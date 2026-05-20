@@ -1,0 +1,317 @@
+{
+  "mappings": [
+    {
+      "id": "e708de6b-90ad-466f-9d36-36620116544e",
+      "name": "Get Profile - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/profiles/wallets/get-profile",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e708de6b-90ad-466f-9d36-36620116544e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "dddb9783-bc3b-4841-a10f-612a80cb6784",
+      "name": "Search Profiles - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/profiles/wallets/search-profiles",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "dddb9783-bc3b-4841-a10f-612a80cb6784",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "6b9e00e9-a0d5-44f0-8c1d-8299a0bdffd0",
+      "name": "Get Profile - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/profiles/tokens/get-profile",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "6b9e00e9-a0d5-44f0-8c1d-8299a0bdffd0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "2947581d-802b-4e48-9418-09062dcbe772",
+      "name": "Search Profiles - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/profiles/tokens/search-profiles",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "2947581d-802b-4e48-9418-09062dcbe772",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "715af28e-287f-433f-9b75-81f738547f7f",
+      "name": "Get Trades - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/trades/get-trades",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "715af28e-287f-433f-9b75-81f738547f7f",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "23375ef7-35ea-454a-a120-b594bdbe31d6",
+      "name": "Get Swaps - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/swaps/get-swaps",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "23375ef7-35ea-454a-a120-b594bdbe31d6",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ba337765-0a23-4fe8-8694-17d25a2c0bc4",
+      "name": "Get Price - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/prices/get-price",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {}\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ba337765-0a23-4fe8-8694-17d25a2c0bc4",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "a255f4d1-2e07-47f1-962c-030fcff73b4c",
+      "name": "Get Price Stats - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/prices/get-price-stats",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {}\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "a255f4d1-2e07-47f1-962c-030fcff73b4c",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ff6944be-e9e2-4cae-8870-cb7403d2450e",
+      "name": "Get Price Candles - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/prices/get-price-candles",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {}\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ff6944be-e9e2-4cae-8870-cb7403d2450e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "19db34dd-bac3-4d67-86c3-30c39359480c",
+      "name": "Get Price History - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/prices/get-price-history",
+        "method": "POST",
+        "headers": {
+          "X-Api-Key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {}\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "19db34dd-bac3-4d67-86c3-30c39359480c",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "total": 10
+  }
+}

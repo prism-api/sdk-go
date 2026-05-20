@@ -1,0 +1,15 @@
+{
+  "cliVersion": "5.29.0",
+  "generatorName": "fernapi/fern-go-sdk",
+  "generatorVersion": "1.40.0",
+  "generatorConfig": {
+    "module": {
+      "path": "github.com/prism-api/sdk-go"
+    }
+  },
+  "originGitCommit": "d50c0ba8703cfb82fa5a5d8b6a238000644c9167",
+  "originGitCommitIsDirty": true,
+  "invokedBy": "manual",
+  "requestedVersion": "1.0.0",
+  "sdkVersion": "v1.0.0"
+}
