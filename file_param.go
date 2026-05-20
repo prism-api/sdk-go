@@ -1,4 +1,4 @@
-package api
+package prism
 
 import (
 	"io"

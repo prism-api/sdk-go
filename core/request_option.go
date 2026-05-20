@@ -19,6 +19,7 @@ type RequestOption interface {
 // to be used directly; use the option package instead.
 type RequestOptions struct {
 	BaseURL         string
+	Environment     interface{}
 	HTTPClient      HTTPClient
 	HTTPHeader      http.Header
 	BodyProperties  map[string]interface{}
@@ -58,8 +59,8 @@ func (r *RequestOptions) cloneHeader() http.Header {
 	headers := r.HTTPHeader.Clone()
 	headers.Set("X-Fern-Language", "Go")
 	headers.Set("X-Fern-SDK-Name", "github.com/prism-api/sdk-go")
-	headers.Set("X-Fern-SDK-Version", "v1.0.5")
-	headers.Set("User-Agent", "github.com/prism-api/sdk-go/1.0.5")
+	headers.Set("X-Fern-SDK-Version", "v1.1.0")
+	headers.Set("User-Agent", "github.com/prism-api/sdk-go/1.1.0")
 	return headers
 }
 
@@ -124,6 +125,15 @@ type MaxBufSizeOption struct {
 
 func (m *MaxBufSizeOption) applyRequestOptions(opts *RequestOptions) {
 	opts.MaxBufSize = m.MaxBufSize
+}
+
+// EnvironmentOption implements the RequestOption interface.
+type EnvironmentOption struct {
+	Environment interface{}
+}
+
+func (e *EnvironmentOption) applyRequestOptions(opts *RequestOptions) {
+	opts.Environment = e.Environment
 }
 
 // APIKeyOption implements the RequestOption interface.

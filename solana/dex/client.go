@@ -5,7 +5,7 @@ package dex
 import (
 	context "context"
 
-	sdkgo "github.com/prism-api/sdk-go"
+	prism "github.com/prism-api/sdk-go"
 	core "github.com/prism-api/sdk-go/core"
 	internal "github.com/prism-api/sdk-go/internal"
 	option "github.com/prism-api/sdk-go/option"
@@ -39,7 +39,7 @@ func (c *Client) GetWalletProfile(
 	ctx context.Context,
 	request *solana.GetWalletProfileDexRequest,
 	opts ...option.RequestOption,
-) (*sdkgo.SolanaDexWalletProfile, error) {
+) (*prism.SolanaDexWalletProfile, error) {
 	response, err := c.WithRawResponse.GetWalletProfile(
 		ctx,
 		request,
@@ -73,7 +73,7 @@ func (c *Client) GetTokenProfile(
 	ctx context.Context,
 	request *solana.GetTokenProfileDexRequest,
 	opts ...option.RequestOption,
-) (*sdkgo.SolanaDexTokenProfile, error) {
+) (*prism.SolanaDexTokenProfile, error) {
 	response, err := c.WithRawResponse.GetTokenProfile(
 		ctx,
 		request,
@@ -141,7 +141,7 @@ func (c *Client) GetPrice(
 	ctx context.Context,
 	request *solana.GetPriceDexRequest,
 	opts ...option.RequestOption,
-) ([]*sdkgo.SolanaDexPrice, error) {
+) ([]*prism.SolanaDexPrice, error) {
 	response, err := c.WithRawResponse.GetPrice(
 		ctx,
 		request,
@@ -158,7 +158,7 @@ func (c *Client) GetPriceStats(
 	ctx context.Context,
 	request *solana.GetPriceStatsDexRequest,
 	opts ...option.RequestOption,
-) ([]*sdkgo.SolanaDexPriceStats, error) {
+) ([]*prism.SolanaDexPriceStats, error) {
 	response, err := c.WithRawResponse.GetPriceStats(
 		ctx,
 		request,
@@ -175,7 +175,7 @@ func (c *Client) GetPriceCandles(
 	ctx context.Context,
 	request *solana.GetPriceCandlesDexRequest,
 	opts ...option.RequestOption,
-) ([]*sdkgo.SolanaDexPriceCandle, error) {
+) ([]*prism.SolanaDexPriceCandle, error) {
 	response, err := c.WithRawResponse.GetPriceCandles(
 		ctx,
 		request,
@@ -192,7 +192,7 @@ func (c *Client) GetPriceHistory(
 	ctx context.Context,
 	request *solana.GetPriceHistoryDexRequest,
 	opts ...option.RequestOption,
-) ([]*sdkgo.SolanaDexPriceHistory, error) {
+) ([]*prism.SolanaDexPriceHistory, error) {
 	response, err := c.WithRawResponse.GetPriceHistory(
 		ctx,
 		request,

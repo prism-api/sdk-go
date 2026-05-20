@@ -1,6 +1,6 @@
 # Reference
 ## Solana Dex
-<details><summary><code>client.Solana.Dex.GetWalletProfile(request) -> *sdkgo.SolanaDexWalletProfile</code></summary>
+<details><summary><code>client.Solana.Dex.GetWalletProfile(request) -> *prism.SolanaDexWalletProfile</code></summary>
 <dl>
 <dd>
 
@@ -29,15 +29,15 @@ Returns a wallet profile for a specific wallet.
 ```go
 request := &solana.GetWalletProfileDexRequest{
         Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-        Options: &sdkgo.SolanaDexWalletProfilePayloadOptions{
-            IncludeMetadata: sdkgo.Bool(
+        Options: &prism.SolanaDexWalletProfilePayloadOptions{
+            IncludeMetadata: prism.Bool(
                 true,
             ),
-            IncludeLabels: sdkgo.Bool(
+            IncludeLabels: prism.Bool(
                 true,
             ),
-            IncludeMetrics: []sdkgo.SolanaDexWalletProfileTimeWindowEnum{
-                sdkgo.SolanaDexWalletProfileTimeWindowEnumWindow7D,
+            IncludeMetrics: []prism.SolanaDexWalletProfileTimeWindowEnum{
+                prism.SolanaDexWalletProfileTimeWindowEnumWindow7D,
             },
         },
     }
@@ -68,7 +68,7 @@ client.Solana.Dex.GetWalletProfile(
 <dl>
 <dd>
 
-**options:** `*sdkgo.SolanaDexWalletProfilePayloadOptions` 
+**options:** `*prism.SolanaDexWalletProfilePayloadOptions` 
     
 </dd>
 </dl>
@@ -108,31 +108,31 @@ Filter, query, and sort wallet profiles based on specified metrics and condition
 
 ```go
 request := &solana.SearchWalletProfilesDexRequest{
-        Limit: sdkgo.Int(
+        Limit: prism.Int(
             10,
         ),
-        Query: &sdkgo.SolanaDexWalletProfileSearchPayloadQuery{
+        Query: &prism.SolanaDexWalletProfileSearchPayloadQuery{
             Text: "cupsey",
-            Fields: []sdkgo.SolanaDexWalletProfileSearchPayloadQueryTargetsEnum{
-                sdkgo.SolanaDexWalletProfileSearchPayloadQueryTargetsEnumWalletAddress,
+            Fields: []prism.SolanaDexWalletProfileSearchPayloadQueryTargetsEnum{
+                prism.SolanaDexWalletProfileSearchPayloadQueryTargetsEnumWalletAddress,
             },
         },
-        Sort: &sdkgo.SolanaDexProfileSearchPayloadSort{
+        Sort: &prism.SolanaDexProfileSearchPayloadSort{
             Field: "metrics.7d.cumulative_pnl",
-            Direction: sdkgo.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
+            Direction: prism.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
         },
-        DynamicLabels: &sdkgo.SolanaDexProfileSearchPayloadDynamicLabels{
-            "smart": &sdkgo.SolanaDexProfileSearchPayloadFilter{},
+        DynamicLabels: &prism.SolanaDexProfileSearchPayloadDynamicLabels{
+            "smart": &prism.SolanaDexProfileSearchPayloadFilter{},
         },
-        Options: &sdkgo.SolanaDexWalletProfilePayloadOptions{
-            IncludeMetadata: sdkgo.Bool(
+        Options: &prism.SolanaDexWalletProfilePayloadOptions{
+            IncludeMetadata: prism.Bool(
                 true,
             ),
-            IncludeLabels: sdkgo.Bool(
+            IncludeLabels: prism.Bool(
                 true,
             ),
-            IncludeMetrics: []sdkgo.SolanaDexWalletProfileTimeWindowEnum{
-                sdkgo.SolanaDexWalletProfileTimeWindowEnumWindow7D,
+            IncludeMetrics: []prism.SolanaDexWalletProfileTimeWindowEnum{
+                prism.SolanaDexWalletProfileTimeWindowEnumWindow7D,
             },
         },
     }
@@ -155,7 +155,7 @@ client.Solana.Dex.SearchWalletProfiles(
 <dl>
 <dd>
 
-**query:** `*sdkgo.SolanaDexWalletProfileSearchPayloadQuery` 
+**query:** `*prism.SolanaDexWalletProfileSearchPayloadQuery` 
     
 </dd>
 </dl>
@@ -163,7 +163,7 @@ client.Solana.Dex.SearchWalletProfiles(
 <dl>
 <dd>
 
-**filter:** `*sdkgo.SolanaDexProfileSearchPayloadFilter` 
+**filter:** `*prism.SolanaDexProfileSearchPayloadFilter` 
     
 </dd>
 </dl>
@@ -171,7 +171,7 @@ client.Solana.Dex.SearchWalletProfiles(
 <dl>
 <dd>
 
-**sort:** `*sdkgo.SolanaDexProfileSearchPayloadSort` 
+**sort:** `*prism.SolanaDexProfileSearchPayloadSort` 
     
 </dd>
 </dl>
@@ -179,7 +179,7 @@ client.Solana.Dex.SearchWalletProfiles(
 <dl>
 <dd>
 
-**dynamicLabels:** `*sdkgo.SolanaDexProfileSearchPayloadDynamicLabels` 
+**dynamicLabels:** `*prism.SolanaDexProfileSearchPayloadDynamicLabels` 
     
 </dd>
 </dl>
@@ -187,7 +187,7 @@ client.Solana.Dex.SearchWalletProfiles(
 <dl>
 <dd>
 
-**options:** `*sdkgo.SolanaDexWalletProfilePayloadOptions` 
+**options:** `*prism.SolanaDexWalletProfilePayloadOptions` 
     
 </dd>
 </dl>
@@ -199,7 +199,7 @@ client.Solana.Dex.SearchWalletProfiles(
 </dl>
 </details>
 
-<details><summary><code>client.Solana.Dex.GetTokenProfile(request) -> *sdkgo.SolanaDexTokenProfile</code></summary>
+<details><summary><code>client.Solana.Dex.GetTokenProfile(request) -> *prism.SolanaDexTokenProfile</code></summary>
 <dl>
 <dd>
 
@@ -228,18 +228,18 @@ Returns the profile for a specific token.
 ```go
 request := &solana.GetTokenProfileDexRequest{
         Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
-        Options: &sdkgo.SolanaDexTokenProfilePayloadOptions{
-            IncludeMetadata: sdkgo.Bool(
+        Options: &prism.SolanaDexTokenProfilePayloadOptions{
+            IncludeMetadata: prism.Bool(
                 true,
             ),
-            IncludeMarket: sdkgo.Bool(
+            IncludeMarket: prism.Bool(
                 true,
             ),
-            IncludeLabels: sdkgo.Bool(
+            IncludeLabels: prism.Bool(
                 true,
             ),
-            IncludeMetrics: []sdkgo.SolanaDexTokenProfileTimeWindowEnum{
-                sdkgo.SolanaDexTokenProfileTimeWindowEnumWindow7D,
+            IncludeMetrics: []prism.SolanaDexTokenProfileTimeWindowEnum{
+                prism.SolanaDexTokenProfileTimeWindowEnumWindow7D,
             },
         },
     }
@@ -270,7 +270,7 @@ client.Solana.Dex.GetTokenProfile(
 <dl>
 <dd>
 
-**options:** `*sdkgo.SolanaDexTokenProfilePayloadOptions` 
+**options:** `*prism.SolanaDexTokenProfilePayloadOptions` 
     
 </dd>
 </dl>
@@ -310,34 +310,34 @@ Filter, query, and sort token profiles based on specified metrics and conditions
 
 ```go
 request := &solana.SearchTokenProfilesDexRequest{
-        Limit: sdkgo.Int(
+        Limit: prism.Int(
             10,
         ),
-        Query: &sdkgo.SolanaDexTokenProfileSearchPayloadQueryField{
+        Query: &prism.SolanaDexTokenProfileSearchPayloadQueryField{
             Text: "bonk",
-            Fields: []sdkgo.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnum{
-                sdkgo.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnumMetadataName,
+            Fields: []prism.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnum{
+                prism.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnumMetadataName,
             },
         },
-        Sort: &sdkgo.SolanaDexProfileSearchPayloadSort{
+        Sort: &prism.SolanaDexProfileSearchPayloadSort{
             Field: "market.liquidity",
-            Direction: sdkgo.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
+            Direction: prism.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
         },
-        DynamicLabels: &sdkgo.SolanaDexProfileSearchPayloadDynamicLabels{
-            "trending": &sdkgo.SolanaDexProfileSearchPayloadFilter{},
+        DynamicLabels: &prism.SolanaDexProfileSearchPayloadDynamicLabels{
+            "trending": &prism.SolanaDexProfileSearchPayloadFilter{},
         },
-        Options: &sdkgo.SolanaDexTokenProfilePayloadOptions{
-            IncludeMetadata: sdkgo.Bool(
+        Options: &prism.SolanaDexTokenProfilePayloadOptions{
+            IncludeMetadata: prism.Bool(
                 true,
             ),
-            IncludeMarket: sdkgo.Bool(
+            IncludeMarket: prism.Bool(
                 true,
             ),
-            IncludeLabels: sdkgo.Bool(
+            IncludeLabels: prism.Bool(
                 true,
             ),
-            IncludeMetrics: []sdkgo.SolanaDexTokenProfileTimeWindowEnum{
-                sdkgo.SolanaDexTokenProfileTimeWindowEnumWindow7D,
+            IncludeMetrics: []prism.SolanaDexTokenProfileTimeWindowEnum{
+                prism.SolanaDexTokenProfileTimeWindowEnumWindow7D,
             },
         },
     }
@@ -360,7 +360,7 @@ client.Solana.Dex.SearchTokenProfiles(
 <dl>
 <dd>
 
-**query:** `*sdkgo.SolanaDexTokenProfileSearchPayloadQueryField` 
+**query:** `*prism.SolanaDexTokenProfileSearchPayloadQueryField` 
     
 </dd>
 </dl>
@@ -368,7 +368,7 @@ client.Solana.Dex.SearchTokenProfiles(
 <dl>
 <dd>
 
-**filter:** `*sdkgo.SolanaDexProfileSearchPayloadFilter` 
+**filter:** `*prism.SolanaDexProfileSearchPayloadFilter` 
     
 </dd>
 </dl>
@@ -376,7 +376,7 @@ client.Solana.Dex.SearchTokenProfiles(
 <dl>
 <dd>
 
-**sort:** `*sdkgo.SolanaDexProfileSearchPayloadSort` 
+**sort:** `*prism.SolanaDexProfileSearchPayloadSort` 
     
 </dd>
 </dl>
@@ -384,7 +384,7 @@ client.Solana.Dex.SearchTokenProfiles(
 <dl>
 <dd>
 
-**dynamicLabels:** `*sdkgo.SolanaDexProfileSearchPayloadDynamicLabels` 
+**dynamicLabels:** `*prism.SolanaDexProfileSearchPayloadDynamicLabels` 
     
 </dd>
 </dl>
@@ -392,7 +392,7 @@ client.Solana.Dex.SearchTokenProfiles(
 <dl>
 <dd>
 
-**options:** `*sdkgo.SolanaDexTokenProfilePayloadOptions` 
+**options:** `*prism.SolanaDexTokenProfilePayloadOptions` 
     
 </dd>
 </dl>
@@ -432,10 +432,10 @@ Returns trades for a wallet, token or both.
 
 ```go
 request := &solana.GetTradesDexRequest{
-        Limit: sdkgo.Int(
+        Limit: prism.Int(
             20,
         ),
-        Wallet: sdkgo.String(
+        Wallet: prism.String(
             "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
         ),
     }
@@ -506,10 +506,10 @@ Returns swaps for a wallet, token or both.
 
 ```go
 request := &solana.GetSwapsDexRequest{
-        Limit: sdkgo.Int(
+        Limit: prism.Int(
             20,
         ),
-        Wallet: sdkgo.String(
+        Wallet: prism.String(
             "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
         ),
     }
@@ -552,7 +552,7 @@ client.Solana.Dex.GetSwaps(
 </dl>
 </details>
 
-<details><summary><code>client.Solana.Dex.GetPrice(request) -> []*sdkgo.SolanaDexPrice</code></summary>
+<details><summary><code>client.Solana.Dex.GetPrice(request) -> []*prism.SolanaDexPrice</code></summary>
 <dl>
 <dd>
 
@@ -615,7 +615,7 @@ client.Solana.Dex.GetPrice(
 </dl>
 </details>
 
-<details><summary><code>client.Solana.Dex.GetPriceStats(request) -> []*sdkgo.SolanaDexPriceStats</code></summary>
+<details><summary><code>client.Solana.Dex.GetPriceStats(request) -> []*prism.SolanaDexPriceStats</code></summary>
 <dl>
 <dd>
 
@@ -678,7 +678,7 @@ client.Solana.Dex.GetPriceStats(
 </dl>
 </details>
 
-<details><summary><code>client.Solana.Dex.GetPriceCandles(request) -> []*sdkgo.SolanaDexPriceCandle</code></summary>
+<details><summary><code>client.Solana.Dex.GetPriceCandles(request) -> []*prism.SolanaDexPriceCandle</code></summary>
 <dl>
 <dd>
 
@@ -707,13 +707,13 @@ Returns price candles for a specific token.
 ```go
 request := &solana.GetPriceCandlesDexRequest{
         Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
-        From: sdkgo.Time(
-            sdkgo.MustParseDateTime(
+        From: prism.Time(
+            prism.MustParseDateTime(
                 "2026-04-27T00:00:00Z",
             ),
         ),
-        To: sdkgo.Time(
-            sdkgo.MustParseDateTime(
+        To: prism.Time(
+            prism.MustParseDateTime(
                 "2026-04-27T01:00:00Z",
             ),
         ),
@@ -791,7 +791,7 @@ Must be combined with `to`.
 </dl>
 </details>
 
-<details><summary><code>client.Solana.Dex.GetPriceHistory(request) -> []*sdkgo.SolanaDexPriceHistory</code></summary>
+<details><summary><code>client.Solana.Dex.GetPriceHistory(request) -> []*prism.SolanaDexPriceHistory</code></summary>
 <dl>
 <dd>
 
@@ -822,11 +822,11 @@ request := &solana.GetPriceHistoryDexRequest{
         Tokens: []string{
             "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
         },
-        From: sdkgo.MustParseDateTime(
+        From: prism.MustParseDateTime(
             "2026-04-27T00:00:00Z",
         ),
-        To: sdkgo.Time(
-            sdkgo.MustParseDateTime(
+        To: prism.Time(
+            prism.MustParseDateTime(
                 "2026-04-27T01:00:00Z",
             ),
         ),

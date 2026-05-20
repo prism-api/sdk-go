@@ -6,7 +6,7 @@ import (
 	context "context"
 	http "net/http"
 
-	sdkgo "github.com/prism-api/sdk-go"
+	prism "github.com/prism-api/sdk-go"
 	core "github.com/prism-api/sdk-go/core"
 	internal "github.com/prism-api/sdk-go/internal"
 	option "github.com/prism-api/sdk-go/option"
@@ -36,11 +36,19 @@ func (r *RawClient) GetWalletProfile(
 	ctx context.Context,
 	request *solana.GetWalletProfileDexRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*sdkgo.SolanaDexWalletProfile], error) {
+) (*core.Response[*prism.SolanaDexWalletProfile], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/profiles/wallets/get-profile"
@@ -49,7 +57,7 @@ func (r *RawClient) GetWalletProfile(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *sdkgo.SolanaDexWalletProfile
+	var response *prism.SolanaDexWalletProfile
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -68,7 +76,7 @@ func (r *RawClient) GetWalletProfile(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*sdkgo.SolanaDexWalletProfile]{
+	return &core.Response[*prism.SolanaDexWalletProfile]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -83,7 +91,15 @@ func (r *RawClient) SearchWalletProfiles(
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/profiles/wallets/search-profiles"
@@ -122,11 +138,19 @@ func (r *RawClient) GetTokenProfile(
 	ctx context.Context,
 	request *solana.GetTokenProfileDexRequest,
 	opts ...option.RequestOption,
-) (*core.Response[*sdkgo.SolanaDexTokenProfile], error) {
+) (*core.Response[*prism.SolanaDexTokenProfile], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/profiles/tokens/get-profile"
@@ -135,7 +159,7 @@ func (r *RawClient) GetTokenProfile(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response *sdkgo.SolanaDexTokenProfile
+	var response *prism.SolanaDexTokenProfile
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -154,7 +178,7 @@ func (r *RawClient) GetTokenProfile(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[*sdkgo.SolanaDexTokenProfile]{
+	return &core.Response[*prism.SolanaDexTokenProfile]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -169,7 +193,15 @@ func (r *RawClient) SearchTokenProfiles(
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/profiles/tokens/search-profiles"
@@ -212,7 +244,15 @@ func (r *RawClient) GetTrades(
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/trades/get-trades"
@@ -255,7 +295,15 @@ func (r *RawClient) GetSwaps(
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/swaps/get-swaps"
@@ -294,11 +342,19 @@ func (r *RawClient) GetPrice(
 	ctx context.Context,
 	request *solana.GetPriceDexRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*sdkgo.SolanaDexPrice], error) {
+) (*core.Response[[]*prism.SolanaDexPrice], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/prices/get-price"
@@ -307,7 +363,7 @@ func (r *RawClient) GetPrice(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response []*sdkgo.SolanaDexPrice
+	var response []*prism.SolanaDexPrice
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -326,7 +382,7 @@ func (r *RawClient) GetPrice(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*sdkgo.SolanaDexPrice]{
+	return &core.Response[[]*prism.SolanaDexPrice]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -337,11 +393,19 @@ func (r *RawClient) GetPriceStats(
 	ctx context.Context,
 	request *solana.GetPriceStatsDexRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*sdkgo.SolanaDexPriceStats], error) {
+) (*core.Response[[]*prism.SolanaDexPriceStats], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/prices/get-price-stats"
@@ -350,7 +414,7 @@ func (r *RawClient) GetPriceStats(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response []*sdkgo.SolanaDexPriceStats
+	var response []*prism.SolanaDexPriceStats
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -369,7 +433,7 @@ func (r *RawClient) GetPriceStats(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*sdkgo.SolanaDexPriceStats]{
+	return &core.Response[[]*prism.SolanaDexPriceStats]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -380,11 +444,19 @@ func (r *RawClient) GetPriceCandles(
 	ctx context.Context,
 	request *solana.GetPriceCandlesDexRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*sdkgo.SolanaDexPriceCandle], error) {
+) (*core.Response[[]*prism.SolanaDexPriceCandle], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/prices/get-price-candles"
@@ -393,7 +465,7 @@ func (r *RawClient) GetPriceCandles(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response []*sdkgo.SolanaDexPriceCandle
+	var response []*prism.SolanaDexPriceCandle
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -412,7 +484,7 @@ func (r *RawClient) GetPriceCandles(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*sdkgo.SolanaDexPriceCandle]{
+	return &core.Response[[]*prism.SolanaDexPriceCandle]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,
@@ -423,11 +495,19 @@ func (r *RawClient) GetPriceHistory(
 	ctx context.Context,
 	request *solana.GetPriceHistoryDexRequest,
 	opts ...option.RequestOption,
-) (*core.Response[[]*sdkgo.SolanaDexPriceHistory], error) {
+) (*core.Response[[]*prism.SolanaDexPriceHistory], error) {
 	options := core.NewRequestOptions(opts...)
 	baseURL := internal.ResolveBaseURL(
 		options.BaseURL,
+		internal.ResolveEnvironmentBaseURL(
+			options.Environment,
+			"Base",
+		),
 		r.baseURL,
+		internal.ResolveEnvironmentBaseURL(
+			r.options.Environment,
+			"Base",
+		),
 		"https://refract.prismapi.io",
 	)
 	endpointURL := baseURL + "/v1/solana/dex/prices/get-price-history"
@@ -436,7 +516,7 @@ func (r *RawClient) GetPriceHistory(
 		options.ToHeader(),
 	)
 	headers.Add("Content-Type", "application/json")
-	var response []*sdkgo.SolanaDexPriceHistory
+	var response []*prism.SolanaDexPriceHistory
 	raw, err := r.caller.Call(
 		ctx,
 		&internal.CallParams{
@@ -455,7 +535,7 @@ func (r *RawClient) GetPriceHistory(
 	if err != nil {
 		return nil, err
 	}
-	return &core.Response[[]*sdkgo.SolanaDexPriceHistory]{
+	return &core.Response[[]*prism.SolanaDexPriceHistory]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

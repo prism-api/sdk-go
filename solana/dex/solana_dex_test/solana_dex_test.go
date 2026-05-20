@@ -10,7 +10,7 @@ import (
 	os "os"
 	testing "testing"
 
-	sdkgo "github.com/prism-api/sdk-go"
+	prism "github.com/prism-api/sdk-go"
 	client "github.com/prism-api/sdk-go/client"
 	option "github.com/prism-api/sdk-go/option"
 	solana "github.com/prism-api/sdk-go/solana"
@@ -91,15 +91,15 @@ func TestSolanaDexGetWalletProfileWithWireMock(
 	)
 	request := &solana.GetWalletProfileDexRequest{
 		Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-		Options: &sdkgo.SolanaDexWalletProfilePayloadOptions{
-			IncludeMetadata: sdkgo.Bool(
+		Options: &prism.SolanaDexWalletProfilePayloadOptions{
+			IncludeMetadata: prism.Bool(
 				true,
 			),
-			IncludeLabels: sdkgo.Bool(
+			IncludeLabels: prism.Bool(
 				true,
 			),
-			IncludeMetrics: []sdkgo.SolanaDexWalletProfileTimeWindowEnum{
-				sdkgo.SolanaDexWalletProfileTimeWindowEnumWindow7D,
+			IncludeMetrics: []prism.SolanaDexWalletProfileTimeWindowEnum{
+				prism.SolanaDexWalletProfileTimeWindowEnumWindow7D,
 			},
 		},
 	}
@@ -127,31 +127,31 @@ func TestSolanaDexSearchWalletProfilesWithWireMock(
 		option.WithAPIKey("test-value"),
 	)
 	request := &solana.SearchWalletProfilesDexRequest{
-		Limit: sdkgo.Int(
+		Limit: prism.Int(
 			10,
 		),
-		Query: &sdkgo.SolanaDexWalletProfileSearchPayloadQuery{
+		Query: &prism.SolanaDexWalletProfileSearchPayloadQuery{
 			Text: "cupsey",
-			Fields: []sdkgo.SolanaDexWalletProfileSearchPayloadQueryTargetsEnum{
-				sdkgo.SolanaDexWalletProfileSearchPayloadQueryTargetsEnumWalletAddress,
+			Fields: []prism.SolanaDexWalletProfileSearchPayloadQueryTargetsEnum{
+				prism.SolanaDexWalletProfileSearchPayloadQueryTargetsEnumWalletAddress,
 			},
 		},
-		Sort: &sdkgo.SolanaDexProfileSearchPayloadSort{
+		Sort: &prism.SolanaDexProfileSearchPayloadSort{
 			Field:     "metrics.7d.cumulative_pnl",
-			Direction: sdkgo.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
+			Direction: prism.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
 		},
-		DynamicLabels: &sdkgo.SolanaDexProfileSearchPayloadDynamicLabels{
-			"smart": &sdkgo.SolanaDexProfileSearchPayloadFilter{},
+		DynamicLabels: &prism.SolanaDexProfileSearchPayloadDynamicLabels{
+			"smart": &prism.SolanaDexProfileSearchPayloadFilter{},
 		},
-		Options: &sdkgo.SolanaDexWalletProfilePayloadOptions{
-			IncludeMetadata: sdkgo.Bool(
+		Options: &prism.SolanaDexWalletProfilePayloadOptions{
+			IncludeMetadata: prism.Bool(
 				true,
 			),
-			IncludeLabels: sdkgo.Bool(
+			IncludeLabels: prism.Bool(
 				true,
 			),
-			IncludeMetrics: []sdkgo.SolanaDexWalletProfileTimeWindowEnum{
-				sdkgo.SolanaDexWalletProfileTimeWindowEnumWindow7D,
+			IncludeMetrics: []prism.SolanaDexWalletProfileTimeWindowEnum{
+				prism.SolanaDexWalletProfileTimeWindowEnumWindow7D,
 			},
 		},
 	}
@@ -180,18 +180,18 @@ func TestSolanaDexGetTokenProfileWithWireMock(
 	)
 	request := &solana.GetTokenProfileDexRequest{
 		Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
-		Options: &sdkgo.SolanaDexTokenProfilePayloadOptions{
-			IncludeMetadata: sdkgo.Bool(
+		Options: &prism.SolanaDexTokenProfilePayloadOptions{
+			IncludeMetadata: prism.Bool(
 				true,
 			),
-			IncludeMarket: sdkgo.Bool(
+			IncludeMarket: prism.Bool(
 				true,
 			),
-			IncludeLabels: sdkgo.Bool(
+			IncludeLabels: prism.Bool(
 				true,
 			),
-			IncludeMetrics: []sdkgo.SolanaDexTokenProfileTimeWindowEnum{
-				sdkgo.SolanaDexTokenProfileTimeWindowEnumWindow7D,
+			IncludeMetrics: []prism.SolanaDexTokenProfileTimeWindowEnum{
+				prism.SolanaDexTokenProfileTimeWindowEnumWindow7D,
 			},
 		},
 	}
@@ -219,34 +219,34 @@ func TestSolanaDexSearchTokenProfilesWithWireMock(
 		option.WithAPIKey("test-value"),
 	)
 	request := &solana.SearchTokenProfilesDexRequest{
-		Limit: sdkgo.Int(
+		Limit: prism.Int(
 			10,
 		),
-		Query: &sdkgo.SolanaDexTokenProfileSearchPayloadQueryField{
+		Query: &prism.SolanaDexTokenProfileSearchPayloadQueryField{
 			Text: "bonk",
-			Fields: []sdkgo.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnum{
-				sdkgo.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnumMetadataName,
+			Fields: []prism.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnum{
+				prism.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnumMetadataName,
 			},
 		},
-		Sort: &sdkgo.SolanaDexProfileSearchPayloadSort{
+		Sort: &prism.SolanaDexProfileSearchPayloadSort{
 			Field:     "market.liquidity",
-			Direction: sdkgo.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
+			Direction: prism.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
 		},
-		DynamicLabels: &sdkgo.SolanaDexProfileSearchPayloadDynamicLabels{
-			"trending": &sdkgo.SolanaDexProfileSearchPayloadFilter{},
+		DynamicLabels: &prism.SolanaDexProfileSearchPayloadDynamicLabels{
+			"trending": &prism.SolanaDexProfileSearchPayloadFilter{},
 		},
-		Options: &sdkgo.SolanaDexTokenProfilePayloadOptions{
-			IncludeMetadata: sdkgo.Bool(
+		Options: &prism.SolanaDexTokenProfilePayloadOptions{
+			IncludeMetadata: prism.Bool(
 				true,
 			),
-			IncludeMarket: sdkgo.Bool(
+			IncludeMarket: prism.Bool(
 				true,
 			),
-			IncludeLabels: sdkgo.Bool(
+			IncludeLabels: prism.Bool(
 				true,
 			),
-			IncludeMetrics: []sdkgo.SolanaDexTokenProfileTimeWindowEnum{
-				sdkgo.SolanaDexTokenProfileTimeWindowEnumWindow7D,
+			IncludeMetrics: []prism.SolanaDexTokenProfileTimeWindowEnum{
+				prism.SolanaDexTokenProfileTimeWindowEnumWindow7D,
 			},
 		},
 	}
@@ -274,10 +274,10 @@ func TestSolanaDexGetTradesWithWireMock(
 		option.WithAPIKey("test-value"),
 	)
 	request := &solana.GetTradesDexRequest{
-		Limit: sdkgo.Int(
+		Limit: prism.Int(
 			20,
 		),
-		Wallet: sdkgo.String(
+		Wallet: prism.String(
 			"suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
 		),
 	}
@@ -305,10 +305,10 @@ func TestSolanaDexGetSwapsWithWireMock(
 		option.WithAPIKey("test-value"),
 	)
 	request := &solana.GetSwapsDexRequest{
-		Limit: sdkgo.Int(
+		Limit: prism.Int(
 			20,
 		),
-		Wallet: sdkgo.String(
+		Wallet: prism.String(
 			"suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
 		),
 	}
@@ -393,13 +393,13 @@ func TestSolanaDexGetPriceCandlesWithWireMock(
 	)
 	request := &solana.GetPriceCandlesDexRequest{
 		Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
-		From: sdkgo.Time(
-			sdkgo.MustParseDateTime(
+		From: prism.Time(
+			prism.MustParseDateTime(
 				"2026-04-27T00:00:00Z",
 			),
 		),
-		To: sdkgo.Time(
-			sdkgo.MustParseDateTime(
+		To: prism.Time(
+			prism.MustParseDateTime(
 				"2026-04-27T01:00:00Z",
 			),
 		),
@@ -432,11 +432,11 @@ func TestSolanaDexGetPriceHistoryWithWireMock(
 		Tokens: []string{
 			"Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
 		},
-		From: sdkgo.MustParseDateTime(
+		From: prism.MustParseDateTime(
 			"2026-04-27T00:00:00Z",
 		),
-		To: sdkgo.Time(
-			sdkgo.MustParseDateTime(
+		To: prism.Time(
+			prism.MustParseDateTime(
 				"2026-04-27T01:00:00Z",
 			),
 		),

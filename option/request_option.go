@@ -3,6 +3,7 @@
 package option
 
 import (
+	sdkgo "github.com/prism-api/sdk-go"
 	core "github.com/prism-api/sdk-go/core"
 	http "net/http"
 	url "net/url"
@@ -69,6 +70,14 @@ func WithMaxAttempts(attempts uint) *core.MaxAttemptsOption {
 func WithMaxStreamBufSize(size int) *core.MaxBufSizeOption {
 	return &core.MaxBufSizeOption{
 		MaxBufSize: size,
+	}
+}
+
+// WithEnvironment sets the environment for the client, which determines
+// the base URL for each endpoint.
+func WithEnvironment(environment sdkgo.Environment) *core.EnvironmentOption {
+	return &core.EnvironmentOption{
+		Environment: environment,
 	}
 }
 

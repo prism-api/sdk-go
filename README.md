@@ -32,7 +32,7 @@ package example
 import (
     context "context"
 
-    sdkgo "github.com/prism-api/sdk-go"
+    prism "github.com/prism-api/sdk-go"
     client "github.com/prism-api/sdk-go/client"
     option "github.com/prism-api/sdk-go/option"
     solana "github.com/prism-api/sdk-go/solana"
@@ -46,15 +46,15 @@ func do() {
     )
     request := &solana.GetWalletProfileDexRequest{
         Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-        Options: &sdkgo.SolanaDexWalletProfilePayloadOptions{
-            IncludeMetadata: sdkgo.Bool(
+        Options: &prism.SolanaDexWalletProfilePayloadOptions{
+            IncludeMetadata: prism.Bool(
                 true,
             ),
-            IncludeLabels: sdkgo.Bool(
+            IncludeLabels: prism.Bool(
                 true,
             ),
-            IncludeMetrics: []sdkgo.SolanaDexWalletProfileTimeWindowEnum{
-                sdkgo.SolanaDexWalletProfileTimeWindowEnumWindow7D,
+            IncludeMetrics: []prism.SolanaDexWalletProfileTimeWindowEnum{
+                prism.SolanaDexWalletProfileTimeWindowEnumWindow7D,
             },
         },
     }
@@ -72,7 +72,7 @@ URL, which is particularly useful in test environments.
 
 ```go
 client := client.NewClient(
-    option.WithBaseURL(api.Environments.Default),
+    option.WithBaseURL(prism.Environments.Default),
 )
 ```
 
