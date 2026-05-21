@@ -2,10 +2,11 @@
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fprism-api%2Fsdk-go)
 
-The Prism Go library provides convenient access to the Prism APIs from Go.
+The Prism API SDK provides convenient access to the Prism APIs from your favorite programming language.
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Reference](#reference)
 - [Usage](#usage)
 - [Environments](#environments)
@@ -17,6 +18,10 @@ The Prism Go library provides convenient access to the Prism APIs from Go.
   - [Timeouts](#timeouts)
   - [Explicit Null](#explicit-null)
 - [Contributing](#contributing)
+
+## Documentation
+
+API reference documentation is available [here](https://docs.prismapi.io/api-reference).
 
 ## Reference
 
