@@ -2,23 +2,12 @@
 
 package prism
 
-// Environment defines the environment with multiple base URLs.
-type Environment struct {
-	Base        string
-	Production  string
-	Development string
-}
-
 // Environments defines all of the API environments.
 // These values can be used with the WithBaseURL
 // RequestOption to override the client's default environment,
 // if any.
 var Environments = struct {
-	Default Environment
+	Production string
 }{
-	Default: Environment{
-		Base:        "https://refract.prismapi.io",
-		Development: "wss://refract-dev.prismapi.io",
-		Production:  "wss://refract.prismapi.io",
-	},
+	Production: "https://refract.prismapi.io",
 }

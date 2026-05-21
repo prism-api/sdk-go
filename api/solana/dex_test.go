@@ -4,7 +4,7 @@ package solana
 
 import (
 	json "encoding/json"
-	sdkgo "github.com/prism-api/sdk-go"
+	api "github.com/prism-api/sdk-go/api"
 	assert "github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
 	testing "testing"
@@ -559,7 +559,7 @@ func TestSettersGetTokenProfileDexRequest(t *testing.T) {
 
 	t.Run("SetOptions", func(t *testing.T) {
 		obj := &GetTokenProfileDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexTokenProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexTokenProfilePayloadOptions
 		obj.SetOptions(fernTestValueOptions)
 		assert.Equal(t, fernTestValueOptions, obj.Options)
 		assert.NotNil(t, obj.explicitFields)
@@ -603,7 +603,7 @@ func TestSettersMarkExplicitGetTokenProfileDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &GetTokenProfileDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexTokenProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexTokenProfilePayloadOptions
 
 		// Act
 		obj.SetOptions(fernTestValueOptions)
@@ -727,7 +727,7 @@ func TestSettersGetWalletProfileDexRequest(t *testing.T) {
 
 	t.Run("SetOptions", func(t *testing.T) {
 		obj := &GetWalletProfileDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexWalletProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexWalletProfilePayloadOptions
 		obj.SetOptions(fernTestValueOptions)
 		assert.Equal(t, fernTestValueOptions, obj.Options)
 		assert.NotNil(t, obj.explicitFields)
@@ -771,7 +771,7 @@ func TestSettersMarkExplicitGetWalletProfileDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &GetWalletProfileDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexWalletProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexWalletProfilePayloadOptions
 
 		// Act
 		obj.SetOptions(fernTestValueOptions)
@@ -803,7 +803,7 @@ func TestSettersMarkExplicitGetWalletProfileDexRequest(t *testing.T) {
 func TestSettersSearchTokenProfilesDexRequest(t *testing.T) {
 	t.Run("SetQuery", func(t *testing.T) {
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueQuery *sdkgo.SolanaDexTokenProfileSearchPayloadQueryField
+		var fernTestValueQuery *api.SolanaDexTokenProfileSearchPayloadQueryField
 		obj.SetQuery(fernTestValueQuery)
 		assert.Equal(t, fernTestValueQuery, obj.Query)
 		assert.NotNil(t, obj.explicitFields)
@@ -811,7 +811,7 @@ func TestSettersSearchTokenProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetFilter", func(t *testing.T) {
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueFilter *sdkgo.SolanaDexProfileSearchPayloadFilter
+		var fernTestValueFilter *api.SolanaDexProfileSearchPayloadFilter
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
@@ -819,7 +819,7 @@ func TestSettersSearchTokenProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetSort", func(t *testing.T) {
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueSort *sdkgo.SolanaDexProfileSearchPayloadSort
+		var fernTestValueSort *api.SolanaDexProfileSearchPayloadSort
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
@@ -827,7 +827,7 @@ func TestSettersSearchTokenProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetDynamicLabels", func(t *testing.T) {
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueDynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels
+		var fernTestValueDynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels
 		obj.SetDynamicLabels(fernTestValueDynamicLabels)
 		assert.Equal(t, fernTestValueDynamicLabels, obj.DynamicLabels)
 		assert.NotNil(t, obj.explicitFields)
@@ -835,7 +835,7 @@ func TestSettersSearchTokenProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetOptions", func(t *testing.T) {
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexTokenProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexTokenProfilePayloadOptions
 		obj.SetOptions(fernTestValueOptions)
 		assert.Equal(t, fernTestValueOptions, obj.Options)
 		assert.NotNil(t, obj.explicitFields)
@@ -848,7 +848,7 @@ func TestSettersMarkExplicitSearchTokenProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueQuery *sdkgo.SolanaDexTokenProfileSearchPayloadQueryField
+		var fernTestValueQuery *api.SolanaDexTokenProfileSearchPayloadQueryField
 
 		// Act
 		obj.SetQuery(fernTestValueQuery)
@@ -879,7 +879,7 @@ func TestSettersMarkExplicitSearchTokenProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueFilter *sdkgo.SolanaDexProfileSearchPayloadFilter
+		var fernTestValueFilter *api.SolanaDexProfileSearchPayloadFilter
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -910,7 +910,7 @@ func TestSettersMarkExplicitSearchTokenProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueSort *sdkgo.SolanaDexProfileSearchPayloadSort
+		var fernTestValueSort *api.SolanaDexProfileSearchPayloadSort
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -941,7 +941,7 @@ func TestSettersMarkExplicitSearchTokenProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueDynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels
+		var fernTestValueDynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels
 
 		// Act
 		obj.SetDynamicLabels(fernTestValueDynamicLabels)
@@ -972,7 +972,7 @@ func TestSettersMarkExplicitSearchTokenProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchTokenProfilesDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexTokenProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexTokenProfilePayloadOptions
 
 		// Act
 		obj.SetOptions(fernTestValueOptions)
@@ -1004,7 +1004,7 @@ func TestSettersMarkExplicitSearchTokenProfilesDexRequest(t *testing.T) {
 func TestSettersSearchWalletProfilesDexRequest(t *testing.T) {
 	t.Run("SetQuery", func(t *testing.T) {
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueQuery *sdkgo.SolanaDexWalletProfileSearchPayloadQuery
+		var fernTestValueQuery *api.SolanaDexWalletProfileSearchPayloadQuery
 		obj.SetQuery(fernTestValueQuery)
 		assert.Equal(t, fernTestValueQuery, obj.Query)
 		assert.NotNil(t, obj.explicitFields)
@@ -1012,7 +1012,7 @@ func TestSettersSearchWalletProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetFilter", func(t *testing.T) {
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueFilter *sdkgo.SolanaDexProfileSearchPayloadFilter
+		var fernTestValueFilter *api.SolanaDexProfileSearchPayloadFilter
 		obj.SetFilter(fernTestValueFilter)
 		assert.Equal(t, fernTestValueFilter, obj.Filter)
 		assert.NotNil(t, obj.explicitFields)
@@ -1020,7 +1020,7 @@ func TestSettersSearchWalletProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetSort", func(t *testing.T) {
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueSort *sdkgo.SolanaDexProfileSearchPayloadSort
+		var fernTestValueSort *api.SolanaDexProfileSearchPayloadSort
 		obj.SetSort(fernTestValueSort)
 		assert.Equal(t, fernTestValueSort, obj.Sort)
 		assert.NotNil(t, obj.explicitFields)
@@ -1028,7 +1028,7 @@ func TestSettersSearchWalletProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetDynamicLabels", func(t *testing.T) {
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueDynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels
+		var fernTestValueDynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels
 		obj.SetDynamicLabels(fernTestValueDynamicLabels)
 		assert.Equal(t, fernTestValueDynamicLabels, obj.DynamicLabels)
 		assert.NotNil(t, obj.explicitFields)
@@ -1036,7 +1036,7 @@ func TestSettersSearchWalletProfilesDexRequest(t *testing.T) {
 
 	t.Run("SetOptions", func(t *testing.T) {
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexWalletProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexWalletProfilePayloadOptions
 		obj.SetOptions(fernTestValueOptions)
 		assert.Equal(t, fernTestValueOptions, obj.Options)
 		assert.NotNil(t, obj.explicitFields)
@@ -1049,7 +1049,7 @@ func TestSettersMarkExplicitSearchWalletProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueQuery *sdkgo.SolanaDexWalletProfileSearchPayloadQuery
+		var fernTestValueQuery *api.SolanaDexWalletProfileSearchPayloadQuery
 
 		// Act
 		obj.SetQuery(fernTestValueQuery)
@@ -1080,7 +1080,7 @@ func TestSettersMarkExplicitSearchWalletProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueFilter *sdkgo.SolanaDexProfileSearchPayloadFilter
+		var fernTestValueFilter *api.SolanaDexProfileSearchPayloadFilter
 
 		// Act
 		obj.SetFilter(fernTestValueFilter)
@@ -1111,7 +1111,7 @@ func TestSettersMarkExplicitSearchWalletProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueSort *sdkgo.SolanaDexProfileSearchPayloadSort
+		var fernTestValueSort *api.SolanaDexProfileSearchPayloadSort
 
 		// Act
 		obj.SetSort(fernTestValueSort)
@@ -1142,7 +1142,7 @@ func TestSettersMarkExplicitSearchWalletProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueDynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels
+		var fernTestValueDynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels
 
 		// Act
 		obj.SetDynamicLabels(fernTestValueDynamicLabels)
@@ -1173,7 +1173,7 @@ func TestSettersMarkExplicitSearchWalletProfilesDexRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchWalletProfilesDexRequest{}
-		var fernTestValueOptions *sdkgo.SolanaDexWalletProfilePayloadOptions
+		var fernTestValueOptions *api.SolanaDexWalletProfilePayloadOptions
 
 		// Act
 		obj.SetOptions(fernTestValueOptions)
@@ -1221,7 +1221,7 @@ func TestSettersGetSwapsDexResponse(t *testing.T) {
 
 	t.Run("SetData", func(t *testing.T) {
 		obj := &GetSwapsDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexSwap
+		var fernTestValueData []*api.SolanaDexSwap
 		obj.SetData(fernTestValueData)
 		assert.Equal(t, fernTestValueData, obj.Data)
 		assert.NotNil(t, obj.explicitFields)
@@ -1300,7 +1300,7 @@ func TestGettersGetSwapsDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &GetSwapsDexResponse{}
-		var expected []*sdkgo.SolanaDexSwap
+		var expected []*api.SolanaDexSwap
 		obj.Data = expected
 
 		// Act & Assert
@@ -1398,7 +1398,7 @@ func TestSettersMarkExplicitGetSwapsDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &GetSwapsDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexSwap
+		var fernTestValueData []*api.SolanaDexSwap
 
 		// Act
 		obj.SetData(fernTestValueData)
@@ -1446,7 +1446,7 @@ func TestSettersGetTradesDexResponse(t *testing.T) {
 
 	t.Run("SetData", func(t *testing.T) {
 		obj := &GetTradesDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexTrade
+		var fernTestValueData []*api.SolanaDexTrade
 		obj.SetData(fernTestValueData)
 		assert.Equal(t, fernTestValueData, obj.Data)
 		assert.NotNil(t, obj.explicitFields)
@@ -1525,7 +1525,7 @@ func TestGettersGetTradesDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &GetTradesDexResponse{}
-		var expected []*sdkgo.SolanaDexTrade
+		var expected []*api.SolanaDexTrade
 		obj.Data = expected
 
 		// Act & Assert
@@ -1623,7 +1623,7 @@ func TestSettersMarkExplicitGetTradesDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &GetTradesDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexTrade
+		var fernTestValueData []*api.SolanaDexTrade
 
 		// Act
 		obj.SetData(fernTestValueData)
@@ -1671,7 +1671,7 @@ func TestSettersSearchTokenProfilesDexResponse(t *testing.T) {
 
 	t.Run("SetData", func(t *testing.T) {
 		obj := &SearchTokenProfilesDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexTokenProfile
+		var fernTestValueData []*api.SolanaDexTokenProfile
 		obj.SetData(fernTestValueData)
 		assert.Equal(t, fernTestValueData, obj.Data)
 		assert.NotNil(t, obj.explicitFields)
@@ -1750,7 +1750,7 @@ func TestGettersSearchTokenProfilesDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchTokenProfilesDexResponse{}
-		var expected []*sdkgo.SolanaDexTokenProfile
+		var expected []*api.SolanaDexTokenProfile
 		obj.Data = expected
 
 		// Act & Assert
@@ -1848,7 +1848,7 @@ func TestSettersMarkExplicitSearchTokenProfilesDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchTokenProfilesDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexTokenProfile
+		var fernTestValueData []*api.SolanaDexTokenProfile
 
 		// Act
 		obj.SetData(fernTestValueData)
@@ -1896,7 +1896,7 @@ func TestSettersSearchWalletProfilesDexResponse(t *testing.T) {
 
 	t.Run("SetData", func(t *testing.T) {
 		obj := &SearchWalletProfilesDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexWalletProfile
+		var fernTestValueData []*api.SolanaDexWalletProfile
 		obj.SetData(fernTestValueData)
 		assert.Equal(t, fernTestValueData, obj.Data)
 		assert.NotNil(t, obj.explicitFields)
@@ -1975,7 +1975,7 @@ func TestGettersSearchWalletProfilesDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchWalletProfilesDexResponse{}
-		var expected []*sdkgo.SolanaDexWalletProfile
+		var expected []*api.SolanaDexWalletProfile
 		obj.Data = expected
 
 		// Act & Assert
@@ -2073,7 +2073,7 @@ func TestSettersMarkExplicitSearchWalletProfilesDexResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SearchWalletProfilesDexResponse{}
-		var fernTestValueData []*sdkgo.SolanaDexWalletProfile
+		var fernTestValueData []*api.SolanaDexWalletProfile
 
 		// Act
 		obj.SetData(fernTestValueData)

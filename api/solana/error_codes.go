@@ -3,34 +3,34 @@
 package solana
 
 import (
-	prism "github.com/prism-api/sdk-go"
+	api "github.com/prism-api/sdk-go/api"
 	core "github.com/prism-api/sdk-go/core"
 	internal "github.com/prism-api/sdk-go/internal"
 )
 
 var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
 	400: func(apiError *core.APIError) error {
-		return &prism.BadRequestError{
+		return &api.BadRequestError{
 			APIError: apiError,
 		}
 	},
 	401: func(apiError *core.APIError) error {
-		return &prism.UnauthorizedError{
+		return &api.UnauthorizedError{
 			APIError: apiError,
 		}
 	},
 	403: func(apiError *core.APIError) error {
-		return &prism.ForbiddenError{
+		return &api.ForbiddenError{
 			APIError: apiError,
 		}
 	},
 	429: func(apiError *core.APIError) error {
-		return &prism.TooManyRequestsError{
+		return &api.TooManyRequestsError{
 			APIError: apiError,
 		}
 	},
 	500: func(apiError *core.APIError) error {
-		return &prism.InternalServerError{
+		return &api.InternalServerError{
 			APIError: apiError,
 		}
 	},

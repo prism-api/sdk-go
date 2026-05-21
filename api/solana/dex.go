@@ -5,7 +5,7 @@ package solana
 import (
 	json "encoding/json"
 	fmt "fmt"
-	sdkgo "github.com/prism-api/sdk-go"
+	api "github.com/prism-api/sdk-go/api"
 	internal "github.com/prism-api/sdk-go/internal"
 	big "math/big"
 	time "time"
@@ -348,8 +348,8 @@ var (
 
 type GetTokenProfileDexRequest struct {
 	// Token address to retrieve the profile for.
-	Token   string                                     `json:"token" url:"-"`
-	Options *sdkgo.SolanaDexTokenProfilePayloadOptions `json:"options,omitempty" url:"-"`
+	Token   string                                   `json:"token" url:"-"`
+	Options *api.SolanaDexTokenProfilePayloadOptions `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -371,7 +371,7 @@ func (g *GetTokenProfileDexRequest) SetToken(token string) {
 
 // SetOptions sets the Options field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTokenProfileDexRequest) SetOptions(options *sdkgo.SolanaDexTokenProfilePayloadOptions) {
+func (g *GetTokenProfileDexRequest) SetOptions(options *api.SolanaDexTokenProfilePayloadOptions) {
 	g.Options = options
 	g.require(getTokenProfileDexRequestFieldOptions)
 }
@@ -465,8 +465,8 @@ var (
 
 type GetWalletProfileDexRequest struct {
 	// Wallet address to retrieve the profile for.
-	Wallet  string                                      `json:"wallet" url:"-"`
-	Options *sdkgo.SolanaDexWalletProfilePayloadOptions `json:"options,omitempty" url:"-"`
+	Wallet  string                                    `json:"wallet" url:"-"`
+	Options *api.SolanaDexWalletProfilePayloadOptions `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -488,7 +488,7 @@ func (g *GetWalletProfileDexRequest) SetWallet(wallet string) {
 
 // SetOptions sets the Options field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetWalletProfileDexRequest) SetOptions(options *sdkgo.SolanaDexWalletProfilePayloadOptions) {
+func (g *GetWalletProfileDexRequest) SetOptions(options *api.SolanaDexWalletProfilePayloadOptions) {
 	g.Options = options
 	g.require(getWalletProfileDexRequestFieldOptions)
 }
@@ -526,12 +526,12 @@ type SearchTokenProfilesDexRequest struct {
 	// Maximum number of results to return in a single page.
 	Limit *int `json:"limit,omitempty" url:"-"`
 	// Opaque cursor returned by a previous response. Pass it to fetch the next page of results.
-	Cursor        *string                                             `json:"cursor,omitempty" url:"-"`
-	Query         *sdkgo.SolanaDexTokenProfileSearchPayloadQueryField `json:"query,omitempty" url:"-"`
-	Filter        *sdkgo.SolanaDexProfileSearchPayloadFilter          `json:"filter,omitempty" url:"-"`
-	Sort          *sdkgo.SolanaDexProfileSearchPayloadSort            `json:"sort,omitempty" url:"-"`
-	DynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels   `json:"dynamic_labels,omitempty" url:"-"`
-	Options       *sdkgo.SolanaDexTokenProfilePayloadOptions          `json:"options,omitempty" url:"-"`
+	Cursor        *string                                           `json:"cursor,omitempty" url:"-"`
+	Query         *api.SolanaDexTokenProfileSearchPayloadQueryField `json:"query,omitempty" url:"-"`
+	Filter        *api.SolanaDexProfileSearchPayloadFilter          `json:"filter,omitempty" url:"-"`
+	Sort          *api.SolanaDexProfileSearchPayloadSort            `json:"sort,omitempty" url:"-"`
+	DynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels   `json:"dynamic_labels,omitempty" url:"-"`
+	Options       *api.SolanaDexTokenProfilePayloadOptions          `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -546,35 +546,35 @@ func (s *SearchTokenProfilesDexRequest) require(field *big.Int) {
 
 // SetQuery sets the Query field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchTokenProfilesDexRequest) SetQuery(query *sdkgo.SolanaDexTokenProfileSearchPayloadQueryField) {
+func (s *SearchTokenProfilesDexRequest) SetQuery(query *api.SolanaDexTokenProfileSearchPayloadQueryField) {
 	s.Query = query
 	s.require(searchTokenProfilesDexRequestFieldQuery)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchTokenProfilesDexRequest) SetFilter(filter *sdkgo.SolanaDexProfileSearchPayloadFilter) {
+func (s *SearchTokenProfilesDexRequest) SetFilter(filter *api.SolanaDexProfileSearchPayloadFilter) {
 	s.Filter = filter
 	s.require(searchTokenProfilesDexRequestFieldFilter)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchTokenProfilesDexRequest) SetSort(sort *sdkgo.SolanaDexProfileSearchPayloadSort) {
+func (s *SearchTokenProfilesDexRequest) SetSort(sort *api.SolanaDexProfileSearchPayloadSort) {
 	s.Sort = sort
 	s.require(searchTokenProfilesDexRequestFieldSort)
 }
 
 // SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchTokenProfilesDexRequest) SetDynamicLabels(dynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels) {
+func (s *SearchTokenProfilesDexRequest) SetDynamicLabels(dynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels) {
 	s.DynamicLabels = dynamicLabels
 	s.require(searchTokenProfilesDexRequestFieldDynamicLabels)
 }
 
 // SetOptions sets the Options field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchTokenProfilesDexRequest) SetOptions(options *sdkgo.SolanaDexTokenProfilePayloadOptions) {
+func (s *SearchTokenProfilesDexRequest) SetOptions(options *api.SolanaDexTokenProfilePayloadOptions) {
 	s.Options = options
 	s.require(searchTokenProfilesDexRequestFieldOptions)
 }
@@ -612,12 +612,12 @@ type SearchWalletProfilesDexRequest struct {
 	// Maximum number of results to return in a single page.
 	Limit *int `json:"limit,omitempty" url:"-"`
 	// Opaque cursor returned by a previous response. Pass it to fetch the next page of results.
-	Cursor        *string                                           `json:"cursor,omitempty" url:"-"`
-	Query         *sdkgo.SolanaDexWalletProfileSearchPayloadQuery   `json:"query,omitempty" url:"-"`
-	Filter        *sdkgo.SolanaDexProfileSearchPayloadFilter        `json:"filter,omitempty" url:"-"`
-	Sort          *sdkgo.SolanaDexProfileSearchPayloadSort          `json:"sort,omitempty" url:"-"`
-	DynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels `json:"dynamic_labels,omitempty" url:"-"`
-	Options       *sdkgo.SolanaDexWalletProfilePayloadOptions       `json:"options,omitempty" url:"-"`
+	Cursor        *string                                         `json:"cursor,omitempty" url:"-"`
+	Query         *api.SolanaDexWalletProfileSearchPayloadQuery   `json:"query,omitempty" url:"-"`
+	Filter        *api.SolanaDexProfileSearchPayloadFilter        `json:"filter,omitempty" url:"-"`
+	Sort          *api.SolanaDexProfileSearchPayloadSort          `json:"sort,omitempty" url:"-"`
+	DynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels `json:"dynamic_labels,omitempty" url:"-"`
+	Options       *api.SolanaDexWalletProfilePayloadOptions       `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -632,35 +632,35 @@ func (s *SearchWalletProfilesDexRequest) require(field *big.Int) {
 
 // SetQuery sets the Query field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchWalletProfilesDexRequest) SetQuery(query *sdkgo.SolanaDexWalletProfileSearchPayloadQuery) {
+func (s *SearchWalletProfilesDexRequest) SetQuery(query *api.SolanaDexWalletProfileSearchPayloadQuery) {
 	s.Query = query
 	s.require(searchWalletProfilesDexRequestFieldQuery)
 }
 
 // SetFilter sets the Filter field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchWalletProfilesDexRequest) SetFilter(filter *sdkgo.SolanaDexProfileSearchPayloadFilter) {
+func (s *SearchWalletProfilesDexRequest) SetFilter(filter *api.SolanaDexProfileSearchPayloadFilter) {
 	s.Filter = filter
 	s.require(searchWalletProfilesDexRequestFieldFilter)
 }
 
 // SetSort sets the Sort field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchWalletProfilesDexRequest) SetSort(sort *sdkgo.SolanaDexProfileSearchPayloadSort) {
+func (s *SearchWalletProfilesDexRequest) SetSort(sort *api.SolanaDexProfileSearchPayloadSort) {
 	s.Sort = sort
 	s.require(searchWalletProfilesDexRequestFieldSort)
 }
 
 // SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchWalletProfilesDexRequest) SetDynamicLabels(dynamicLabels *sdkgo.SolanaDexProfileSearchPayloadDynamicLabels) {
+func (s *SearchWalletProfilesDexRequest) SetDynamicLabels(dynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels) {
 	s.DynamicLabels = dynamicLabels
 	s.require(searchWalletProfilesDexRequestFieldDynamicLabels)
 }
 
 // SetOptions sets the Options field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchWalletProfilesDexRequest) SetOptions(options *sdkgo.SolanaDexWalletProfilePayloadOptions) {
+func (s *SearchWalletProfilesDexRequest) SetOptions(options *api.SolanaDexWalletProfilePayloadOptions) {
 	s.Options = options
 	s.require(searchWalletProfilesDexRequestFieldOptions)
 }
@@ -696,8 +696,8 @@ type GetSwapsDexResponse struct {
 	// Total number of matching items
 	Count *int `json:"count,omitempty" url:"count,omitempty"`
 	// Cursor for pagination
-	Cursor *string                `json:"cursor,omitempty" url:"cursor,omitempty"`
-	Data   []*sdkgo.SolanaDexSwap `json:"data,omitempty" url:"data,omitempty"`
+	Cursor *string              `json:"cursor,omitempty" url:"cursor,omitempty"`
+	Data   []*api.SolanaDexSwap `json:"data,omitempty" url:"data,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -720,7 +720,7 @@ func (g *GetSwapsDexResponse) GetCursor() *string {
 	return g.Cursor
 }
 
-func (g *GetSwapsDexResponse) GetData() []*sdkgo.SolanaDexSwap {
+func (g *GetSwapsDexResponse) GetData() []*api.SolanaDexSwap {
 	if g == nil {
 		return nil
 	}
@@ -757,7 +757,7 @@ func (g *GetSwapsDexResponse) SetCursor(cursor *string) {
 
 // SetData sets the Data field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSwapsDexResponse) SetData(data []*sdkgo.SolanaDexSwap) {
+func (g *GetSwapsDexResponse) SetData(data []*api.SolanaDexSwap) {
 	g.Data = data
 	g.require(getSwapsDexResponseFieldData)
 }
@@ -814,8 +814,8 @@ type GetTradesDexResponse struct {
 	// Total number of matching items
 	Count *int `json:"count,omitempty" url:"count,omitempty"`
 	// Cursor for pagination
-	Cursor *string                 `json:"cursor,omitempty" url:"cursor,omitempty"`
-	Data   []*sdkgo.SolanaDexTrade `json:"data,omitempty" url:"data,omitempty"`
+	Cursor *string               `json:"cursor,omitempty" url:"cursor,omitempty"`
+	Data   []*api.SolanaDexTrade `json:"data,omitempty" url:"data,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -838,7 +838,7 @@ func (g *GetTradesDexResponse) GetCursor() *string {
 	return g.Cursor
 }
 
-func (g *GetTradesDexResponse) GetData() []*sdkgo.SolanaDexTrade {
+func (g *GetTradesDexResponse) GetData() []*api.SolanaDexTrade {
 	if g == nil {
 		return nil
 	}
@@ -875,7 +875,7 @@ func (g *GetTradesDexResponse) SetCursor(cursor *string) {
 
 // SetData sets the Data field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTradesDexResponse) SetData(data []*sdkgo.SolanaDexTrade) {
+func (g *GetTradesDexResponse) SetData(data []*api.SolanaDexTrade) {
 	g.Data = data
 	g.require(getTradesDexResponseFieldData)
 }
@@ -932,8 +932,8 @@ type SearchTokenProfilesDexResponse struct {
 	// Total number of matching items
 	Count *int `json:"count,omitempty" url:"count,omitempty"`
 	// Cursor for pagination
-	Cursor *string                        `json:"cursor,omitempty" url:"cursor,omitempty"`
-	Data   []*sdkgo.SolanaDexTokenProfile `json:"data,omitempty" url:"data,omitempty"`
+	Cursor *string                      `json:"cursor,omitempty" url:"cursor,omitempty"`
+	Data   []*api.SolanaDexTokenProfile `json:"data,omitempty" url:"data,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -956,7 +956,7 @@ func (s *SearchTokenProfilesDexResponse) GetCursor() *string {
 	return s.Cursor
 }
 
-func (s *SearchTokenProfilesDexResponse) GetData() []*sdkgo.SolanaDexTokenProfile {
+func (s *SearchTokenProfilesDexResponse) GetData() []*api.SolanaDexTokenProfile {
 	if s == nil {
 		return nil
 	}
@@ -993,7 +993,7 @@ func (s *SearchTokenProfilesDexResponse) SetCursor(cursor *string) {
 
 // SetData sets the Data field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchTokenProfilesDexResponse) SetData(data []*sdkgo.SolanaDexTokenProfile) {
+func (s *SearchTokenProfilesDexResponse) SetData(data []*api.SolanaDexTokenProfile) {
 	s.Data = data
 	s.require(searchTokenProfilesDexResponseFieldData)
 }
@@ -1050,8 +1050,8 @@ type SearchWalletProfilesDexResponse struct {
 	// Total number of matching items
 	Count *int `json:"count,omitempty" url:"count,omitempty"`
 	// Cursor for pagination
-	Cursor *string                         `json:"cursor,omitempty" url:"cursor,omitempty"`
-	Data   []*sdkgo.SolanaDexWalletProfile `json:"data,omitempty" url:"data,omitempty"`
+	Cursor *string                       `json:"cursor,omitempty" url:"cursor,omitempty"`
+	Data   []*api.SolanaDexWalletProfile `json:"data,omitempty" url:"data,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1074,7 +1074,7 @@ func (s *SearchWalletProfilesDexResponse) GetCursor() *string {
 	return s.Cursor
 }
 
-func (s *SearchWalletProfilesDexResponse) GetData() []*sdkgo.SolanaDexWalletProfile {
+func (s *SearchWalletProfilesDexResponse) GetData() []*api.SolanaDexWalletProfile {
 	if s == nil {
 		return nil
 	}
@@ -1111,7 +1111,7 @@ func (s *SearchWalletProfilesDexResponse) SetCursor(cursor *string) {
 
 // SetData sets the Data field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SearchWalletProfilesDexResponse) SetData(data []*sdkgo.SolanaDexWalletProfile) {
+func (s *SearchWalletProfilesDexResponse) SetData(data []*api.SolanaDexWalletProfile) {
 	s.Data = data
 	s.require(searchWalletProfilesDexResponseFieldData)
 }

@@ -5,11 +5,11 @@ package dex
 import (
 	context "context"
 
-	prism "github.com/prism-api/sdk-go"
+	api "github.com/prism-api/sdk-go/api"
+	solana "github.com/prism-api/sdk-go/api/solana"
 	core "github.com/prism-api/sdk-go/core"
 	internal "github.com/prism-api/sdk-go/internal"
 	option "github.com/prism-api/sdk-go/option"
-	solana "github.com/prism-api/sdk-go/solana"
 )
 
 type Client struct {
@@ -39,7 +39,7 @@ func (c *Client) GetWalletProfile(
 	ctx context.Context,
 	request *solana.GetWalletProfileDexRequest,
 	opts ...option.RequestOption,
-) (*prism.SolanaDexWalletProfile, error) {
+) (*api.SolanaDexWalletProfile, error) {
 	response, err := c.WithRawResponse.GetWalletProfile(
 		ctx,
 		request,
@@ -73,7 +73,7 @@ func (c *Client) GetTokenProfile(
 	ctx context.Context,
 	request *solana.GetTokenProfileDexRequest,
 	opts ...option.RequestOption,
-) (*prism.SolanaDexTokenProfile, error) {
+) (*api.SolanaDexTokenProfile, error) {
 	response, err := c.WithRawResponse.GetTokenProfile(
 		ctx,
 		request,
@@ -141,7 +141,7 @@ func (c *Client) GetPrice(
 	ctx context.Context,
 	request *solana.GetPriceDexRequest,
 	opts ...option.RequestOption,
-) ([]*prism.SolanaDexPrice, error) {
+) ([]*api.SolanaDexPrice, error) {
 	response, err := c.WithRawResponse.GetPrice(
 		ctx,
 		request,
@@ -158,7 +158,7 @@ func (c *Client) GetPriceStats(
 	ctx context.Context,
 	request *solana.GetPriceStatsDexRequest,
 	opts ...option.RequestOption,
-) ([]*prism.SolanaDexPriceStats, error) {
+) ([]*api.SolanaDexPriceStats, error) {
 	response, err := c.WithRawResponse.GetPriceStats(
 		ctx,
 		request,
@@ -175,7 +175,7 @@ func (c *Client) GetPriceCandles(
 	ctx context.Context,
 	request *solana.GetPriceCandlesDexRequest,
 	opts ...option.RequestOption,
-) ([]*prism.SolanaDexPriceCandle, error) {
+) ([]*api.SolanaDexPriceCandle, error) {
 	response, err := c.WithRawResponse.GetPriceCandles(
 		ctx,
 		request,
@@ -192,7 +192,7 @@ func (c *Client) GetPriceHistory(
 	ctx context.Context,
 	request *solana.GetPriceHistoryDexRequest,
 	opts ...option.RequestOption,
-) ([]*prism.SolanaDexPriceHistory, error) {
+) ([]*api.SolanaDexPriceHistory, error) {
 	response, err := c.WithRawResponse.GetPriceHistory(
 		ctx,
 		request,

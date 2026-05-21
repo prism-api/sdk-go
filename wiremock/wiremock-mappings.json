@@ -1,7 +1,7 @@
 {
   "mappings": [
     {
-      "id": "e708de6b-90ad-466f-9d36-36620116544e",
+      "id": "0008befb-0ec1-4c15-b004-f19137377919",
       "name": "Get Profile - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/profiles/wallets/get-profile",
@@ -14,12 +14,12 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"updated_at\": \"2024-01-15T09:30:00Z\",\n  \"synced_at\": \"2024-01-15T09:30:00Z\",\n  \"wallet_address\": \"wallet_address\",\n  \"labels\": [\n    \"kol\"\n  ],\n  \"matched_labels\": {\n    \"key\": [\n      \"value\"\n    ]\n  },\n  \"dynamic_labels\": [\n    \"dynamic_labels\"\n  ],\n  \"metadata\": {\n    \"last_trade_at\": \"2024-01-15T09:30:00Z\"\n  },\n  \"identity\": {\n    \"name\": \"name\",\n    \"twitter_username\": \"twitter_username\",\n    \"telegram_username\": \"telegram_username\"\n  },\n  \"metrics\": {\n    \"key\": {\n      \"risk_score\": 1.1,\n      \"consistency_score\": 1.1,\n      \"largest_win\": 1.1,\n      \"largest_loss\": 1.1,\n      \"max_consecutive_wins\": 1,\n      \"max_consecutive_losses\": 1,\n      \"avg_buy_size\": 1.1,\n      \"avg_sell_size\": 1.1,\n      \"avg_buy_mcap\": 1.1,\n      \"avg_sell_mcap\": 1.1,\n      \"avg_daily_pnl\": 1.1,\n      \"avg_daily_roi\": 1.1,\n      \"avg_daily_trade_count\": 1,\n      \"avg_daily_traded_tokens\": 1,\n      \"avg_daily_volume\": 1.1,\n      \"avg_holding_duration\": 1,\n      \"avg_trade_delta\": 1,\n      \"avg_pnl\": 1.1,\n      \"avg_roi\": 1.1,\n      \"avg_token_pnl\": 1.1,\n      \"avg_token_roi\": 1.1,\n      \"token_roi_distribution\": {\n        \"key\": 1\n      },\n      \"trade_count\": 1,\n      \"buy_count\": 1,\n      \"sell_count\": 1,\n      \"position_count\": 1,\n      \"win_count\": 1,\n      \"loss_count\": 1,\n      \"pnl\": 1.1,\n      \"win_pnl\": 1.1,\n      \"loss_pnl\": 1.1,\n      \"volume\": 1.1,\n      \"buy_volume\": 1.1,\n      \"sell_volume\": 1.1,\n      \"winrate\": 1.1,\n      \"volume_weighted_winrate\": 1.1,\n      \"roi\": 1.1,\n      \"volume_weighted_roi\": 1.1,\n      \"time_weighted_roi\": 1.1,\n      \"pnl_volume_ratio\": 1.1,\n      \"token_hit_ratio\": 1.1,\n      \"win_loss_size_ratio\": 1.1,\n      \"profit_factor\": 1.1,\n      \"profit_expectancy\": 1.1,\n      \"recovery_factor\": 1.1,\n      \"winrate_stability\": 1.1,\n      \"winrate_volatility\": 1.1,\n      \"pnl_stability\": 1.1,\n      \"pnl_volatility\": 1.1,\n      \"roi_stability\": 1.1,\n      \"roi_volatility\": 1.1,\n      \"sharpe_ratio\": 1.1,\n      \"sortino_ratio\": 1.1,\n      \"max_drawdown\": 1.1,\n      \"risk_of_ruin\": 1.1,\n      \"turnover\": 1.1\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "e708de6b-90ad-466f-9d36-36620116544e",
+      "uuid": "0008befb-0ec1-4c15-b004-f19137377919",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -32,7 +32,7 @@
       }
     },
     {
-      "id": "dddb9783-bc3b-4841-a10f-612a80cb6784",
+      "id": "1b5328c2-44ad-47c3-897e-cbb80dbf75db",
       "name": "Search Profiles - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/profiles/wallets/search-profiles",
@@ -45,12 +45,12 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"updated_at\": \"2024-01-15T09:30:00Z\",\n      \"synced_at\": \"2024-01-15T09:30:00Z\",\n      \"wallet_address\": \"wallet_address\",\n      \"labels\": [\n        \"kol\"\n      ],\n      \"matched_labels\": {\n        \"key\": [\n          \"value\"\n        ]\n      },\n      \"dynamic_labels\": [\n        \"dynamic_labels\"\n      ],\n      \"metrics\": {\n        \"key\": {}\n      }\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "dddb9783-bc3b-4841-a10f-612a80cb6784",
+      "uuid": "1b5328c2-44ad-47c3-897e-cbb80dbf75db",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -63,7 +63,7 @@
       }
     },
     {
-      "id": "6b9e00e9-a0d5-44f0-8c1d-8299a0bdffd0",
+      "id": "f73100ad-83c5-4a96-806a-ce934b0aed71",
       "name": "Get Profile - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/profiles/tokens/get-profile",
@@ -76,12 +76,12 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"updated_at\": \"2024-01-15T09:30:00Z\",\n  \"synced_at\": \"2024-01-15T09:30:00Z\",\n  \"token_address\": \"token_address\",\n  \"labels\": [\n    \"trending\"\n  ],\n  \"matched_labels\": {\n    \"key\": [\n      \"value\"\n    ]\n  },\n  \"dynamic_labels\": [\n    \"dynamic_labels\"\n  ],\n  \"metadata\": {\n    \"last_trade_at\": \"2024-01-15T09:30:00Z\",\n    \"created_at\": \"2024-01-15T09:30:00Z\",\n    \"symbol\": \"symbol\",\n    \"name\": \"name\",\n    \"image\": \"image\",\n    \"verified\": true,\n    \"creator_address\": \"creator_address\",\n    \"twitter\": \"twitter\",\n    \"discord\": \"discord\",\n    \"website\": \"website\",\n    \"telegram\": \"telegram\"\n  },\n  \"market\": {\n    \"fdv\": 1.1,\n    \"market_cap\": 1.1,\n    \"price\": 1.1,\n    \"liquidity\": 1.1,\n    \"holders\": 1,\n    \"total_supply\": 1.1,\n    \"circulating_supply\": 1.1,\n    \"top_holdings\": 1.1,\n    \"dev_holdings\": 1.1\n  },\n  \"metrics\": {\n    \"key\": {\n      \"largest_trade_win\": 1.1,\n      \"largest_trade_loss\": 1.1,\n      \"avg_buy_size\": 1.1,\n      \"avg_sell_size\": 1.1,\n      \"avg_price\": 1.1,\n      \"avg_buy_price\": 1.1,\n      \"avg_sell_price\": 1.1,\n      \"avg_buy_mcap\": 1.1,\n      \"avg_sell_mcap\": 1.1,\n      \"avg_holding_duration\": 1,\n      \"avg_trade_pnl\": 1.1,\n      \"avg_trade_roi\": 1.1,\n      \"avg_wallet_winrate\": 1.1,\n      \"avg_wallet_pnl\": 1.1,\n      \"avg_wallet_roi\": 1.1,\n      \"wallet_roi_distribution\": {\n        \"key\": 1\n      },\n      \"makers_count\": 1,\n      \"buyers_count\": 1,\n      \"sellers_count\": 1,\n      \"buy_count\": 1,\n      \"sell_count\": 1,\n      \"win_position_count\": 1,\n      \"loss_position_count\": 1,\n      \"win_pnl\": 1.1,\n      \"loss_pnl\": 1.1,\n      \"buy_volume\": 1.1,\n      \"sell_volume\": 1.1,\n      \"pnl\": 1.1,\n      \"trade_count\": 1,\n      \"volume\": 1.1,\n      \"position_count\": 1,\n      \"volume_weighted_winrate\": 1.1,\n      \"volume_weighted_roi\": 1.1,\n      \"wallet_hit_ratio\": 1.1,\n      \"profit_factor\": 1.1,\n      \"win_loss_size_ratio\": 1.1,\n      \"pnl_volume_ratio\": 1.1,\n      \"price_stability\": 1.1,\n      \"price_volatility\": 1.1,\n      \"roi_stability\": 1.1,\n      \"roi_volatility\": 1.1,\n      \"pnl_volatility\": 1.1,\n      \"pnl_stability\": 1.1,\n      \"sharpe_ratio\": 1.1,\n      \"sortino_ratio\": 1.1,\n      \"max_drawdown\": 1.1\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "6b9e00e9-a0d5-44f0-8c1d-8299a0bdffd0",
+      "uuid": "f73100ad-83c5-4a96-806a-ce934b0aed71",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -94,7 +94,7 @@
       }
     },
     {
-      "id": "2947581d-802b-4e48-9418-09062dcbe772",
+      "id": "ea89c400-e135-4901-b284-ea6334f7f44a",
       "name": "Search Profiles - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/profiles/tokens/search-profiles",
@@ -107,12 +107,12 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"updated_at\": \"2024-01-15T09:30:00Z\",\n      \"synced_at\": \"2024-01-15T09:30:00Z\",\n      \"token_address\": \"token_address\",\n      \"labels\": [\n        \"trending\"\n      ],\n      \"matched_labels\": {\n        \"key\": [\n          \"value\"\n        ]\n      },\n      \"dynamic_labels\": [\n        \"dynamic_labels\"\n      ],\n      \"metrics\": {\n        \"key\": {}\n      }\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "2947581d-802b-4e48-9418-09062dcbe772",
+      "uuid": "ea89c400-e135-4901-b284-ea6334f7f44a",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -125,7 +125,7 @@
       }
     },
     {
-      "id": "715af28e-287f-433f-9b75-81f738547f7f",
+      "id": "2f210ade-6f2e-4ed5-bc75-3d838103e019",
       "name": "Get Trades - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/trades/get-trades",
@@ -138,12 +138,12 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"protocol\": \"protocol\",\n      \"swap_type\": \"quote_token\",\n      \"wallet_address\": \"wallet_address\",\n      \"token_address\": \"token_address\",\n      \"quote_address\": \"quote_address\",\n      \"position_address\": \"position_address\",\n      \"direction\": \"buy\",\n      \"position_state\": \"open\",\n      \"token_amount\": 1.1,\n      \"quote_amount\": 1.1,\n      \"native_amount\": 1.1,\n      \"usd_amount\": 1.1,\n      \"pre_token_balance\": 1.1,\n      \"post_token_balance\": 1.1,\n      \"token_price\": 1.1,\n      \"quote_price\": 1.1,\n      \"token_mcap\": 1.1,\n      \"block_slot\": 1,\n      \"block_time\": \"2024-01-15T09:30:00Z\",\n      \"tx_hash\": \"tx_hash\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "715af28e-287f-433f-9b75-81f738547f7f",
+      "uuid": "2f210ade-6f2e-4ed5-bc75-3d838103e019",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -156,7 +156,7 @@
       }
     },
     {
-      "id": "23375ef7-35ea-454a-a120-b594bdbe31d6",
+      "id": "984712d7-a68c-42c8-a405-8825a439ebb0",
       "name": "Get Swaps - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/swaps/get-swaps",
@@ -169,12 +169,12 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"swap_type\": \"quote_token\",\n      \"protocol\": \"protocol\",\n      \"wallet_address\": \"wallet_address\",\n      \"token_address_in\": \"token_address_in\",\n      \"token_address_out\": \"token_address_out\",\n      \"token_amount_in\": 1.1,\n      \"token_amount_out\": 1.1,\n      \"token_price_in\": 1.1,\n      \"token_price_out\": 1.1,\n      \"pre_token_balance_in\": 1.1,\n      \"pre_token_balance_out\": 1.1,\n      \"post_token_balance_in\": 1.1,\n      \"post_token_balance_out\": 1.1,\n      \"usd_amount_in\": 1.1,\n      \"usd_amount_out\": 1.1,\n      \"block_slot\": 1,\n      \"block_time\": \"2024-01-15T09:30:00Z\",\n      \"tx_hash\": \"tx_hash\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "23375ef7-35ea-454a-a120-b594bdbe31d6",
+      "uuid": "984712d7-a68c-42c8-a405-8825a439ebb0",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -187,7 +187,7 @@
       }
     },
     {
-      "id": "ba337765-0a23-4fe8-8694-17d25a2c0bc4",
+      "id": "b2b55325-ab6d-4681-98aa-db2607ee20e0",
       "name": "Get Price - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/prices/get-price",
@@ -200,12 +200,12 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {}\n]",
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"usd_price\": 1.1,\n    \"block_slot\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "ba337765-0a23-4fe8-8694-17d25a2c0bc4",
+      "uuid": "b2b55325-ab6d-4681-98aa-db2607ee20e0",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -218,7 +218,7 @@
       }
     },
     {
-      "id": "a255f4d1-2e07-47f1-962c-030fcff73b4c",
+      "id": "636a1e74-7020-4eb1-bb26-aaf3f5241608",
       "name": "Get Price Stats - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/prices/get-price-stats",
@@ -231,12 +231,12 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {}\n]",
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"usd_price\": 1.1,\n    \"usd_price_change_5m\": 1.1,\n    \"usd_price_change_1h\": 1.1,\n    \"usd_price_change_6h\": 1.1,\n    \"usd_price_change_12h\": 1.1,\n    \"usd_price_change_1d\": 1.1,\n    \"usd_price_change_7d\": 1.1,\n    \"usd_price_change_30d\": 1.1,\n    \"usd_volume_5m\": 1.1,\n    \"usd_volume_1h\": 1.1,\n    \"usd_volume_6h\": 1.1,\n    \"usd_volume_12h\": 1.1,\n    \"usd_volume_1d\": 1.1,\n    \"usd_volume_7d\": 1.1,\n    \"usd_volume_30d\": 1.1,\n    \"usd_volume_change_5m\": 1.1,\n    \"usd_volume_change_1h\": 1.1,\n    \"usd_volume_change_6h\": 1.1,\n    \"usd_volume_change_12h\": 1.1,\n    \"usd_volume_change_1d\": 1.1,\n    \"usd_volume_change_7d\": 1.1,\n    \"usd_volume_change_30d\": 1.1,\n    \"block_slot\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "a255f4d1-2e07-47f1-962c-030fcff73b4c",
+      "uuid": "636a1e74-7020-4eb1-bb26-aaf3f5241608",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -249,7 +249,7 @@
       }
     },
     {
-      "id": "ff6944be-e9e2-4cae-8870-cb7403d2450e",
+      "id": "9b8c8600-2b84-472b-9513-7829c4598bd8",
       "name": "Get Price Candles - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/prices/get-price-candles",
@@ -262,12 +262,12 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {}\n]",
+        "body": "[\n  {\n    \"timestamp\": \"2024-01-15T09:30:00Z\",\n    \"open\": 1.1,\n    \"high\": 1.1,\n    \"low\": 1.1,\n    \"close\": 1.1,\n    \"volume\": 1.1,\n    \"count\": 1\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "ff6944be-e9e2-4cae-8870-cb7403d2450e",
+      "uuid": "9b8c8600-2b84-472b-9513-7829c4598bd8",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -280,7 +280,7 @@
       }
     },
     {
-      "id": "19db34dd-bac3-4d67-86c3-30c39359480c",
+      "id": "6c40e3cf-7aa2-4c04-b71e-0459e25c8e65",
       "name": "Get Price History - default",
       "request": {
         "urlPathTemplate": "/v1/solana/dex/prices/get-price-history",
@@ -293,12 +293,12 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {}\n]",
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"prices\": [\n      {}\n    ]\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "19db34dd-bac3-4d67-86c3-30c39359480c",
+      "uuid": "6c40e3cf-7aa2-4c04-b71e-0459e25c8e65",
       "persistent": true,
       "priority": 3,
       "metadata": {

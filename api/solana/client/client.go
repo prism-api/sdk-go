@@ -3,24 +3,22 @@
 package client
 
 import (
-	client "github.com/prism-api/sdk-go/api/client"
+	dex "github.com/prism-api/sdk-go/api/solana/dex"
 	core "github.com/prism-api/sdk-go/core"
 	internal "github.com/prism-api/sdk-go/internal"
-	option "github.com/prism-api/sdk-go/option"
 )
 
 type Client struct {
-	API *client.Client
+	Dex *dex.Client
 
 	options *core.RequestOptions
 	baseURL string
 	caller  *internal.Caller
 }
 
-func NewClient(opts ...option.RequestOption) *Client {
-	options := core.NewRequestOptions(opts...)
+func NewClient(options *core.RequestOptions) *Client {
 	return &Client{
-		API:     client.NewClient(options),
+		Dex:     dex.NewClient(options),
 		options: options,
 		baseURL: options.BaseURL,
 		caller: internal.NewCaller(
