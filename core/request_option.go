@@ -58,8 +58,8 @@ func (r *RequestOptions) cloneHeader() http.Header {
 	headers := r.HTTPHeader.Clone()
 	headers.Set("X-Fern-Language", "Go")
 	headers.Set("X-Fern-SDK-Name", "github.com/prism-api/sdk-go")
-	headers.Set("X-Fern-SDK-Version", "v1.3.2")
-	headers.Set("User-Agent", "github.com/prism-api/sdk-go/1.3.2")
+	headers.Set("X-Fern-SDK-Version", "v1.3.3")
+	headers.Set("User-Agent", "github.com/prism-api/sdk-go/1.3.3")
 	return headers
 }
 
