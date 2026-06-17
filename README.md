@@ -51,7 +51,6 @@ func do() {
         ),
     )
     request := &solana.GetWalletProfileDexRequest{
-        Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
         Options: &api.SolanaDexWalletProfilePayloadOptions{
             IncludeMetadata: prism.Bool(
                 true,

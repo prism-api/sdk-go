@@ -10,434 +10,65 @@ import (
 	time "time"
 )
 
-func TestSettersSolanaDexPrice(t *testing.T) {
-	t.Run("SetTokenAddress", func(t *testing.T) {
-		obj := &SolanaDexPrice{}
-		var fernTestValueTokenAddress *string
-		obj.SetTokenAddress(fernTestValueTokenAddress)
-		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUsdPrice", func(t *testing.T) {
-		obj := &SolanaDexPrice{}
-		var fernTestValueUsdPrice *float64
-		obj.SetUsdPrice(fernTestValueUsdPrice)
-		assert.Equal(t, fernTestValueUsdPrice, obj.UsdPrice)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetBlockSlot", func(t *testing.T) {
-		obj := &SolanaDexPrice{}
-		var fernTestValueBlockSlot *int
-		obj.SetBlockSlot(fernTestValueBlockSlot)
-		assert.Equal(t, fernTestValueBlockSlot, obj.BlockSlot)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetBlockTime", func(t *testing.T) {
-		obj := &SolanaDexPrice{}
-		var fernTestValueBlockTime *time.Time
-		obj.SetBlockTime(fernTestValueBlockTime)
-		assert.Equal(t, fernTestValueBlockTime, obj.BlockTime)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersSolanaDexPrice(t *testing.T) {
-	t.Run("GetTokenAddress", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var expected *string
-		obj.TokenAddress = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetTokenAddress(), "getter should return the property value")
-	})
-
-	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		obj.TokenAddress = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTokenAddress(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexPrice
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetTokenAddress() // Should return zero value
-	})
-
-	t.Run("GetUsdPrice", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var expected *float64
-		obj.UsdPrice = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUsdPrice(), "getter should return the property value")
-	})
-
-	t.Run("GetUsdPrice_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		obj.UsdPrice = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUsdPrice(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUsdPrice_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexPrice
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUsdPrice() // Should return zero value
-	})
-
-	t.Run("GetBlockSlot", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var expected *int
-		obj.BlockSlot = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetBlockSlot(), "getter should return the property value")
-	})
-
-	t.Run("GetBlockSlot_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		obj.BlockSlot = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetBlockSlot(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetBlockSlot_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexPrice
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetBlockSlot() // Should return zero value
-	})
-
-	t.Run("GetBlockTime", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var expected *time.Time
-		obj.BlockTime = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetBlockTime(), "getter should return the property value")
-	})
-
-	t.Run("GetBlockTime_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		obj.BlockTime = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetBlockTime(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetBlockTime_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexPrice
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetBlockTime() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitSolanaDexPrice(t *testing.T) {
-	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var fernTestValueTokenAddress *string
-
-		// Act
-		obj.SetTokenAddress(fernTestValueTokenAddress)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUsdPrice_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var fernTestValueUsdPrice *float64
-
-		// Act
-		obj.SetUsdPrice(fernTestValueUsdPrice)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetBlockSlot_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var fernTestValueBlockSlot *int
-
-		// Act
-		obj.SetBlockSlot(fernTestValueBlockSlot)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetBlockTime_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexPrice{}
-		var fernTestValueBlockTime *time.Time
-
-		// Act
-		obj.SetBlockTime(fernTestValueBlockTime)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersSolanaDexSwap(t *testing.T) {
+func TestSettersSolanaAssetsBalanceChangeMessage(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueID *int
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetSwapType", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueSwapType *SolanaDexSwapTypeEnum
-		obj.SetSwapType(fernTestValueSwapType)
-		assert.Equal(t, fernTestValueSwapType, obj.SwapType)
+	t.Run("SetBalanceType", func(t *testing.T) {
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueBalanceType *SolanaAssetsBalanceChangeTypeEnum
+		obj.SetBalanceType(fernTestValueBalanceType)
+		assert.Equal(t, fernTestValueBalanceType, obj.BalanceType)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetProtocol", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueProtocol *string
-		obj.SetProtocol(fernTestValueProtocol)
-		assert.Equal(t, fernTestValueProtocol, obj.Protocol)
+	t.Run("SetStackHeight", func(t *testing.T) {
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueStackHeight *int
+		obj.SetStackHeight(fernTestValueStackHeight)
+		assert.Equal(t, fernTestValueStackHeight, obj.StackHeight)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetWalletAddress", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueWalletAddress *string
-		obj.SetWalletAddress(fernTestValueWalletAddress)
-		assert.Equal(t, fernTestValueWalletAddress, obj.WalletAddress)
+	t.Run("SetTokenAddress", func(t *testing.T) {
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueTokenAddress *string
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTokenAddressIn", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAddressIn *string
-		obj.SetTokenAddressIn(fernTestValueTokenAddressIn)
-		assert.Equal(t, fernTestValueTokenAddressIn, obj.TokenAddressIn)
+	t.Run("SetOwnerAddress", func(t *testing.T) {
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueOwnerAddress *string
+		obj.SetOwnerAddress(fernTestValueOwnerAddress)
+		assert.Equal(t, fernTestValueOwnerAddress, obj.OwnerAddress)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTokenAddressOut", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAddressOut *string
-		obj.SetTokenAddressOut(fernTestValueTokenAddressOut)
-		assert.Equal(t, fernTestValueTokenAddressOut, obj.TokenAddressOut)
+	t.Run("SetPreBalance", func(t *testing.T) {
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValuePreBalance *float64
+		obj.SetPreBalance(fernTestValuePreBalance)
+		assert.Equal(t, fernTestValuePreBalance, obj.PreBalance)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTokenAmountIn", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAmountIn *float64
-		obj.SetTokenAmountIn(fernTestValueTokenAmountIn)
-		assert.Equal(t, fernTestValueTokenAmountIn, obj.TokenAmountIn)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTokenAmountOut", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAmountOut *float64
-		obj.SetTokenAmountOut(fernTestValueTokenAmountOut)
-		assert.Equal(t, fernTestValueTokenAmountOut, obj.TokenAmountOut)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTokenPriceIn", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenPriceIn *float64
-		obj.SetTokenPriceIn(fernTestValueTokenPriceIn)
-		assert.Equal(t, fernTestValueTokenPriceIn, obj.TokenPriceIn)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetTokenPriceOut", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenPriceOut *float64
-		obj.SetTokenPriceOut(fernTestValueTokenPriceOut)
-		assert.Equal(t, fernTestValueTokenPriceOut, obj.TokenPriceOut)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPreTokenBalanceIn", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValuePreTokenBalanceIn *float64
-		obj.SetPreTokenBalanceIn(fernTestValuePreTokenBalanceIn)
-		assert.Equal(t, fernTestValuePreTokenBalanceIn, obj.PreTokenBalanceIn)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPreTokenBalanceOut", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValuePreTokenBalanceOut *float64
-		obj.SetPreTokenBalanceOut(fernTestValuePreTokenBalanceOut)
-		assert.Equal(t, fernTestValuePreTokenBalanceOut, obj.PreTokenBalanceOut)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPostTokenBalanceIn", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValuePostTokenBalanceIn *float64
-		obj.SetPostTokenBalanceIn(fernTestValuePostTokenBalanceIn)
-		assert.Equal(t, fernTestValuePostTokenBalanceIn, obj.PostTokenBalanceIn)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetPostTokenBalanceOut", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValuePostTokenBalanceOut *float64
-		obj.SetPostTokenBalanceOut(fernTestValuePostTokenBalanceOut)
-		assert.Equal(t, fernTestValuePostTokenBalanceOut, obj.PostTokenBalanceOut)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUsdAmountIn", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueUsdAmountIn *float64
-		obj.SetUsdAmountIn(fernTestValueUsdAmountIn)
-		assert.Equal(t, fernTestValueUsdAmountIn, obj.UsdAmountIn)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetUsdAmountOut", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
-		var fernTestValueUsdAmountOut *float64
-		obj.SetUsdAmountOut(fernTestValueUsdAmountOut)
-		assert.Equal(t, fernTestValueUsdAmountOut, obj.UsdAmountOut)
+	t.Run("SetPostBalance", func(t *testing.T) {
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValuePostBalance *float64
+		obj.SetPostBalance(fernTestValuePostBalance)
+		assert.Equal(t, fernTestValuePostBalance, obj.PostBalance)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetBlockSlot", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueBlockSlot *int
 		obj.SetBlockSlot(fernTestValueBlockSlot)
 		assert.Equal(t, fernTestValueBlockSlot, obj.BlockSlot)
@@ -445,7 +76,7 @@ func TestSettersSolanaDexSwap(t *testing.T) {
 	})
 
 	t.Run("SetBlockTime", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueBlockTime *time.Time
 		obj.SetBlockTime(fernTestValueBlockTime)
 		assert.Equal(t, fernTestValueBlockTime, obj.BlockTime)
@@ -453,7 +84,7 @@ func TestSettersSolanaDexSwap(t *testing.T) {
 	})
 
 	t.Run("SetTxHash", func(t *testing.T) {
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueTxHash *string
 		obj.SetTxHash(fernTestValueTxHash)
 		assert.Equal(t, fernTestValueTxHash, obj.TxHash)
@@ -462,11 +93,11 @@ func TestSettersSolanaDexSwap(t *testing.T) {
 
 }
 
-func TestGettersSolanaDexSwap(t *testing.T) {
+func TestGettersSolanaAssetsBalanceChangeMessage(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *int
 		obj.ID = expected
 
@@ -477,7 +108,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 	t.Run("GetID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		obj.ID = nil
 
 		// Act & Assert
@@ -486,7 +117,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -496,505 +127,208 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 		_ = obj.GetID() // Should return zero value
 	})
 
-	t.Run("GetSwapType", func(t *testing.T) {
+	t.Run("GetBalanceType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *SolanaDexSwapTypeEnum
-		obj.SwapType = expected
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var expected *SolanaAssetsBalanceChangeTypeEnum
+		obj.BalanceType = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetSwapType(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetBalanceType(), "getter should return the property value")
 	})
 
-	t.Run("GetSwapType_NilValue", func(t *testing.T) {
+	t.Run("GetBalanceType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.SwapType = nil
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		obj.BalanceType = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetSwapType(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetBalanceType(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetSwapType_NilReceiver", func(t *testing.T) {
+	t.Run("GetBalanceType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetSwapType() // Should return zero value
+		_ = obj.GetBalanceType() // Should return zero value
 	})
 
-	t.Run("GetProtocol", func(t *testing.T) {
+	t.Run("GetStackHeight", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var expected *int
+		obj.StackHeight = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStackHeight(), "getter should return the property value")
+	})
+
+	t.Run("GetStackHeight_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		obj.StackHeight = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetStackHeight(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetStackHeight_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaAssetsBalanceChangeMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStackHeight() // Should return zero value
+	})
+
+	t.Run("GetTokenAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *string
-		obj.Protocol = expected
+		obj.TokenAddress = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetProtocol(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetTokenAddress(), "getter should return the property value")
 	})
 
-	t.Run("GetProtocol_NilValue", func(t *testing.T) {
+	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.Protocol = nil
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		obj.TokenAddress = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetProtocol(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetTokenAddress(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetProtocol_NilReceiver", func(t *testing.T) {
+	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetProtocol() // Should return zero value
+		_ = obj.GetTokenAddress() // Should return zero value
 	})
 
-	t.Run("GetWalletAddress", func(t *testing.T) {
+	t.Run("GetOwnerAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *string
-		obj.WalletAddress = expected
+		obj.OwnerAddress = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetWalletAddress(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetOwnerAddress(), "getter should return the property value")
 	})
 
-	t.Run("GetWalletAddress_NilValue", func(t *testing.T) {
+	t.Run("GetOwnerAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.WalletAddress = nil
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		obj.OwnerAddress = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetWalletAddress(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetOwnerAddress(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetWalletAddress_NilReceiver", func(t *testing.T) {
+	t.Run("GetOwnerAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetWalletAddress() // Should return zero value
+		_ = obj.GetOwnerAddress() // Should return zero value
 	})
 
-	t.Run("GetTokenAddressIn", func(t *testing.T) {
+	t.Run("GetPreBalance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *string
-		obj.TokenAddressIn = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetTokenAddressIn(), "getter should return the property value")
-	})
-
-	t.Run("GetTokenAddressIn_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.TokenAddressIn = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTokenAddressIn(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTokenAddressIn_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetTokenAddressIn() // Should return zero value
-	})
-
-	t.Run("GetTokenAddressOut", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *string
-		obj.TokenAddressOut = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetTokenAddressOut(), "getter should return the property value")
-	})
-
-	t.Run("GetTokenAddressOut_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.TokenAddressOut = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTokenAddressOut(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTokenAddressOut_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetTokenAddressOut() // Should return zero value
-	})
-
-	t.Run("GetTokenAmountIn", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *float64
-		obj.TokenAmountIn = expected
+		obj.PreBalance = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetTokenAmountIn(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetPreBalance(), "getter should return the property value")
 	})
 
-	t.Run("GetTokenAmountIn_NilValue", func(t *testing.T) {
+	t.Run("GetPreBalance_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.TokenAmountIn = nil
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		obj.PreBalance = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetTokenAmountIn(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetPreBalance(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetTokenAmountIn_NilReceiver", func(t *testing.T) {
+	t.Run("GetPreBalance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetTokenAmountIn() // Should return zero value
+		_ = obj.GetPreBalance() // Should return zero value
 	})
 
-	t.Run("GetTokenAmountOut", func(t *testing.T) {
+	t.Run("GetPostBalance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *float64
-		obj.TokenAmountOut = expected
+		obj.PostBalance = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetTokenAmountOut(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetPostBalance(), "getter should return the property value")
 	})
 
-	t.Run("GetTokenAmountOut_NilValue", func(t *testing.T) {
+	t.Run("GetPostBalance_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.TokenAmountOut = nil
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		obj.PostBalance = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetTokenAmountOut(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetPostBalance(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetTokenAmountOut_NilReceiver", func(t *testing.T) {
+	t.Run("GetPostBalance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetTokenAmountOut() // Should return zero value
-	})
-
-	t.Run("GetTokenPriceIn", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.TokenPriceIn = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetTokenPriceIn(), "getter should return the property value")
-	})
-
-	t.Run("GetTokenPriceIn_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.TokenPriceIn = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTokenPriceIn(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTokenPriceIn_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetTokenPriceIn() // Should return zero value
-	})
-
-	t.Run("GetTokenPriceOut", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.TokenPriceOut = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetTokenPriceOut(), "getter should return the property value")
-	})
-
-	t.Run("GetTokenPriceOut_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.TokenPriceOut = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTokenPriceOut(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTokenPriceOut_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetTokenPriceOut() // Should return zero value
-	})
-
-	t.Run("GetPreTokenBalanceIn", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.PreTokenBalanceIn = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPreTokenBalanceIn(), "getter should return the property value")
-	})
-
-	t.Run("GetPreTokenBalanceIn_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.PreTokenBalanceIn = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetPreTokenBalanceIn(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetPreTokenBalanceIn_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPreTokenBalanceIn() // Should return zero value
-	})
-
-	t.Run("GetPreTokenBalanceOut", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.PreTokenBalanceOut = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPreTokenBalanceOut(), "getter should return the property value")
-	})
-
-	t.Run("GetPreTokenBalanceOut_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.PreTokenBalanceOut = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetPreTokenBalanceOut(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetPreTokenBalanceOut_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPreTokenBalanceOut() // Should return zero value
-	})
-
-	t.Run("GetPostTokenBalanceIn", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.PostTokenBalanceIn = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostTokenBalanceIn(), "getter should return the property value")
-	})
-
-	t.Run("GetPostTokenBalanceIn_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.PostTokenBalanceIn = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetPostTokenBalanceIn(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetPostTokenBalanceIn_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPostTokenBalanceIn() // Should return zero value
-	})
-
-	t.Run("GetPostTokenBalanceOut", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.PostTokenBalanceOut = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetPostTokenBalanceOut(), "getter should return the property value")
-	})
-
-	t.Run("GetPostTokenBalanceOut_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.PostTokenBalanceOut = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetPostTokenBalanceOut(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetPostTokenBalanceOut_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetPostTokenBalanceOut() // Should return zero value
-	})
-
-	t.Run("GetUsdAmountIn", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.UsdAmountIn = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUsdAmountIn(), "getter should return the property value")
-	})
-
-	t.Run("GetUsdAmountIn_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.UsdAmountIn = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUsdAmountIn(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUsdAmountIn_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUsdAmountIn() // Should return zero value
-	})
-
-	t.Run("GetUsdAmountOut", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var expected *float64
-		obj.UsdAmountOut = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUsdAmountOut(), "getter should return the property value")
-	})
-
-	t.Run("GetUsdAmountOut_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		obj.UsdAmountOut = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUsdAmountOut(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUsdAmountOut_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexSwap
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUsdAmountOut() // Should return zero value
+		_ = obj.GetPostBalance() // Should return zero value
 	})
 
 	t.Run("GetBlockSlot", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *int
 		obj.BlockSlot = expected
 
@@ -1005,7 +339,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 	t.Run("GetBlockSlot_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		obj.BlockSlot = nil
 
 		// Act & Assert
@@ -1014,7 +348,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 
 	t.Run("GetBlockSlot_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1027,7 +361,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 	t.Run("GetBlockTime", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *time.Time
 		obj.BlockTime = expected
 
@@ -1038,7 +372,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 	t.Run("GetBlockTime_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		obj.BlockTime = nil
 
 		// Act & Assert
@@ -1047,7 +381,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 
 	t.Run("GetBlockTime_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1060,7 +394,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 	t.Run("GetTxHash", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var expected *string
 		obj.TxHash = expected
 
@@ -1071,7 +405,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 	t.Run("GetTxHash_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		obj.TxHash = nil
 
 		// Act & Assert
@@ -1080,7 +414,7 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 
 	t.Run("GetTxHash_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsBalanceChangeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1092,11 +426,11 @@ func TestGettersSolanaDexSwap(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
+func TestSettersMarkExplicitSolanaAssetsBalanceChangeMessage(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueID *int
 
 		// Act
@@ -1124,14 +458,14 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetSwapType_MarksExplicit", func(t *testing.T) {
+	t.Run("SetBalanceType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueSwapType *SolanaDexSwapTypeEnum
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueBalanceType *SolanaAssetsBalanceChangeTypeEnum
 
 		// Act
-		obj.SetSwapType(fernTestValueSwapType)
+		obj.SetBalanceType(fernTestValueBalanceType)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1155,14 +489,14 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetProtocol_MarksExplicit", func(t *testing.T) {
+	t.Run("SetStackHeight_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueProtocol *string
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueStackHeight *int
 
 		// Act
-		obj.SetProtocol(fernTestValueProtocol)
+		obj.SetStackHeight(fernTestValueStackHeight)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1186,14 +520,14 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetWalletAddress_MarksExplicit", func(t *testing.T) {
+	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueWalletAddress *string
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueTokenAddress *string
 
 		// Act
-		obj.SetWalletAddress(fernTestValueWalletAddress)
+		obj.SetTokenAddress(fernTestValueTokenAddress)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1217,14 +551,14 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTokenAddressIn_MarksExplicit", func(t *testing.T) {
+	t.Run("SetOwnerAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAddressIn *string
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValueOwnerAddress *string
 
 		// Act
-		obj.SetTokenAddressIn(fernTestValueTokenAddressIn)
+		obj.SetOwnerAddress(fernTestValueOwnerAddress)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1248,14 +582,14 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTokenAddressOut_MarksExplicit", func(t *testing.T) {
+	t.Run("SetPreBalance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAddressOut *string
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValuePreBalance *float64
 
 		// Act
-		obj.SetTokenAddressOut(fernTestValueTokenAddressOut)
+		obj.SetPreBalance(fernTestValuePreBalance)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1279,293 +613,14 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTokenAmountIn_MarksExplicit", func(t *testing.T) {
+	t.Run("SetPostBalance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAmountIn *float64
+		obj := &SolanaAssetsBalanceChangeMessage{}
+		var fernTestValuePostBalance *float64
 
 		// Act
-		obj.SetTokenAmountIn(fernTestValueTokenAmountIn)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTokenAmountOut_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenAmountOut *float64
-
-		// Act
-		obj.SetTokenAmountOut(fernTestValueTokenAmountOut)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTokenPriceIn_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenPriceIn *float64
-
-		// Act
-		obj.SetTokenPriceIn(fernTestValueTokenPriceIn)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTokenPriceOut_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueTokenPriceOut *float64
-
-		// Act
-		obj.SetTokenPriceOut(fernTestValueTokenPriceOut)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPreTokenBalanceIn_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValuePreTokenBalanceIn *float64
-
-		// Act
-		obj.SetPreTokenBalanceIn(fernTestValuePreTokenBalanceIn)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPreTokenBalanceOut_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValuePreTokenBalanceOut *float64
-
-		// Act
-		obj.SetPreTokenBalanceOut(fernTestValuePreTokenBalanceOut)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPostTokenBalanceIn_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValuePostTokenBalanceIn *float64
-
-		// Act
-		obj.SetPostTokenBalanceIn(fernTestValuePostTokenBalanceIn)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetPostTokenBalanceOut_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValuePostTokenBalanceOut *float64
-
-		// Act
-		obj.SetPostTokenBalanceOut(fernTestValuePostTokenBalanceOut)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUsdAmountIn_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueUsdAmountIn *float64
-
-		// Act
-		obj.SetUsdAmountIn(fernTestValueUsdAmountIn)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetUsdAmountOut_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexSwap{}
-		var fernTestValueUsdAmountOut *float64
-
-		// Act
-		obj.SetUsdAmountOut(fernTestValueUsdAmountOut)
+		obj.SetPostBalance(fernTestValuePostBalance)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1592,7 +647,7 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 	t.Run("SetBlockSlot_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueBlockSlot *int
 
 		// Act
@@ -1623,7 +678,7 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 	t.Run("SetBlockTime_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueBlockTime *time.Time
 
 		// Act
@@ -1654,7 +709,7 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 	t.Run("SetTxHash_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		var fernTestValueTxHash *string
 
 		// Act
@@ -1684,152 +739,201 @@ func TestSettersMarkExplicitSolanaDexSwap(t *testing.T) {
 
 }
 
-func TestSettersSolanaDexTokenProfile(t *testing.T) {
-	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueUpdatedAt *time.Time
-		obj.SetUpdatedAt(fernTestValueUpdatedAt)
-		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+func TestSettersSolanaAssetsTransferMessage(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueID *int
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetSyncedAt", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueSyncedAt *time.Time
-		obj.SetSyncedAt(fernTestValueSyncedAt)
-		assert.Equal(t, fernTestValueSyncedAt, obj.SyncedAt)
+	t.Run("SetTransferType", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueTransferType *SolanaAssetsTransferTypeEnum
+		obj.SetTransferType(fernTestValueTransferType)
+		assert.Equal(t, fernTestValueTransferType, obj.TransferType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStackHeight", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueStackHeight *int
+		obj.SetStackHeight(fernTestValueStackHeight)
+		assert.Equal(t, fernTestValueStackHeight, obj.StackHeight)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 	t.Run("SetTokenAddress", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
+		obj := &SolanaAssetsTransferMessage{}
 		var fernTestValueTokenAddress *string
 		obj.SetTokenAddress(fernTestValueTokenAddress)
 		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetLabels", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueLabels []SolanaDexTokenProfileLabelEnum
-		obj.SetLabels(fernTestValueLabels)
-		assert.Equal(t, fernTestValueLabels, obj.Labels)
+	t.Run("SetFromAddress", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueFromAddress *string
+		obj.SetFromAddress(fernTestValueFromAddress)
+		assert.Equal(t, fernTestValueFromAddress, obj.FromAddress)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetMatchedLabels", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMatchedLabels map[string][]string
-		obj.SetMatchedLabels(fernTestValueMatchedLabels)
-		assert.Equal(t, fernTestValueMatchedLabels, obj.MatchedLabels)
+	t.Run("SetToAddress", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueToAddress *string
+		obj.SetToAddress(fernTestValueToAddress)
+		assert.Equal(t, fernTestValueToAddress, obj.ToAddress)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetDynamicLabels", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueDynamicLabels []string
-		obj.SetDynamicLabels(fernTestValueDynamicLabels)
-		assert.Equal(t, fernTestValueDynamicLabels, obj.DynamicLabels)
+	t.Run("SetAmount", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueAmount *float64
+		obj.SetAmount(fernTestValueAmount)
+		assert.Equal(t, fernTestValueAmount, obj.Amount)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetMetadata", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMetadata *SolanaDexTokenProfileMetadata
-		obj.SetMetadata(fernTestValueMetadata)
-		assert.Equal(t, fernTestValueMetadata, obj.Metadata)
+	t.Run("SetUsdAmount", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueUsdAmount *float64
+		obj.SetUsdAmount(fernTestValueUsdAmount)
+		assert.Equal(t, fernTestValueUsdAmount, obj.UsdAmount)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetMarket", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMarket *SolanaDexTokenProfileMarket
-		obj.SetMarket(fernTestValueMarket)
-		assert.Equal(t, fernTestValueMarket, obj.Market)
+	t.Run("SetBlockSlot", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueBlockSlot *int
+		obj.SetBlockSlot(fernTestValueBlockSlot)
+		assert.Equal(t, fernTestValueBlockSlot, obj.BlockSlot)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetMetrics", func(t *testing.T) {
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMetrics map[string]*SolanaDexTokenProfileMetrics
-		obj.SetMetrics(fernTestValueMetrics)
-		assert.Equal(t, fernTestValueMetrics, obj.Metrics)
+	t.Run("SetBlockTime", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueBlockTime *time.Time
+		obj.SetBlockTime(fernTestValueBlockTime)
+		assert.Equal(t, fernTestValueBlockTime, obj.BlockTime)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTxHash", func(t *testing.T) {
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueTxHash *string
+		obj.SetTxHash(fernTestValueTxHash)
+		assert.Equal(t, fernTestValueTxHash, obj.TxHash)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
 }
 
-func TestGettersSolanaDexTokenProfile(t *testing.T) {
-	t.Run("GetUpdatedAt", func(t *testing.T) {
+func TestGettersSolanaAssetsTransferMessage(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected *time.Time
-		obj.UpdatedAt = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *int
+		obj.ID = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
 	})
 
-	t.Run("GetUpdatedAt_NilValue", func(t *testing.T) {
+	t.Run("GetID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.UpdatedAt = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.ID = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetUpdatedAt(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetID(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetUpdatedAt() // Should return zero value
+		_ = obj.GetID() // Should return zero value
 	})
 
-	t.Run("GetSyncedAt", func(t *testing.T) {
+	t.Run("GetTransferType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected *time.Time
-		obj.SyncedAt = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *SolanaAssetsTransferTypeEnum
+		obj.TransferType = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetSyncedAt(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetTransferType(), "getter should return the property value")
 	})
 
-	t.Run("GetSyncedAt_NilValue", func(t *testing.T) {
+	t.Run("GetTransferType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.SyncedAt = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.TransferType = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetSyncedAt(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetTransferType(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetSyncedAt_NilReceiver", func(t *testing.T) {
+	t.Run("GetTransferType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetSyncedAt() // Should return zero value
+		_ = obj.GetTransferType() // Should return zero value
+	})
+
+	t.Run("GetStackHeight", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *int
+		obj.StackHeight = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStackHeight(), "getter should return the property value")
+	})
+
+	t.Run("GetStackHeight_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsTransferMessage{}
+		obj.StackHeight = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetStackHeight(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetStackHeight_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaAssetsTransferMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStackHeight() // Should return zero value
 	})
 
 	t.Run("GetTokenAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
+		obj := &SolanaAssetsTransferMessage{}
 		var expected *string
 		obj.TokenAddress = expected
 
@@ -1840,7 +944,7 @@ func TestGettersSolanaDexTokenProfile(t *testing.T) {
 	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
+		obj := &SolanaAssetsTransferMessage{}
 		obj.TokenAddress = nil
 
 		// Act & Assert
@@ -1849,7 +953,7 @@ func TestGettersSolanaDexTokenProfile(t *testing.T) {
 
 	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -1859,215 +963,248 @@ func TestGettersSolanaDexTokenProfile(t *testing.T) {
 		_ = obj.GetTokenAddress() // Should return zero value
 	})
 
-	t.Run("GetLabels", func(t *testing.T) {
+	t.Run("GetFromAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected []SolanaDexTokenProfileLabelEnum
-		obj.Labels = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *string
+		obj.FromAddress = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetLabels(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetFromAddress(), "getter should return the property value")
 	})
 
-	t.Run("GetLabels_NilValue", func(t *testing.T) {
+	t.Run("GetFromAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.Labels = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.FromAddress = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetLabels(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetFromAddress(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetLabels_NilReceiver", func(t *testing.T) {
+	t.Run("GetFromAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetLabels() // Should return zero value
+		_ = obj.GetFromAddress() // Should return zero value
 	})
 
-	t.Run("GetMatchedLabels", func(t *testing.T) {
+	t.Run("GetToAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected map[string][]string
-		obj.MatchedLabels = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *string
+		obj.ToAddress = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetMatchedLabels(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetToAddress(), "getter should return the property value")
 	})
 
-	t.Run("GetMatchedLabels_NilValue", func(t *testing.T) {
+	t.Run("GetToAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.MatchedLabels = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.ToAddress = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetMatchedLabels(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetToAddress(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetMatchedLabels_NilReceiver", func(t *testing.T) {
+	t.Run("GetToAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetMatchedLabels() // Should return zero value
+		_ = obj.GetToAddress() // Should return zero value
 	})
 
-	t.Run("GetDynamicLabels", func(t *testing.T) {
+	t.Run("GetAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected []string
-		obj.DynamicLabels = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *float64
+		obj.Amount = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetDynamicLabels(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetAmount(), "getter should return the property value")
 	})
 
-	t.Run("GetDynamicLabels_NilValue", func(t *testing.T) {
+	t.Run("GetAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.DynamicLabels = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.Amount = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetDynamicLabels(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetAmount(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetDynamicLabels_NilReceiver", func(t *testing.T) {
+	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetDynamicLabels() // Should return zero value
+		_ = obj.GetAmount() // Should return zero value
 	})
 
-	t.Run("GetMetadata", func(t *testing.T) {
+	t.Run("GetUsdAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected *SolanaDexTokenProfileMetadata
-		obj.Metadata = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *float64
+		obj.UsdAmount = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetMetadata(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetUsdAmount(), "getter should return the property value")
 	})
 
-	t.Run("GetMetadata_NilValue", func(t *testing.T) {
+	t.Run("GetUsdAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.Metadata = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.UsdAmount = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetMetadata(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetUsdAmount(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetMetadata_NilReceiver", func(t *testing.T) {
+	t.Run("GetUsdAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetMetadata() // Should return zero value
+		_ = obj.GetUsdAmount() // Should return zero value
 	})
 
-	t.Run("GetMarket", func(t *testing.T) {
+	t.Run("GetBlockSlot", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected *SolanaDexTokenProfileMarket
-		obj.Market = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *int
+		obj.BlockSlot = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetMarket(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetBlockSlot(), "getter should return the property value")
 	})
 
-	t.Run("GetMarket_NilValue", func(t *testing.T) {
+	t.Run("GetBlockSlot_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.Market = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.BlockSlot = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetMarket(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetBlockSlot(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetMarket_NilReceiver", func(t *testing.T) {
+	t.Run("GetBlockSlot_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetMarket() // Should return zero value
+		_ = obj.GetBlockSlot() // Should return zero value
 	})
 
-	t.Run("GetMetrics", func(t *testing.T) {
+	t.Run("GetBlockTime", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var expected map[string]*SolanaDexTokenProfileMetrics
-		obj.Metrics = expected
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *time.Time
+		obj.BlockTime = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetMetrics(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetBlockTime(), "getter should return the property value")
 	})
 
-	t.Run("GetMetrics_NilValue", func(t *testing.T) {
+	t.Run("GetBlockTime_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		obj.Metrics = nil
+		obj := &SolanaAssetsTransferMessage{}
+		obj.BlockTime = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetMetrics(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetBlockTime(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetMetrics_NilReceiver", func(t *testing.T) {
+	t.Run("GetBlockTime_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaAssetsTransferMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetMetrics() // Should return zero value
+		_ = obj.GetBlockTime() // Should return zero value
+	})
+
+	t.Run("GetTxHash", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsTransferMessage{}
+		var expected *string
+		obj.TxHash = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTxHash(), "getter should return the property value")
+	})
+
+	t.Run("GetTxHash_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsTransferMessage{}
+		obj.TxHash = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTxHash(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTxHash_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaAssetsTransferMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTxHash() // Should return zero value
 	})
 
 }
 
-func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
-	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+func TestSettersMarkExplicitSolanaAssetsTransferMessage(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueUpdatedAt *time.Time
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueID *int
 
 		// Act
-		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		obj.SetID(fernTestValueID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2091,14 +1228,45 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetSyncedAt_MarksExplicit", func(t *testing.T) {
+	t.Run("SetTransferType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueSyncedAt *time.Time
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueTransferType *SolanaAssetsTransferTypeEnum
 
 		// Act
-		obj.SetSyncedAt(fernTestValueSyncedAt)
+		obj.SetTransferType(fernTestValueTransferType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStackHeight_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueStackHeight *int
+
+		// Act
+		obj.SetStackHeight(fernTestValueStackHeight)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2125,7 +1293,7 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
+		obj := &SolanaAssetsTransferMessage{}
 		var fernTestValueTokenAddress *string
 
 		// Act
@@ -2153,14 +1321,14 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetLabels_MarksExplicit", func(t *testing.T) {
+	t.Run("SetFromAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueLabels []SolanaDexTokenProfileLabelEnum
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueFromAddress *string
 
 		// Act
-		obj.SetLabels(fernTestValueLabels)
+		obj.SetFromAddress(fernTestValueFromAddress)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2184,14 +1352,14 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetMatchedLabels_MarksExplicit", func(t *testing.T) {
+	t.Run("SetToAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMatchedLabels map[string][]string
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueToAddress *string
 
 		// Act
-		obj.SetMatchedLabels(fernTestValueMatchedLabels)
+		obj.SetToAddress(fernTestValueToAddress)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2215,14 +1383,14 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetDynamicLabels_MarksExplicit", func(t *testing.T) {
+	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueDynamicLabels []string
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueAmount *float64
 
 		// Act
-		obj.SetDynamicLabels(fernTestValueDynamicLabels)
+		obj.SetAmount(fernTestValueAmount)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2246,14 +1414,14 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetMetadata_MarksExplicit", func(t *testing.T) {
+	t.Run("SetUsdAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMetadata *SolanaDexTokenProfileMetadata
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueUsdAmount *float64
 
 		// Act
-		obj.SetMetadata(fernTestValueMetadata)
+		obj.SetUsdAmount(fernTestValueUsdAmount)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2277,14 +1445,14 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetMarket_MarksExplicit", func(t *testing.T) {
+	t.Run("SetBlockSlot_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMarket *SolanaDexTokenProfileMarket
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueBlockSlot *int
 
 		// Act
-		obj.SetMarket(fernTestValueMarket)
+		obj.SetBlockSlot(fernTestValueBlockSlot)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2308,14 +1476,2529 @@ func TestSettersMarkExplicitSolanaDexTokenProfile(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetMetrics_MarksExplicit", func(t *testing.T) {
+	t.Run("SetBlockTime_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
-		var fernTestValueMetrics map[string]*SolanaDexTokenProfileMetrics
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueBlockTime *time.Time
 
 		// Act
-		obj.SetMetrics(fernTestValueMetrics)
+		obj.SetBlockTime(fernTestValueBlockTime)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTxHash_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaAssetsTransferMessage{}
+		var fernTestValueTxHash *string
+
+		// Act
+		obj.SetTxHash(fernTestValueTxHash)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexPoolMessage(t *testing.T) {
+	t.Run("SetProtocol", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueProtocol *string
+		obj.SetProtocol(fernTestValueProtocol)
+		assert.Equal(t, fernTestValueProtocol, obj.Protocol)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEventType", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueEventType *SolanaDexPoolMessageEventTypeEnum
+		obj.SetEventType(fernTestValueEventType)
+		assert.Equal(t, fernTestValueEventType, obj.EventType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetProgramAddress", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueProgramAddress *string
+		obj.SetProgramAddress(fernTestValueProgramAddress)
+		assert.Equal(t, fernTestValueProgramAddress, obj.ProgramAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPoolAddress", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValuePoolAddress *string
+		obj.SetPoolAddress(fernTestValuePoolAddress)
+		assert.Equal(t, fernTestValuePoolAddress, obj.PoolAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVaults", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueVaults []*SolanaDexPoolMessageVault
+		obj.SetVaults(fernTestValueVaults)
+		assert.Equal(t, fernTestValueVaults, obj.Vaults)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBlockSlot", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueBlockSlot *int
+		obj.SetBlockSlot(fernTestValueBlockSlot)
+		assert.Equal(t, fernTestValueBlockSlot, obj.BlockSlot)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBlockTime", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueBlockTime *time.Time
+		obj.SetBlockTime(fernTestValueBlockTime)
+		assert.Equal(t, fernTestValueBlockTime, obj.BlockTime)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTxHash", func(t *testing.T) {
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueTxHash *string
+		obj.SetTxHash(fernTestValueTxHash)
+		assert.Equal(t, fernTestValueTxHash, obj.TxHash)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexPoolMessage(t *testing.T) {
+	t.Run("GetProtocol", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected *string
+		obj.Protocol = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetProtocol(), "getter should return the property value")
+	})
+
+	t.Run("GetProtocol_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.Protocol = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetProtocol(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetProtocol_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetProtocol() // Should return zero value
+	})
+
+	t.Run("GetEventType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected *SolanaDexPoolMessageEventTypeEnum
+		obj.EventType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEventType(), "getter should return the property value")
+	})
+
+	t.Run("GetEventType_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.EventType = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEventType(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEventType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEventType() // Should return zero value
+	})
+
+	t.Run("GetProgramAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected *string
+		obj.ProgramAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetProgramAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetProgramAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.ProgramAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetProgramAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetProgramAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetProgramAddress() // Should return zero value
+	})
+
+	t.Run("GetPoolAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected *string
+		obj.PoolAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPoolAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetPoolAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.PoolAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPoolAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPoolAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPoolAddress() // Should return zero value
+	})
+
+	t.Run("GetVaults", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected []*SolanaDexPoolMessageVault
+		obj.Vaults = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVaults(), "getter should return the property value")
+	})
+
+	t.Run("GetVaults_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.Vaults = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVaults(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVaults_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVaults() // Should return zero value
+	})
+
+	t.Run("GetBlockSlot", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected *int
+		obj.BlockSlot = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBlockSlot(), "getter should return the property value")
+	})
+
+	t.Run("GetBlockSlot_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.BlockSlot = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBlockSlot(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBlockSlot_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBlockSlot() // Should return zero value
+	})
+
+	t.Run("GetBlockTime", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected *time.Time
+		obj.BlockTime = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBlockTime(), "getter should return the property value")
+	})
+
+	t.Run("GetBlockTime_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.BlockTime = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBlockTime(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBlockTime_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBlockTime() // Should return zero value
+	})
+
+	t.Run("GetTxHash", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var expected *string
+		obj.TxHash = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTxHash(), "getter should return the property value")
+	})
+
+	t.Run("GetTxHash_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		obj.TxHash = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTxHash(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTxHash_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTxHash() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexPoolMessage(t *testing.T) {
+	t.Run("SetProtocol_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueProtocol *string
+
+		// Act
+		obj.SetProtocol(fernTestValueProtocol)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEventType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueEventType *SolanaDexPoolMessageEventTypeEnum
+
+		// Act
+		obj.SetEventType(fernTestValueEventType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetProgramAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueProgramAddress *string
+
+		// Act
+		obj.SetProgramAddress(fernTestValueProgramAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPoolAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValuePoolAddress *string
+
+		// Act
+		obj.SetPoolAddress(fernTestValuePoolAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVaults_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueVaults []*SolanaDexPoolMessageVault
+
+		// Act
+		obj.SetVaults(fernTestValueVaults)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBlockSlot_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueBlockSlot *int
+
+		// Act
+		obj.SetBlockSlot(fernTestValueBlockSlot)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBlockTime_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueBlockTime *time.Time
+
+		// Act
+		obj.SetBlockTime(fernTestValueBlockTime)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTxHash_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessage{}
+		var fernTestValueTxHash *string
+
+		// Act
+		obj.SetTxHash(fernTestValueTxHash)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexPoolMessageVault(t *testing.T) {
+	t.Run("SetVaultAddress", func(t *testing.T) {
+		obj := &SolanaDexPoolMessageVault{}
+		var fernTestValueVaultAddress *string
+		obj.SetVaultAddress(fernTestValueVaultAddress)
+		assert.Equal(t, fernTestValueVaultAddress, obj.VaultAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenAddress", func(t *testing.T) {
+		obj := &SolanaDexPoolMessageVault{}
+		var fernTestValueTokenAddress *string
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAmount", func(t *testing.T) {
+		obj := &SolanaDexPoolMessageVault{}
+		var fernTestValueAmount *float64
+		obj.SetAmount(fernTestValueAmount)
+		assert.Equal(t, fernTestValueAmount, obj.Amount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexPoolMessageVault(t *testing.T) {
+	t.Run("GetVaultAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		var expected *string
+		obj.VaultAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVaultAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetVaultAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		obj.VaultAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVaultAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVaultAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessageVault
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVaultAddress() // Should return zero value
+	})
+
+	t.Run("GetTokenAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		var expected *string
+		obj.TokenAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		obj.TokenAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessageVault
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAddress() // Should return zero value
+	})
+
+	t.Run("GetAmount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		var expected *float64
+		obj.Amount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAmount(), "getter should return the property value")
+	})
+
+	t.Run("GetAmount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		obj.Amount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAmount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAmount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessageVault
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAmount() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexPoolMessageVault(t *testing.T) {
+	t.Run("SetVaultAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		var fernTestValueVaultAddress *string
+
+		// Act
+		obj.SetVaultAddress(fernTestValueVaultAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		var fernTestValueTokenAddress *string
+
+		// Act
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAmount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+		var fernTestValueAmount *float64
+
+		// Act
+		obj.SetAmount(fernTestValueAmount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexPriceMessage(t *testing.T) {
+	t.Run("SetTokenAddress", func(t *testing.T) {
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueTokenAddress *string
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUsdPrice", func(t *testing.T) {
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueUsdPrice *float64
+		obj.SetUsdPrice(fernTestValueUsdPrice)
+		assert.Equal(t, fernTestValueUsdPrice, obj.UsdPrice)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBlockSlot", func(t *testing.T) {
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueBlockSlot *int
+		obj.SetBlockSlot(fernTestValueBlockSlot)
+		assert.Equal(t, fernTestValueBlockSlot, obj.BlockSlot)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBlockTime", func(t *testing.T) {
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueBlockTime *time.Time
+		obj.SetBlockTime(fernTestValueBlockTime)
+		assert.Equal(t, fernTestValueBlockTime, obj.BlockTime)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexPriceMessage(t *testing.T) {
+	t.Run("GetTokenAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var expected *string
+		obj.TokenAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		obj.TokenAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPriceMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAddress() // Should return zero value
+	})
+
+	t.Run("GetUsdPrice", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var expected *float64
+		obj.UsdPrice = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUsdPrice(), "getter should return the property value")
+	})
+
+	t.Run("GetUsdPrice_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		obj.UsdPrice = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUsdPrice(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUsdPrice_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPriceMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUsdPrice() // Should return zero value
+	})
+
+	t.Run("GetBlockSlot", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var expected *int
+		obj.BlockSlot = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBlockSlot(), "getter should return the property value")
+	})
+
+	t.Run("GetBlockSlot_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		obj.BlockSlot = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBlockSlot(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBlockSlot_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPriceMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBlockSlot() // Should return zero value
+	})
+
+	t.Run("GetBlockTime", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var expected *time.Time
+		obj.BlockTime = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBlockTime(), "getter should return the property value")
+	})
+
+	t.Run("GetBlockTime_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		obj.BlockTime = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBlockTime(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBlockTime_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPriceMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBlockTime() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexPriceMessage(t *testing.T) {
+	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueTokenAddress *string
+
+		// Act
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUsdPrice_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueUsdPrice *float64
+
+		// Act
+		obj.SetUsdPrice(fernTestValueUsdPrice)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBlockSlot_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueBlockSlot *int
+
+		// Act
+		obj.SetBlockSlot(fernTestValueBlockSlot)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBlockTime_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+		var fernTestValueBlockTime *time.Time
+
+		// Act
+		obj.SetBlockTime(fernTestValueBlockTime)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexSwapMessage(t *testing.T) {
+	t.Run("SetID", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueID *int
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSwapType", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueSwapType *SolanaDexSwapTypeEnum
+		obj.SetSwapType(fernTestValueSwapType)
+		assert.Equal(t, fernTestValueSwapType, obj.SwapType)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetProtocol", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueProtocol *string
+		obj.SetProtocol(fernTestValueProtocol)
+		assert.Equal(t, fernTestValueProtocol, obj.Protocol)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWalletAddress", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueWalletAddress *string
+		obj.SetWalletAddress(fernTestValueWalletAddress)
+		assert.Equal(t, fernTestValueWalletAddress, obj.WalletAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenAddressIn", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAddressIn *string
+		obj.SetTokenAddressIn(fernTestValueTokenAddressIn)
+		assert.Equal(t, fernTestValueTokenAddressIn, obj.TokenAddressIn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenAddressOut", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAddressOut *string
+		obj.SetTokenAddressOut(fernTestValueTokenAddressOut)
+		assert.Equal(t, fernTestValueTokenAddressOut, obj.TokenAddressOut)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenAmountIn", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAmountIn *float64
+		obj.SetTokenAmountIn(fernTestValueTokenAmountIn)
+		assert.Equal(t, fernTestValueTokenAmountIn, obj.TokenAmountIn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenAmountOut", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAmountOut *float64
+		obj.SetTokenAmountOut(fernTestValueTokenAmountOut)
+		assert.Equal(t, fernTestValueTokenAmountOut, obj.TokenAmountOut)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenPriceIn", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenPriceIn *float64
+		obj.SetTokenPriceIn(fernTestValueTokenPriceIn)
+		assert.Equal(t, fernTestValueTokenPriceIn, obj.TokenPriceIn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenPriceOut", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenPriceOut *float64
+		obj.SetTokenPriceOut(fernTestValueTokenPriceOut)
+		assert.Equal(t, fernTestValueTokenPriceOut, obj.TokenPriceOut)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPreTokenBalanceIn", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePreTokenBalanceIn *float64
+		obj.SetPreTokenBalanceIn(fernTestValuePreTokenBalanceIn)
+		assert.Equal(t, fernTestValuePreTokenBalanceIn, obj.PreTokenBalanceIn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPreTokenBalanceOut", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePreTokenBalanceOut *float64
+		obj.SetPreTokenBalanceOut(fernTestValuePreTokenBalanceOut)
+		assert.Equal(t, fernTestValuePreTokenBalanceOut, obj.PreTokenBalanceOut)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPostTokenBalanceIn", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePostTokenBalanceIn *float64
+		obj.SetPostTokenBalanceIn(fernTestValuePostTokenBalanceIn)
+		assert.Equal(t, fernTestValuePostTokenBalanceIn, obj.PostTokenBalanceIn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPostTokenBalanceOut", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePostTokenBalanceOut *float64
+		obj.SetPostTokenBalanceOut(fernTestValuePostTokenBalanceOut)
+		assert.Equal(t, fernTestValuePostTokenBalanceOut, obj.PostTokenBalanceOut)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUsdAmountIn", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueUsdAmountIn *float64
+		obj.SetUsdAmountIn(fernTestValueUsdAmountIn)
+		assert.Equal(t, fernTestValueUsdAmountIn, obj.UsdAmountIn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUsdAmountOut", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueUsdAmountOut *float64
+		obj.SetUsdAmountOut(fernTestValueUsdAmountOut)
+		assert.Equal(t, fernTestValueUsdAmountOut, obj.UsdAmountOut)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBlockSlot", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueBlockSlot *int
+		obj.SetBlockSlot(fernTestValueBlockSlot)
+		assert.Equal(t, fernTestValueBlockSlot, obj.BlockSlot)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBlockTime", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueBlockTime *time.Time
+		obj.SetBlockTime(fernTestValueBlockTime)
+		assert.Equal(t, fernTestValueBlockTime, obj.BlockTime)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTxHash", func(t *testing.T) {
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTxHash *string
+		obj.SetTxHash(fernTestValueTxHash)
+		assert.Equal(t, fernTestValueTxHash, obj.TxHash)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexSwapMessage(t *testing.T) {
+	t.Run("GetID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *int
+		obj.ID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetID(), "getter should return the property value")
+	})
+
+	t.Run("GetID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.ID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetID() // Should return zero value
+	})
+
+	t.Run("GetSwapType", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *SolanaDexSwapTypeEnum
+		obj.SwapType = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSwapType(), "getter should return the property value")
+	})
+
+	t.Run("GetSwapType_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.SwapType = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSwapType(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSwapType_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSwapType() // Should return zero value
+	})
+
+	t.Run("GetProtocol", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *string
+		obj.Protocol = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetProtocol(), "getter should return the property value")
+	})
+
+	t.Run("GetProtocol_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.Protocol = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetProtocol(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetProtocol_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetProtocol() // Should return zero value
+	})
+
+	t.Run("GetWalletAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *string
+		obj.WalletAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWalletAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetWalletAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.WalletAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWalletAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWalletAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWalletAddress() // Should return zero value
+	})
+
+	t.Run("GetTokenAddressIn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *string
+		obj.TokenAddressIn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAddressIn(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAddressIn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.TokenAddressIn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAddressIn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAddressIn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAddressIn() // Should return zero value
+	})
+
+	t.Run("GetTokenAddressOut", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *string
+		obj.TokenAddressOut = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAddressOut(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAddressOut_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.TokenAddressOut = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAddressOut(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAddressOut_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAddressOut() // Should return zero value
+	})
+
+	t.Run("GetTokenAmountIn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.TokenAmountIn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAmountIn(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAmountIn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.TokenAmountIn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAmountIn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAmountIn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAmountIn() // Should return zero value
+	})
+
+	t.Run("GetTokenAmountOut", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.TokenAmountOut = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAmountOut(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAmountOut_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.TokenAmountOut = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAmountOut(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAmountOut_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAmountOut() // Should return zero value
+	})
+
+	t.Run("GetTokenPriceIn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.TokenPriceIn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenPriceIn(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenPriceIn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.TokenPriceIn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenPriceIn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenPriceIn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenPriceIn() // Should return zero value
+	})
+
+	t.Run("GetTokenPriceOut", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.TokenPriceOut = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenPriceOut(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenPriceOut_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.TokenPriceOut = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenPriceOut(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenPriceOut_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenPriceOut() // Should return zero value
+	})
+
+	t.Run("GetPreTokenBalanceIn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.PreTokenBalanceIn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPreTokenBalanceIn(), "getter should return the property value")
+	})
+
+	t.Run("GetPreTokenBalanceIn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.PreTokenBalanceIn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPreTokenBalanceIn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPreTokenBalanceIn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPreTokenBalanceIn() // Should return zero value
+	})
+
+	t.Run("GetPreTokenBalanceOut", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.PreTokenBalanceOut = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPreTokenBalanceOut(), "getter should return the property value")
+	})
+
+	t.Run("GetPreTokenBalanceOut_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.PreTokenBalanceOut = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPreTokenBalanceOut(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPreTokenBalanceOut_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPreTokenBalanceOut() // Should return zero value
+	})
+
+	t.Run("GetPostTokenBalanceIn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.PostTokenBalanceIn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPostTokenBalanceIn(), "getter should return the property value")
+	})
+
+	t.Run("GetPostTokenBalanceIn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.PostTokenBalanceIn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPostTokenBalanceIn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPostTokenBalanceIn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPostTokenBalanceIn() // Should return zero value
+	})
+
+	t.Run("GetPostTokenBalanceOut", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.PostTokenBalanceOut = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPostTokenBalanceOut(), "getter should return the property value")
+	})
+
+	t.Run("GetPostTokenBalanceOut_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.PostTokenBalanceOut = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPostTokenBalanceOut(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPostTokenBalanceOut_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPostTokenBalanceOut() // Should return zero value
+	})
+
+	t.Run("GetUsdAmountIn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.UsdAmountIn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUsdAmountIn(), "getter should return the property value")
+	})
+
+	t.Run("GetUsdAmountIn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.UsdAmountIn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUsdAmountIn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUsdAmountIn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUsdAmountIn() // Should return zero value
+	})
+
+	t.Run("GetUsdAmountOut", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *float64
+		obj.UsdAmountOut = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUsdAmountOut(), "getter should return the property value")
+	})
+
+	t.Run("GetUsdAmountOut_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.UsdAmountOut = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUsdAmountOut(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUsdAmountOut_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUsdAmountOut() // Should return zero value
+	})
+
+	t.Run("GetBlockSlot", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *int
+		obj.BlockSlot = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBlockSlot(), "getter should return the property value")
+	})
+
+	t.Run("GetBlockSlot_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.BlockSlot = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBlockSlot(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBlockSlot_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBlockSlot() // Should return zero value
+	})
+
+	t.Run("GetBlockTime", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *time.Time
+		obj.BlockTime = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBlockTime(), "getter should return the property value")
+	})
+
+	t.Run("GetBlockTime_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.BlockTime = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBlockTime(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBlockTime_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBlockTime() // Should return zero value
+	})
+
+	t.Run("GetTxHash", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var expected *string
+		obj.TxHash = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTxHash(), "getter should return the property value")
+	})
+
+	t.Run("GetTxHash_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		obj.TxHash = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTxHash(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTxHash_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTxHash() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexSwapMessage(t *testing.T) {
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueID *int
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSwapType_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueSwapType *SolanaDexSwapTypeEnum
+
+		// Act
+		obj.SetSwapType(fernTestValueSwapType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetProtocol_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueProtocol *string
+
+		// Act
+		obj.SetProtocol(fernTestValueProtocol)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWalletAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueWalletAddress *string
+
+		// Act
+		obj.SetWalletAddress(fernTestValueWalletAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenAddressIn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAddressIn *string
+
+		// Act
+		obj.SetTokenAddressIn(fernTestValueTokenAddressIn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenAddressOut_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAddressOut *string
+
+		// Act
+		obj.SetTokenAddressOut(fernTestValueTokenAddressOut)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenAmountIn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAmountIn *float64
+
+		// Act
+		obj.SetTokenAmountIn(fernTestValueTokenAmountIn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenAmountOut_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenAmountOut *float64
+
+		// Act
+		obj.SetTokenAmountOut(fernTestValueTokenAmountOut)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenPriceIn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenPriceIn *float64
+
+		// Act
+		obj.SetTokenPriceIn(fernTestValueTokenPriceIn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenPriceOut_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTokenPriceOut *float64
+
+		// Act
+		obj.SetTokenPriceOut(fernTestValueTokenPriceOut)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPreTokenBalanceIn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePreTokenBalanceIn *float64
+
+		// Act
+		obj.SetPreTokenBalanceIn(fernTestValuePreTokenBalanceIn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPreTokenBalanceOut_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePreTokenBalanceOut *float64
+
+		// Act
+		obj.SetPreTokenBalanceOut(fernTestValuePreTokenBalanceOut)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPostTokenBalanceIn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePostTokenBalanceIn *float64
+
+		// Act
+		obj.SetPostTokenBalanceIn(fernTestValuePostTokenBalanceIn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPostTokenBalanceOut_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValuePostTokenBalanceOut *float64
+
+		// Act
+		obj.SetPostTokenBalanceOut(fernTestValuePostTokenBalanceOut)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUsdAmountIn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueUsdAmountIn *float64
+
+		// Act
+		obj.SetUsdAmountIn(fernTestValueUsdAmountIn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUsdAmountOut_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueUsdAmountOut *float64
+
+		// Act
+		obj.SetUsdAmountOut(fernTestValueUsdAmountOut)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBlockSlot_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueBlockSlot *int
+
+		// Act
+		obj.SetBlockSlot(fernTestValueBlockSlot)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBlockTime_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueBlockTime *time.Time
+
+		// Act
+		obj.SetBlockTime(fernTestValueBlockTime)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTxHash_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+		var fernTestValueTxHash *string
+
+		// Act
+		obj.SetTxHash(fernTestValueTxHash)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2973,6 +4656,663 @@ func TestSettersMarkExplicitSolanaDexTokenProfileMarket(t *testing.T) {
 
 		// Act
 		obj.SetDevHoldings(fernTestValueDevHoldings)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexTokenProfileMessage(t *testing.T) {
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueUpdatedAt *time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSyncedAt", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueSyncedAt *time.Time
+		obj.SetSyncedAt(fernTestValueSyncedAt)
+		assert.Equal(t, fernTestValueSyncedAt, obj.SyncedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenAddress", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueTokenAddress *string
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLabels", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueLabels []SolanaDexTokenProfileLabelEnum
+		obj.SetLabels(fernTestValueLabels)
+		assert.Equal(t, fernTestValueLabels, obj.Labels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMatchedLabels", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMatchedLabels map[string][]string
+		obj.SetMatchedLabels(fernTestValueMatchedLabels)
+		assert.Equal(t, fernTestValueMatchedLabels, obj.MatchedLabels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDynamicLabels", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueDynamicLabels []string
+		obj.SetDynamicLabels(fernTestValueDynamicLabels)
+		assert.Equal(t, fernTestValueDynamicLabels, obj.DynamicLabels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMetadata", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMetadata *SolanaDexTokenProfileMetadata
+		obj.SetMetadata(fernTestValueMetadata)
+		assert.Equal(t, fernTestValueMetadata, obj.Metadata)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMarket", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMarket *SolanaDexTokenProfileMarket
+		obj.SetMarket(fernTestValueMarket)
+		assert.Equal(t, fernTestValueMarket, obj.Market)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMetrics", func(t *testing.T) {
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMetrics map[string]*SolanaDexTokenProfileMetrics
+		obj.SetMetrics(fernTestValueMetrics)
+		assert.Equal(t, fernTestValueMetrics, obj.Metrics)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexTokenProfileMessage(t *testing.T) {
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected *time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.UpdatedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUpdatedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+	t.Run("GetSyncedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected *time.Time
+		obj.SyncedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSyncedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetSyncedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.SyncedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSyncedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSyncedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSyncedAt() // Should return zero value
+	})
+
+	t.Run("GetTokenAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected *string
+		obj.TokenAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.TokenAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAddress() // Should return zero value
+	})
+
+	t.Run("GetLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected []SolanaDexTokenProfileLabelEnum
+		obj.Labels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.Labels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLabels() // Should return zero value
+	})
+
+	t.Run("GetMatchedLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected map[string][]string
+		obj.MatchedLabels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMatchedLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetMatchedLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.MatchedLabels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMatchedLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMatchedLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMatchedLabels() // Should return zero value
+	})
+
+	t.Run("GetDynamicLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected []string
+		obj.DynamicLabels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDynamicLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetDynamicLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.DynamicLabels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDynamicLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDynamicLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDynamicLabels() // Should return zero value
+	})
+
+	t.Run("GetMetadata", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected *SolanaDexTokenProfileMetadata
+		obj.Metadata = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMetadata(), "getter should return the property value")
+	})
+
+	t.Run("GetMetadata_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.Metadata = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMetadata(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMetadata_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMetadata() // Should return zero value
+	})
+
+	t.Run("GetMarket", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected *SolanaDexTokenProfileMarket
+		obj.Market = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMarket(), "getter should return the property value")
+	})
+
+	t.Run("GetMarket_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.Market = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMarket(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMarket_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMarket() // Should return zero value
+	})
+
+	t.Run("GetMetrics", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var expected map[string]*SolanaDexTokenProfileMetrics
+		obj.Metrics = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMetrics(), "getter should return the property value")
+	})
+
+	t.Run("GetMetrics_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		obj.Metrics = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMetrics(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMetrics_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMetrics() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexTokenProfileMessage(t *testing.T) {
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueUpdatedAt *time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSyncedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueSyncedAt *time.Time
+
+		// Act
+		obj.SetSyncedAt(fernTestValueSyncedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueTokenAddress *string
+
+		// Act
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueLabels []SolanaDexTokenProfileLabelEnum
+
+		// Act
+		obj.SetLabels(fernTestValueLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMatchedLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMatchedLabels map[string][]string
+
+		// Act
+		obj.SetMatchedLabels(fernTestValueMatchedLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDynamicLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueDynamicLabels []string
+
+		// Act
+		obj.SetDynamicLabels(fernTestValueDynamicLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMetadata_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMetadata *SolanaDexTokenProfileMetadata
+
+		// Act
+		obj.SetMetadata(fernTestValueMetadata)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMarket_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMarket *SolanaDexTokenProfileMarket
+
+		// Act
+		obj.SetMarket(fernTestValueMarket)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMetrics_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+		var fernTestValueMetrics map[string]*SolanaDexTokenProfileMetrics
+
+		// Act
+		obj.SetMetrics(fernTestValueMetrics)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7120,9 +9460,9 @@ func TestSettersMarkExplicitSolanaDexTokenProfileMetrics(t *testing.T) {
 
 }
 
-func TestSettersSolanaDexTrade(t *testing.T) {
+func TestSettersSolanaDexTradeMessage(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueID *int
 		obj.SetID(fernTestValueID)
 		assert.Equal(t, fernTestValueID, obj.ID)
@@ -7130,7 +9470,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetProtocol", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueProtocol *string
 		obj.SetProtocol(fernTestValueProtocol)
 		assert.Equal(t, fernTestValueProtocol, obj.Protocol)
@@ -7138,7 +9478,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetSwapType", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueSwapType *SolanaDexSwapTypeEnum
 		obj.SetSwapType(fernTestValueSwapType)
 		assert.Equal(t, fernTestValueSwapType, obj.SwapType)
@@ -7146,7 +9486,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetWalletAddress", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueWalletAddress *string
 		obj.SetWalletAddress(fernTestValueWalletAddress)
 		assert.Equal(t, fernTestValueWalletAddress, obj.WalletAddress)
@@ -7154,7 +9494,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetTokenAddress", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenAddress *string
 		obj.SetTokenAddress(fernTestValueTokenAddress)
 		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
@@ -7162,7 +9502,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetQuoteAddress", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueQuoteAddress *string
 		obj.SetQuoteAddress(fernTestValueQuoteAddress)
 		assert.Equal(t, fernTestValueQuoteAddress, obj.QuoteAddress)
@@ -7170,7 +9510,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetPositionAddress", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePositionAddress *string
 		obj.SetPositionAddress(fernTestValuePositionAddress)
 		assert.Equal(t, fernTestValuePositionAddress, obj.PositionAddress)
@@ -7178,7 +9518,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetDirection", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueDirection *SolanaDexTradeDirectionEnum
 		obj.SetDirection(fernTestValueDirection)
 		assert.Equal(t, fernTestValueDirection, obj.Direction)
@@ -7186,7 +9526,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetPositionState", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePositionState *SolanaDexTradePositionStateEnum
 		obj.SetPositionState(fernTestValuePositionState)
 		assert.Equal(t, fernTestValuePositionState, obj.PositionState)
@@ -7194,7 +9534,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetTokenAmount", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenAmount *float64
 		obj.SetTokenAmount(fernTestValueTokenAmount)
 		assert.Equal(t, fernTestValueTokenAmount, obj.TokenAmount)
@@ -7202,7 +9542,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetQuoteAmount", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueQuoteAmount *float64
 		obj.SetQuoteAmount(fernTestValueQuoteAmount)
 		assert.Equal(t, fernTestValueQuoteAmount, obj.QuoteAmount)
@@ -7210,7 +9550,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetNativeAmount", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueNativeAmount *float64
 		obj.SetNativeAmount(fernTestValueNativeAmount)
 		assert.Equal(t, fernTestValueNativeAmount, obj.NativeAmount)
@@ -7218,7 +9558,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetUsdAmount", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueUsdAmount *float64
 		obj.SetUsdAmount(fernTestValueUsdAmount)
 		assert.Equal(t, fernTestValueUsdAmount, obj.UsdAmount)
@@ -7226,7 +9566,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetPreTokenBalance", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePreTokenBalance *float64
 		obj.SetPreTokenBalance(fernTestValuePreTokenBalance)
 		assert.Equal(t, fernTestValuePreTokenBalance, obj.PreTokenBalance)
@@ -7234,7 +9574,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetPostTokenBalance", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePostTokenBalance *float64
 		obj.SetPostTokenBalance(fernTestValuePostTokenBalance)
 		assert.Equal(t, fernTestValuePostTokenBalance, obj.PostTokenBalance)
@@ -7242,7 +9582,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetTokenPrice", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenPrice *float64
 		obj.SetTokenPrice(fernTestValueTokenPrice)
 		assert.Equal(t, fernTestValueTokenPrice, obj.TokenPrice)
@@ -7250,7 +9590,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetQuotePrice", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueQuotePrice *float64
 		obj.SetQuotePrice(fernTestValueQuotePrice)
 		assert.Equal(t, fernTestValueQuotePrice, obj.QuotePrice)
@@ -7258,7 +9598,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetTokenMcap", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenMcap *float64
 		obj.SetTokenMcap(fernTestValueTokenMcap)
 		assert.Equal(t, fernTestValueTokenMcap, obj.TokenMcap)
@@ -7266,7 +9606,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetBlockSlot", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueBlockSlot *int
 		obj.SetBlockSlot(fernTestValueBlockSlot)
 		assert.Equal(t, fernTestValueBlockSlot, obj.BlockSlot)
@@ -7274,7 +9614,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetBlockTime", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueBlockTime *time.Time
 		obj.SetBlockTime(fernTestValueBlockTime)
 		assert.Equal(t, fernTestValueBlockTime, obj.BlockTime)
@@ -7282,7 +9622,7 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 	})
 
 	t.Run("SetTxHash", func(t *testing.T) {
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTxHash *string
 		obj.SetTxHash(fernTestValueTxHash)
 		assert.Equal(t, fernTestValueTxHash, obj.TxHash)
@@ -7291,11 +9631,11 @@ func TestSettersSolanaDexTrade(t *testing.T) {
 
 }
 
-func TestGettersSolanaDexTrade(t *testing.T) {
+func TestGettersSolanaDexTradeMessage(t *testing.T) {
 	t.Run("GetID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *int
 		obj.ID = expected
 
@@ -7306,7 +9646,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetID_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.ID = nil
 
 		// Act & Assert
@@ -7315,7 +9655,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetID_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7328,7 +9668,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetProtocol", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *string
 		obj.Protocol = expected
 
@@ -7339,7 +9679,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetProtocol_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.Protocol = nil
 
 		// Act & Assert
@@ -7348,7 +9688,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetProtocol_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7361,7 +9701,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetSwapType", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *SolanaDexSwapTypeEnum
 		obj.SwapType = expected
 
@@ -7372,7 +9712,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetSwapType_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.SwapType = nil
 
 		// Act & Assert
@@ -7381,7 +9721,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetSwapType_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7394,7 +9734,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetWalletAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *string
 		obj.WalletAddress = expected
 
@@ -7405,7 +9745,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetWalletAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.WalletAddress = nil
 
 		// Act & Assert
@@ -7414,7 +9754,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetWalletAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7427,7 +9767,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *string
 		obj.TokenAddress = expected
 
@@ -7438,7 +9778,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.TokenAddress = nil
 
 		// Act & Assert
@@ -7447,7 +9787,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7460,7 +9800,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetQuoteAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *string
 		obj.QuoteAddress = expected
 
@@ -7471,7 +9811,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetQuoteAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.QuoteAddress = nil
 
 		// Act & Assert
@@ -7480,7 +9820,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetQuoteAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7493,7 +9833,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPositionAddress", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *string
 		obj.PositionAddress = expected
 
@@ -7504,7 +9844,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPositionAddress_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.PositionAddress = nil
 
 		// Act & Assert
@@ -7513,7 +9853,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetPositionAddress_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7526,7 +9866,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetDirection", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *SolanaDexTradeDirectionEnum
 		obj.Direction = expected
 
@@ -7537,7 +9877,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetDirection_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.Direction = nil
 
 		// Act & Assert
@@ -7546,7 +9886,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetDirection_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7559,7 +9899,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPositionState", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *SolanaDexTradePositionStateEnum
 		obj.PositionState = expected
 
@@ -7570,7 +9910,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPositionState_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.PositionState = nil
 
 		// Act & Assert
@@ -7579,7 +9919,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetPositionState_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7592,7 +9932,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.TokenAmount = expected
 
@@ -7603,7 +9943,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.TokenAmount = nil
 
 		// Act & Assert
@@ -7612,7 +9952,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetTokenAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7625,7 +9965,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetQuoteAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.QuoteAmount = expected
 
@@ -7636,7 +9976,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetQuoteAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.QuoteAmount = nil
 
 		// Act & Assert
@@ -7645,7 +9985,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetQuoteAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7658,7 +9998,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetNativeAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.NativeAmount = expected
 
@@ -7669,7 +10009,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetNativeAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.NativeAmount = nil
 
 		// Act & Assert
@@ -7678,7 +10018,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetNativeAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7691,7 +10031,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetUsdAmount", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.UsdAmount = expected
 
@@ -7702,7 +10042,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetUsdAmount_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.UsdAmount = nil
 
 		// Act & Assert
@@ -7711,7 +10051,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetUsdAmount_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7724,7 +10064,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPreTokenBalance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.PreTokenBalance = expected
 
@@ -7735,7 +10075,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPreTokenBalance_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.PreTokenBalance = nil
 
 		// Act & Assert
@@ -7744,7 +10084,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetPreTokenBalance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7757,7 +10097,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPostTokenBalance", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.PostTokenBalance = expected
 
@@ -7768,7 +10108,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetPostTokenBalance_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.PostTokenBalance = nil
 
 		// Act & Assert
@@ -7777,7 +10117,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetPostTokenBalance_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7790,7 +10130,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenPrice", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.TokenPrice = expected
 
@@ -7801,7 +10141,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenPrice_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.TokenPrice = nil
 
 		// Act & Assert
@@ -7810,7 +10150,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetTokenPrice_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7823,7 +10163,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetQuotePrice", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.QuotePrice = expected
 
@@ -7834,7 +10174,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetQuotePrice_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.QuotePrice = nil
 
 		// Act & Assert
@@ -7843,7 +10183,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetQuotePrice_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7856,7 +10196,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenMcap", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *float64
 		obj.TokenMcap = expected
 
@@ -7867,7 +10207,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTokenMcap_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.TokenMcap = nil
 
 		// Act & Assert
@@ -7876,7 +10216,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetTokenMcap_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7889,7 +10229,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetBlockSlot", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *int
 		obj.BlockSlot = expected
 
@@ -7900,7 +10240,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetBlockSlot_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.BlockSlot = nil
 
 		// Act & Assert
@@ -7909,7 +10249,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetBlockSlot_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7922,7 +10262,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetBlockTime", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *time.Time
 		obj.BlockTime = expected
 
@@ -7933,7 +10273,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetBlockTime_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.BlockTime = nil
 
 		// Act & Assert
@@ -7942,7 +10282,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetBlockTime_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7955,7 +10295,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTxHash", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var expected *string
 		obj.TxHash = expected
 
@@ -7966,7 +10306,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 	t.Run("GetTxHash_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		obj.TxHash = nil
 
 		// Act & Assert
@@ -7975,7 +10315,7 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetTxHash_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
+		var obj *SolanaDexTradeMessage
 		// Should not panic - getters should handle nil receiver gracefully
 		defer func() {
 			if r := recover(); r != nil {
@@ -7987,11 +10327,11 @@ func TestGettersSolanaDexTrade(t *testing.T) {
 
 }
 
-func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
+func TestSettersMarkExplicitSolanaDexTradeMessage(t *testing.T) {
 	t.Run("SetID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueID *int
 
 		// Act
@@ -8022,7 +10362,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetProtocol_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueProtocol *string
 
 		// Act
@@ -8053,7 +10393,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetSwapType_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueSwapType *SolanaDexSwapTypeEnum
 
 		// Act
@@ -8084,7 +10424,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetWalletAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueWalletAddress *string
 
 		// Act
@@ -8115,7 +10455,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenAddress *string
 
 		// Act
@@ -8146,7 +10486,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetQuoteAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueQuoteAddress *string
 
 		// Act
@@ -8177,7 +10517,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetPositionAddress_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePositionAddress *string
 
 		// Act
@@ -8208,7 +10548,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetDirection_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueDirection *SolanaDexTradeDirectionEnum
 
 		// Act
@@ -8239,7 +10579,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetPositionState_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePositionState *SolanaDexTradePositionStateEnum
 
 		// Act
@@ -8270,7 +10610,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetTokenAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenAmount *float64
 
 		// Act
@@ -8301,7 +10641,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetQuoteAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueQuoteAmount *float64
 
 		// Act
@@ -8332,7 +10672,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetNativeAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueNativeAmount *float64
 
 		// Act
@@ -8363,7 +10703,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetUsdAmount_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueUsdAmount *float64
 
 		// Act
@@ -8394,7 +10734,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetPreTokenBalance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePreTokenBalance *float64
 
 		// Act
@@ -8425,7 +10765,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetPostTokenBalance_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValuePostTokenBalance *float64
 
 		// Act
@@ -8456,7 +10796,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetTokenPrice_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenPrice *float64
 
 		// Act
@@ -8487,7 +10827,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetQuotePrice_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueQuotePrice *float64
 
 		// Act
@@ -8518,7 +10858,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetTokenMcap_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTokenMcap *float64
 
 		// Act
@@ -8549,7 +10889,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetBlockSlot_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueBlockSlot *int
 
 		// Act
@@ -8580,7 +10920,7 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetBlockTime_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueBlockTime *time.Time
 
 		// Act
@@ -8611,668 +10951,11 @@ func TestSettersMarkExplicitSolanaDexTrade(t *testing.T) {
 	t.Run("SetTxHash_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		var fernTestValueTxHash *string
 
 		// Act
 		obj.SetTxHash(fernTestValueTxHash)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersSolanaDexWalletProfile(t *testing.T) {
-	t.Run("SetUpdatedAt", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueUpdatedAt *time.Time
-		obj.SetUpdatedAt(fernTestValueUpdatedAt)
-		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetSyncedAt", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueSyncedAt *time.Time
-		obj.SetSyncedAt(fernTestValueSyncedAt)
-		assert.Equal(t, fernTestValueSyncedAt, obj.SyncedAt)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetWalletAddress", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueWalletAddress *string
-		obj.SetWalletAddress(fernTestValueWalletAddress)
-		assert.Equal(t, fernTestValueWalletAddress, obj.WalletAddress)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetLabels", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueLabels []SolanaDexWalletProfileLabelEnum
-		obj.SetLabels(fernTestValueLabels)
-		assert.Equal(t, fernTestValueLabels, obj.Labels)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetMatchedLabels", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueMatchedLabels map[string][]string
-		obj.SetMatchedLabels(fernTestValueMatchedLabels)
-		assert.Equal(t, fernTestValueMatchedLabels, obj.MatchedLabels)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetDynamicLabels", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueDynamicLabels []string
-		obj.SetDynamicLabels(fernTestValueDynamicLabels)
-		assert.Equal(t, fernTestValueDynamicLabels, obj.DynamicLabels)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetMetadata", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueMetadata *SolanaDexWalletProfileMetadata
-		obj.SetMetadata(fernTestValueMetadata)
-		assert.Equal(t, fernTestValueMetadata, obj.Metadata)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetIdentity", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueIdentity *SolanaDexWalletProfileIdentity
-		obj.SetIdentity(fernTestValueIdentity)
-		assert.Equal(t, fernTestValueIdentity, obj.Identity)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetMetrics", func(t *testing.T) {
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueMetrics map[string]*SolanaDexWalletProfileMetrics
-		obj.SetMetrics(fernTestValueMetrics)
-		assert.Equal(t, fernTestValueMetrics, obj.Metrics)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersSolanaDexWalletProfile(t *testing.T) {
-	t.Run("GetUpdatedAt", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected *time.Time
-		obj.UpdatedAt = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
-	})
-
-	t.Run("GetUpdatedAt_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.UpdatedAt = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUpdatedAt(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUpdatedAt() // Should return zero value
-	})
-
-	t.Run("GetSyncedAt", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected *time.Time
-		obj.SyncedAt = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetSyncedAt(), "getter should return the property value")
-	})
-
-	t.Run("GetSyncedAt_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.SyncedAt = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetSyncedAt(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetSyncedAt_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetSyncedAt() // Should return zero value
-	})
-
-	t.Run("GetWalletAddress", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected *string
-		obj.WalletAddress = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetWalletAddress(), "getter should return the property value")
-	})
-
-	t.Run("GetWalletAddress_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.WalletAddress = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetWalletAddress(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetWalletAddress_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetWalletAddress() // Should return zero value
-	})
-
-	t.Run("GetLabels", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected []SolanaDexWalletProfileLabelEnum
-		obj.Labels = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetLabels(), "getter should return the property value")
-	})
-
-	t.Run("GetLabels_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.Labels = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetLabels(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetLabels_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetLabels() // Should return zero value
-	})
-
-	t.Run("GetMatchedLabels", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected map[string][]string
-		obj.MatchedLabels = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetMatchedLabels(), "getter should return the property value")
-	})
-
-	t.Run("GetMatchedLabels_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.MatchedLabels = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetMatchedLabels(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetMatchedLabels_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetMatchedLabels() // Should return zero value
-	})
-
-	t.Run("GetDynamicLabels", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected []string
-		obj.DynamicLabels = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetDynamicLabels(), "getter should return the property value")
-	})
-
-	t.Run("GetDynamicLabels_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.DynamicLabels = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetDynamicLabels(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetDynamicLabels_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetDynamicLabels() // Should return zero value
-	})
-
-	t.Run("GetMetadata", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected *SolanaDexWalletProfileMetadata
-		obj.Metadata = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetMetadata(), "getter should return the property value")
-	})
-
-	t.Run("GetMetadata_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.Metadata = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetMetadata(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetMetadata_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetMetadata() // Should return zero value
-	})
-
-	t.Run("GetIdentity", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected *SolanaDexWalletProfileIdentity
-		obj.Identity = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetIdentity(), "getter should return the property value")
-	})
-
-	t.Run("GetIdentity_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.Identity = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetIdentity(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetIdentity_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetIdentity() // Should return zero value
-	})
-
-	t.Run("GetMetrics", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var expected map[string]*SolanaDexWalletProfileMetrics
-		obj.Metrics = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetMetrics(), "getter should return the property value")
-	})
-
-	t.Run("GetMetrics_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		obj.Metrics = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetMetrics(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetMetrics_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetMetrics() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitSolanaDexWalletProfile(t *testing.T) {
-	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueUpdatedAt *time.Time
-
-		// Act
-		obj.SetUpdatedAt(fernTestValueUpdatedAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetSyncedAt_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueSyncedAt *time.Time
-
-		// Act
-		obj.SetSyncedAt(fernTestValueSyncedAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetWalletAddress_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueWalletAddress *string
-
-		// Act
-		obj.SetWalletAddress(fernTestValueWalletAddress)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetLabels_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueLabels []SolanaDexWalletProfileLabelEnum
-
-		// Act
-		obj.SetLabels(fernTestValueLabels)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetMatchedLabels_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueMatchedLabels map[string][]string
-
-		// Act
-		obj.SetMatchedLabels(fernTestValueMatchedLabels)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetDynamicLabels_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueDynamicLabels []string
-
-		// Act
-		obj.SetDynamicLabels(fernTestValueDynamicLabels)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetMetadata_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueMetadata *SolanaDexWalletProfileMetadata
-
-		// Act
-		obj.SetMetadata(fernTestValueMetadata)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetIdentity_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueIdentity *SolanaDexWalletProfileIdentity
-
-		// Act
-		obj.SetIdentity(fernTestValueIdentity)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetMetrics_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-		var fernTestValueMetrics map[string]*SolanaDexWalletProfileMetrics
-
-		// Act
-		obj.SetMetrics(fernTestValueMetrics)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -9498,6 +11181,663 @@ func TestSettersMarkExplicitSolanaDexWalletProfileIdentity(t *testing.T) {
 
 		// Act
 		obj.SetTelegramUsername(fernTestValueTelegramUsername)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexWalletProfileMessage(t *testing.T) {
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueUpdatedAt *time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSyncedAt", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueSyncedAt *time.Time
+		obj.SetSyncedAt(fernTestValueSyncedAt)
+		assert.Equal(t, fernTestValueSyncedAt, obj.SyncedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWalletAddress", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueWalletAddress *string
+		obj.SetWalletAddress(fernTestValueWalletAddress)
+		assert.Equal(t, fernTestValueWalletAddress, obj.WalletAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLabels", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueLabels []SolanaDexWalletProfileLabelEnum
+		obj.SetLabels(fernTestValueLabels)
+		assert.Equal(t, fernTestValueLabels, obj.Labels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMatchedLabels", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueMatchedLabels map[string][]string
+		obj.SetMatchedLabels(fernTestValueMatchedLabels)
+		assert.Equal(t, fernTestValueMatchedLabels, obj.MatchedLabels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDynamicLabels", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueDynamicLabels []string
+		obj.SetDynamicLabels(fernTestValueDynamicLabels)
+		assert.Equal(t, fernTestValueDynamicLabels, obj.DynamicLabels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMetadata", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueMetadata *SolanaDexWalletProfileMetadata
+		obj.SetMetadata(fernTestValueMetadata)
+		assert.Equal(t, fernTestValueMetadata, obj.Metadata)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetIdentity", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueIdentity *SolanaDexWalletProfileIdentity
+		obj.SetIdentity(fernTestValueIdentity)
+		assert.Equal(t, fernTestValueIdentity, obj.Identity)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMetrics", func(t *testing.T) {
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueMetrics map[string]*SolanaDexWalletProfileMetrics
+		obj.SetMetrics(fernTestValueMetrics)
+		assert.Equal(t, fernTestValueMetrics, obj.Metrics)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexWalletProfileMessage(t *testing.T) {
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected *time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.UpdatedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUpdatedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+	t.Run("GetSyncedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected *time.Time
+		obj.SyncedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSyncedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetSyncedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.SyncedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSyncedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSyncedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSyncedAt() // Should return zero value
+	})
+
+	t.Run("GetWalletAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected *string
+		obj.WalletAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWalletAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetWalletAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.WalletAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWalletAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWalletAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWalletAddress() // Should return zero value
+	})
+
+	t.Run("GetLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected []SolanaDexWalletProfileLabelEnum
+		obj.Labels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.Labels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLabels() // Should return zero value
+	})
+
+	t.Run("GetMatchedLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected map[string][]string
+		obj.MatchedLabels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMatchedLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetMatchedLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.MatchedLabels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMatchedLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMatchedLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMatchedLabels() // Should return zero value
+	})
+
+	t.Run("GetDynamicLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected []string
+		obj.DynamicLabels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDynamicLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetDynamicLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.DynamicLabels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDynamicLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDynamicLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDynamicLabels() // Should return zero value
+	})
+
+	t.Run("GetMetadata", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected *SolanaDexWalletProfileMetadata
+		obj.Metadata = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMetadata(), "getter should return the property value")
+	})
+
+	t.Run("GetMetadata_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.Metadata = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMetadata(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMetadata_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMetadata() // Should return zero value
+	})
+
+	t.Run("GetIdentity", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected *SolanaDexWalletProfileIdentity
+		obj.Identity = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIdentity(), "getter should return the property value")
+	})
+
+	t.Run("GetIdentity_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.Identity = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIdentity(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIdentity_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIdentity() // Should return zero value
+	})
+
+	t.Run("GetMetrics", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var expected map[string]*SolanaDexWalletProfileMetrics
+		obj.Metrics = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMetrics(), "getter should return the property value")
+	})
+
+	t.Run("GetMetrics_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		obj.Metrics = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMetrics(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMetrics_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMetrics() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexWalletProfileMessage(t *testing.T) {
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueUpdatedAt *time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSyncedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueSyncedAt *time.Time
+
+		// Act
+		obj.SetSyncedAt(fernTestValueSyncedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWalletAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueWalletAddress *string
+
+		// Act
+		obj.SetWalletAddress(fernTestValueWalletAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueLabels []SolanaDexWalletProfileLabelEnum
+
+		// Act
+		obj.SetLabels(fernTestValueLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMatchedLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueMatchedLabels map[string][]string
+
+		// Act
+		obj.SetMatchedLabels(fernTestValueMatchedLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDynamicLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueDynamicLabels []string
+
+		// Act
+		obj.SetDynamicLabels(fernTestValueDynamicLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMetadata_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueMetadata *SolanaDexWalletProfileMetadata
+
+		// Act
+		obj.SetMetadata(fernTestValueMetadata)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetIdentity_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueIdentity *SolanaDexWalletProfileIdentity
+
+		// Act
+		obj.SetIdentity(fernTestValueIdentity)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMetrics_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+		var fernTestValueMetrics map[string]*SolanaDexWalletProfileMetrics
+
+		// Act
+		obj.SetMetrics(fernTestValueMetrics)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -13970,6 +16310,39 @@ func TestGettersSubscribePayloadParams(t *testing.T) {
 		_ = obj.GetSubscribeSolanaDexTradesParams() // Should return zero value
 	})
 
+	t.Run("GetSubscribeSolanaDexPoolsParams", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribePayloadParams{}
+		var expected *SubscribeSolanaDexPoolsParams
+		obj.SubscribeSolanaDexPoolsParams = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubscribeSolanaDexPoolsParams(), "getter should return the property value")
+	})
+
+	t.Run("GetSubscribeSolanaDexPoolsParams_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribePayloadParams{}
+		obj.SubscribeSolanaDexPoolsParams = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubscribeSolanaDexPoolsParams(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubscribeSolanaDexPoolsParams_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscribePayloadParams
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubscribeSolanaDexPoolsParams() // Should return zero value
+	})
+
 	t.Run("GetSubscribeSolanaDexWalletProfilesParams", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -14067,6 +16440,72 @@ func TestGettersSubscribePayloadParams(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSubscribeSolanaDexPositionProfilesParams() // Should return zero value
+	})
+
+	t.Run("GetSubscribeSolanaAssetsTransfersParams", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribePayloadParams{}
+		var expected *SubscribeSolanaAssetsTransfersParams
+		obj.SubscribeSolanaAssetsTransfersParams = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubscribeSolanaAssetsTransfersParams(), "getter should return the property value")
+	})
+
+	t.Run("GetSubscribeSolanaAssetsTransfersParams_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribePayloadParams{}
+		obj.SubscribeSolanaAssetsTransfersParams = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubscribeSolanaAssetsTransfersParams(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubscribeSolanaAssetsTransfersParams_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscribePayloadParams
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubscribeSolanaAssetsTransfersParams() // Should return zero value
+	})
+
+	t.Run("GetSubscribeSolanaAssetsBalanceChangesParams", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribePayloadParams{}
+		var expected *SubscribeSolanaAssetsBalanceChangesParams
+		obj.SubscribeSolanaAssetsBalanceChangesParams = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubscribeSolanaAssetsBalanceChangesParams(), "getter should return the property value")
+	})
+
+	t.Run("GetSubscribeSolanaAssetsBalanceChangesParams_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribePayloadParams{}
+		obj.SubscribeSolanaAssetsBalanceChangesParams = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubscribeSolanaAssetsBalanceChangesParams(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubscribeSolanaAssetsBalanceChangesParams_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscribePayloadParams
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubscribeSolanaAssetsBalanceChangesParams() // Should return zero value
 	})
 
 }
@@ -14225,28 +16664,28 @@ func TestSettersMarkExplicitSubscriptionMessage(t *testing.T) {
 }
 
 func TestGettersSubscriptionMessageData(t *testing.T) {
-	t.Run("GetSolanaDexPrice", func(t *testing.T) {
+	t.Run("GetSolanaDexPriceMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		var expected *SolanaDexPrice
-		obj.SolanaDexPrice = expected
+		var expected *SolanaDexPriceMessage
+		obj.SolanaDexPriceMessage = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetSolanaDexPrice(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetSolanaDexPriceMessage(), "getter should return the property value")
 	})
 
-	t.Run("GetSolanaDexPrice_NilValue", func(t *testing.T) {
+	t.Run("GetSolanaDexPriceMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		obj.SolanaDexPrice = nil
+		obj.SolanaDexPriceMessage = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetSolanaDexPrice(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetSolanaDexPriceMessage(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetSolanaDexPrice_NilReceiver", func(t *testing.T) {
+	t.Run("GetSolanaDexPriceMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubscriptionMessageData
 		// Should not panic - getters should handle nil receiver gracefully
@@ -14255,31 +16694,31 @@ func TestGettersSubscriptionMessageData(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetSolanaDexPrice() // Should return zero value
+		_ = obj.GetSolanaDexPriceMessage() // Should return zero value
 	})
 
-	t.Run("GetSolanaDexSwap", func(t *testing.T) {
+	t.Run("GetSolanaDexSwapMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		var expected *SolanaDexSwap
-		obj.SolanaDexSwap = expected
+		var expected *SolanaDexSwapMessage
+		obj.SolanaDexSwapMessage = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetSolanaDexSwap(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetSolanaDexSwapMessage(), "getter should return the property value")
 	})
 
-	t.Run("GetSolanaDexSwap_NilValue", func(t *testing.T) {
+	t.Run("GetSolanaDexSwapMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		obj.SolanaDexSwap = nil
+		obj.SolanaDexSwapMessage = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetSolanaDexSwap(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetSolanaDexSwapMessage(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetSolanaDexSwap_NilReceiver", func(t *testing.T) {
+	t.Run("GetSolanaDexSwapMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubscriptionMessageData
 		// Should not panic - getters should handle nil receiver gracefully
@@ -14288,31 +16727,31 @@ func TestGettersSubscriptionMessageData(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetSolanaDexSwap() // Should return zero value
+		_ = obj.GetSolanaDexSwapMessage() // Should return zero value
 	})
 
-	t.Run("GetSolanaDexTrade", func(t *testing.T) {
+	t.Run("GetSolanaDexTradeMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		var expected *SolanaDexTrade
-		obj.SolanaDexTrade = expected
+		var expected *SolanaDexTradeMessage
+		obj.SolanaDexTradeMessage = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetSolanaDexTrade(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetSolanaDexTradeMessage(), "getter should return the property value")
 	})
 
-	t.Run("GetSolanaDexTrade_NilValue", func(t *testing.T) {
+	t.Run("GetSolanaDexTradeMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		obj.SolanaDexTrade = nil
+		obj.SolanaDexTradeMessage = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetSolanaDexTrade(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetSolanaDexTradeMessage(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetSolanaDexTrade_NilReceiver", func(t *testing.T) {
+	t.Run("GetSolanaDexTradeMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubscriptionMessageData
 		// Should not panic - getters should handle nil receiver gracefully
@@ -14321,31 +16760,31 @@ func TestGettersSubscriptionMessageData(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetSolanaDexTrade() // Should return zero value
+		_ = obj.GetSolanaDexTradeMessage() // Should return zero value
 	})
 
-	t.Run("GetSolanaDexWalletProfile", func(t *testing.T) {
+	t.Run("GetSolanaDexPoolMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		var expected *SolanaDexWalletProfile
-		obj.SolanaDexWalletProfile = expected
+		var expected *SolanaDexPoolMessage
+		obj.SolanaDexPoolMessage = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetSolanaDexWalletProfile(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetSolanaDexPoolMessage(), "getter should return the property value")
 	})
 
-	t.Run("GetSolanaDexWalletProfile_NilValue", func(t *testing.T) {
+	t.Run("GetSolanaDexPoolMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		obj.SolanaDexWalletProfile = nil
+		obj.SolanaDexPoolMessage = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetSolanaDexWalletProfile(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetSolanaDexPoolMessage(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetSolanaDexWalletProfile_NilReceiver", func(t *testing.T) {
+	t.Run("GetSolanaDexPoolMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubscriptionMessageData
 		// Should not panic - getters should handle nil receiver gracefully
@@ -14354,31 +16793,31 @@ func TestGettersSubscriptionMessageData(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetSolanaDexWalletProfile() // Should return zero value
+		_ = obj.GetSolanaDexPoolMessage() // Should return zero value
 	})
 
-	t.Run("GetSolanaDexTokenProfile", func(t *testing.T) {
+	t.Run("GetSolanaDexWalletProfileMessage", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		var expected *SolanaDexTokenProfile
-		obj.SolanaDexTokenProfile = expected
+		var expected *SolanaDexWalletProfileMessage
+		obj.SolanaDexWalletProfileMessage = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetSolanaDexTokenProfile(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetSolanaDexWalletProfileMessage(), "getter should return the property value")
 	})
 
-	t.Run("GetSolanaDexTokenProfile_NilValue", func(t *testing.T) {
+	t.Run("GetSolanaDexWalletProfileMessage_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &SubscriptionMessageData{}
-		obj.SolanaDexTokenProfile = nil
+		obj.SolanaDexWalletProfileMessage = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetSolanaDexTokenProfile(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetSolanaDexWalletProfileMessage(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetSolanaDexTokenProfile_NilReceiver", func(t *testing.T) {
+	t.Run("GetSolanaDexWalletProfileMessage_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubscriptionMessageData
 		// Should not panic - getters should handle nil receiver gracefully
@@ -14387,7 +16826,106 @@ func TestGettersSubscriptionMessageData(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetSolanaDexTokenProfile() // Should return zero value
+		_ = obj.GetSolanaDexWalletProfileMessage() // Should return zero value
+	})
+
+	t.Run("GetSolanaDexTokenProfileMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionMessageData{}
+		var expected *SolanaDexTokenProfileMessage
+		obj.SolanaDexTokenProfileMessage = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSolanaDexTokenProfileMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetSolanaDexTokenProfileMessage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionMessageData{}
+		obj.SolanaDexTokenProfileMessage = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSolanaDexTokenProfileMessage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSolanaDexTokenProfileMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionMessageData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSolanaDexTokenProfileMessage() // Should return zero value
+	})
+
+	t.Run("GetSolanaAssetsTransferMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionMessageData{}
+		var expected *SolanaAssetsTransferMessage
+		obj.SolanaAssetsTransferMessage = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSolanaAssetsTransferMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetSolanaAssetsTransferMessage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionMessageData{}
+		obj.SolanaAssetsTransferMessage = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSolanaAssetsTransferMessage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSolanaAssetsTransferMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionMessageData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSolanaAssetsTransferMessage() // Should return zero value
+	})
+
+	t.Run("GetSolanaAssetsBalanceChangeMessage", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionMessageData{}
+		var expected *SolanaAssetsBalanceChangeMessage
+		obj.SolanaAssetsBalanceChangeMessage = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSolanaAssetsBalanceChangeMessage(), "getter should return the property value")
+	})
+
+	t.Run("GetSolanaAssetsBalanceChangeMessage_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionMessageData{}
+		obj.SolanaAssetsBalanceChangeMessage = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSolanaAssetsBalanceChangeMessage(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSolanaAssetsBalanceChangeMessage_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionMessageData
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSolanaAssetsBalanceChangeMessage() // Should return zero value
 	})
 
 }
@@ -14401,19 +16939,11 @@ func TestSettersUnsubscribePayload(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTopic", func(t *testing.T) {
+	t.Run("SetTopics", func(t *testing.T) {
 		obj := &UnsubscribePayload{}
-		var fernTestValueTopic *SubscriptionTopicEnum
-		obj.SetTopic(fernTestValueTopic)
-		assert.Equal(t, fernTestValueTopic, obj.Topic)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetParams", func(t *testing.T) {
-		obj := &UnsubscribePayload{}
-		var fernTestValueParams *UnsubscribePayloadParams
-		obj.SetParams(fernTestValueParams)
-		assert.Equal(t, fernTestValueParams, obj.Params)
+		var fernTestValueTopics []SubscriptionTopicEnum
+		obj.SetTopics(fernTestValueTopics)
+		assert.Equal(t, fernTestValueTopics, obj.Topics)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -14453,28 +16983,28 @@ func TestGettersUnsubscribePayload(t *testing.T) {
 		_ = obj.GetMethod() // Should return zero value
 	})
 
-	t.Run("GetTopic", func(t *testing.T) {
+	t.Run("GetTopics", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &UnsubscribePayload{}
-		var expected *SubscriptionTopicEnum
-		obj.Topic = expected
+		var expected []SubscriptionTopicEnum
+		obj.Topics = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetTopic(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetTopics(), "getter should return the property value")
 	})
 
-	t.Run("GetTopic_NilValue", func(t *testing.T) {
+	t.Run("GetTopics_NilValue", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &UnsubscribePayload{}
-		obj.Topic = nil
+		obj.Topics = nil
 
 		// Act & Assert
-		assert.Nil(t, obj.GetTopic(), "getter should return nil when property is nil")
+		assert.Nil(t, obj.GetTopics(), "getter should return nil when property is nil")
 	})
 
-	t.Run("GetTopic_NilReceiver", func(t *testing.T) {
+	t.Run("GetTopics_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *UnsubscribePayload
 		// Should not panic - getters should handle nil receiver gracefully
@@ -14483,40 +17013,7 @@ func TestGettersUnsubscribePayload(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetTopic() // Should return zero value
-	})
-
-	t.Run("GetParams", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayload{}
-		var expected *UnsubscribePayloadParams
-		obj.Params = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetParams(), "getter should return the property value")
-	})
-
-	t.Run("GetParams_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayload{}
-		obj.Params = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetParams(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetParams_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UnsubscribePayload
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetParams() // Should return zero value
+		_ = obj.GetTopics() // Should return zero value
 	})
 
 }
@@ -14553,45 +17050,14 @@ func TestSettersMarkExplicitUnsubscribePayload(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTopic_MarksExplicit", func(t *testing.T) {
+	t.Run("SetTopics_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &UnsubscribePayload{}
-		var fernTestValueTopic *SubscriptionTopicEnum
+		var fernTestValueTopics []SubscriptionTopicEnum
 
 		// Act
-		obj.SetTopic(fernTestValueTopic)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetParams_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayload{}
-		var fernTestValueParams *UnsubscribePayloadParams
-
-		// Act
-		obj.SetParams(fernTestValueParams)
+		obj.SetTopics(fernTestValueTopics)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -14617,212 +17083,11 @@ func TestSettersMarkExplicitUnsubscribePayload(t *testing.T) {
 
 }
 
-func TestGettersUnsubscribePayloadParams(t *testing.T) {
-	t.Run("GetUnsubscribeSolanaDexPricesParams", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		var expected *UnsubscribeSolanaDexPricesParams
-		obj.UnsubscribeSolanaDexPricesParams = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnsubscribeSolanaDexPricesParams(), "getter should return the property value")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexPricesParams_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		obj.UnsubscribeSolanaDexPricesParams = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnsubscribeSolanaDexPricesParams(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexPricesParams_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UnsubscribePayloadParams
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnsubscribeSolanaDexPricesParams() // Should return zero value
-	})
-
-	t.Run("GetUnsubscribeSolanaDexSwapsParams", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		var expected *UnsubscribeSolanaDexSwapsParams
-		obj.UnsubscribeSolanaDexSwapsParams = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnsubscribeSolanaDexSwapsParams(), "getter should return the property value")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexSwapsParams_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		obj.UnsubscribeSolanaDexSwapsParams = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnsubscribeSolanaDexSwapsParams(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexSwapsParams_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UnsubscribePayloadParams
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnsubscribeSolanaDexSwapsParams() // Should return zero value
-	})
-
-	t.Run("GetUnsubscribeSolanaDexTradesParams", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		var expected *UnsubscribeSolanaDexTradesParams
-		obj.UnsubscribeSolanaDexTradesParams = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnsubscribeSolanaDexTradesParams(), "getter should return the property value")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexTradesParams_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		obj.UnsubscribeSolanaDexTradesParams = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnsubscribeSolanaDexTradesParams(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexTradesParams_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UnsubscribePayloadParams
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnsubscribeSolanaDexTradesParams() // Should return zero value
-	})
-
-	t.Run("GetUnsubscribeSolanaDexWalletProfilesParams", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		var expected *UnsubscribeSolanaDexWalletProfilesParams
-		obj.UnsubscribeSolanaDexWalletProfilesParams = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnsubscribeSolanaDexWalletProfilesParams(), "getter should return the property value")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexWalletProfilesParams_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		obj.UnsubscribeSolanaDexWalletProfilesParams = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnsubscribeSolanaDexWalletProfilesParams(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexWalletProfilesParams_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UnsubscribePayloadParams
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnsubscribeSolanaDexWalletProfilesParams() // Should return zero value
-	})
-
-	t.Run("GetUnsubscribeSolanaDexTokenProfilesParams", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		var expected *UnsubscribeSolanaDexTokenProfilesParams
-		obj.UnsubscribeSolanaDexTokenProfilesParams = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnsubscribeSolanaDexTokenProfilesParams(), "getter should return the property value")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexTokenProfilesParams_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		obj.UnsubscribeSolanaDexTokenProfilesParams = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnsubscribeSolanaDexTokenProfilesParams(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexTokenProfilesParams_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UnsubscribePayloadParams
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnsubscribeSolanaDexTokenProfilesParams() // Should return zero value
-	})
-
-	t.Run("GetUnsubscribeSolanaDexPositionProfilesParams", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		var expected *UnsubscribeSolanaDexPositionProfilesParams
-		obj.UnsubscribeSolanaDexPositionProfilesParams = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetUnsubscribeSolanaDexPositionProfilesParams(), "getter should return the property value")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexPositionProfilesParams_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UnsubscribePayloadParams{}
-		obj.UnsubscribeSolanaDexPositionProfilesParams = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetUnsubscribeSolanaDexPositionProfilesParams(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetUnsubscribeSolanaDexPositionProfilesParams_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UnsubscribePayloadParams
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetUnsubscribeSolanaDexPositionProfilesParams() // Should return zero value
-	})
-
-}
-
-func TestJSONMarshalingSolanaDexPrice(t *testing.T) {
+func TestJSONMarshalingSolanaAssetsBalanceChangeMessage(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexPrice{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14831,31 +17096,31 @@ func TestJSONMarshalingSolanaDexPrice(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled SolanaDexPrice
+		var unmarshaled SolanaAssetsBalanceChangeMessage
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexPrice
+		var obj SolanaAssetsBalanceChangeMessage
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexPrice
+		var obj SolanaAssetsBalanceChangeMessage
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingSolanaDexSwap(t *testing.T) {
+func TestJSONMarshalingSolanaAssetsTransferMessage(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsTransferMessage{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14864,31 +17129,31 @@ func TestJSONMarshalingSolanaDexSwap(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled SolanaDexSwap
+		var unmarshaled SolanaAssetsTransferMessage
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexSwap
+		var obj SolanaAssetsTransferMessage
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexSwap
+		var obj SolanaAssetsTransferMessage
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
 }
 
-func TestJSONMarshalingSolanaDexTokenProfile(t *testing.T) {
+func TestJSONMarshalingSolanaDexPoolMessage(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTokenProfile{}
+		obj := &SolanaDexPoolMessage{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -14897,21 +17162,120 @@ func TestJSONMarshalingSolanaDexTokenProfile(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled SolanaDexTokenProfile
+		var unmarshaled SolanaDexPoolMessage
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexTokenProfile
+		var obj SolanaDexPoolMessage
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexTokenProfile
+		var obj SolanaDexPoolMessage
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexPoolMessageVault(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPoolMessageVault{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexPoolMessageVault
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPoolMessageVault
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPoolMessageVault
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexPriceMessage(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPriceMessage{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexPriceMessage
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPriceMessage
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPriceMessage
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexSwapMessage(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexSwapMessage{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexSwapMessage
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexSwapMessage
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexSwapMessage
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -14945,6 +17309,39 @@ func TestJSONMarshalingSolanaDexTokenProfileMarket(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj SolanaDexTokenProfileMarket
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexTokenProfileMessage(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexTokenProfileMessage{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexTokenProfileMessage
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexTokenProfileMessage
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexTokenProfileMessage
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -15016,11 +17413,11 @@ func TestJSONMarshalingSolanaDexTokenProfileMetrics(t *testing.T) {
 	})
 }
 
-func TestJSONMarshalingSolanaDexTrade(t *testing.T) {
+func TestJSONMarshalingSolanaDexTradeMessage(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 
 		// Act - Marshal to JSON
 		data, err := json.Marshal(obj)
@@ -15029,54 +17426,21 @@ func TestJSONMarshalingSolanaDexTrade(t *testing.T) {
 		assert.NotEmpty(t, data, "marshaled data should not be empty")
 
 		// Unmarshal back and verify round-trip
-		var unmarshaled SolanaDexTrade
+		var unmarshaled SolanaDexTradeMessage
 		err = json.Unmarshal(data, &unmarshaled)
 		assert.NoError(t, err, "round-trip unmarshal should succeed")
 	})
 
 	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexTrade
+		var obj SolanaDexTradeMessage
 		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
 		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
 	})
 
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
-		var obj SolanaDexTrade
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
-func TestJSONMarshalingSolanaDexWalletProfile(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SolanaDexWalletProfile{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled SolanaDexWalletProfile
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj SolanaDexWalletProfile
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj SolanaDexWalletProfile
+		var obj SolanaDexTradeMessage
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -15110,6 +17474,39 @@ func TestJSONMarshalingSolanaDexWalletProfileIdentity(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj SolanaDexWalletProfileIdentity
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexWalletProfileMessage(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexWalletProfileMessage{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexWalletProfileMessage
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexWalletProfileMessage
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexWalletProfileMessage
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -15280,49 +17677,97 @@ func TestJSONMarshalingUnsubscribePayload(t *testing.T) {
 	})
 }
 
-func TestStringSolanaDexPrice(t *testing.T) {
+func TestStringSolanaAssetsBalanceChangeMessage(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexPrice{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexPrice
+		var obj *SolanaAssetsBalanceChangeMessage
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringSolanaDexSwap(t *testing.T) {
+func TestStringSolanaAssetsTransferMessage(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsTransferMessage{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsTransferMessage
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
 }
 
-func TestStringSolanaDexTokenProfile(t *testing.T) {
+func TestStringSolanaDexPoolMessage(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexTokenProfile{}
+		obj := &SolanaDexPoolMessage{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaDexPoolMessage
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexPoolMessageVault(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPoolMessageVault{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessageVault
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexPriceMessage(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPriceMessage{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPriceMessage
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexSwapMessage(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexSwapMessage{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -15339,6 +17784,22 @@ func TestStringSolanaDexTokenProfileMarket(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SolanaDexTokenProfileMarket
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexTokenProfileMessage(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexTokenProfileMessage{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -15376,33 +17837,17 @@ func TestStringSolanaDexTokenProfileMetrics(t *testing.T) {
 	})
 }
 
-func TestStringSolanaDexTrade(t *testing.T) {
+func TestStringSolanaDexTradeMessage(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		result := obj.String()
 		assert.NotEmpty(t, result, "String() should return a non-empty representation")
 	})
 
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
-func TestStringSolanaDexWalletProfile(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &SolanaDexWalletProfile{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
+		var obj *SolanaDexTradeMessage
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -15419,6 +17864,22 @@ func TestStringSolanaDexWalletProfileIdentity(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SolanaDexWalletProfileIdentity
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexWalletProfileMessage(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexWalletProfileMessage{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -15501,6 +17962,107 @@ func TestStringUnsubscribePayload(t *testing.T) {
 		var obj *UnsubscribePayload
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestEnumSolanaAssetsBalanceChangeTypeEnum(t *testing.T) {
+	t.Run("NewFromString_spl_token_balance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaAssetsBalanceChangeTypeEnumFromString("spl_token_balance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaAssetsBalanceChangeTypeEnum("spl_token_balance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_native_balance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaAssetsBalanceChangeTypeEnumFromString("native_balance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaAssetsBalanceChangeTypeEnum("native_balance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSolanaAssetsBalanceChangeTypeEnumFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSolanaAssetsBalanceChangeTypeEnumFromString("spl_token_balance")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSolanaAssetsTransferTypeEnum(t *testing.T) {
+	t.Run("NewFromString_spl_token_transfer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaAssetsTransferTypeEnumFromString("spl_token_transfer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaAssetsTransferTypeEnum("spl_token_transfer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_native_transfer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaAssetsTransferTypeEnumFromString("native_transfer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaAssetsTransferTypeEnum("native_transfer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSolanaAssetsTransferTypeEnumFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSolanaAssetsTransferTypeEnumFromString("spl_token_transfer")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSolanaDexPoolMessageEventTypeEnum(t *testing.T) {
+	t.Run("NewFromString_create", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPoolMessageEventTypeEnumFromString("create")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPoolMessageEventTypeEnum("create"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_swap", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPoolMessageEventTypeEnumFromString("swap")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPoolMessageEventTypeEnum("swap"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_add_liquidity", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPoolMessageEventTypeEnumFromString("add_liquidity")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPoolMessageEventTypeEnum("add_liquidity"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_remove_liquidity", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPoolMessageEventTypeEnumFromString("remove_liquidity")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPoolMessageEventTypeEnum("remove_liquidity"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSolanaDexPoolMessageEventTypeEnumFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSolanaDexPoolMessageEventTypeEnumFromString("create")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
 	})
 }
 
@@ -15763,60 +18325,67 @@ func TestEnumSubscriptionMethodEnum(t *testing.T) {
 }
 
 func TestEnumSubscriptionTopicEnum(t *testing.T) {
-	t.Run("NewFromString_solana_dex_price", func(t *testing.T) {
+	t.Run("NewFromString_solana_dex_prices", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.price")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.prices")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.price"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.dex.prices"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_solana_dex_swap_wallet", func(t *testing.T) {
+	t.Run("NewFromString_solana_dex_swaps", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.swap.wallet")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.swaps")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.swap.wallet"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.dex.swaps"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_solana_dex_swap_token", func(t *testing.T) {
+	t.Run("NewFromString_solana_dex_trades", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.swap.token")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.trades")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.swap.token"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.dex.trades"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_solana_dex_trade_wallet", func(t *testing.T) {
+	t.Run("NewFromString_solana_dex_pools", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.trade.wallet")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.pools")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.trade.wallet"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.dex.pools"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_solana_dex_trade_token", func(t *testing.T) {
+	t.Run("NewFromString_solana_dex_profiles_wallet", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.trade.token")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.profiles.wallet")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.trade.token"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.dex.profiles.wallet"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_solana_dex_profile_wallet", func(t *testing.T) {
+	t.Run("NewFromString_solana_dex_profiles_token", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.profile.wallet")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.profiles.token")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.profile.wallet"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.dex.profiles.token"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_solana_dex_profile_token", func(t *testing.T) {
+	t.Run("NewFromString_solana_dex_profiles_position", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.profile.token")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.profiles.position")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.profile.token"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.dex.profiles.position"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_solana_dex_profile_position", func(t *testing.T) {
+	t.Run("NewFromString_solana_assets_transfers", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.profile.position")
+		val, err := NewSubscriptionTopicEnumFromString("solana.assets.transfers")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, SubscriptionTopicEnum("solana.dex.profile.position"), val, "enum value should match expected wire value")
+		assert.Equal(t, SubscriptionTopicEnum("solana.assets.transfers"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_solana_assets_balance_changes", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionTopicEnumFromString("solana.assets.balance-changes")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionTopicEnum("solana.assets.balance-changes"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -15825,7 +18394,7 @@ func TestEnumSubscriptionTopicEnum(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewSubscriptionTopicEnumFromString("solana.dex.price")
+		val, err := NewSubscriptionTopicEnumFromString("solana.dex.prices")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -15833,10 +18402,10 @@ func TestEnumSubscriptionTopicEnum(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesSolanaDexPrice(t *testing.T) {
+func TestExtraPropertiesSolanaAssetsBalanceChangeMessage(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexPrice{}
+		obj := &SolanaAssetsBalanceChangeMessage{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15850,16 +18419,16 @@ func TestExtraPropertiesSolanaDexPrice(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexPrice
+		var obj *SolanaAssetsBalanceChangeMessage
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesSolanaDexSwap(t *testing.T) {
+func TestExtraPropertiesSolanaAssetsTransferMessage(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexSwap{}
+		obj := &SolanaAssetsTransferMessage{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15873,16 +18442,16 @@ func TestExtraPropertiesSolanaDexSwap(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexSwap
+		var obj *SolanaAssetsTransferMessage
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
 }
 
-func TestExtraPropertiesSolanaDexTokenProfile(t *testing.T) {
+func TestExtraPropertiesSolanaDexPoolMessage(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexTokenProfile{}
+		obj := &SolanaDexPoolMessage{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15896,7 +18465,76 @@ func TestExtraPropertiesSolanaDexTokenProfile(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTokenProfile
+		var obj *SolanaDexPoolMessage
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexPoolMessageVault(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPoolMessageVault{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPoolMessageVault
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexPriceMessage(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPriceMessage{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPriceMessage
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexSwapMessage(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexSwapMessage{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexSwapMessage
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -15920,6 +18558,29 @@ func TestExtraPropertiesSolanaDexTokenProfileMarket(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SolanaDexTokenProfileMarket
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexTokenProfileMessage(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexTokenProfileMessage{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexTokenProfileMessage
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -15971,10 +18632,10 @@ func TestExtraPropertiesSolanaDexTokenProfileMetrics(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesSolanaDexTrade(t *testing.T) {
+func TestExtraPropertiesSolanaDexTradeMessage(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
-		obj := &SolanaDexTrade{}
+		obj := &SolanaDexTradeMessage{}
 		// Should not panic when calling GetExtraProperties()
 		defer func() {
 			if r := recover(); r != nil {
@@ -15988,30 +18649,7 @@ func TestExtraPropertiesSolanaDexTrade(t *testing.T) {
 
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
-		var obj *SolanaDexTrade
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
-func TestExtraPropertiesSolanaDexWalletProfile(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &SolanaDexWalletProfile{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SolanaDexWalletProfile
+		var obj *SolanaDexTradeMessage
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -16035,6 +18673,29 @@ func TestExtraPropertiesSolanaDexWalletProfileIdentity(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SolanaDexWalletProfileIdentity
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexWalletProfileMessage(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexWalletProfileMessage{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexWalletProfileMessage
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

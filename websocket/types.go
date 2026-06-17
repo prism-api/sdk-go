@@ -10,11 +10,15 @@ import (
 )
 
 var (
-	subscribeSolanaDexPositionProfilesParamsFieldPositions = big.NewInt(1 << 0)
+	subscribeSolanaAssetsBalanceChangesParamsFieldOwnerAddresses = big.NewInt(1 << 0)
+	subscribeSolanaAssetsBalanceChangesParamsFieldTokenAddresses = big.NewInt(1 << 1)
 )
 
-type SubscribeSolanaDexPositionProfilesParams struct {
-	Positions []string `json:"positions,omitempty" url:"positions,omitempty"`
+type SubscribeSolanaAssetsBalanceChangesParams struct {
+	// The owner addresses to filter by. Leave empty to subscribe to all owners.
+	OwnerAddresses []string `json:"owner_addresses,omitempty" url:"owner_addresses,omitempty"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -23,11 +27,297 @@ type SubscribeSolanaDexPositionProfilesParams struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SubscribeSolanaDexPositionProfilesParams) GetPositions() []string {
+func (s *SubscribeSolanaAssetsBalanceChangesParams) GetOwnerAddresses() []string {
 	if s == nil {
 		return nil
 	}
-	return s.Positions
+	return s.OwnerAddresses
+}
+
+func (s *SubscribeSolanaAssetsBalanceChangesParams) GetTokenAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddresses
+}
+
+func (s *SubscribeSolanaAssetsBalanceChangesParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeSolanaAssetsBalanceChangesParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetOwnerAddresses sets the OwnerAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaAssetsBalanceChangesParams) SetOwnerAddresses(ownerAddresses []string) {
+	s.OwnerAddresses = ownerAddresses
+	s.require(subscribeSolanaAssetsBalanceChangesParamsFieldOwnerAddresses)
+}
+
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaAssetsBalanceChangesParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeSolanaAssetsBalanceChangesParamsFieldTokenAddresses)
+}
+
+func (s *SubscribeSolanaAssetsBalanceChangesParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeSolanaAssetsBalanceChangesParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeSolanaAssetsBalanceChangesParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeSolanaAssetsBalanceChangesParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeSolanaAssetsBalanceChangesParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeSolanaAssetsBalanceChangesParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeSolanaAssetsTransfersParamsFieldFromAddresses = big.NewInt(1 << 0)
+	subscribeSolanaAssetsTransfersParamsFieldToAddresses   = big.NewInt(1 << 1)
+)
+
+type SubscribeSolanaAssetsTransfersParams struct {
+	// The from addresses to filter by. Leave empty to subscribe to all from addresses.
+	FromAddresses []string `json:"from_addresses,omitempty" url:"from_addresses,omitempty"`
+	// The to addresses to filter by. Leave empty to subscribe to all to addresses.
+	ToAddresses []string `json:"to_addresses,omitempty" url:"to_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeSolanaAssetsTransfersParams) GetFromAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.FromAddresses
+}
+
+func (s *SubscribeSolanaAssetsTransfersParams) GetToAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.ToAddresses
+}
+
+func (s *SubscribeSolanaAssetsTransfersParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeSolanaAssetsTransfersParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetFromAddresses sets the FromAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaAssetsTransfersParams) SetFromAddresses(fromAddresses []string) {
+	s.FromAddresses = fromAddresses
+	s.require(subscribeSolanaAssetsTransfersParamsFieldFromAddresses)
+}
+
+// SetToAddresses sets the ToAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaAssetsTransfersParams) SetToAddresses(toAddresses []string) {
+	s.ToAddresses = toAddresses
+	s.require(subscribeSolanaAssetsTransfersParamsFieldToAddresses)
+}
+
+func (s *SubscribeSolanaAssetsTransfersParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeSolanaAssetsTransfersParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeSolanaAssetsTransfersParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeSolanaAssetsTransfersParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeSolanaAssetsTransfersParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeSolanaAssetsTransfersParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeSolanaDexPoolsParamsFieldPoolAddresses = big.NewInt(1 << 0)
+)
+
+type SubscribeSolanaDexPoolsParams struct {
+	// The pool addresses to filter by. Leave empty to subscribe to all pools.
+	PoolAddresses []string `json:"pool_addresses,omitempty" url:"pool_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeSolanaDexPoolsParams) GetPoolAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddresses
+}
+
+func (s *SubscribeSolanaDexPoolsParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeSolanaDexPoolsParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetPoolAddresses sets the PoolAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaDexPoolsParams) SetPoolAddresses(poolAddresses []string) {
+	s.PoolAddresses = poolAddresses
+	s.require(subscribeSolanaDexPoolsParamsFieldPoolAddresses)
+}
+
+func (s *SubscribeSolanaDexPoolsParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeSolanaDexPoolsParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeSolanaDexPoolsParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeSolanaDexPoolsParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeSolanaDexPoolsParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeSolanaDexPoolsParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeSolanaDexPositionProfilesParamsFieldPositionAddresses = big.NewInt(1 << 0)
+)
+
+type SubscribeSolanaDexPositionProfilesParams struct {
+	// The position addresses to filter by. Leave empty to subscribe to all positions.
+	PositionAddresses []string `json:"position_addresses,omitempty" url:"position_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeSolanaDexPositionProfilesParams) GetPositionAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.PositionAddresses
 }
 
 func (s *SubscribeSolanaDexPositionProfilesParams) GetExtraProperties() map[string]interface{} {
@@ -44,11 +334,11 @@ func (s *SubscribeSolanaDexPositionProfilesParams) require(field *big.Int) {
 	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetPositions sets the Positions field and marks it as non-optional;
+// SetPositionAddresses sets the PositionAddresses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubscribeSolanaDexPositionProfilesParams) SetPositions(positions []string) {
-	s.Positions = positions
-	s.require(subscribeSolanaDexPositionProfilesParamsFieldPositions)
+func (s *SubscribeSolanaDexPositionProfilesParams) SetPositionAddresses(positionAddresses []string) {
+	s.PositionAddresses = positionAddresses
+	s.require(subscribeSolanaDexPositionProfilesParamsFieldPositionAddresses)
 }
 
 func (s *SubscribeSolanaDexPositionProfilesParams) UnmarshalJSON(data []byte) error {
@@ -94,11 +384,12 @@ func (s *SubscribeSolanaDexPositionProfilesParams) String() string {
 }
 
 var (
-	subscribeSolanaDexPricesParamsFieldTokens = big.NewInt(1 << 0)
+	subscribeSolanaDexPricesParamsFieldTokenAddresses = big.NewInt(1 << 0)
 )
 
 type SubscribeSolanaDexPricesParams struct {
-	Tokens []string `json:"tokens,omitempty" url:"tokens,omitempty"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -107,11 +398,11 @@ type SubscribeSolanaDexPricesParams struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SubscribeSolanaDexPricesParams) GetTokens() []string {
+func (s *SubscribeSolanaDexPricesParams) GetTokenAddresses() []string {
 	if s == nil {
 		return nil
 	}
-	return s.Tokens
+	return s.TokenAddresses
 }
 
 func (s *SubscribeSolanaDexPricesParams) GetExtraProperties() map[string]interface{} {
@@ -128,11 +419,11 @@ func (s *SubscribeSolanaDexPricesParams) require(field *big.Int) {
 	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetTokens sets the Tokens field and marks it as non-optional;
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubscribeSolanaDexPricesParams) SetTokens(tokens []string) {
-	s.Tokens = tokens
-	s.require(subscribeSolanaDexPricesParamsFieldTokens)
+func (s *SubscribeSolanaDexPricesParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeSolanaDexPricesParamsFieldTokenAddresses)
 }
 
 func (s *SubscribeSolanaDexPricesParams) UnmarshalJSON(data []byte) error {
@@ -178,11 +469,15 @@ func (s *SubscribeSolanaDexPricesParams) String() string {
 }
 
 var (
-	subscribeSolanaDexSwapsParamsFieldWallets = big.NewInt(1 << 0)
+	subscribeSolanaDexSwapsParamsFieldWalletAddresses = big.NewInt(1 << 0)
+	subscribeSolanaDexSwapsParamsFieldTokenAddresses  = big.NewInt(1 << 1)
 )
 
 type SubscribeSolanaDexSwapsParams struct {
-	Wallets []string `json:"wallets,omitempty" url:"wallets,omitempty"`
+	// The wallet addresses to filter by. Leave empty to subscribe to all wallets.
+	WalletAddresses []string `json:"wallet_addresses,omitempty" url:"wallet_addresses,omitempty"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -191,11 +486,18 @@ type SubscribeSolanaDexSwapsParams struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SubscribeSolanaDexSwapsParams) GetWallets() []string {
+func (s *SubscribeSolanaDexSwapsParams) GetWalletAddresses() []string {
 	if s == nil {
 		return nil
 	}
-	return s.Wallets
+	return s.WalletAddresses
+}
+
+func (s *SubscribeSolanaDexSwapsParams) GetTokenAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddresses
 }
 
 func (s *SubscribeSolanaDexSwapsParams) GetExtraProperties() map[string]interface{} {
@@ -212,11 +514,18 @@ func (s *SubscribeSolanaDexSwapsParams) require(field *big.Int) {
 	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetWallets sets the Wallets field and marks it as non-optional;
+// SetWalletAddresses sets the WalletAddresses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubscribeSolanaDexSwapsParams) SetWallets(wallets []string) {
-	s.Wallets = wallets
-	s.require(subscribeSolanaDexSwapsParamsFieldWallets)
+func (s *SubscribeSolanaDexSwapsParams) SetWalletAddresses(walletAddresses []string) {
+	s.WalletAddresses = walletAddresses
+	s.require(subscribeSolanaDexSwapsParamsFieldWalletAddresses)
+}
+
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaDexSwapsParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeSolanaDexSwapsParamsFieldTokenAddresses)
 }
 
 func (s *SubscribeSolanaDexSwapsParams) UnmarshalJSON(data []byte) error {
@@ -262,11 +571,12 @@ func (s *SubscribeSolanaDexSwapsParams) String() string {
 }
 
 var (
-	subscribeSolanaDexTokenProfilesParamsFieldTokens = big.NewInt(1 << 0)
+	subscribeSolanaDexTokenProfilesParamsFieldTokenAddresses = big.NewInt(1 << 0)
 )
 
 type SubscribeSolanaDexTokenProfilesParams struct {
-	Tokens []string `json:"tokens,omitempty" url:"tokens,omitempty"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -275,11 +585,11 @@ type SubscribeSolanaDexTokenProfilesParams struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SubscribeSolanaDexTokenProfilesParams) GetTokens() []string {
+func (s *SubscribeSolanaDexTokenProfilesParams) GetTokenAddresses() []string {
 	if s == nil {
 		return nil
 	}
-	return s.Tokens
+	return s.TokenAddresses
 }
 
 func (s *SubscribeSolanaDexTokenProfilesParams) GetExtraProperties() map[string]interface{} {
@@ -296,11 +606,11 @@ func (s *SubscribeSolanaDexTokenProfilesParams) require(field *big.Int) {
 	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetTokens sets the Tokens field and marks it as non-optional;
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubscribeSolanaDexTokenProfilesParams) SetTokens(tokens []string) {
-	s.Tokens = tokens
-	s.require(subscribeSolanaDexTokenProfilesParamsFieldTokens)
+func (s *SubscribeSolanaDexTokenProfilesParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeSolanaDexTokenProfilesParamsFieldTokenAddresses)
 }
 
 func (s *SubscribeSolanaDexTokenProfilesParams) UnmarshalJSON(data []byte) error {
@@ -346,11 +656,15 @@ func (s *SubscribeSolanaDexTokenProfilesParams) String() string {
 }
 
 var (
-	subscribeSolanaDexTradesParamsFieldTokens = big.NewInt(1 << 0)
+	subscribeSolanaDexTradesParamsFieldTokenAddresses  = big.NewInt(1 << 0)
+	subscribeSolanaDexTradesParamsFieldWalletAddresses = big.NewInt(1 << 1)
 )
 
 type SubscribeSolanaDexTradesParams struct {
-	Tokens []string `json:"tokens,omitempty" url:"tokens,omitempty"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
+	// The wallet addresses to filter by. Leave empty to subscribe to all wallets.
+	WalletAddresses []string `json:"wallet_addresses,omitempty" url:"wallet_addresses,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -359,11 +673,18 @@ type SubscribeSolanaDexTradesParams struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SubscribeSolanaDexTradesParams) GetTokens() []string {
+func (s *SubscribeSolanaDexTradesParams) GetTokenAddresses() []string {
 	if s == nil {
 		return nil
 	}
-	return s.Tokens
+	return s.TokenAddresses
+}
+
+func (s *SubscribeSolanaDexTradesParams) GetWalletAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.WalletAddresses
 }
 
 func (s *SubscribeSolanaDexTradesParams) GetExtraProperties() map[string]interface{} {
@@ -380,11 +701,18 @@ func (s *SubscribeSolanaDexTradesParams) require(field *big.Int) {
 	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetTokens sets the Tokens field and marks it as non-optional;
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubscribeSolanaDexTradesParams) SetTokens(tokens []string) {
-	s.Tokens = tokens
-	s.require(subscribeSolanaDexTradesParamsFieldTokens)
+func (s *SubscribeSolanaDexTradesParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeSolanaDexTradesParamsFieldTokenAddresses)
+}
+
+// SetWalletAddresses sets the WalletAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaDexTradesParams) SetWalletAddresses(walletAddresses []string) {
+	s.WalletAddresses = walletAddresses
+	s.require(subscribeSolanaDexTradesParamsFieldWalletAddresses)
 }
 
 func (s *SubscribeSolanaDexTradesParams) UnmarshalJSON(data []byte) error {
@@ -430,11 +758,12 @@ func (s *SubscribeSolanaDexTradesParams) String() string {
 }
 
 var (
-	subscribeSolanaDexWalletProfilesParamsFieldWallets = big.NewInt(1 << 0)
+	subscribeSolanaDexWalletProfilesParamsFieldWalletAddresses = big.NewInt(1 << 0)
 )
 
 type SubscribeSolanaDexWalletProfilesParams struct {
-	Wallets []string `json:"wallets,omitempty" url:"wallets,omitempty"`
+	// The wallet addresses to filter by. Leave empty to subscribe to all wallets.
+	WalletAddresses []string `json:"wallet_addresses,omitempty" url:"wallet_addresses,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -443,11 +772,11 @@ type SubscribeSolanaDexWalletProfilesParams struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SubscribeSolanaDexWalletProfilesParams) GetWallets() []string {
+func (s *SubscribeSolanaDexWalletProfilesParams) GetWalletAddresses() []string {
 	if s == nil {
 		return nil
 	}
-	return s.Wallets
+	return s.WalletAddresses
 }
 
 func (s *SubscribeSolanaDexWalletProfilesParams) GetExtraProperties() map[string]interface{} {
@@ -464,11 +793,11 @@ func (s *SubscribeSolanaDexWalletProfilesParams) require(field *big.Int) {
 	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetWallets sets the Wallets field and marks it as non-optional;
+// SetWalletAddresses sets the WalletAddresses field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubscribeSolanaDexWalletProfilesParams) SetWallets(wallets []string) {
-	s.Wallets = wallets
-	s.require(subscribeSolanaDexWalletProfilesParamsFieldWallets)
+func (s *SubscribeSolanaDexWalletProfilesParams) SetWalletAddresses(walletAddresses []string) {
+	s.WalletAddresses = walletAddresses
+	s.require(subscribeSolanaDexWalletProfilesParamsFieldWalletAddresses)
 }
 
 func (s *SubscribeSolanaDexWalletProfilesParams) UnmarshalJSON(data []byte) error {
@@ -511,508 +840,4 @@ func (s *SubscribeSolanaDexWalletProfilesParams) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", s)
-}
-
-var (
-	unsubscribeSolanaDexPositionProfilesParamsFieldPositions = big.NewInt(1 << 0)
-)
-
-type UnsubscribeSolanaDexPositionProfilesParams struct {
-	Positions []string `json:"positions,omitempty" url:"positions,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (u *UnsubscribeSolanaDexPositionProfilesParams) GetPositions() []string {
-	if u == nil {
-		return nil
-	}
-	return u.Positions
-}
-
-func (u *UnsubscribeSolanaDexPositionProfilesParams) GetExtraProperties() map[string]interface{} {
-	if u == nil {
-		return nil
-	}
-	return u.extraProperties
-}
-
-func (u *UnsubscribeSolanaDexPositionProfilesParams) require(field *big.Int) {
-	if u.explicitFields == nil {
-		u.explicitFields = big.NewInt(0)
-	}
-	u.explicitFields.Or(u.explicitFields, field)
-}
-
-// SetPositions sets the Positions field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribeSolanaDexPositionProfilesParams) SetPositions(positions []string) {
-	u.Positions = positions
-	u.require(unsubscribeSolanaDexPositionProfilesParamsFieldPositions)
-}
-
-func (u *UnsubscribeSolanaDexPositionProfilesParams) UnmarshalJSON(data []byte) error {
-	type unmarshaler UnsubscribeSolanaDexPositionProfilesParams
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*u = UnsubscribeSolanaDexPositionProfilesParams(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *u)
-	if err != nil {
-		return err
-	}
-	u.extraProperties = extraProperties
-	u.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (u *UnsubscribeSolanaDexPositionProfilesParams) MarshalJSON() ([]byte, error) {
-	type embed UnsubscribeSolanaDexPositionProfilesParams
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*u),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (u *UnsubscribeSolanaDexPositionProfilesParams) String() string {
-	if u == nil {
-		return "<nil>"
-	}
-	if len(u.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(u); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", u)
-}
-
-var (
-	unsubscribeSolanaDexPricesParamsFieldTokens = big.NewInt(1 << 0)
-)
-
-type UnsubscribeSolanaDexPricesParams struct {
-	Tokens []string `json:"tokens,omitempty" url:"tokens,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (u *UnsubscribeSolanaDexPricesParams) GetTokens() []string {
-	if u == nil {
-		return nil
-	}
-	return u.Tokens
-}
-
-func (u *UnsubscribeSolanaDexPricesParams) GetExtraProperties() map[string]interface{} {
-	if u == nil {
-		return nil
-	}
-	return u.extraProperties
-}
-
-func (u *UnsubscribeSolanaDexPricesParams) require(field *big.Int) {
-	if u.explicitFields == nil {
-		u.explicitFields = big.NewInt(0)
-	}
-	u.explicitFields.Or(u.explicitFields, field)
-}
-
-// SetTokens sets the Tokens field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribeSolanaDexPricesParams) SetTokens(tokens []string) {
-	u.Tokens = tokens
-	u.require(unsubscribeSolanaDexPricesParamsFieldTokens)
-}
-
-func (u *UnsubscribeSolanaDexPricesParams) UnmarshalJSON(data []byte) error {
-	type unmarshaler UnsubscribeSolanaDexPricesParams
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*u = UnsubscribeSolanaDexPricesParams(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *u)
-	if err != nil {
-		return err
-	}
-	u.extraProperties = extraProperties
-	u.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (u *UnsubscribeSolanaDexPricesParams) MarshalJSON() ([]byte, error) {
-	type embed UnsubscribeSolanaDexPricesParams
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*u),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (u *UnsubscribeSolanaDexPricesParams) String() string {
-	if u == nil {
-		return "<nil>"
-	}
-	if len(u.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(u); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", u)
-}
-
-var (
-	unsubscribeSolanaDexSwapsParamsFieldWallets = big.NewInt(1 << 0)
-)
-
-type UnsubscribeSolanaDexSwapsParams struct {
-	Wallets []string `json:"wallets,omitempty" url:"wallets,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (u *UnsubscribeSolanaDexSwapsParams) GetWallets() []string {
-	if u == nil {
-		return nil
-	}
-	return u.Wallets
-}
-
-func (u *UnsubscribeSolanaDexSwapsParams) GetExtraProperties() map[string]interface{} {
-	if u == nil {
-		return nil
-	}
-	return u.extraProperties
-}
-
-func (u *UnsubscribeSolanaDexSwapsParams) require(field *big.Int) {
-	if u.explicitFields == nil {
-		u.explicitFields = big.NewInt(0)
-	}
-	u.explicitFields.Or(u.explicitFields, field)
-}
-
-// SetWallets sets the Wallets field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribeSolanaDexSwapsParams) SetWallets(wallets []string) {
-	u.Wallets = wallets
-	u.require(unsubscribeSolanaDexSwapsParamsFieldWallets)
-}
-
-func (u *UnsubscribeSolanaDexSwapsParams) UnmarshalJSON(data []byte) error {
-	type unmarshaler UnsubscribeSolanaDexSwapsParams
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*u = UnsubscribeSolanaDexSwapsParams(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *u)
-	if err != nil {
-		return err
-	}
-	u.extraProperties = extraProperties
-	u.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (u *UnsubscribeSolanaDexSwapsParams) MarshalJSON() ([]byte, error) {
-	type embed UnsubscribeSolanaDexSwapsParams
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*u),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (u *UnsubscribeSolanaDexSwapsParams) String() string {
-	if u == nil {
-		return "<nil>"
-	}
-	if len(u.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(u); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", u)
-}
-
-var (
-	unsubscribeSolanaDexTokenProfilesParamsFieldTokens = big.NewInt(1 << 0)
-)
-
-type UnsubscribeSolanaDexTokenProfilesParams struct {
-	Tokens []string `json:"tokens,omitempty" url:"tokens,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (u *UnsubscribeSolanaDexTokenProfilesParams) GetTokens() []string {
-	if u == nil {
-		return nil
-	}
-	return u.Tokens
-}
-
-func (u *UnsubscribeSolanaDexTokenProfilesParams) GetExtraProperties() map[string]interface{} {
-	if u == nil {
-		return nil
-	}
-	return u.extraProperties
-}
-
-func (u *UnsubscribeSolanaDexTokenProfilesParams) require(field *big.Int) {
-	if u.explicitFields == nil {
-		u.explicitFields = big.NewInt(0)
-	}
-	u.explicitFields.Or(u.explicitFields, field)
-}
-
-// SetTokens sets the Tokens field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribeSolanaDexTokenProfilesParams) SetTokens(tokens []string) {
-	u.Tokens = tokens
-	u.require(unsubscribeSolanaDexTokenProfilesParamsFieldTokens)
-}
-
-func (u *UnsubscribeSolanaDexTokenProfilesParams) UnmarshalJSON(data []byte) error {
-	type unmarshaler UnsubscribeSolanaDexTokenProfilesParams
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*u = UnsubscribeSolanaDexTokenProfilesParams(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *u)
-	if err != nil {
-		return err
-	}
-	u.extraProperties = extraProperties
-	u.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (u *UnsubscribeSolanaDexTokenProfilesParams) MarshalJSON() ([]byte, error) {
-	type embed UnsubscribeSolanaDexTokenProfilesParams
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*u),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (u *UnsubscribeSolanaDexTokenProfilesParams) String() string {
-	if u == nil {
-		return "<nil>"
-	}
-	if len(u.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(u); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", u)
-}
-
-var (
-	unsubscribeSolanaDexTradesParamsFieldTokens = big.NewInt(1 << 0)
-)
-
-type UnsubscribeSolanaDexTradesParams struct {
-	Tokens []string `json:"tokens,omitempty" url:"tokens,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (u *UnsubscribeSolanaDexTradesParams) GetTokens() []string {
-	if u == nil {
-		return nil
-	}
-	return u.Tokens
-}
-
-func (u *UnsubscribeSolanaDexTradesParams) GetExtraProperties() map[string]interface{} {
-	if u == nil {
-		return nil
-	}
-	return u.extraProperties
-}
-
-func (u *UnsubscribeSolanaDexTradesParams) require(field *big.Int) {
-	if u.explicitFields == nil {
-		u.explicitFields = big.NewInt(0)
-	}
-	u.explicitFields.Or(u.explicitFields, field)
-}
-
-// SetTokens sets the Tokens field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribeSolanaDexTradesParams) SetTokens(tokens []string) {
-	u.Tokens = tokens
-	u.require(unsubscribeSolanaDexTradesParamsFieldTokens)
-}
-
-func (u *UnsubscribeSolanaDexTradesParams) UnmarshalJSON(data []byte) error {
-	type unmarshaler UnsubscribeSolanaDexTradesParams
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*u = UnsubscribeSolanaDexTradesParams(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *u)
-	if err != nil {
-		return err
-	}
-	u.extraProperties = extraProperties
-	u.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (u *UnsubscribeSolanaDexTradesParams) MarshalJSON() ([]byte, error) {
-	type embed UnsubscribeSolanaDexTradesParams
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*u),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (u *UnsubscribeSolanaDexTradesParams) String() string {
-	if u == nil {
-		return "<nil>"
-	}
-	if len(u.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(u); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", u)
-}
-
-var (
-	unsubscribeSolanaDexWalletProfilesParamsFieldWallets = big.NewInt(1 << 0)
-)
-
-type UnsubscribeSolanaDexWalletProfilesParams struct {
-	Wallets []string `json:"wallets,omitempty" url:"wallets,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (u *UnsubscribeSolanaDexWalletProfilesParams) GetWallets() []string {
-	if u == nil {
-		return nil
-	}
-	return u.Wallets
-}
-
-func (u *UnsubscribeSolanaDexWalletProfilesParams) GetExtraProperties() map[string]interface{} {
-	if u == nil {
-		return nil
-	}
-	return u.extraProperties
-}
-
-func (u *UnsubscribeSolanaDexWalletProfilesParams) require(field *big.Int) {
-	if u.explicitFields == nil {
-		u.explicitFields = big.NewInt(0)
-	}
-	u.explicitFields.Or(u.explicitFields, field)
-}
-
-// SetWallets sets the Wallets field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribeSolanaDexWalletProfilesParams) SetWallets(wallets []string) {
-	u.Wallets = wallets
-	u.require(unsubscribeSolanaDexWalletProfilesParamsFieldWallets)
-}
-
-func (u *UnsubscribeSolanaDexWalletProfilesParams) UnmarshalJSON(data []byte) error {
-	type unmarshaler UnsubscribeSolanaDexWalletProfilesParams
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*u = UnsubscribeSolanaDexWalletProfilesParams(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *u)
-	if err != nil {
-		return err
-	}
-	u.extraProperties = extraProperties
-	u.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (u *UnsubscribeSolanaDexWalletProfilesParams) MarshalJSON() ([]byte, error) {
-	type embed UnsubscribeSolanaDexWalletProfilesParams
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*u),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (u *UnsubscribeSolanaDexWalletProfilesParams) String() string {
-	if u == nil {
-		return "<nil>"
-	}
-	if len(u.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(u); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", u)
 }

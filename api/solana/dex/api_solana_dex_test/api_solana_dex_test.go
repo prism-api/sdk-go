@@ -91,7 +91,6 @@ func TestAPISolanaDexGetWalletProfileWithWireMock(
 		option.WithAPIKey("test-value"),
 	)
 	request := &solana.GetWalletProfileDexRequest{
-		Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
 		Options: &api.SolanaDexWalletProfilePayloadOptions{
 			IncludeMetadata: prism.Bool(
 				true,
@@ -132,10 +131,10 @@ func TestAPISolanaDexSearchWalletProfilesWithWireMock(
 			10,
 		),
 		Query: &api.SolanaDexWalletProfileSearchPayloadQuery{
-			Text: "cupsey",
 			Fields: []api.SolanaDexWalletProfileSearchPayloadQueryTargetsEnum{
 				api.SolanaDexWalletProfileSearchPayloadQueryTargetsEnumIdentityName,
 			},
+			Text: "cupsey",
 		},
 		Sort: &api.SolanaDexProfileSearchPayloadSort{
 			Field:     "metrics.7d.cumulative_pnl",
@@ -180,7 +179,6 @@ func TestAPISolanaDexGetTokenProfileWithWireMock(
 		option.WithAPIKey("test-value"),
 	)
 	request := &solana.GetTokenProfileDexRequest{
-		Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
 		Options: &api.SolanaDexTokenProfilePayloadOptions{
 			IncludeMetadata: prism.Bool(
 				true,
@@ -224,10 +222,10 @@ func TestAPISolanaDexSearchTokenProfilesWithWireMock(
 			10,
 		),
 		Query: &api.SolanaDexTokenProfileSearchPayloadQueryField{
-			Text: "bonk",
 			Fields: []api.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnum{
 				api.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnumMetadataName,
 			},
+			Text: "bonk",
 		},
 		Sort: &api.SolanaDexProfileSearchPayloadSort{
 			Field:     "market.liquidity",
@@ -278,9 +276,6 @@ func TestAPISolanaDexGetTradesWithWireMock(
 		Limit: prism.Int(
 			20,
 		),
-		Wallet: prism.String(
-			"suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-		),
 	}
 	_, invocationErr := client.API.Solana.Dex.GetTrades(
 		context.TODO(),
@@ -308,9 +303,6 @@ func TestAPISolanaDexGetSwapsWithWireMock(
 	request := &solana.GetSwapsDexRequest{
 		Limit: prism.Int(
 			20,
-		),
-		Wallet: prism.String(
-			"suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
 		),
 	}
 	_, invocationErr := client.API.Solana.Dex.GetSwaps(
@@ -393,7 +385,6 @@ func TestAPISolanaDexGetPriceCandlesWithWireMock(
 		option.WithAPIKey("test-value"),
 	)
 	request := &solana.GetPriceCandlesDexRequest{
-		Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
 		From: prism.Time(
 			prism.MustParseDateTime(
 				"2026-04-27T00:00:00Z",

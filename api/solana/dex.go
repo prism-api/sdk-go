@@ -59,16 +59,16 @@ func (g *GetPriceDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getPriceCandlesDexRequestFieldToken    = big.NewInt(1 << 0)
-	getPriceCandlesDexRequestFieldFrom     = big.NewInt(1 << 1)
-	getPriceCandlesDexRequestFieldTo       = big.NewInt(1 << 2)
-	getPriceCandlesDexRequestFieldCount    = big.NewInt(1 << 3)
-	getPriceCandlesDexRequestFieldInterval = big.NewInt(1 << 4)
+	getPriceCandlesDexRequestFieldTokenAddress = big.NewInt(1 << 0)
+	getPriceCandlesDexRequestFieldFrom         = big.NewInt(1 << 1)
+	getPriceCandlesDexRequestFieldTo           = big.NewInt(1 << 2)
+	getPriceCandlesDexRequestFieldCount        = big.NewInt(1 << 3)
+	getPriceCandlesDexRequestFieldInterval     = big.NewInt(1 << 4)
 )
 
 type GetPriceCandlesDexRequest struct {
 	// Token address to retrieve price candles for.
-	Token string `json:"token" url:"-"`
+	TokenAddress *string `json:"token_address,omitempty" url:"-"`
 	// Start of the candle range, as a date-time RFC3339 string.
 	// Must be combined with `to` to define a bounded range.
 	From *time.Time `json:"from,omitempty" url:"-"`
@@ -92,11 +92,11 @@ func (g *GetPriceCandlesDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetToken sets the Token field and marks it as non-optional;
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetPriceCandlesDexRequest) SetToken(token string) {
-	g.Token = token
-	g.require(getPriceCandlesDexRequestFieldToken)
+func (g *GetPriceCandlesDexRequest) SetTokenAddress(tokenAddress *string) {
+	g.TokenAddress = tokenAddress
+	g.require(getPriceCandlesDexRequestFieldTokenAddress)
 }
 
 // SetFrom sets the From field and marks it as non-optional;
@@ -281,8 +281,8 @@ func (g *GetPriceStatsDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getSwapsDexRequestFieldWallet = big.NewInt(1 << 0)
-	getSwapsDexRequestFieldToken  = big.NewInt(1 << 1)
+	getSwapsDexRequestFieldWalletAddress = big.NewInt(1 << 0)
+	getSwapsDexRequestFieldTokenAddress  = big.NewInt(1 << 1)
 )
 
 type GetSwapsDexRequest struct {
@@ -291,9 +291,9 @@ type GetSwapsDexRequest struct {
 	// Opaque cursor returned by a previous response. Pass it to fetch the next page of results.
 	Cursor *string `json:"cursor,omitempty" url:"-"`
 	// Wallet address to filter swaps by. When combined with `token`, returns only swaps for that wallet on that token.
-	Wallet *string `json:"wallet,omitempty" url:"-"`
+	WalletAddress *string `json:"wallet_address,omitempty" url:"-"`
 	// Token address to filter swaps by. When combined with `wallet`, returns only swaps for that wallet on that token.
-	Token *string `json:"token,omitempty" url:"-"`
+	TokenAddress *string `json:"token_address,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -306,18 +306,18 @@ func (g *GetSwapsDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetWallet sets the Wallet field and marks it as non-optional;
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSwapsDexRequest) SetWallet(wallet *string) {
-	g.Wallet = wallet
-	g.require(getSwapsDexRequestFieldWallet)
+func (g *GetSwapsDexRequest) SetWalletAddress(walletAddress *string) {
+	g.WalletAddress = walletAddress
+	g.require(getSwapsDexRequestFieldWalletAddress)
 }
 
-// SetToken sets the Token field and marks it as non-optional;
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSwapsDexRequest) SetToken(token *string) {
-	g.Token = token
-	g.require(getSwapsDexRequestFieldToken)
+func (g *GetSwapsDexRequest) SetTokenAddress(tokenAddress *string) {
+	g.TokenAddress = tokenAddress
+	g.require(getSwapsDexRequestFieldTokenAddress)
 }
 
 func (g *GetSwapsDexRequest) UnmarshalJSON(data []byte) error {
@@ -342,14 +342,14 @@ func (g *GetSwapsDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getTokenProfileDexRequestFieldToken   = big.NewInt(1 << 0)
-	getTokenProfileDexRequestFieldOptions = big.NewInt(1 << 1)
+	getTokenProfileDexRequestFieldTokenAddress = big.NewInt(1 << 0)
+	getTokenProfileDexRequestFieldOptions      = big.NewInt(1 << 1)
 )
 
 type GetTokenProfileDexRequest struct {
 	// Token address to retrieve the profile for.
-	Token   string                                   `json:"token" url:"-"`
-	Options *api.SolanaDexTokenProfilePayloadOptions `json:"options,omitempty" url:"-"`
+	TokenAddress *string                                  `json:"token_address,omitempty" url:"-"`
+	Options      *api.SolanaDexTokenProfilePayloadOptions `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -362,11 +362,11 @@ func (g *GetTokenProfileDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetToken sets the Token field and marks it as non-optional;
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTokenProfileDexRequest) SetToken(token string) {
-	g.Token = token
-	g.require(getTokenProfileDexRequestFieldToken)
+func (g *GetTokenProfileDexRequest) SetTokenAddress(tokenAddress *string) {
+	g.TokenAddress = tokenAddress
+	g.require(getTokenProfileDexRequestFieldTokenAddress)
 }
 
 // SetOptions sets the Options field and marks it as non-optional;
@@ -398,8 +398,8 @@ func (g *GetTokenProfileDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getTradesDexRequestFieldWallet = big.NewInt(1 << 0)
-	getTradesDexRequestFieldToken  = big.NewInt(1 << 1)
+	getTradesDexRequestFieldWalletAddress = big.NewInt(1 << 0)
+	getTradesDexRequestFieldTokenAddress  = big.NewInt(1 << 1)
 )
 
 type GetTradesDexRequest struct {
@@ -408,9 +408,9 @@ type GetTradesDexRequest struct {
 	// Opaque cursor returned by a previous response. Pass it to fetch the next page of results.
 	Cursor *string `json:"cursor,omitempty" url:"-"`
 	// Wallet address to filter trades by. When combined with `token`, returns only trades for that wallet on that token.
-	Wallet *string `json:"wallet,omitempty" url:"-"`
+	WalletAddress *string `json:"wallet_address,omitempty" url:"-"`
 	// Token address to filter trades by. When combined with `wallet`, returns only trades for that wallet on that token.
-	Token *string `json:"token,omitempty" url:"-"`
+	TokenAddress *string `json:"token_address,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -423,18 +423,18 @@ func (g *GetTradesDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetWallet sets the Wallet field and marks it as non-optional;
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTradesDexRequest) SetWallet(wallet *string) {
-	g.Wallet = wallet
-	g.require(getTradesDexRequestFieldWallet)
+func (g *GetTradesDexRequest) SetWalletAddress(walletAddress *string) {
+	g.WalletAddress = walletAddress
+	g.require(getTradesDexRequestFieldWalletAddress)
 }
 
-// SetToken sets the Token field and marks it as non-optional;
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTradesDexRequest) SetToken(token *string) {
-	g.Token = token
-	g.require(getTradesDexRequestFieldToken)
+func (g *GetTradesDexRequest) SetTokenAddress(tokenAddress *string) {
+	g.TokenAddress = tokenAddress
+	g.require(getTradesDexRequestFieldTokenAddress)
 }
 
 func (g *GetTradesDexRequest) UnmarshalJSON(data []byte) error {
@@ -459,14 +459,14 @@ func (g *GetTradesDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getWalletProfileDexRequestFieldWallet  = big.NewInt(1 << 0)
-	getWalletProfileDexRequestFieldOptions = big.NewInt(1 << 1)
+	getWalletProfileDexRequestFieldWalletAddress = big.NewInt(1 << 0)
+	getWalletProfileDexRequestFieldOptions       = big.NewInt(1 << 1)
 )
 
 type GetWalletProfileDexRequest struct {
 	// Wallet address to retrieve the profile for.
-	Wallet  string                                    `json:"wallet" url:"-"`
-	Options *api.SolanaDexWalletProfilePayloadOptions `json:"options,omitempty" url:"-"`
+	WalletAddress *string                                   `json:"wallet_address,omitempty" url:"-"`
+	Options       *api.SolanaDexWalletProfilePayloadOptions `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -479,11 +479,11 @@ func (g *GetWalletProfileDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetWallet sets the Wallet field and marks it as non-optional;
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetWalletProfileDexRequest) SetWallet(wallet string) {
-	g.Wallet = wallet
-	g.require(getWalletProfileDexRequestFieldWallet)
+func (g *GetWalletProfileDexRequest) SetWalletAddress(walletAddress *string) {
+	g.WalletAddress = walletAddress
+	g.require(getWalletProfileDexRequestFieldWalletAddress)
 }
 
 // SetOptions sets the Options field and marks it as non-optional;

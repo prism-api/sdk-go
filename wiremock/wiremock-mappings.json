@@ -7,7 +7,7 @@
         "urlPathTemplate": "/v1/solana/dex/profiles/wallets/get-profile",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -38,7 +38,7 @@
         "urlPathTemplate": "/v1/solana/dex/profiles/wallets/search-profiles",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -69,7 +69,7 @@
         "urlPathTemplate": "/v1/solana/dex/profiles/tokens/get-profile",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -100,7 +100,7 @@
         "urlPathTemplate": "/v1/solana/dex/profiles/tokens/search-profiles",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -131,7 +131,7 @@
         "urlPathTemplate": "/v1/solana/dex/trades/get-trades",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -162,7 +162,7 @@
         "urlPathTemplate": "/v1/solana/dex/swaps/get-swaps",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -193,7 +193,7 @@
         "urlPathTemplate": "/v1/solana/dex/prices/get-price",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -224,7 +224,7 @@
         "urlPathTemplate": "/v1/solana/dex/prices/get-price-stats",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -255,7 +255,7 @@
         "urlPathTemplate": "/v1/solana/dex/prices/get-price-candles",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }
@@ -286,7 +286,7 @@
         "urlPathTemplate": "/v1/solana/dex/prices/get-price-history",
         "method": "POST",
         "headers": {
-          "X-Api-Key": {
+          "x-api-key": {
             "matches": ".+"
           }
         }

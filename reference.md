@@ -28,7 +28,6 @@ Returns a wallet profile for a specific wallet.
 
 ```go
 request := &solana.GetWalletProfileDexRequest{
-        Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
         Options: &api.SolanaDexWalletProfilePayloadOptions{
             IncludeMetadata: prism.Bool(
                 true,
@@ -60,7 +59,7 @@ client.API.Solana.Dex.GetWalletProfile(
 <dl>
 <dd>
 
-**wallet:** `string` — Wallet address to retrieve the profile for.
+**walletAddress:** `*string` — Wallet address to retrieve the profile for.
     
 </dd>
 </dl>
@@ -112,10 +111,10 @@ request := &solana.SearchWalletProfilesDexRequest{
             10,
         ),
         Query: &api.SolanaDexWalletProfileSearchPayloadQuery{
-            Text: "cupsey",
             Fields: []api.SolanaDexWalletProfileSearchPayloadQueryTargetsEnum{
                 api.SolanaDexWalletProfileSearchPayloadQueryTargetsEnumIdentityName,
             },
+            Text: "cupsey",
         },
         Sort: &api.SolanaDexProfileSearchPayloadSort{
             Field: "metrics.7d.cumulative_pnl",
@@ -227,7 +226,6 @@ Returns the profile for a specific token.
 
 ```go
 request := &solana.GetTokenProfileDexRequest{
-        Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
         Options: &api.SolanaDexTokenProfilePayloadOptions{
             IncludeMetadata: prism.Bool(
                 true,
@@ -262,7 +260,7 @@ client.API.Solana.Dex.GetTokenProfile(
 <dl>
 <dd>
 
-**token:** `string` — Token address to retrieve the profile for.
+**tokenAddress:** `*string` — Token address to retrieve the profile for.
     
 </dd>
 </dl>
@@ -314,10 +312,10 @@ request := &solana.SearchTokenProfilesDexRequest{
             10,
         ),
         Query: &api.SolanaDexTokenProfileSearchPayloadQueryField{
-            Text: "bonk",
             Fields: []api.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnum{
                 api.SolanaDexTokenProfileSearchPayloadQueryFieldTargetsEnumMetadataName,
             },
+            Text: "bonk",
         },
         Sort: &api.SolanaDexProfileSearchPayloadSort{
             Field: "market.liquidity",
@@ -435,9 +433,6 @@ request := &solana.GetTradesDexRequest{
         Limit: prism.Int(
             20,
         ),
-        Wallet: prism.String(
-            "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-        ),
     }
 client.API.Solana.Dex.GetTrades(
         context.TODO(),
@@ -458,7 +453,7 @@ client.API.Solana.Dex.GetTrades(
 <dl>
 <dd>
 
-**wallet:** `*string` — Wallet address to filter trades by. When combined with `token`, returns only trades for that wallet on that token.
+**walletAddress:** `*string` — Wallet address to filter trades by. When combined with `token`, returns only trades for that wallet on that token.
     
 </dd>
 </dl>
@@ -466,7 +461,7 @@ client.API.Solana.Dex.GetTrades(
 <dl>
 <dd>
 
-**token:** `*string` — Token address to filter trades by. When combined with `wallet`, returns only trades for that wallet on that token.
+**tokenAddress:** `*string` — Token address to filter trades by. When combined with `wallet`, returns only trades for that wallet on that token.
     
 </dd>
 </dl>
@@ -509,9 +504,6 @@ request := &solana.GetSwapsDexRequest{
         Limit: prism.Int(
             20,
         ),
-        Wallet: prism.String(
-            "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-        ),
     }
 client.API.Solana.Dex.GetSwaps(
         context.TODO(),
@@ -532,7 +524,7 @@ client.API.Solana.Dex.GetSwaps(
 <dl>
 <dd>
 
-**wallet:** `*string` — Wallet address to filter swaps by. When combined with `token`, returns only swaps for that wallet on that token.
+**walletAddress:** `*string` — Wallet address to filter swaps by. When combined with `token`, returns only swaps for that wallet on that token.
     
 </dd>
 </dl>
@@ -540,7 +532,7 @@ client.API.Solana.Dex.GetSwaps(
 <dl>
 <dd>
 
-**token:** `*string` — Token address to filter swaps by. When combined with `wallet`, returns only swaps for that wallet on that token.
+**tokenAddress:** `*string` — Token address to filter swaps by. When combined with `wallet`, returns only swaps for that wallet on that token.
     
 </dd>
 </dl>
@@ -706,7 +698,6 @@ Returns price candles for a specific token.
 
 ```go
 request := &solana.GetPriceCandlesDexRequest{
-        Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
         From: prism.Time(
             prism.MustParseDateTime(
                 "2026-04-27T00:00:00Z",
@@ -738,7 +729,7 @@ client.API.Solana.Dex.GetPriceCandles(
 <dl>
 <dd>
 
-**token:** `string` — Token address to retrieve price candles for.
+**tokenAddress:** `*string` — Token address to retrieve price candles for.
     
 </dd>
 </dl>

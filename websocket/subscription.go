@@ -11,17 +11,29 @@ import (
 )
 
 var (
-	solanaDexPriceFieldTokenAddress = big.NewInt(1 << 0)
-	solanaDexPriceFieldUsdPrice     = big.NewInt(1 << 1)
-	solanaDexPriceFieldBlockSlot    = big.NewInt(1 << 2)
-	solanaDexPriceFieldBlockTime    = big.NewInt(1 << 3)
+	solanaAssetsBalanceChangeMessageFieldID           = big.NewInt(1 << 0)
+	solanaAssetsBalanceChangeMessageFieldBalanceType  = big.NewInt(1 << 1)
+	solanaAssetsBalanceChangeMessageFieldStackHeight  = big.NewInt(1 << 2)
+	solanaAssetsBalanceChangeMessageFieldTokenAddress = big.NewInt(1 << 3)
+	solanaAssetsBalanceChangeMessageFieldOwnerAddress = big.NewInt(1 << 4)
+	solanaAssetsBalanceChangeMessageFieldPreBalance   = big.NewInt(1 << 5)
+	solanaAssetsBalanceChangeMessageFieldPostBalance  = big.NewInt(1 << 6)
+	solanaAssetsBalanceChangeMessageFieldBlockSlot    = big.NewInt(1 << 7)
+	solanaAssetsBalanceChangeMessageFieldBlockTime    = big.NewInt(1 << 8)
+	solanaAssetsBalanceChangeMessageFieldTxHash       = big.NewInt(1 << 9)
 )
 
-type SolanaDexPrice struct {
-	TokenAddress *string    `json:"token_address,omitempty" url:"token_address,omitempty"`
-	UsdPrice     *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
-	BlockSlot    *int       `json:"block_slot,omitempty" url:"block_slot,omitempty"`
-	BlockTime    *time.Time `json:"block_time,omitempty" url:"block_time,omitempty"`
+type SolanaAssetsBalanceChangeMessage struct {
+	ID           *int                               `json:"id,omitempty" url:"id,omitempty"`
+	BalanceType  *SolanaAssetsBalanceChangeTypeEnum `json:"balance_type,omitempty" url:"balance_type,omitempty"`
+	StackHeight  *int                               `json:"stack_height,omitempty" url:"stack_height,omitempty"`
+	TokenAddress *string                            `json:"token_address,omitempty" url:"token_address,omitempty"`
+	OwnerAddress *string                            `json:"owner_address,omitempty" url:"owner_address,omitempty"`
+	PreBalance   *float64                           `json:"pre_balance,omitempty" url:"pre_balance,omitempty"`
+	PostBalance  *float64                           `json:"post_balance,omitempty" url:"post_balance,omitempty"`
+	BlockSlot    *int                               `json:"block_slot,omitempty" url:"block_slot,omitempty"`
+	BlockTime    *time.Time                         `json:"block_time,omitempty" url:"block_time,omitempty"`
+	TxHash       *string                            `json:"tx_hash,omitempty" url:"tx_hash,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -30,78 +42,162 @@ type SolanaDexPrice struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SolanaDexPrice) GetTokenAddress() *string {
+func (s *SolanaAssetsBalanceChangeMessage) GetID() *int {
+	if s == nil {
+		return nil
+	}
+	return s.ID
+}
+
+func (s *SolanaAssetsBalanceChangeMessage) GetBalanceType() *SolanaAssetsBalanceChangeTypeEnum {
+	if s == nil {
+		return nil
+	}
+	return s.BalanceType
+}
+
+func (s *SolanaAssetsBalanceChangeMessage) GetStackHeight() *int {
+	if s == nil {
+		return nil
+	}
+	return s.StackHeight
+}
+
+func (s *SolanaAssetsBalanceChangeMessage) GetTokenAddress() *string {
 	if s == nil {
 		return nil
 	}
 	return s.TokenAddress
 }
 
-func (s *SolanaDexPrice) GetUsdPrice() *float64 {
+func (s *SolanaAssetsBalanceChangeMessage) GetOwnerAddress() *string {
 	if s == nil {
 		return nil
 	}
-	return s.UsdPrice
+	return s.OwnerAddress
 }
 
-func (s *SolanaDexPrice) GetBlockSlot() *int {
+func (s *SolanaAssetsBalanceChangeMessage) GetPreBalance() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.PreBalance
+}
+
+func (s *SolanaAssetsBalanceChangeMessage) GetPostBalance() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.PostBalance
+}
+
+func (s *SolanaAssetsBalanceChangeMessage) GetBlockSlot() *int {
 	if s == nil {
 		return nil
 	}
 	return s.BlockSlot
 }
 
-func (s *SolanaDexPrice) GetBlockTime() *time.Time {
+func (s *SolanaAssetsBalanceChangeMessage) GetBlockTime() *time.Time {
 	if s == nil {
 		return nil
 	}
 	return s.BlockTime
 }
 
-func (s *SolanaDexPrice) GetExtraProperties() map[string]interface{} {
+func (s *SolanaAssetsBalanceChangeMessage) GetTxHash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TxHash
+}
+
+func (s *SolanaAssetsBalanceChangeMessage) GetExtraProperties() map[string]interface{} {
 	if s == nil {
 		return nil
 	}
 	return s.extraProperties
 }
 
-func (s *SolanaDexPrice) require(field *big.Int) {
+func (s *SolanaAssetsBalanceChangeMessage) require(field *big.Int) {
 	if s.explicitFields == nil {
 		s.explicitFields = big.NewInt(0)
 	}
 	s.explicitFields.Or(s.explicitFields, field)
 }
 
-// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexPrice) SetTokenAddress(tokenAddress *string) {
-	s.TokenAddress = tokenAddress
-	s.require(solanaDexPriceFieldTokenAddress)
+func (s *SolanaAssetsBalanceChangeMessage) SetID(id *int) {
+	s.ID = id
+	s.require(solanaAssetsBalanceChangeMessageFieldID)
 }
 
-// SetUsdPrice sets the UsdPrice field and marks it as non-optional;
+// SetBalanceType sets the BalanceType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexPrice) SetUsdPrice(usdPrice *float64) {
-	s.UsdPrice = usdPrice
-	s.require(solanaDexPriceFieldUsdPrice)
+func (s *SolanaAssetsBalanceChangeMessage) SetBalanceType(balanceType *SolanaAssetsBalanceChangeTypeEnum) {
+	s.BalanceType = balanceType
+	s.require(solanaAssetsBalanceChangeMessageFieldBalanceType)
+}
+
+// SetStackHeight sets the StackHeight field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsBalanceChangeMessage) SetStackHeight(stackHeight *int) {
+	s.StackHeight = stackHeight
+	s.require(solanaAssetsBalanceChangeMessageFieldStackHeight)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsBalanceChangeMessage) SetTokenAddress(tokenAddress *string) {
+	s.TokenAddress = tokenAddress
+	s.require(solanaAssetsBalanceChangeMessageFieldTokenAddress)
+}
+
+// SetOwnerAddress sets the OwnerAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsBalanceChangeMessage) SetOwnerAddress(ownerAddress *string) {
+	s.OwnerAddress = ownerAddress
+	s.require(solanaAssetsBalanceChangeMessageFieldOwnerAddress)
+}
+
+// SetPreBalance sets the PreBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsBalanceChangeMessage) SetPreBalance(preBalance *float64) {
+	s.PreBalance = preBalance
+	s.require(solanaAssetsBalanceChangeMessageFieldPreBalance)
+}
+
+// SetPostBalance sets the PostBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsBalanceChangeMessage) SetPostBalance(postBalance *float64) {
+	s.PostBalance = postBalance
+	s.require(solanaAssetsBalanceChangeMessageFieldPostBalance)
 }
 
 // SetBlockSlot sets the BlockSlot field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexPrice) SetBlockSlot(blockSlot *int) {
+func (s *SolanaAssetsBalanceChangeMessage) SetBlockSlot(blockSlot *int) {
 	s.BlockSlot = blockSlot
-	s.require(solanaDexPriceFieldBlockSlot)
+	s.require(solanaAssetsBalanceChangeMessageFieldBlockSlot)
 }
 
 // SetBlockTime sets the BlockTime field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexPrice) SetBlockTime(blockTime *time.Time) {
+func (s *SolanaAssetsBalanceChangeMessage) SetBlockTime(blockTime *time.Time) {
 	s.BlockTime = blockTime
-	s.require(solanaDexPriceFieldBlockTime)
+	s.require(solanaAssetsBalanceChangeMessageFieldBlockTime)
 }
 
-func (s *SolanaDexPrice) UnmarshalJSON(data []byte) error {
-	type embed SolanaDexPrice
+// SetTxHash sets the TxHash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsBalanceChangeMessage) SetTxHash(txHash *string) {
+	s.TxHash = txHash
+	s.require(solanaAssetsBalanceChangeMessageFieldTxHash)
+}
+
+func (s *SolanaAssetsBalanceChangeMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaAssetsBalanceChangeMessage
 	var unmarshaler = struct {
 		embed
 		BlockTime *internal.DateTime `json:"block_time,omitempty"`
@@ -111,7 +207,7 @@ func (s *SolanaDexPrice) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*s = SolanaDexPrice(unmarshaler.embed)
+	*s = SolanaAssetsBalanceChangeMessage(unmarshaler.embed)
 	s.BlockTime = unmarshaler.BlockTime.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
@@ -122,8 +218,8 @@ func (s *SolanaDexPrice) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SolanaDexPrice) MarshalJSON() ([]byte, error) {
-	type embed SolanaDexPrice
+func (s *SolanaAssetsBalanceChangeMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaAssetsBalanceChangeMessage
 	var marshaler = struct {
 		embed
 		BlockTime *internal.DateTime `json:"block_time,omitempty"`
@@ -135,7 +231,652 @@ func (s *SolanaDexPrice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (s *SolanaDexPrice) String() string {
+func (s *SolanaAssetsBalanceChangeMessage) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SolanaAssetsBalanceChangeTypeEnum string
+
+const (
+	SolanaAssetsBalanceChangeTypeEnumSplTokenBalance SolanaAssetsBalanceChangeTypeEnum = "spl_token_balance"
+	SolanaAssetsBalanceChangeTypeEnumNativeBalance   SolanaAssetsBalanceChangeTypeEnum = "native_balance"
+)
+
+func NewSolanaAssetsBalanceChangeTypeEnumFromString(s string) (SolanaAssetsBalanceChangeTypeEnum, error) {
+	switch s {
+	case "spl_token_balance":
+		return SolanaAssetsBalanceChangeTypeEnumSplTokenBalance, nil
+	case "native_balance":
+		return SolanaAssetsBalanceChangeTypeEnumNativeBalance, nil
+	}
+	var t SolanaAssetsBalanceChangeTypeEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SolanaAssetsBalanceChangeTypeEnum) Ptr() *SolanaAssetsBalanceChangeTypeEnum {
+	return &s
+}
+
+var (
+	solanaAssetsTransferMessageFieldID           = big.NewInt(1 << 0)
+	solanaAssetsTransferMessageFieldTransferType = big.NewInt(1 << 1)
+	solanaAssetsTransferMessageFieldStackHeight  = big.NewInt(1 << 2)
+	solanaAssetsTransferMessageFieldTokenAddress = big.NewInt(1 << 3)
+	solanaAssetsTransferMessageFieldFromAddress  = big.NewInt(1 << 4)
+	solanaAssetsTransferMessageFieldToAddress    = big.NewInt(1 << 5)
+	solanaAssetsTransferMessageFieldAmount       = big.NewInt(1 << 6)
+	solanaAssetsTransferMessageFieldUsdAmount    = big.NewInt(1 << 7)
+	solanaAssetsTransferMessageFieldBlockSlot    = big.NewInt(1 << 8)
+	solanaAssetsTransferMessageFieldBlockTime    = big.NewInt(1 << 9)
+	solanaAssetsTransferMessageFieldTxHash       = big.NewInt(1 << 10)
+)
+
+type SolanaAssetsTransferMessage struct {
+	ID           *int                          `json:"id,omitempty" url:"id,omitempty"`
+	TransferType *SolanaAssetsTransferTypeEnum `json:"transfer_type,omitempty" url:"transfer_type,omitempty"`
+	StackHeight  *int                          `json:"stack_height,omitempty" url:"stack_height,omitempty"`
+	TokenAddress *string                       `json:"token_address,omitempty" url:"token_address,omitempty"`
+	FromAddress  *string                       `json:"from_address,omitempty" url:"from_address,omitempty"`
+	ToAddress    *string                       `json:"to_address,omitempty" url:"to_address,omitempty"`
+	Amount       *float64                      `json:"amount,omitempty" url:"amount,omitempty"`
+	UsdAmount    *float64                      `json:"usd_amount,omitempty" url:"usd_amount,omitempty"`
+	BlockSlot    *int                          `json:"block_slot,omitempty" url:"block_slot,omitempty"`
+	BlockTime    *time.Time                    `json:"block_time,omitempty" url:"block_time,omitempty"`
+	TxHash       *string                       `json:"tx_hash,omitempty" url:"tx_hash,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaAssetsTransferMessage) GetID() *int {
+	if s == nil {
+		return nil
+	}
+	return s.ID
+}
+
+func (s *SolanaAssetsTransferMessage) GetTransferType() *SolanaAssetsTransferTypeEnum {
+	if s == nil {
+		return nil
+	}
+	return s.TransferType
+}
+
+func (s *SolanaAssetsTransferMessage) GetStackHeight() *int {
+	if s == nil {
+		return nil
+	}
+	return s.StackHeight
+}
+
+func (s *SolanaAssetsTransferMessage) GetTokenAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddress
+}
+
+func (s *SolanaAssetsTransferMessage) GetFromAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.FromAddress
+}
+
+func (s *SolanaAssetsTransferMessage) GetToAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ToAddress
+}
+
+func (s *SolanaAssetsTransferMessage) GetAmount() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.Amount
+}
+
+func (s *SolanaAssetsTransferMessage) GetUsdAmount() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.UsdAmount
+}
+
+func (s *SolanaAssetsTransferMessage) GetBlockSlot() *int {
+	if s == nil {
+		return nil
+	}
+	return s.BlockSlot
+}
+
+func (s *SolanaAssetsTransferMessage) GetBlockTime() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.BlockTime
+}
+
+func (s *SolanaAssetsTransferMessage) GetTxHash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TxHash
+}
+
+func (s *SolanaAssetsTransferMessage) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaAssetsTransferMessage) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetID(id *int) {
+	s.ID = id
+	s.require(solanaAssetsTransferMessageFieldID)
+}
+
+// SetTransferType sets the TransferType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetTransferType(transferType *SolanaAssetsTransferTypeEnum) {
+	s.TransferType = transferType
+	s.require(solanaAssetsTransferMessageFieldTransferType)
+}
+
+// SetStackHeight sets the StackHeight field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetStackHeight(stackHeight *int) {
+	s.StackHeight = stackHeight
+	s.require(solanaAssetsTransferMessageFieldStackHeight)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetTokenAddress(tokenAddress *string) {
+	s.TokenAddress = tokenAddress
+	s.require(solanaAssetsTransferMessageFieldTokenAddress)
+}
+
+// SetFromAddress sets the FromAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetFromAddress(fromAddress *string) {
+	s.FromAddress = fromAddress
+	s.require(solanaAssetsTransferMessageFieldFromAddress)
+}
+
+// SetToAddress sets the ToAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetToAddress(toAddress *string) {
+	s.ToAddress = toAddress
+	s.require(solanaAssetsTransferMessageFieldToAddress)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetAmount(amount *float64) {
+	s.Amount = amount
+	s.require(solanaAssetsTransferMessageFieldAmount)
+}
+
+// SetUsdAmount sets the UsdAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetUsdAmount(usdAmount *float64) {
+	s.UsdAmount = usdAmount
+	s.require(solanaAssetsTransferMessageFieldUsdAmount)
+}
+
+// SetBlockSlot sets the BlockSlot field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetBlockSlot(blockSlot *int) {
+	s.BlockSlot = blockSlot
+	s.require(solanaAssetsTransferMessageFieldBlockSlot)
+}
+
+// SetBlockTime sets the BlockTime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetBlockTime(blockTime *time.Time) {
+	s.BlockTime = blockTime
+	s.require(solanaAssetsTransferMessageFieldBlockTime)
+}
+
+// SetTxHash sets the TxHash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaAssetsTransferMessage) SetTxHash(txHash *string) {
+	s.TxHash = txHash
+	s.require(solanaAssetsTransferMessageFieldTxHash)
+}
+
+func (s *SolanaAssetsTransferMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaAssetsTransferMessage
+	var unmarshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SolanaAssetsTransferMessage(unmarshaler.embed)
+	s.BlockTime = unmarshaler.BlockTime.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaAssetsTransferMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaAssetsTransferMessage
+	var marshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed:     embed(*s),
+		BlockTime: internal.NewOptionalDateTime(s.BlockTime),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaAssetsTransferMessage) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SolanaAssetsTransferTypeEnum string
+
+const (
+	SolanaAssetsTransferTypeEnumSplTokenTransfer SolanaAssetsTransferTypeEnum = "spl_token_transfer"
+	SolanaAssetsTransferTypeEnumNativeTransfer   SolanaAssetsTransferTypeEnum = "native_transfer"
+)
+
+func NewSolanaAssetsTransferTypeEnumFromString(s string) (SolanaAssetsTransferTypeEnum, error) {
+	switch s {
+	case "spl_token_transfer":
+		return SolanaAssetsTransferTypeEnumSplTokenTransfer, nil
+	case "native_transfer":
+		return SolanaAssetsTransferTypeEnumNativeTransfer, nil
+	}
+	var t SolanaAssetsTransferTypeEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SolanaAssetsTransferTypeEnum) Ptr() *SolanaAssetsTransferTypeEnum {
+	return &s
+}
+
+var (
+	solanaDexPoolMessageFieldProtocol       = big.NewInt(1 << 0)
+	solanaDexPoolMessageFieldEventType      = big.NewInt(1 << 1)
+	solanaDexPoolMessageFieldProgramAddress = big.NewInt(1 << 2)
+	solanaDexPoolMessageFieldPoolAddress    = big.NewInt(1 << 3)
+	solanaDexPoolMessageFieldVaults         = big.NewInt(1 << 4)
+	solanaDexPoolMessageFieldBlockSlot      = big.NewInt(1 << 5)
+	solanaDexPoolMessageFieldBlockTime      = big.NewInt(1 << 6)
+	solanaDexPoolMessageFieldTxHash         = big.NewInt(1 << 7)
+)
+
+type SolanaDexPoolMessage struct {
+	// Refer to [Data Sources](/documentation/solana/dex/overview#data-sources) for the list of supported protocols.
+	Protocol       *string                            `json:"protocol,omitempty" url:"protocol,omitempty"`
+	EventType      *SolanaDexPoolMessageEventTypeEnum `json:"event_type,omitempty" url:"event_type,omitempty"`
+	ProgramAddress *string                            `json:"program_address,omitempty" url:"program_address,omitempty"`
+	PoolAddress    *string                            `json:"pool_address,omitempty" url:"pool_address,omitempty"`
+	Vaults         []*SolanaDexPoolMessageVault       `json:"vaults,omitempty" url:"vaults,omitempty"`
+	BlockSlot      *int                               `json:"block_slot,omitempty" url:"block_slot,omitempty"`
+	BlockTime      *time.Time                         `json:"block_time,omitempty" url:"block_time,omitempty"`
+	TxHash         *string                            `json:"tx_hash,omitempty" url:"tx_hash,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexPoolMessage) GetProtocol() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Protocol
+}
+
+func (s *SolanaDexPoolMessage) GetEventType() *SolanaDexPoolMessageEventTypeEnum {
+	if s == nil {
+		return nil
+	}
+	return s.EventType
+}
+
+func (s *SolanaDexPoolMessage) GetProgramAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ProgramAddress
+}
+
+func (s *SolanaDexPoolMessage) GetPoolAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddress
+}
+
+func (s *SolanaDexPoolMessage) GetVaults() []*SolanaDexPoolMessageVault {
+	if s == nil {
+		return nil
+	}
+	return s.Vaults
+}
+
+func (s *SolanaDexPoolMessage) GetBlockSlot() *int {
+	if s == nil {
+		return nil
+	}
+	return s.BlockSlot
+}
+
+func (s *SolanaDexPoolMessage) GetBlockTime() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.BlockTime
+}
+
+func (s *SolanaDexPoolMessage) GetTxHash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TxHash
+}
+
+func (s *SolanaDexPoolMessage) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexPoolMessage) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetProtocol sets the Protocol field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetProtocol(protocol *string) {
+	s.Protocol = protocol
+	s.require(solanaDexPoolMessageFieldProtocol)
+}
+
+// SetEventType sets the EventType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetEventType(eventType *SolanaDexPoolMessageEventTypeEnum) {
+	s.EventType = eventType
+	s.require(solanaDexPoolMessageFieldEventType)
+}
+
+// SetProgramAddress sets the ProgramAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetProgramAddress(programAddress *string) {
+	s.ProgramAddress = programAddress
+	s.require(solanaDexPoolMessageFieldProgramAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetPoolAddress(poolAddress *string) {
+	s.PoolAddress = poolAddress
+	s.require(solanaDexPoolMessageFieldPoolAddress)
+}
+
+// SetVaults sets the Vaults field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetVaults(vaults []*SolanaDexPoolMessageVault) {
+	s.Vaults = vaults
+	s.require(solanaDexPoolMessageFieldVaults)
+}
+
+// SetBlockSlot sets the BlockSlot field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetBlockSlot(blockSlot *int) {
+	s.BlockSlot = blockSlot
+	s.require(solanaDexPoolMessageFieldBlockSlot)
+}
+
+// SetBlockTime sets the BlockTime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetBlockTime(blockTime *time.Time) {
+	s.BlockTime = blockTime
+	s.require(solanaDexPoolMessageFieldBlockTime)
+}
+
+// SetTxHash sets the TxHash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessage) SetTxHash(txHash *string) {
+	s.TxHash = txHash
+	s.require(solanaDexPoolMessageFieldTxHash)
+}
+
+func (s *SolanaDexPoolMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexPoolMessage
+	var unmarshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SolanaDexPoolMessage(unmarshaler.embed)
+	s.BlockTime = unmarshaler.BlockTime.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexPoolMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexPoolMessage
+	var marshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed:     embed(*s),
+		BlockTime: internal.NewOptionalDateTime(s.BlockTime),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexPoolMessage) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SolanaDexPoolMessageEventTypeEnum string
+
+const (
+	SolanaDexPoolMessageEventTypeEnumCreate          SolanaDexPoolMessageEventTypeEnum = "create"
+	SolanaDexPoolMessageEventTypeEnumSwap            SolanaDexPoolMessageEventTypeEnum = "swap"
+	SolanaDexPoolMessageEventTypeEnumAddLiquidity    SolanaDexPoolMessageEventTypeEnum = "add_liquidity"
+	SolanaDexPoolMessageEventTypeEnumRemoveLiquidity SolanaDexPoolMessageEventTypeEnum = "remove_liquidity"
+)
+
+func NewSolanaDexPoolMessageEventTypeEnumFromString(s string) (SolanaDexPoolMessageEventTypeEnum, error) {
+	switch s {
+	case "create":
+		return SolanaDexPoolMessageEventTypeEnumCreate, nil
+	case "swap":
+		return SolanaDexPoolMessageEventTypeEnumSwap, nil
+	case "add_liquidity":
+		return SolanaDexPoolMessageEventTypeEnumAddLiquidity, nil
+	case "remove_liquidity":
+		return SolanaDexPoolMessageEventTypeEnumRemoveLiquidity, nil
+	}
+	var t SolanaDexPoolMessageEventTypeEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SolanaDexPoolMessageEventTypeEnum) Ptr() *SolanaDexPoolMessageEventTypeEnum {
+	return &s
+}
+
+var (
+	solanaDexPoolMessageVaultFieldVaultAddress = big.NewInt(1 << 0)
+	solanaDexPoolMessageVaultFieldTokenAddress = big.NewInt(1 << 1)
+	solanaDexPoolMessageVaultFieldAmount       = big.NewInt(1 << 2)
+)
+
+type SolanaDexPoolMessageVault struct {
+	VaultAddress *string  `json:"vault_address,omitempty" url:"vault_address,omitempty"`
+	TokenAddress *string  `json:"token_address,omitempty" url:"token_address,omitempty"`
+	Amount       *float64 `json:"amount,omitempty" url:"amount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexPoolMessageVault) GetVaultAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.VaultAddress
+}
+
+func (s *SolanaDexPoolMessageVault) GetTokenAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddress
+}
+
+func (s *SolanaDexPoolMessageVault) GetAmount() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.Amount
+}
+
+func (s *SolanaDexPoolMessageVault) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexPoolMessageVault) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetVaultAddress sets the VaultAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessageVault) SetVaultAddress(vaultAddress *string) {
+	s.VaultAddress = vaultAddress
+	s.require(solanaDexPoolMessageVaultFieldVaultAddress)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessageVault) SetTokenAddress(tokenAddress *string) {
+	s.TokenAddress = tokenAddress
+	s.require(solanaDexPoolMessageVaultFieldTokenAddress)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPoolMessageVault) SetAmount(amount *float64) {
+	s.Amount = amount
+	s.require(solanaDexPoolMessageVaultFieldAmount)
+}
+
+func (s *SolanaDexPoolMessageVault) UnmarshalJSON(data []byte) error {
+	type unmarshaler SolanaDexPoolMessageVault
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SolanaDexPoolMessageVault(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexPoolMessageVault) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexPoolMessageVault
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexPoolMessageVault) String() string {
 	if s == nil {
 		return "<nil>"
 	}
@@ -151,28 +892,168 @@ func (s *SolanaDexPrice) String() string {
 }
 
 var (
-	solanaDexSwapFieldID                  = big.NewInt(1 << 0)
-	solanaDexSwapFieldSwapType            = big.NewInt(1 << 1)
-	solanaDexSwapFieldProtocol            = big.NewInt(1 << 2)
-	solanaDexSwapFieldWalletAddress       = big.NewInt(1 << 3)
-	solanaDexSwapFieldTokenAddressIn      = big.NewInt(1 << 4)
-	solanaDexSwapFieldTokenAddressOut     = big.NewInt(1 << 5)
-	solanaDexSwapFieldTokenAmountIn       = big.NewInt(1 << 6)
-	solanaDexSwapFieldTokenAmountOut      = big.NewInt(1 << 7)
-	solanaDexSwapFieldTokenPriceIn        = big.NewInt(1 << 8)
-	solanaDexSwapFieldTokenPriceOut       = big.NewInt(1 << 9)
-	solanaDexSwapFieldPreTokenBalanceIn   = big.NewInt(1 << 10)
-	solanaDexSwapFieldPreTokenBalanceOut  = big.NewInt(1 << 11)
-	solanaDexSwapFieldPostTokenBalanceIn  = big.NewInt(1 << 12)
-	solanaDexSwapFieldPostTokenBalanceOut = big.NewInt(1 << 13)
-	solanaDexSwapFieldUsdAmountIn         = big.NewInt(1 << 14)
-	solanaDexSwapFieldUsdAmountOut        = big.NewInt(1 << 15)
-	solanaDexSwapFieldBlockSlot           = big.NewInt(1 << 16)
-	solanaDexSwapFieldBlockTime           = big.NewInt(1 << 17)
-	solanaDexSwapFieldTxHash              = big.NewInt(1 << 18)
+	solanaDexPriceMessageFieldTokenAddress = big.NewInt(1 << 0)
+	solanaDexPriceMessageFieldUsdPrice     = big.NewInt(1 << 1)
+	solanaDexPriceMessageFieldBlockSlot    = big.NewInt(1 << 2)
+	solanaDexPriceMessageFieldBlockTime    = big.NewInt(1 << 3)
 )
 
-type SolanaDexSwap struct {
+type SolanaDexPriceMessage struct {
+	TokenAddress *string    `json:"token_address,omitempty" url:"token_address,omitempty"`
+	UsdPrice     *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
+	BlockSlot    *int       `json:"block_slot,omitempty" url:"block_slot,omitempty"`
+	BlockTime    *time.Time `json:"block_time,omitempty" url:"block_time,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexPriceMessage) GetTokenAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddress
+}
+
+func (s *SolanaDexPriceMessage) GetUsdPrice() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.UsdPrice
+}
+
+func (s *SolanaDexPriceMessage) GetBlockSlot() *int {
+	if s == nil {
+		return nil
+	}
+	return s.BlockSlot
+}
+
+func (s *SolanaDexPriceMessage) GetBlockTime() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.BlockTime
+}
+
+func (s *SolanaDexPriceMessage) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexPriceMessage) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPriceMessage) SetTokenAddress(tokenAddress *string) {
+	s.TokenAddress = tokenAddress
+	s.require(solanaDexPriceMessageFieldTokenAddress)
+}
+
+// SetUsdPrice sets the UsdPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPriceMessage) SetUsdPrice(usdPrice *float64) {
+	s.UsdPrice = usdPrice
+	s.require(solanaDexPriceMessageFieldUsdPrice)
+}
+
+// SetBlockSlot sets the BlockSlot field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPriceMessage) SetBlockSlot(blockSlot *int) {
+	s.BlockSlot = blockSlot
+	s.require(solanaDexPriceMessageFieldBlockSlot)
+}
+
+// SetBlockTime sets the BlockTime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPriceMessage) SetBlockTime(blockTime *time.Time) {
+	s.BlockTime = blockTime
+	s.require(solanaDexPriceMessageFieldBlockTime)
+}
+
+func (s *SolanaDexPriceMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexPriceMessage
+	var unmarshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SolanaDexPriceMessage(unmarshaler.embed)
+	s.BlockTime = unmarshaler.BlockTime.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexPriceMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexPriceMessage
+	var marshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed:     embed(*s),
+		BlockTime: internal.NewOptionalDateTime(s.BlockTime),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexPriceMessage) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	solanaDexSwapMessageFieldID                  = big.NewInt(1 << 0)
+	solanaDexSwapMessageFieldSwapType            = big.NewInt(1 << 1)
+	solanaDexSwapMessageFieldProtocol            = big.NewInt(1 << 2)
+	solanaDexSwapMessageFieldWalletAddress       = big.NewInt(1 << 3)
+	solanaDexSwapMessageFieldTokenAddressIn      = big.NewInt(1 << 4)
+	solanaDexSwapMessageFieldTokenAddressOut     = big.NewInt(1 << 5)
+	solanaDexSwapMessageFieldTokenAmountIn       = big.NewInt(1 << 6)
+	solanaDexSwapMessageFieldTokenAmountOut      = big.NewInt(1 << 7)
+	solanaDexSwapMessageFieldTokenPriceIn        = big.NewInt(1 << 8)
+	solanaDexSwapMessageFieldTokenPriceOut       = big.NewInt(1 << 9)
+	solanaDexSwapMessageFieldPreTokenBalanceIn   = big.NewInt(1 << 10)
+	solanaDexSwapMessageFieldPreTokenBalanceOut  = big.NewInt(1 << 11)
+	solanaDexSwapMessageFieldPostTokenBalanceIn  = big.NewInt(1 << 12)
+	solanaDexSwapMessageFieldPostTokenBalanceOut = big.NewInt(1 << 13)
+	solanaDexSwapMessageFieldUsdAmountIn         = big.NewInt(1 << 14)
+	solanaDexSwapMessageFieldUsdAmountOut        = big.NewInt(1 << 15)
+	solanaDexSwapMessageFieldBlockSlot           = big.NewInt(1 << 16)
+	solanaDexSwapMessageFieldBlockTime           = big.NewInt(1 << 17)
+	solanaDexSwapMessageFieldTxHash              = big.NewInt(1 << 18)
+)
+
+type SolanaDexSwapMessage struct {
 	ID       *int                   `json:"id,omitempty" url:"id,omitempty"`
 	SwapType *SolanaDexSwapTypeEnum `json:"swap_type,omitempty" url:"swap_type,omitempty"`
 	// Refer to [Data Sources](/documentation/solana/dex/overview#data-sources) for the list of supported protocols.
@@ -201,147 +1082,147 @@ type SolanaDexSwap struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SolanaDexSwap) GetID() *int {
+func (s *SolanaDexSwapMessage) GetID() *int {
 	if s == nil {
 		return nil
 	}
 	return s.ID
 }
 
-func (s *SolanaDexSwap) GetSwapType() *SolanaDexSwapTypeEnum {
+func (s *SolanaDexSwapMessage) GetSwapType() *SolanaDexSwapTypeEnum {
 	if s == nil {
 		return nil
 	}
 	return s.SwapType
 }
 
-func (s *SolanaDexSwap) GetProtocol() *string {
+func (s *SolanaDexSwapMessage) GetProtocol() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Protocol
 }
 
-func (s *SolanaDexSwap) GetWalletAddress() *string {
+func (s *SolanaDexSwapMessage) GetWalletAddress() *string {
 	if s == nil {
 		return nil
 	}
 	return s.WalletAddress
 }
 
-func (s *SolanaDexSwap) GetTokenAddressIn() *string {
+func (s *SolanaDexSwapMessage) GetTokenAddressIn() *string {
 	if s == nil {
 		return nil
 	}
 	return s.TokenAddressIn
 }
 
-func (s *SolanaDexSwap) GetTokenAddressOut() *string {
+func (s *SolanaDexSwapMessage) GetTokenAddressOut() *string {
 	if s == nil {
 		return nil
 	}
 	return s.TokenAddressOut
 }
 
-func (s *SolanaDexSwap) GetTokenAmountIn() *float64 {
+func (s *SolanaDexSwapMessage) GetTokenAmountIn() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TokenAmountIn
 }
 
-func (s *SolanaDexSwap) GetTokenAmountOut() *float64 {
+func (s *SolanaDexSwapMessage) GetTokenAmountOut() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TokenAmountOut
 }
 
-func (s *SolanaDexSwap) GetTokenPriceIn() *float64 {
+func (s *SolanaDexSwapMessage) GetTokenPriceIn() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TokenPriceIn
 }
 
-func (s *SolanaDexSwap) GetTokenPriceOut() *float64 {
+func (s *SolanaDexSwapMessage) GetTokenPriceOut() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TokenPriceOut
 }
 
-func (s *SolanaDexSwap) GetPreTokenBalanceIn() *float64 {
+func (s *SolanaDexSwapMessage) GetPreTokenBalanceIn() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.PreTokenBalanceIn
 }
 
-func (s *SolanaDexSwap) GetPreTokenBalanceOut() *float64 {
+func (s *SolanaDexSwapMessage) GetPreTokenBalanceOut() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.PreTokenBalanceOut
 }
 
-func (s *SolanaDexSwap) GetPostTokenBalanceIn() *float64 {
+func (s *SolanaDexSwapMessage) GetPostTokenBalanceIn() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.PostTokenBalanceIn
 }
 
-func (s *SolanaDexSwap) GetPostTokenBalanceOut() *float64 {
+func (s *SolanaDexSwapMessage) GetPostTokenBalanceOut() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.PostTokenBalanceOut
 }
 
-func (s *SolanaDexSwap) GetUsdAmountIn() *float64 {
+func (s *SolanaDexSwapMessage) GetUsdAmountIn() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.UsdAmountIn
 }
 
-func (s *SolanaDexSwap) GetUsdAmountOut() *float64 {
+func (s *SolanaDexSwapMessage) GetUsdAmountOut() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.UsdAmountOut
 }
 
-func (s *SolanaDexSwap) GetBlockSlot() *int {
+func (s *SolanaDexSwapMessage) GetBlockSlot() *int {
 	if s == nil {
 		return nil
 	}
 	return s.BlockSlot
 }
 
-func (s *SolanaDexSwap) GetBlockTime() *time.Time {
+func (s *SolanaDexSwapMessage) GetBlockTime() *time.Time {
 	if s == nil {
 		return nil
 	}
 	return s.BlockTime
 }
 
-func (s *SolanaDexSwap) GetTxHash() *string {
+func (s *SolanaDexSwapMessage) GetTxHash() *string {
 	if s == nil {
 		return nil
 	}
 	return s.TxHash
 }
 
-func (s *SolanaDexSwap) GetExtraProperties() map[string]interface{} {
+func (s *SolanaDexSwapMessage) GetExtraProperties() map[string]interface{} {
 	if s == nil {
 		return nil
 	}
 	return s.extraProperties
 }
 
-func (s *SolanaDexSwap) require(field *big.Int) {
+func (s *SolanaDexSwapMessage) require(field *big.Int) {
 	if s.explicitFields == nil {
 		s.explicitFields = big.NewInt(0)
 	}
@@ -350,139 +1231,139 @@ func (s *SolanaDexSwap) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetID(id *int) {
+func (s *SolanaDexSwapMessage) SetID(id *int) {
 	s.ID = id
-	s.require(solanaDexSwapFieldID)
+	s.require(solanaDexSwapMessageFieldID)
 }
 
 // SetSwapType sets the SwapType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetSwapType(swapType *SolanaDexSwapTypeEnum) {
+func (s *SolanaDexSwapMessage) SetSwapType(swapType *SolanaDexSwapTypeEnum) {
 	s.SwapType = swapType
-	s.require(solanaDexSwapFieldSwapType)
+	s.require(solanaDexSwapMessageFieldSwapType)
 }
 
 // SetProtocol sets the Protocol field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetProtocol(protocol *string) {
+func (s *SolanaDexSwapMessage) SetProtocol(protocol *string) {
 	s.Protocol = protocol
-	s.require(solanaDexSwapFieldProtocol)
+	s.require(solanaDexSwapMessageFieldProtocol)
 }
 
 // SetWalletAddress sets the WalletAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetWalletAddress(walletAddress *string) {
+func (s *SolanaDexSwapMessage) SetWalletAddress(walletAddress *string) {
 	s.WalletAddress = walletAddress
-	s.require(solanaDexSwapFieldWalletAddress)
+	s.require(solanaDexSwapMessageFieldWalletAddress)
 }
 
 // SetTokenAddressIn sets the TokenAddressIn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetTokenAddressIn(tokenAddressIn *string) {
+func (s *SolanaDexSwapMessage) SetTokenAddressIn(tokenAddressIn *string) {
 	s.TokenAddressIn = tokenAddressIn
-	s.require(solanaDexSwapFieldTokenAddressIn)
+	s.require(solanaDexSwapMessageFieldTokenAddressIn)
 }
 
 // SetTokenAddressOut sets the TokenAddressOut field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetTokenAddressOut(tokenAddressOut *string) {
+func (s *SolanaDexSwapMessage) SetTokenAddressOut(tokenAddressOut *string) {
 	s.TokenAddressOut = tokenAddressOut
-	s.require(solanaDexSwapFieldTokenAddressOut)
+	s.require(solanaDexSwapMessageFieldTokenAddressOut)
 }
 
 // SetTokenAmountIn sets the TokenAmountIn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetTokenAmountIn(tokenAmountIn *float64) {
+func (s *SolanaDexSwapMessage) SetTokenAmountIn(tokenAmountIn *float64) {
 	s.TokenAmountIn = tokenAmountIn
-	s.require(solanaDexSwapFieldTokenAmountIn)
+	s.require(solanaDexSwapMessageFieldTokenAmountIn)
 }
 
 // SetTokenAmountOut sets the TokenAmountOut field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetTokenAmountOut(tokenAmountOut *float64) {
+func (s *SolanaDexSwapMessage) SetTokenAmountOut(tokenAmountOut *float64) {
 	s.TokenAmountOut = tokenAmountOut
-	s.require(solanaDexSwapFieldTokenAmountOut)
+	s.require(solanaDexSwapMessageFieldTokenAmountOut)
 }
 
 // SetTokenPriceIn sets the TokenPriceIn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetTokenPriceIn(tokenPriceIn *float64) {
+func (s *SolanaDexSwapMessage) SetTokenPriceIn(tokenPriceIn *float64) {
 	s.TokenPriceIn = tokenPriceIn
-	s.require(solanaDexSwapFieldTokenPriceIn)
+	s.require(solanaDexSwapMessageFieldTokenPriceIn)
 }
 
 // SetTokenPriceOut sets the TokenPriceOut field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetTokenPriceOut(tokenPriceOut *float64) {
+func (s *SolanaDexSwapMessage) SetTokenPriceOut(tokenPriceOut *float64) {
 	s.TokenPriceOut = tokenPriceOut
-	s.require(solanaDexSwapFieldTokenPriceOut)
+	s.require(solanaDexSwapMessageFieldTokenPriceOut)
 }
 
 // SetPreTokenBalanceIn sets the PreTokenBalanceIn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetPreTokenBalanceIn(preTokenBalanceIn *float64) {
+func (s *SolanaDexSwapMessage) SetPreTokenBalanceIn(preTokenBalanceIn *float64) {
 	s.PreTokenBalanceIn = preTokenBalanceIn
-	s.require(solanaDexSwapFieldPreTokenBalanceIn)
+	s.require(solanaDexSwapMessageFieldPreTokenBalanceIn)
 }
 
 // SetPreTokenBalanceOut sets the PreTokenBalanceOut field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetPreTokenBalanceOut(preTokenBalanceOut *float64) {
+func (s *SolanaDexSwapMessage) SetPreTokenBalanceOut(preTokenBalanceOut *float64) {
 	s.PreTokenBalanceOut = preTokenBalanceOut
-	s.require(solanaDexSwapFieldPreTokenBalanceOut)
+	s.require(solanaDexSwapMessageFieldPreTokenBalanceOut)
 }
 
 // SetPostTokenBalanceIn sets the PostTokenBalanceIn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetPostTokenBalanceIn(postTokenBalanceIn *float64) {
+func (s *SolanaDexSwapMessage) SetPostTokenBalanceIn(postTokenBalanceIn *float64) {
 	s.PostTokenBalanceIn = postTokenBalanceIn
-	s.require(solanaDexSwapFieldPostTokenBalanceIn)
+	s.require(solanaDexSwapMessageFieldPostTokenBalanceIn)
 }
 
 // SetPostTokenBalanceOut sets the PostTokenBalanceOut field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetPostTokenBalanceOut(postTokenBalanceOut *float64) {
+func (s *SolanaDexSwapMessage) SetPostTokenBalanceOut(postTokenBalanceOut *float64) {
 	s.PostTokenBalanceOut = postTokenBalanceOut
-	s.require(solanaDexSwapFieldPostTokenBalanceOut)
+	s.require(solanaDexSwapMessageFieldPostTokenBalanceOut)
 }
 
 // SetUsdAmountIn sets the UsdAmountIn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetUsdAmountIn(usdAmountIn *float64) {
+func (s *SolanaDexSwapMessage) SetUsdAmountIn(usdAmountIn *float64) {
 	s.UsdAmountIn = usdAmountIn
-	s.require(solanaDexSwapFieldUsdAmountIn)
+	s.require(solanaDexSwapMessageFieldUsdAmountIn)
 }
 
 // SetUsdAmountOut sets the UsdAmountOut field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetUsdAmountOut(usdAmountOut *float64) {
+func (s *SolanaDexSwapMessage) SetUsdAmountOut(usdAmountOut *float64) {
 	s.UsdAmountOut = usdAmountOut
-	s.require(solanaDexSwapFieldUsdAmountOut)
+	s.require(solanaDexSwapMessageFieldUsdAmountOut)
 }
 
 // SetBlockSlot sets the BlockSlot field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetBlockSlot(blockSlot *int) {
+func (s *SolanaDexSwapMessage) SetBlockSlot(blockSlot *int) {
 	s.BlockSlot = blockSlot
-	s.require(solanaDexSwapFieldBlockSlot)
+	s.require(solanaDexSwapMessageFieldBlockSlot)
 }
 
 // SetBlockTime sets the BlockTime field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetBlockTime(blockTime *time.Time) {
+func (s *SolanaDexSwapMessage) SetBlockTime(blockTime *time.Time) {
 	s.BlockTime = blockTime
-	s.require(solanaDexSwapFieldBlockTime)
+	s.require(solanaDexSwapMessageFieldBlockTime)
 }
 
 // SetTxHash sets the TxHash field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexSwap) SetTxHash(txHash *string) {
+func (s *SolanaDexSwapMessage) SetTxHash(txHash *string) {
 	s.TxHash = txHash
-	s.require(solanaDexSwapFieldTxHash)
+	s.require(solanaDexSwapMessageFieldTxHash)
 }
 
-func (s *SolanaDexSwap) UnmarshalJSON(data []byte) error {
-	type embed SolanaDexSwap
+func (s *SolanaDexSwapMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexSwapMessage
 	var unmarshaler = struct {
 		embed
 		BlockTime *internal.DateTime `json:"block_time,omitempty"`
@@ -492,7 +1373,7 @@ func (s *SolanaDexSwap) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*s = SolanaDexSwap(unmarshaler.embed)
+	*s = SolanaDexSwapMessage(unmarshaler.embed)
 	s.BlockTime = unmarshaler.BlockTime.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
@@ -503,8 +1384,8 @@ func (s *SolanaDexSwap) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SolanaDexSwap) MarshalJSON() ([]byte, error) {
-	type embed SolanaDexSwap
+func (s *SolanaDexSwapMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexSwapMessage
 	var marshaler = struct {
 		embed
 		BlockTime *internal.DateTime `json:"block_time,omitempty"`
@@ -516,7 +1397,7 @@ func (s *SolanaDexSwap) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (s *SolanaDexSwap) String() string {
+func (s *SolanaDexSwapMessage) String() string {
 	if s == nil {
 		return "<nil>"
 	}
@@ -557,230 +1438,6 @@ func NewSolanaDexSwapTypeEnumFromString(s string) (SolanaDexSwapTypeEnum, error)
 
 func (s SolanaDexSwapTypeEnum) Ptr() *SolanaDexSwapTypeEnum {
 	return &s
-}
-
-var (
-	solanaDexTokenProfileFieldUpdatedAt     = big.NewInt(1 << 0)
-	solanaDexTokenProfileFieldSyncedAt      = big.NewInt(1 << 1)
-	solanaDexTokenProfileFieldTokenAddress  = big.NewInt(1 << 2)
-	solanaDexTokenProfileFieldLabels        = big.NewInt(1 << 3)
-	solanaDexTokenProfileFieldMatchedLabels = big.NewInt(1 << 4)
-	solanaDexTokenProfileFieldDynamicLabels = big.NewInt(1 << 5)
-	solanaDexTokenProfileFieldMetadata      = big.NewInt(1 << 6)
-	solanaDexTokenProfileFieldMarket        = big.NewInt(1 << 7)
-	solanaDexTokenProfileFieldMetrics       = big.NewInt(1 << 8)
-)
-
-type SolanaDexTokenProfile struct {
-	UpdatedAt     *time.Time                               `json:"updated_at,omitempty" url:"updated_at,omitempty"`
-	SyncedAt      *time.Time                               `json:"synced_at,omitempty" url:"synced_at,omitempty"`
-	TokenAddress  *string                                  `json:"token_address,omitempty" url:"token_address,omitempty"`
-	Labels        []SolanaDexTokenProfileLabelEnum         `json:"labels,omitempty" url:"labels,omitempty"`
-	MatchedLabels map[string][]string                      `json:"matched_labels,omitempty" url:"matched_labels,omitempty"`
-	DynamicLabels []string                                 `json:"dynamic_labels,omitempty" url:"dynamic_labels,omitempty"`
-	Metadata      *SolanaDexTokenProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
-	Market        *SolanaDexTokenProfileMarket             `json:"market,omitempty" url:"market,omitempty"`
-	Metrics       map[string]*SolanaDexTokenProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (s *SolanaDexTokenProfile) GetUpdatedAt() *time.Time {
-	if s == nil {
-		return nil
-	}
-	return s.UpdatedAt
-}
-
-func (s *SolanaDexTokenProfile) GetSyncedAt() *time.Time {
-	if s == nil {
-		return nil
-	}
-	return s.SyncedAt
-}
-
-func (s *SolanaDexTokenProfile) GetTokenAddress() *string {
-	if s == nil {
-		return nil
-	}
-	return s.TokenAddress
-}
-
-func (s *SolanaDexTokenProfile) GetLabels() []SolanaDexTokenProfileLabelEnum {
-	if s == nil {
-		return nil
-	}
-	return s.Labels
-}
-
-func (s *SolanaDexTokenProfile) GetMatchedLabels() map[string][]string {
-	if s == nil {
-		return nil
-	}
-	return s.MatchedLabels
-}
-
-func (s *SolanaDexTokenProfile) GetDynamicLabels() []string {
-	if s == nil {
-		return nil
-	}
-	return s.DynamicLabels
-}
-
-func (s *SolanaDexTokenProfile) GetMetadata() *SolanaDexTokenProfileMetadata {
-	if s == nil {
-		return nil
-	}
-	return s.Metadata
-}
-
-func (s *SolanaDexTokenProfile) GetMarket() *SolanaDexTokenProfileMarket {
-	if s == nil {
-		return nil
-	}
-	return s.Market
-}
-
-func (s *SolanaDexTokenProfile) GetMetrics() map[string]*SolanaDexTokenProfileMetrics {
-	if s == nil {
-		return nil
-	}
-	return s.Metrics
-}
-
-func (s *SolanaDexTokenProfile) GetExtraProperties() map[string]interface{} {
-	if s == nil {
-		return nil
-	}
-	return s.extraProperties
-}
-
-func (s *SolanaDexTokenProfile) require(field *big.Int) {
-	if s.explicitFields == nil {
-		s.explicitFields = big.NewInt(0)
-	}
-	s.explicitFields.Or(s.explicitFields, field)
-}
-
-// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetUpdatedAt(updatedAt *time.Time) {
-	s.UpdatedAt = updatedAt
-	s.require(solanaDexTokenProfileFieldUpdatedAt)
-}
-
-// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetSyncedAt(syncedAt *time.Time) {
-	s.SyncedAt = syncedAt
-	s.require(solanaDexTokenProfileFieldSyncedAt)
-}
-
-// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetTokenAddress(tokenAddress *string) {
-	s.TokenAddress = tokenAddress
-	s.require(solanaDexTokenProfileFieldTokenAddress)
-}
-
-// SetLabels sets the Labels field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetLabels(labels []SolanaDexTokenProfileLabelEnum) {
-	s.Labels = labels
-	s.require(solanaDexTokenProfileFieldLabels)
-}
-
-// SetMatchedLabels sets the MatchedLabels field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetMatchedLabels(matchedLabels map[string][]string) {
-	s.MatchedLabels = matchedLabels
-	s.require(solanaDexTokenProfileFieldMatchedLabels)
-}
-
-// SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetDynamicLabels(dynamicLabels []string) {
-	s.DynamicLabels = dynamicLabels
-	s.require(solanaDexTokenProfileFieldDynamicLabels)
-}
-
-// SetMetadata sets the Metadata field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetMetadata(metadata *SolanaDexTokenProfileMetadata) {
-	s.Metadata = metadata
-	s.require(solanaDexTokenProfileFieldMetadata)
-}
-
-// SetMarket sets the Market field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetMarket(market *SolanaDexTokenProfileMarket) {
-	s.Market = market
-	s.require(solanaDexTokenProfileFieldMarket)
-}
-
-// SetMetrics sets the Metrics field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTokenProfile) SetMetrics(metrics map[string]*SolanaDexTokenProfileMetrics) {
-	s.Metrics = metrics
-	s.require(solanaDexTokenProfileFieldMetrics)
-}
-
-func (s *SolanaDexTokenProfile) UnmarshalJSON(data []byte) error {
-	type embed SolanaDexTokenProfile
-	var unmarshaler = struct {
-		embed
-		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
-		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
-	}{
-		embed: embed(*s),
-	}
-	if err := json.Unmarshal(data, &unmarshaler); err != nil {
-		return err
-	}
-	*s = SolanaDexTokenProfile(unmarshaler.embed)
-	s.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
-	s.SyncedAt = unmarshaler.SyncedAt.TimePtr()
-	extraProperties, err := internal.ExtractExtraProperties(data, *s)
-	if err != nil {
-		return err
-	}
-	s.extraProperties = extraProperties
-	s.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (s *SolanaDexTokenProfile) MarshalJSON() ([]byte, error) {
-	type embed SolanaDexTokenProfile
-	var marshaler = struct {
-		embed
-		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
-		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
-	}{
-		embed:     embed(*s),
-		UpdatedAt: internal.NewOptionalDateTime(s.UpdatedAt),
-		SyncedAt:  internal.NewOptionalDateTime(s.SyncedAt),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (s *SolanaDexTokenProfile) String() string {
-	if s == nil {
-		return "<nil>"
-	}
-	if len(s.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(s); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", s)
 }
 
 type SolanaDexTokenProfileLabelEnum string
@@ -1009,6 +1666,230 @@ func (s *SolanaDexTokenProfileMarket) MarshalJSON() ([]byte, error) {
 }
 
 func (s *SolanaDexTokenProfileMarket) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	solanaDexTokenProfileMessageFieldUpdatedAt     = big.NewInt(1 << 0)
+	solanaDexTokenProfileMessageFieldSyncedAt      = big.NewInt(1 << 1)
+	solanaDexTokenProfileMessageFieldTokenAddress  = big.NewInt(1 << 2)
+	solanaDexTokenProfileMessageFieldLabels        = big.NewInt(1 << 3)
+	solanaDexTokenProfileMessageFieldMatchedLabels = big.NewInt(1 << 4)
+	solanaDexTokenProfileMessageFieldDynamicLabels = big.NewInt(1 << 5)
+	solanaDexTokenProfileMessageFieldMetadata      = big.NewInt(1 << 6)
+	solanaDexTokenProfileMessageFieldMarket        = big.NewInt(1 << 7)
+	solanaDexTokenProfileMessageFieldMetrics       = big.NewInt(1 << 8)
+)
+
+type SolanaDexTokenProfileMessage struct {
+	UpdatedAt     *time.Time                               `json:"updated_at,omitempty" url:"updated_at,omitempty"`
+	SyncedAt      *time.Time                               `json:"synced_at,omitempty" url:"synced_at,omitempty"`
+	TokenAddress  *string                                  `json:"token_address,omitempty" url:"token_address,omitempty"`
+	Labels        []SolanaDexTokenProfileLabelEnum         `json:"labels,omitempty" url:"labels,omitempty"`
+	MatchedLabels map[string][]string                      `json:"matched_labels,omitempty" url:"matched_labels,omitempty"`
+	DynamicLabels []string                                 `json:"dynamic_labels,omitempty" url:"dynamic_labels,omitempty"`
+	Metadata      *SolanaDexTokenProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Market        *SolanaDexTokenProfileMarket             `json:"market,omitempty" url:"market,omitempty"`
+	Metrics       map[string]*SolanaDexTokenProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexTokenProfileMessage) GetUpdatedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.UpdatedAt
+}
+
+func (s *SolanaDexTokenProfileMessage) GetSyncedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.SyncedAt
+}
+
+func (s *SolanaDexTokenProfileMessage) GetTokenAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddress
+}
+
+func (s *SolanaDexTokenProfileMessage) GetLabels() []SolanaDexTokenProfileLabelEnum {
+	if s == nil {
+		return nil
+	}
+	return s.Labels
+}
+
+func (s *SolanaDexTokenProfileMessage) GetMatchedLabels() map[string][]string {
+	if s == nil {
+		return nil
+	}
+	return s.MatchedLabels
+}
+
+func (s *SolanaDexTokenProfileMessage) GetDynamicLabels() []string {
+	if s == nil {
+		return nil
+	}
+	return s.DynamicLabels
+}
+
+func (s *SolanaDexTokenProfileMessage) GetMetadata() *SolanaDexTokenProfileMetadata {
+	if s == nil {
+		return nil
+	}
+	return s.Metadata
+}
+
+func (s *SolanaDexTokenProfileMessage) GetMarket() *SolanaDexTokenProfileMarket {
+	if s == nil {
+		return nil
+	}
+	return s.Market
+}
+
+func (s *SolanaDexTokenProfileMessage) GetMetrics() map[string]*SolanaDexTokenProfileMetrics {
+	if s == nil {
+		return nil
+	}
+	return s.Metrics
+}
+
+func (s *SolanaDexTokenProfileMessage) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexTokenProfileMessage) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetUpdatedAt(updatedAt *time.Time) {
+	s.UpdatedAt = updatedAt
+	s.require(solanaDexTokenProfileMessageFieldUpdatedAt)
+}
+
+// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetSyncedAt(syncedAt *time.Time) {
+	s.SyncedAt = syncedAt
+	s.require(solanaDexTokenProfileMessageFieldSyncedAt)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetTokenAddress(tokenAddress *string) {
+	s.TokenAddress = tokenAddress
+	s.require(solanaDexTokenProfileMessageFieldTokenAddress)
+}
+
+// SetLabels sets the Labels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetLabels(labels []SolanaDexTokenProfileLabelEnum) {
+	s.Labels = labels
+	s.require(solanaDexTokenProfileMessageFieldLabels)
+}
+
+// SetMatchedLabels sets the MatchedLabels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetMatchedLabels(matchedLabels map[string][]string) {
+	s.MatchedLabels = matchedLabels
+	s.require(solanaDexTokenProfileMessageFieldMatchedLabels)
+}
+
+// SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetDynamicLabels(dynamicLabels []string) {
+	s.DynamicLabels = dynamicLabels
+	s.require(solanaDexTokenProfileMessageFieldDynamicLabels)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetMetadata(metadata *SolanaDexTokenProfileMetadata) {
+	s.Metadata = metadata
+	s.require(solanaDexTokenProfileMessageFieldMetadata)
+}
+
+// SetMarket sets the Market field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetMarket(market *SolanaDexTokenProfileMarket) {
+	s.Market = market
+	s.require(solanaDexTokenProfileMessageFieldMarket)
+}
+
+// SetMetrics sets the Metrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexTokenProfileMessage) SetMetrics(metrics map[string]*SolanaDexTokenProfileMetrics) {
+	s.Metrics = metrics
+	s.require(solanaDexTokenProfileMessageFieldMetrics)
+}
+
+func (s *SolanaDexTokenProfileMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexTokenProfileMessage
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SolanaDexTokenProfileMessage(unmarshaler.embed)
+	s.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
+	s.SyncedAt = unmarshaler.SyncedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexTokenProfileMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexTokenProfileMessage
+	var marshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed:     embed(*s),
+		UpdatedAt: internal.NewOptionalDateTime(s.UpdatedAt),
+		SyncedAt:  internal.NewOptionalDateTime(s.SyncedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexTokenProfileMessage) String() string {
 	if s == nil {
 		return "<nil>"
 	}
@@ -2083,31 +2964,53 @@ func (s *SolanaDexTokenProfileMetrics) String() string {
 	return fmt.Sprintf("%#v", s)
 }
 
-var (
-	solanaDexTradeFieldID               = big.NewInt(1 << 0)
-	solanaDexTradeFieldProtocol         = big.NewInt(1 << 1)
-	solanaDexTradeFieldSwapType         = big.NewInt(1 << 2)
-	solanaDexTradeFieldWalletAddress    = big.NewInt(1 << 3)
-	solanaDexTradeFieldTokenAddress     = big.NewInt(1 << 4)
-	solanaDexTradeFieldQuoteAddress     = big.NewInt(1 << 5)
-	solanaDexTradeFieldPositionAddress  = big.NewInt(1 << 6)
-	solanaDexTradeFieldDirection        = big.NewInt(1 << 7)
-	solanaDexTradeFieldPositionState    = big.NewInt(1 << 8)
-	solanaDexTradeFieldTokenAmount      = big.NewInt(1 << 9)
-	solanaDexTradeFieldQuoteAmount      = big.NewInt(1 << 10)
-	solanaDexTradeFieldNativeAmount     = big.NewInt(1 << 11)
-	solanaDexTradeFieldUsdAmount        = big.NewInt(1 << 12)
-	solanaDexTradeFieldPreTokenBalance  = big.NewInt(1 << 13)
-	solanaDexTradeFieldPostTokenBalance = big.NewInt(1 << 14)
-	solanaDexTradeFieldTokenPrice       = big.NewInt(1 << 15)
-	solanaDexTradeFieldQuotePrice       = big.NewInt(1 << 16)
-	solanaDexTradeFieldTokenMcap        = big.NewInt(1 << 17)
-	solanaDexTradeFieldBlockSlot        = big.NewInt(1 << 18)
-	solanaDexTradeFieldBlockTime        = big.NewInt(1 << 19)
-	solanaDexTradeFieldTxHash           = big.NewInt(1 << 20)
+type SolanaDexTradeDirectionEnum string
+
+const (
+	SolanaDexTradeDirectionEnumBuy  SolanaDexTradeDirectionEnum = "buy"
+	SolanaDexTradeDirectionEnumSell SolanaDexTradeDirectionEnum = "sell"
 )
 
-type SolanaDexTrade struct {
+func NewSolanaDexTradeDirectionEnumFromString(s string) (SolanaDexTradeDirectionEnum, error) {
+	switch s {
+	case "buy":
+		return SolanaDexTradeDirectionEnumBuy, nil
+	case "sell":
+		return SolanaDexTradeDirectionEnumSell, nil
+	}
+	var t SolanaDexTradeDirectionEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SolanaDexTradeDirectionEnum) Ptr() *SolanaDexTradeDirectionEnum {
+	return &s
+}
+
+var (
+	solanaDexTradeMessageFieldID               = big.NewInt(1 << 0)
+	solanaDexTradeMessageFieldProtocol         = big.NewInt(1 << 1)
+	solanaDexTradeMessageFieldSwapType         = big.NewInt(1 << 2)
+	solanaDexTradeMessageFieldWalletAddress    = big.NewInt(1 << 3)
+	solanaDexTradeMessageFieldTokenAddress     = big.NewInt(1 << 4)
+	solanaDexTradeMessageFieldQuoteAddress     = big.NewInt(1 << 5)
+	solanaDexTradeMessageFieldPositionAddress  = big.NewInt(1 << 6)
+	solanaDexTradeMessageFieldDirection        = big.NewInt(1 << 7)
+	solanaDexTradeMessageFieldPositionState    = big.NewInt(1 << 8)
+	solanaDexTradeMessageFieldTokenAmount      = big.NewInt(1 << 9)
+	solanaDexTradeMessageFieldQuoteAmount      = big.NewInt(1 << 10)
+	solanaDexTradeMessageFieldNativeAmount     = big.NewInt(1 << 11)
+	solanaDexTradeMessageFieldUsdAmount        = big.NewInt(1 << 12)
+	solanaDexTradeMessageFieldPreTokenBalance  = big.NewInt(1 << 13)
+	solanaDexTradeMessageFieldPostTokenBalance = big.NewInt(1 << 14)
+	solanaDexTradeMessageFieldTokenPrice       = big.NewInt(1 << 15)
+	solanaDexTradeMessageFieldQuotePrice       = big.NewInt(1 << 16)
+	solanaDexTradeMessageFieldTokenMcap        = big.NewInt(1 << 17)
+	solanaDexTradeMessageFieldBlockSlot        = big.NewInt(1 << 18)
+	solanaDexTradeMessageFieldBlockTime        = big.NewInt(1 << 19)
+	solanaDexTradeMessageFieldTxHash           = big.NewInt(1 << 20)
+)
+
+type SolanaDexTradeMessage struct {
 	ID *int `json:"id,omitempty" url:"id,omitempty"`
 	// Refer to [Data Sources](/documentation/solana/dex/overview#data-sources) for the list of supported protocols.
 	Protocol         *string                          `json:"protocol,omitempty" url:"protocol,omitempty"`
@@ -2138,161 +3041,161 @@ type SolanaDexTrade struct {
 	rawJSON         json.RawMessage
 }
 
-func (s *SolanaDexTrade) GetID() *int {
+func (s *SolanaDexTradeMessage) GetID() *int {
 	if s == nil {
 		return nil
 	}
 	return s.ID
 }
 
-func (s *SolanaDexTrade) GetProtocol() *string {
+func (s *SolanaDexTradeMessage) GetProtocol() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Protocol
 }
 
-func (s *SolanaDexTrade) GetSwapType() *SolanaDexSwapTypeEnum {
+func (s *SolanaDexTradeMessage) GetSwapType() *SolanaDexSwapTypeEnum {
 	if s == nil {
 		return nil
 	}
 	return s.SwapType
 }
 
-func (s *SolanaDexTrade) GetWalletAddress() *string {
+func (s *SolanaDexTradeMessage) GetWalletAddress() *string {
 	if s == nil {
 		return nil
 	}
 	return s.WalletAddress
 }
 
-func (s *SolanaDexTrade) GetTokenAddress() *string {
+func (s *SolanaDexTradeMessage) GetTokenAddress() *string {
 	if s == nil {
 		return nil
 	}
 	return s.TokenAddress
 }
 
-func (s *SolanaDexTrade) GetQuoteAddress() *string {
+func (s *SolanaDexTradeMessage) GetQuoteAddress() *string {
 	if s == nil {
 		return nil
 	}
 	return s.QuoteAddress
 }
 
-func (s *SolanaDexTrade) GetPositionAddress() *string {
+func (s *SolanaDexTradeMessage) GetPositionAddress() *string {
 	if s == nil {
 		return nil
 	}
 	return s.PositionAddress
 }
 
-func (s *SolanaDexTrade) GetDirection() *SolanaDexTradeDirectionEnum {
+func (s *SolanaDexTradeMessage) GetDirection() *SolanaDexTradeDirectionEnum {
 	if s == nil {
 		return nil
 	}
 	return s.Direction
 }
 
-func (s *SolanaDexTrade) GetPositionState() *SolanaDexTradePositionStateEnum {
+func (s *SolanaDexTradeMessage) GetPositionState() *SolanaDexTradePositionStateEnum {
 	if s == nil {
 		return nil
 	}
 	return s.PositionState
 }
 
-func (s *SolanaDexTrade) GetTokenAmount() *float64 {
+func (s *SolanaDexTradeMessage) GetTokenAmount() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TokenAmount
 }
 
-func (s *SolanaDexTrade) GetQuoteAmount() *float64 {
+func (s *SolanaDexTradeMessage) GetQuoteAmount() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.QuoteAmount
 }
 
-func (s *SolanaDexTrade) GetNativeAmount() *float64 {
+func (s *SolanaDexTradeMessage) GetNativeAmount() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.NativeAmount
 }
 
-func (s *SolanaDexTrade) GetUsdAmount() *float64 {
+func (s *SolanaDexTradeMessage) GetUsdAmount() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.UsdAmount
 }
 
-func (s *SolanaDexTrade) GetPreTokenBalance() *float64 {
+func (s *SolanaDexTradeMessage) GetPreTokenBalance() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.PreTokenBalance
 }
 
-func (s *SolanaDexTrade) GetPostTokenBalance() *float64 {
+func (s *SolanaDexTradeMessage) GetPostTokenBalance() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.PostTokenBalance
 }
 
-func (s *SolanaDexTrade) GetTokenPrice() *float64 {
+func (s *SolanaDexTradeMessage) GetTokenPrice() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TokenPrice
 }
 
-func (s *SolanaDexTrade) GetQuotePrice() *float64 {
+func (s *SolanaDexTradeMessage) GetQuotePrice() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.QuotePrice
 }
 
-func (s *SolanaDexTrade) GetTokenMcap() *float64 {
+func (s *SolanaDexTradeMessage) GetTokenMcap() *float64 {
 	if s == nil {
 		return nil
 	}
 	return s.TokenMcap
 }
 
-func (s *SolanaDexTrade) GetBlockSlot() *int {
+func (s *SolanaDexTradeMessage) GetBlockSlot() *int {
 	if s == nil {
 		return nil
 	}
 	return s.BlockSlot
 }
 
-func (s *SolanaDexTrade) GetBlockTime() *time.Time {
+func (s *SolanaDexTradeMessage) GetBlockTime() *time.Time {
 	if s == nil {
 		return nil
 	}
 	return s.BlockTime
 }
 
-func (s *SolanaDexTrade) GetTxHash() *string {
+func (s *SolanaDexTradeMessage) GetTxHash() *string {
 	if s == nil {
 		return nil
 	}
 	return s.TxHash
 }
 
-func (s *SolanaDexTrade) GetExtraProperties() map[string]interface{} {
+func (s *SolanaDexTradeMessage) GetExtraProperties() map[string]interface{} {
 	if s == nil {
 		return nil
 	}
 	return s.extraProperties
 }
 
-func (s *SolanaDexTrade) require(field *big.Int) {
+func (s *SolanaDexTradeMessage) require(field *big.Int) {
 	if s.explicitFields == nil {
 		s.explicitFields = big.NewInt(0)
 	}
@@ -2301,153 +3204,153 @@ func (s *SolanaDexTrade) require(field *big.Int) {
 
 // SetID sets the ID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetID(id *int) {
+func (s *SolanaDexTradeMessage) SetID(id *int) {
 	s.ID = id
-	s.require(solanaDexTradeFieldID)
+	s.require(solanaDexTradeMessageFieldID)
 }
 
 // SetProtocol sets the Protocol field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetProtocol(protocol *string) {
+func (s *SolanaDexTradeMessage) SetProtocol(protocol *string) {
 	s.Protocol = protocol
-	s.require(solanaDexTradeFieldProtocol)
+	s.require(solanaDexTradeMessageFieldProtocol)
 }
 
 // SetSwapType sets the SwapType field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetSwapType(swapType *SolanaDexSwapTypeEnum) {
+func (s *SolanaDexTradeMessage) SetSwapType(swapType *SolanaDexSwapTypeEnum) {
 	s.SwapType = swapType
-	s.require(solanaDexTradeFieldSwapType)
+	s.require(solanaDexTradeMessageFieldSwapType)
 }
 
 // SetWalletAddress sets the WalletAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetWalletAddress(walletAddress *string) {
+func (s *SolanaDexTradeMessage) SetWalletAddress(walletAddress *string) {
 	s.WalletAddress = walletAddress
-	s.require(solanaDexTradeFieldWalletAddress)
+	s.require(solanaDexTradeMessageFieldWalletAddress)
 }
 
 // SetTokenAddress sets the TokenAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetTokenAddress(tokenAddress *string) {
+func (s *SolanaDexTradeMessage) SetTokenAddress(tokenAddress *string) {
 	s.TokenAddress = tokenAddress
-	s.require(solanaDexTradeFieldTokenAddress)
+	s.require(solanaDexTradeMessageFieldTokenAddress)
 }
 
 // SetQuoteAddress sets the QuoteAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetQuoteAddress(quoteAddress *string) {
+func (s *SolanaDexTradeMessage) SetQuoteAddress(quoteAddress *string) {
 	s.QuoteAddress = quoteAddress
-	s.require(solanaDexTradeFieldQuoteAddress)
+	s.require(solanaDexTradeMessageFieldQuoteAddress)
 }
 
 // SetPositionAddress sets the PositionAddress field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetPositionAddress(positionAddress *string) {
+func (s *SolanaDexTradeMessage) SetPositionAddress(positionAddress *string) {
 	s.PositionAddress = positionAddress
-	s.require(solanaDexTradeFieldPositionAddress)
+	s.require(solanaDexTradeMessageFieldPositionAddress)
 }
 
 // SetDirection sets the Direction field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetDirection(direction *SolanaDexTradeDirectionEnum) {
+func (s *SolanaDexTradeMessage) SetDirection(direction *SolanaDexTradeDirectionEnum) {
 	s.Direction = direction
-	s.require(solanaDexTradeFieldDirection)
+	s.require(solanaDexTradeMessageFieldDirection)
 }
 
 // SetPositionState sets the PositionState field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetPositionState(positionState *SolanaDexTradePositionStateEnum) {
+func (s *SolanaDexTradeMessage) SetPositionState(positionState *SolanaDexTradePositionStateEnum) {
 	s.PositionState = positionState
-	s.require(solanaDexTradeFieldPositionState)
+	s.require(solanaDexTradeMessageFieldPositionState)
 }
 
 // SetTokenAmount sets the TokenAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetTokenAmount(tokenAmount *float64) {
+func (s *SolanaDexTradeMessage) SetTokenAmount(tokenAmount *float64) {
 	s.TokenAmount = tokenAmount
-	s.require(solanaDexTradeFieldTokenAmount)
+	s.require(solanaDexTradeMessageFieldTokenAmount)
 }
 
 // SetQuoteAmount sets the QuoteAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetQuoteAmount(quoteAmount *float64) {
+func (s *SolanaDexTradeMessage) SetQuoteAmount(quoteAmount *float64) {
 	s.QuoteAmount = quoteAmount
-	s.require(solanaDexTradeFieldQuoteAmount)
+	s.require(solanaDexTradeMessageFieldQuoteAmount)
 }
 
 // SetNativeAmount sets the NativeAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetNativeAmount(nativeAmount *float64) {
+func (s *SolanaDexTradeMessage) SetNativeAmount(nativeAmount *float64) {
 	s.NativeAmount = nativeAmount
-	s.require(solanaDexTradeFieldNativeAmount)
+	s.require(solanaDexTradeMessageFieldNativeAmount)
 }
 
 // SetUsdAmount sets the UsdAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetUsdAmount(usdAmount *float64) {
+func (s *SolanaDexTradeMessage) SetUsdAmount(usdAmount *float64) {
 	s.UsdAmount = usdAmount
-	s.require(solanaDexTradeFieldUsdAmount)
+	s.require(solanaDexTradeMessageFieldUsdAmount)
 }
 
 // SetPreTokenBalance sets the PreTokenBalance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetPreTokenBalance(preTokenBalance *float64) {
+func (s *SolanaDexTradeMessage) SetPreTokenBalance(preTokenBalance *float64) {
 	s.PreTokenBalance = preTokenBalance
-	s.require(solanaDexTradeFieldPreTokenBalance)
+	s.require(solanaDexTradeMessageFieldPreTokenBalance)
 }
 
 // SetPostTokenBalance sets the PostTokenBalance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetPostTokenBalance(postTokenBalance *float64) {
+func (s *SolanaDexTradeMessage) SetPostTokenBalance(postTokenBalance *float64) {
 	s.PostTokenBalance = postTokenBalance
-	s.require(solanaDexTradeFieldPostTokenBalance)
+	s.require(solanaDexTradeMessageFieldPostTokenBalance)
 }
 
 // SetTokenPrice sets the TokenPrice field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetTokenPrice(tokenPrice *float64) {
+func (s *SolanaDexTradeMessage) SetTokenPrice(tokenPrice *float64) {
 	s.TokenPrice = tokenPrice
-	s.require(solanaDexTradeFieldTokenPrice)
+	s.require(solanaDexTradeMessageFieldTokenPrice)
 }
 
 // SetQuotePrice sets the QuotePrice field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetQuotePrice(quotePrice *float64) {
+func (s *SolanaDexTradeMessage) SetQuotePrice(quotePrice *float64) {
 	s.QuotePrice = quotePrice
-	s.require(solanaDexTradeFieldQuotePrice)
+	s.require(solanaDexTradeMessageFieldQuotePrice)
 }
 
 // SetTokenMcap sets the TokenMcap field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetTokenMcap(tokenMcap *float64) {
+func (s *SolanaDexTradeMessage) SetTokenMcap(tokenMcap *float64) {
 	s.TokenMcap = tokenMcap
-	s.require(solanaDexTradeFieldTokenMcap)
+	s.require(solanaDexTradeMessageFieldTokenMcap)
 }
 
 // SetBlockSlot sets the BlockSlot field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetBlockSlot(blockSlot *int) {
+func (s *SolanaDexTradeMessage) SetBlockSlot(blockSlot *int) {
 	s.BlockSlot = blockSlot
-	s.require(solanaDexTradeFieldBlockSlot)
+	s.require(solanaDexTradeMessageFieldBlockSlot)
 }
 
 // SetBlockTime sets the BlockTime field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetBlockTime(blockTime *time.Time) {
+func (s *SolanaDexTradeMessage) SetBlockTime(blockTime *time.Time) {
 	s.BlockTime = blockTime
-	s.require(solanaDexTradeFieldBlockTime)
+	s.require(solanaDexTradeMessageFieldBlockTime)
 }
 
 // SetTxHash sets the TxHash field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexTrade) SetTxHash(txHash *string) {
+func (s *SolanaDexTradeMessage) SetTxHash(txHash *string) {
 	s.TxHash = txHash
-	s.require(solanaDexTradeFieldTxHash)
+	s.require(solanaDexTradeMessageFieldTxHash)
 }
 
-func (s *SolanaDexTrade) UnmarshalJSON(data []byte) error {
-	type embed SolanaDexTrade
+func (s *SolanaDexTradeMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexTradeMessage
 	var unmarshaler = struct {
 		embed
 		BlockTime *internal.DateTime `json:"block_time,omitempty"`
@@ -2457,7 +3360,7 @@ func (s *SolanaDexTrade) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*s = SolanaDexTrade(unmarshaler.embed)
+	*s = SolanaDexTradeMessage(unmarshaler.embed)
 	s.BlockTime = unmarshaler.BlockTime.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *s)
 	if err != nil {
@@ -2468,8 +3371,8 @@ func (s *SolanaDexTrade) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SolanaDexTrade) MarshalJSON() ([]byte, error) {
-	type embed SolanaDexTrade
+func (s *SolanaDexTradeMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexTradeMessage
 	var marshaler = struct {
 		embed
 		BlockTime *internal.DateTime `json:"block_time,omitempty"`
@@ -2481,7 +3384,7 @@ func (s *SolanaDexTrade) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
-func (s *SolanaDexTrade) String() string {
+func (s *SolanaDexTradeMessage) String() string {
 	if s == nil {
 		return "<nil>"
 	}
@@ -2494,28 +3397,6 @@ func (s *SolanaDexTrade) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", s)
-}
-
-type SolanaDexTradeDirectionEnum string
-
-const (
-	SolanaDexTradeDirectionEnumBuy  SolanaDexTradeDirectionEnum = "buy"
-	SolanaDexTradeDirectionEnumSell SolanaDexTradeDirectionEnum = "sell"
-)
-
-func NewSolanaDexTradeDirectionEnumFromString(s string) (SolanaDexTradeDirectionEnum, error) {
-	switch s {
-	case "buy":
-		return SolanaDexTradeDirectionEnumBuy, nil
-	case "sell":
-		return SolanaDexTradeDirectionEnumSell, nil
-	}
-	var t SolanaDexTradeDirectionEnum
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (s SolanaDexTradeDirectionEnum) Ptr() *SolanaDexTradeDirectionEnum {
-	return &s
 }
 
 type SolanaDexTradePositionStateEnum string
@@ -2541,230 +3422,6 @@ func NewSolanaDexTradePositionStateEnumFromString(s string) (SolanaDexTradePosit
 
 func (s SolanaDexTradePositionStateEnum) Ptr() *SolanaDexTradePositionStateEnum {
 	return &s
-}
-
-var (
-	solanaDexWalletProfileFieldUpdatedAt     = big.NewInt(1 << 0)
-	solanaDexWalletProfileFieldSyncedAt      = big.NewInt(1 << 1)
-	solanaDexWalletProfileFieldWalletAddress = big.NewInt(1 << 2)
-	solanaDexWalletProfileFieldLabels        = big.NewInt(1 << 3)
-	solanaDexWalletProfileFieldMatchedLabels = big.NewInt(1 << 4)
-	solanaDexWalletProfileFieldDynamicLabels = big.NewInt(1 << 5)
-	solanaDexWalletProfileFieldMetadata      = big.NewInt(1 << 6)
-	solanaDexWalletProfileFieldIdentity      = big.NewInt(1 << 7)
-	solanaDexWalletProfileFieldMetrics       = big.NewInt(1 << 8)
-)
-
-type SolanaDexWalletProfile struct {
-	UpdatedAt     *time.Time                                `json:"updated_at,omitempty" url:"updated_at,omitempty"`
-	SyncedAt      *time.Time                                `json:"synced_at,omitempty" url:"synced_at,omitempty"`
-	WalletAddress *string                                   `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
-	Labels        []SolanaDexWalletProfileLabelEnum         `json:"labels,omitempty" url:"labels,omitempty"`
-	MatchedLabels map[string][]string                       `json:"matched_labels,omitempty" url:"matched_labels,omitempty"`
-	DynamicLabels []string                                  `json:"dynamic_labels,omitempty" url:"dynamic_labels,omitempty"`
-	Metadata      *SolanaDexWalletProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
-	Identity      *SolanaDexWalletProfileIdentity           `json:"identity,omitempty" url:"identity,omitempty"`
-	Metrics       map[string]*SolanaDexWalletProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (s *SolanaDexWalletProfile) GetUpdatedAt() *time.Time {
-	if s == nil {
-		return nil
-	}
-	return s.UpdatedAt
-}
-
-func (s *SolanaDexWalletProfile) GetSyncedAt() *time.Time {
-	if s == nil {
-		return nil
-	}
-	return s.SyncedAt
-}
-
-func (s *SolanaDexWalletProfile) GetWalletAddress() *string {
-	if s == nil {
-		return nil
-	}
-	return s.WalletAddress
-}
-
-func (s *SolanaDexWalletProfile) GetLabels() []SolanaDexWalletProfileLabelEnum {
-	if s == nil {
-		return nil
-	}
-	return s.Labels
-}
-
-func (s *SolanaDexWalletProfile) GetMatchedLabels() map[string][]string {
-	if s == nil {
-		return nil
-	}
-	return s.MatchedLabels
-}
-
-func (s *SolanaDexWalletProfile) GetDynamicLabels() []string {
-	if s == nil {
-		return nil
-	}
-	return s.DynamicLabels
-}
-
-func (s *SolanaDexWalletProfile) GetMetadata() *SolanaDexWalletProfileMetadata {
-	if s == nil {
-		return nil
-	}
-	return s.Metadata
-}
-
-func (s *SolanaDexWalletProfile) GetIdentity() *SolanaDexWalletProfileIdentity {
-	if s == nil {
-		return nil
-	}
-	return s.Identity
-}
-
-func (s *SolanaDexWalletProfile) GetMetrics() map[string]*SolanaDexWalletProfileMetrics {
-	if s == nil {
-		return nil
-	}
-	return s.Metrics
-}
-
-func (s *SolanaDexWalletProfile) GetExtraProperties() map[string]interface{} {
-	if s == nil {
-		return nil
-	}
-	return s.extraProperties
-}
-
-func (s *SolanaDexWalletProfile) require(field *big.Int) {
-	if s.explicitFields == nil {
-		s.explicitFields = big.NewInt(0)
-	}
-	s.explicitFields.Or(s.explicitFields, field)
-}
-
-// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetUpdatedAt(updatedAt *time.Time) {
-	s.UpdatedAt = updatedAt
-	s.require(solanaDexWalletProfileFieldUpdatedAt)
-}
-
-// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetSyncedAt(syncedAt *time.Time) {
-	s.SyncedAt = syncedAt
-	s.require(solanaDexWalletProfileFieldSyncedAt)
-}
-
-// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetWalletAddress(walletAddress *string) {
-	s.WalletAddress = walletAddress
-	s.require(solanaDexWalletProfileFieldWalletAddress)
-}
-
-// SetLabels sets the Labels field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetLabels(labels []SolanaDexWalletProfileLabelEnum) {
-	s.Labels = labels
-	s.require(solanaDexWalletProfileFieldLabels)
-}
-
-// SetMatchedLabels sets the MatchedLabels field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetMatchedLabels(matchedLabels map[string][]string) {
-	s.MatchedLabels = matchedLabels
-	s.require(solanaDexWalletProfileFieldMatchedLabels)
-}
-
-// SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetDynamicLabels(dynamicLabels []string) {
-	s.DynamicLabels = dynamicLabels
-	s.require(solanaDexWalletProfileFieldDynamicLabels)
-}
-
-// SetMetadata sets the Metadata field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetMetadata(metadata *SolanaDexWalletProfileMetadata) {
-	s.Metadata = metadata
-	s.require(solanaDexWalletProfileFieldMetadata)
-}
-
-// SetIdentity sets the Identity field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetIdentity(identity *SolanaDexWalletProfileIdentity) {
-	s.Identity = identity
-	s.require(solanaDexWalletProfileFieldIdentity)
-}
-
-// SetMetrics sets the Metrics field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SolanaDexWalletProfile) SetMetrics(metrics map[string]*SolanaDexWalletProfileMetrics) {
-	s.Metrics = metrics
-	s.require(solanaDexWalletProfileFieldMetrics)
-}
-
-func (s *SolanaDexWalletProfile) UnmarshalJSON(data []byte) error {
-	type embed SolanaDexWalletProfile
-	var unmarshaler = struct {
-		embed
-		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
-		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
-	}{
-		embed: embed(*s),
-	}
-	if err := json.Unmarshal(data, &unmarshaler); err != nil {
-		return err
-	}
-	*s = SolanaDexWalletProfile(unmarshaler.embed)
-	s.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
-	s.SyncedAt = unmarshaler.SyncedAt.TimePtr()
-	extraProperties, err := internal.ExtractExtraProperties(data, *s)
-	if err != nil {
-		return err
-	}
-	s.extraProperties = extraProperties
-	s.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (s *SolanaDexWalletProfile) MarshalJSON() ([]byte, error) {
-	type embed SolanaDexWalletProfile
-	var marshaler = struct {
-		embed
-		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
-		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
-	}{
-		embed:     embed(*s),
-		UpdatedAt: internal.NewOptionalDateTime(s.UpdatedAt),
-		SyncedAt:  internal.NewOptionalDateTime(s.SyncedAt),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (s *SolanaDexWalletProfile) String() string {
-	if s == nil {
-		return "<nil>"
-	}
-	if len(s.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(s); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", s)
 }
 
 var (
@@ -2924,6 +3581,230 @@ func NewSolanaDexWalletProfileLabelEnumFromString(s string) (SolanaDexWalletProf
 
 func (s SolanaDexWalletProfileLabelEnum) Ptr() *SolanaDexWalletProfileLabelEnum {
 	return &s
+}
+
+var (
+	solanaDexWalletProfileMessageFieldUpdatedAt     = big.NewInt(1 << 0)
+	solanaDexWalletProfileMessageFieldSyncedAt      = big.NewInt(1 << 1)
+	solanaDexWalletProfileMessageFieldWalletAddress = big.NewInt(1 << 2)
+	solanaDexWalletProfileMessageFieldLabels        = big.NewInt(1 << 3)
+	solanaDexWalletProfileMessageFieldMatchedLabels = big.NewInt(1 << 4)
+	solanaDexWalletProfileMessageFieldDynamicLabels = big.NewInt(1 << 5)
+	solanaDexWalletProfileMessageFieldMetadata      = big.NewInt(1 << 6)
+	solanaDexWalletProfileMessageFieldIdentity      = big.NewInt(1 << 7)
+	solanaDexWalletProfileMessageFieldMetrics       = big.NewInt(1 << 8)
+)
+
+type SolanaDexWalletProfileMessage struct {
+	UpdatedAt     *time.Time                                `json:"updated_at,omitempty" url:"updated_at,omitempty"`
+	SyncedAt      *time.Time                                `json:"synced_at,omitempty" url:"synced_at,omitempty"`
+	WalletAddress *string                                   `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	Labels        []SolanaDexWalletProfileLabelEnum         `json:"labels,omitempty" url:"labels,omitempty"`
+	MatchedLabels map[string][]string                       `json:"matched_labels,omitempty" url:"matched_labels,omitempty"`
+	DynamicLabels []string                                  `json:"dynamic_labels,omitempty" url:"dynamic_labels,omitempty"`
+	Metadata      *SolanaDexWalletProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Identity      *SolanaDexWalletProfileIdentity           `json:"identity,omitempty" url:"identity,omitempty"`
+	Metrics       map[string]*SolanaDexWalletProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexWalletProfileMessage) GetUpdatedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.UpdatedAt
+}
+
+func (s *SolanaDexWalletProfileMessage) GetSyncedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.SyncedAt
+}
+
+func (s *SolanaDexWalletProfileMessage) GetWalletAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.WalletAddress
+}
+
+func (s *SolanaDexWalletProfileMessage) GetLabels() []SolanaDexWalletProfileLabelEnum {
+	if s == nil {
+		return nil
+	}
+	return s.Labels
+}
+
+func (s *SolanaDexWalletProfileMessage) GetMatchedLabels() map[string][]string {
+	if s == nil {
+		return nil
+	}
+	return s.MatchedLabels
+}
+
+func (s *SolanaDexWalletProfileMessage) GetDynamicLabels() []string {
+	if s == nil {
+		return nil
+	}
+	return s.DynamicLabels
+}
+
+func (s *SolanaDexWalletProfileMessage) GetMetadata() *SolanaDexWalletProfileMetadata {
+	if s == nil {
+		return nil
+	}
+	return s.Metadata
+}
+
+func (s *SolanaDexWalletProfileMessage) GetIdentity() *SolanaDexWalletProfileIdentity {
+	if s == nil {
+		return nil
+	}
+	return s.Identity
+}
+
+func (s *SolanaDexWalletProfileMessage) GetMetrics() map[string]*SolanaDexWalletProfileMetrics {
+	if s == nil {
+		return nil
+	}
+	return s.Metrics
+}
+
+func (s *SolanaDexWalletProfileMessage) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexWalletProfileMessage) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetUpdatedAt(updatedAt *time.Time) {
+	s.UpdatedAt = updatedAt
+	s.require(solanaDexWalletProfileMessageFieldUpdatedAt)
+}
+
+// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetSyncedAt(syncedAt *time.Time) {
+	s.SyncedAt = syncedAt
+	s.require(solanaDexWalletProfileMessageFieldSyncedAt)
+}
+
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetWalletAddress(walletAddress *string) {
+	s.WalletAddress = walletAddress
+	s.require(solanaDexWalletProfileMessageFieldWalletAddress)
+}
+
+// SetLabels sets the Labels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetLabels(labels []SolanaDexWalletProfileLabelEnum) {
+	s.Labels = labels
+	s.require(solanaDexWalletProfileMessageFieldLabels)
+}
+
+// SetMatchedLabels sets the MatchedLabels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetMatchedLabels(matchedLabels map[string][]string) {
+	s.MatchedLabels = matchedLabels
+	s.require(solanaDexWalletProfileMessageFieldMatchedLabels)
+}
+
+// SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetDynamicLabels(dynamicLabels []string) {
+	s.DynamicLabels = dynamicLabels
+	s.require(solanaDexWalletProfileMessageFieldDynamicLabels)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetMetadata(metadata *SolanaDexWalletProfileMetadata) {
+	s.Metadata = metadata
+	s.require(solanaDexWalletProfileMessageFieldMetadata)
+}
+
+// SetIdentity sets the Identity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetIdentity(identity *SolanaDexWalletProfileIdentity) {
+	s.Identity = identity
+	s.require(solanaDexWalletProfileMessageFieldIdentity)
+}
+
+// SetMetrics sets the Metrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexWalletProfileMessage) SetMetrics(metrics map[string]*SolanaDexWalletProfileMetrics) {
+	s.Metrics = metrics
+	s.require(solanaDexWalletProfileMessageFieldMetrics)
+}
+
+func (s *SolanaDexWalletProfileMessage) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexWalletProfileMessage
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SolanaDexWalletProfileMessage(unmarshaler.embed)
+	s.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
+	s.SyncedAt = unmarshaler.SyncedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexWalletProfileMessage) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexWalletProfileMessage
+	var marshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed:     embed(*s),
+		UpdatedAt: internal.NewOptionalDateTime(s.UpdatedAt),
+		SyncedAt:  internal.NewOptionalDateTime(s.SyncedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexWalletProfileMessage) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
@@ -4099,12 +4980,15 @@ func (s *SubscribePayload) String() string {
 }
 
 type SubscribePayloadParams struct {
-	SubscribeSolanaDexPricesParams           *SubscribeSolanaDexPricesParams
-	SubscribeSolanaDexSwapsParams            *SubscribeSolanaDexSwapsParams
-	SubscribeSolanaDexTradesParams           *SubscribeSolanaDexTradesParams
-	SubscribeSolanaDexWalletProfilesParams   *SubscribeSolanaDexWalletProfilesParams
-	SubscribeSolanaDexTokenProfilesParams    *SubscribeSolanaDexTokenProfilesParams
-	SubscribeSolanaDexPositionProfilesParams *SubscribeSolanaDexPositionProfilesParams
+	SubscribeSolanaDexPricesParams            *SubscribeSolanaDexPricesParams
+	SubscribeSolanaDexSwapsParams             *SubscribeSolanaDexSwapsParams
+	SubscribeSolanaDexTradesParams            *SubscribeSolanaDexTradesParams
+	SubscribeSolanaDexPoolsParams             *SubscribeSolanaDexPoolsParams
+	SubscribeSolanaDexWalletProfilesParams    *SubscribeSolanaDexWalletProfilesParams
+	SubscribeSolanaDexTokenProfilesParams     *SubscribeSolanaDexTokenProfilesParams
+	SubscribeSolanaDexPositionProfilesParams  *SubscribeSolanaDexPositionProfilesParams
+	SubscribeSolanaAssetsTransfersParams      *SubscribeSolanaAssetsTransfersParams
+	SubscribeSolanaAssetsBalanceChangesParams *SubscribeSolanaAssetsBalanceChangesParams
 
 	typ string
 }
@@ -4130,6 +5014,13 @@ func (s *SubscribePayloadParams) GetSubscribeSolanaDexTradesParams() *SubscribeS
 	return s.SubscribeSolanaDexTradesParams
 }
 
+func (s *SubscribePayloadParams) GetSubscribeSolanaDexPoolsParams() *SubscribeSolanaDexPoolsParams {
+	if s == nil {
+		return nil
+	}
+	return s.SubscribeSolanaDexPoolsParams
+}
+
 func (s *SubscribePayloadParams) GetSubscribeSolanaDexWalletProfilesParams() *SubscribeSolanaDexWalletProfilesParams {
 	if s == nil {
 		return nil
@@ -4151,6 +5042,20 @@ func (s *SubscribePayloadParams) GetSubscribeSolanaDexPositionProfilesParams() *
 	return s.SubscribeSolanaDexPositionProfilesParams
 }
 
+func (s *SubscribePayloadParams) GetSubscribeSolanaAssetsTransfersParams() *SubscribeSolanaAssetsTransfersParams {
+	if s == nil {
+		return nil
+	}
+	return s.SubscribeSolanaAssetsTransfersParams
+}
+
+func (s *SubscribePayloadParams) GetSubscribeSolanaAssetsBalanceChangesParams() *SubscribeSolanaAssetsBalanceChangesParams {
+	if s == nil {
+		return nil
+	}
+	return s.SubscribeSolanaAssetsBalanceChangesParams
+}
+
 func (s *SubscribePayloadParams) UnmarshalJSON(data []byte) error {
 	valueSubscribeSolanaDexPricesParams := new(SubscribeSolanaDexPricesParams)
 	if err := json.Unmarshal(data, &valueSubscribeSolanaDexPricesParams); err == nil {
@@ -4168,6 +5073,12 @@ func (s *SubscribePayloadParams) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &valueSubscribeSolanaDexTradesParams); err == nil {
 		s.typ = "SubscribeSolanaDexTradesParams"
 		s.SubscribeSolanaDexTradesParams = valueSubscribeSolanaDexTradesParams
+		return nil
+	}
+	valueSubscribeSolanaDexPoolsParams := new(SubscribeSolanaDexPoolsParams)
+	if err := json.Unmarshal(data, &valueSubscribeSolanaDexPoolsParams); err == nil {
+		s.typ = "SubscribeSolanaDexPoolsParams"
+		s.SubscribeSolanaDexPoolsParams = valueSubscribeSolanaDexPoolsParams
 		return nil
 	}
 	valueSubscribeSolanaDexWalletProfilesParams := new(SubscribeSolanaDexWalletProfilesParams)
@@ -4188,6 +5099,18 @@ func (s *SubscribePayloadParams) UnmarshalJSON(data []byte) error {
 		s.SubscribeSolanaDexPositionProfilesParams = valueSubscribeSolanaDexPositionProfilesParams
 		return nil
 	}
+	valueSubscribeSolanaAssetsTransfersParams := new(SubscribeSolanaAssetsTransfersParams)
+	if err := json.Unmarshal(data, &valueSubscribeSolanaAssetsTransfersParams); err == nil {
+		s.typ = "SubscribeSolanaAssetsTransfersParams"
+		s.SubscribeSolanaAssetsTransfersParams = valueSubscribeSolanaAssetsTransfersParams
+		return nil
+	}
+	valueSubscribeSolanaAssetsBalanceChangesParams := new(SubscribeSolanaAssetsBalanceChangesParams)
+	if err := json.Unmarshal(data, &valueSubscribeSolanaAssetsBalanceChangesParams); err == nil {
+		s.typ = "SubscribeSolanaAssetsBalanceChangesParams"
+		s.SubscribeSolanaAssetsBalanceChangesParams = valueSubscribeSolanaAssetsBalanceChangesParams
+		return nil
+	}
 	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
 }
 
@@ -4201,6 +5124,9 @@ func (s SubscribePayloadParams) MarshalJSON() ([]byte, error) {
 	if s.typ == "SubscribeSolanaDexTradesParams" || s.SubscribeSolanaDexTradesParams != nil {
 		return json.Marshal(s.SubscribeSolanaDexTradesParams)
 	}
+	if s.typ == "SubscribeSolanaDexPoolsParams" || s.SubscribeSolanaDexPoolsParams != nil {
+		return json.Marshal(s.SubscribeSolanaDexPoolsParams)
+	}
 	if s.typ == "SubscribeSolanaDexWalletProfilesParams" || s.SubscribeSolanaDexWalletProfilesParams != nil {
 		return json.Marshal(s.SubscribeSolanaDexWalletProfilesParams)
 	}
@@ -4210,6 +5136,12 @@ func (s SubscribePayloadParams) MarshalJSON() ([]byte, error) {
 	if s.typ == "SubscribeSolanaDexPositionProfilesParams" || s.SubscribeSolanaDexPositionProfilesParams != nil {
 		return json.Marshal(s.SubscribeSolanaDexPositionProfilesParams)
 	}
+	if s.typ == "SubscribeSolanaAssetsTransfersParams" || s.SubscribeSolanaAssetsTransfersParams != nil {
+		return json.Marshal(s.SubscribeSolanaAssetsTransfersParams)
+	}
+	if s.typ == "SubscribeSolanaAssetsBalanceChangesParams" || s.SubscribeSolanaAssetsBalanceChangesParams != nil {
+		return json.Marshal(s.SubscribeSolanaAssetsBalanceChangesParams)
+	}
 	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
@@ -4217,9 +5149,12 @@ type SubscribePayloadParamsVisitor interface {
 	VisitSubscribeSolanaDexPricesParams(*SubscribeSolanaDexPricesParams) error
 	VisitSubscribeSolanaDexSwapsParams(*SubscribeSolanaDexSwapsParams) error
 	VisitSubscribeSolanaDexTradesParams(*SubscribeSolanaDexTradesParams) error
+	VisitSubscribeSolanaDexPoolsParams(*SubscribeSolanaDexPoolsParams) error
 	VisitSubscribeSolanaDexWalletProfilesParams(*SubscribeSolanaDexWalletProfilesParams) error
 	VisitSubscribeSolanaDexTokenProfilesParams(*SubscribeSolanaDexTokenProfilesParams) error
 	VisitSubscribeSolanaDexPositionProfilesParams(*SubscribeSolanaDexPositionProfilesParams) error
+	VisitSubscribeSolanaAssetsTransfersParams(*SubscribeSolanaAssetsTransfersParams) error
+	VisitSubscribeSolanaAssetsBalanceChangesParams(*SubscribeSolanaAssetsBalanceChangesParams) error
 }
 
 func (s *SubscribePayloadParams) Accept(visitor SubscribePayloadParamsVisitor) error {
@@ -4232,6 +5167,9 @@ func (s *SubscribePayloadParams) Accept(visitor SubscribePayloadParamsVisitor) e
 	if s.typ == "SubscribeSolanaDexTradesParams" || s.SubscribeSolanaDexTradesParams != nil {
 		return visitor.VisitSubscribeSolanaDexTradesParams(s.SubscribeSolanaDexTradesParams)
 	}
+	if s.typ == "SubscribeSolanaDexPoolsParams" || s.SubscribeSolanaDexPoolsParams != nil {
+		return visitor.VisitSubscribeSolanaDexPoolsParams(s.SubscribeSolanaDexPoolsParams)
+	}
 	if s.typ == "SubscribeSolanaDexWalletProfilesParams" || s.SubscribeSolanaDexWalletProfilesParams != nil {
 		return visitor.VisitSubscribeSolanaDexWalletProfilesParams(s.SubscribeSolanaDexWalletProfilesParams)
 	}
@@ -4240,6 +5178,12 @@ func (s *SubscribePayloadParams) Accept(visitor SubscribePayloadParamsVisitor) e
 	}
 	if s.typ == "SubscribeSolanaDexPositionProfilesParams" || s.SubscribeSolanaDexPositionProfilesParams != nil {
 		return visitor.VisitSubscribeSolanaDexPositionProfilesParams(s.SubscribeSolanaDexPositionProfilesParams)
+	}
+	if s.typ == "SubscribeSolanaAssetsTransfersParams" || s.SubscribeSolanaAssetsTransfersParams != nil {
+		return visitor.VisitSubscribeSolanaAssetsTransfersParams(s.SubscribeSolanaAssetsTransfersParams)
+	}
+	if s.typ == "SubscribeSolanaAssetsBalanceChangesParams" || s.SubscribeSolanaAssetsBalanceChangesParams != nil {
+		return visitor.VisitSubscribeSolanaAssetsBalanceChangesParams(s.SubscribeSolanaAssetsBalanceChangesParams)
 	}
 	return fmt.Errorf("type %T does not include a non-empty union type", s)
 }
@@ -4345,126 +5289,189 @@ func (s *SubscriptionMessage) String() string {
 }
 
 type SubscriptionMessageData struct {
-	SolanaDexPrice         *SolanaDexPrice
-	SolanaDexSwap          *SolanaDexSwap
-	SolanaDexTrade         *SolanaDexTrade
-	SolanaDexWalletProfile *SolanaDexWalletProfile
-	SolanaDexTokenProfile  *SolanaDexTokenProfile
+	SolanaDexPriceMessage            *SolanaDexPriceMessage
+	SolanaDexSwapMessage             *SolanaDexSwapMessage
+	SolanaDexTradeMessage            *SolanaDexTradeMessage
+	SolanaDexPoolMessage             *SolanaDexPoolMessage
+	SolanaDexWalletProfileMessage    *SolanaDexWalletProfileMessage
+	SolanaDexTokenProfileMessage     *SolanaDexTokenProfileMessage
+	SolanaAssetsTransferMessage      *SolanaAssetsTransferMessage
+	SolanaAssetsBalanceChangeMessage *SolanaAssetsBalanceChangeMessage
 
 	typ string
 }
 
-func (s *SubscriptionMessageData) GetSolanaDexPrice() *SolanaDexPrice {
+func (s *SubscriptionMessageData) GetSolanaDexPriceMessage() *SolanaDexPriceMessage {
 	if s == nil {
 		return nil
 	}
-	return s.SolanaDexPrice
+	return s.SolanaDexPriceMessage
 }
 
-func (s *SubscriptionMessageData) GetSolanaDexSwap() *SolanaDexSwap {
+func (s *SubscriptionMessageData) GetSolanaDexSwapMessage() *SolanaDexSwapMessage {
 	if s == nil {
 		return nil
 	}
-	return s.SolanaDexSwap
+	return s.SolanaDexSwapMessage
 }
 
-func (s *SubscriptionMessageData) GetSolanaDexTrade() *SolanaDexTrade {
+func (s *SubscriptionMessageData) GetSolanaDexTradeMessage() *SolanaDexTradeMessage {
 	if s == nil {
 		return nil
 	}
-	return s.SolanaDexTrade
+	return s.SolanaDexTradeMessage
 }
 
-func (s *SubscriptionMessageData) GetSolanaDexWalletProfile() *SolanaDexWalletProfile {
+func (s *SubscriptionMessageData) GetSolanaDexPoolMessage() *SolanaDexPoolMessage {
 	if s == nil {
 		return nil
 	}
-	return s.SolanaDexWalletProfile
+	return s.SolanaDexPoolMessage
 }
 
-func (s *SubscriptionMessageData) GetSolanaDexTokenProfile() *SolanaDexTokenProfile {
+func (s *SubscriptionMessageData) GetSolanaDexWalletProfileMessage() *SolanaDexWalletProfileMessage {
 	if s == nil {
 		return nil
 	}
-	return s.SolanaDexTokenProfile
+	return s.SolanaDexWalletProfileMessage
+}
+
+func (s *SubscriptionMessageData) GetSolanaDexTokenProfileMessage() *SolanaDexTokenProfileMessage {
+	if s == nil {
+		return nil
+	}
+	return s.SolanaDexTokenProfileMessage
+}
+
+func (s *SubscriptionMessageData) GetSolanaAssetsTransferMessage() *SolanaAssetsTransferMessage {
+	if s == nil {
+		return nil
+	}
+	return s.SolanaAssetsTransferMessage
+}
+
+func (s *SubscriptionMessageData) GetSolanaAssetsBalanceChangeMessage() *SolanaAssetsBalanceChangeMessage {
+	if s == nil {
+		return nil
+	}
+	return s.SolanaAssetsBalanceChangeMessage
 }
 
 func (s *SubscriptionMessageData) UnmarshalJSON(data []byte) error {
-	valueSolanaDexPrice := new(SolanaDexPrice)
-	if err := json.Unmarshal(data, &valueSolanaDexPrice); err == nil {
-		s.typ = "SolanaDexPrice"
-		s.SolanaDexPrice = valueSolanaDexPrice
+	valueSolanaDexPriceMessage := new(SolanaDexPriceMessage)
+	if err := json.Unmarshal(data, &valueSolanaDexPriceMessage); err == nil {
+		s.typ = "SolanaDexPriceMessage"
+		s.SolanaDexPriceMessage = valueSolanaDexPriceMessage
 		return nil
 	}
-	valueSolanaDexSwap := new(SolanaDexSwap)
-	if err := json.Unmarshal(data, &valueSolanaDexSwap); err == nil {
-		s.typ = "SolanaDexSwap"
-		s.SolanaDexSwap = valueSolanaDexSwap
+	valueSolanaDexSwapMessage := new(SolanaDexSwapMessage)
+	if err := json.Unmarshal(data, &valueSolanaDexSwapMessage); err == nil {
+		s.typ = "SolanaDexSwapMessage"
+		s.SolanaDexSwapMessage = valueSolanaDexSwapMessage
 		return nil
 	}
-	valueSolanaDexTrade := new(SolanaDexTrade)
-	if err := json.Unmarshal(data, &valueSolanaDexTrade); err == nil {
-		s.typ = "SolanaDexTrade"
-		s.SolanaDexTrade = valueSolanaDexTrade
+	valueSolanaDexTradeMessage := new(SolanaDexTradeMessage)
+	if err := json.Unmarshal(data, &valueSolanaDexTradeMessage); err == nil {
+		s.typ = "SolanaDexTradeMessage"
+		s.SolanaDexTradeMessage = valueSolanaDexTradeMessage
 		return nil
 	}
-	valueSolanaDexWalletProfile := new(SolanaDexWalletProfile)
-	if err := json.Unmarshal(data, &valueSolanaDexWalletProfile); err == nil {
-		s.typ = "SolanaDexWalletProfile"
-		s.SolanaDexWalletProfile = valueSolanaDexWalletProfile
+	valueSolanaDexPoolMessage := new(SolanaDexPoolMessage)
+	if err := json.Unmarshal(data, &valueSolanaDexPoolMessage); err == nil {
+		s.typ = "SolanaDexPoolMessage"
+		s.SolanaDexPoolMessage = valueSolanaDexPoolMessage
 		return nil
 	}
-	valueSolanaDexTokenProfile := new(SolanaDexTokenProfile)
-	if err := json.Unmarshal(data, &valueSolanaDexTokenProfile); err == nil {
-		s.typ = "SolanaDexTokenProfile"
-		s.SolanaDexTokenProfile = valueSolanaDexTokenProfile
+	valueSolanaDexWalletProfileMessage := new(SolanaDexWalletProfileMessage)
+	if err := json.Unmarshal(data, &valueSolanaDexWalletProfileMessage); err == nil {
+		s.typ = "SolanaDexWalletProfileMessage"
+		s.SolanaDexWalletProfileMessage = valueSolanaDexWalletProfileMessage
+		return nil
+	}
+	valueSolanaDexTokenProfileMessage := new(SolanaDexTokenProfileMessage)
+	if err := json.Unmarshal(data, &valueSolanaDexTokenProfileMessage); err == nil {
+		s.typ = "SolanaDexTokenProfileMessage"
+		s.SolanaDexTokenProfileMessage = valueSolanaDexTokenProfileMessage
+		return nil
+	}
+	valueSolanaAssetsTransferMessage := new(SolanaAssetsTransferMessage)
+	if err := json.Unmarshal(data, &valueSolanaAssetsTransferMessage); err == nil {
+		s.typ = "SolanaAssetsTransferMessage"
+		s.SolanaAssetsTransferMessage = valueSolanaAssetsTransferMessage
+		return nil
+	}
+	valueSolanaAssetsBalanceChangeMessage := new(SolanaAssetsBalanceChangeMessage)
+	if err := json.Unmarshal(data, &valueSolanaAssetsBalanceChangeMessage); err == nil {
+		s.typ = "SolanaAssetsBalanceChangeMessage"
+		s.SolanaAssetsBalanceChangeMessage = valueSolanaAssetsBalanceChangeMessage
 		return nil
 	}
 	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
 }
 
 func (s SubscriptionMessageData) MarshalJSON() ([]byte, error) {
-	if s.typ == "SolanaDexPrice" || s.SolanaDexPrice != nil {
-		return json.Marshal(s.SolanaDexPrice)
+	if s.typ == "SolanaDexPriceMessage" || s.SolanaDexPriceMessage != nil {
+		return json.Marshal(s.SolanaDexPriceMessage)
 	}
-	if s.typ == "SolanaDexSwap" || s.SolanaDexSwap != nil {
-		return json.Marshal(s.SolanaDexSwap)
+	if s.typ == "SolanaDexSwapMessage" || s.SolanaDexSwapMessage != nil {
+		return json.Marshal(s.SolanaDexSwapMessage)
 	}
-	if s.typ == "SolanaDexTrade" || s.SolanaDexTrade != nil {
-		return json.Marshal(s.SolanaDexTrade)
+	if s.typ == "SolanaDexTradeMessage" || s.SolanaDexTradeMessage != nil {
+		return json.Marshal(s.SolanaDexTradeMessage)
 	}
-	if s.typ == "SolanaDexWalletProfile" || s.SolanaDexWalletProfile != nil {
-		return json.Marshal(s.SolanaDexWalletProfile)
+	if s.typ == "SolanaDexPoolMessage" || s.SolanaDexPoolMessage != nil {
+		return json.Marshal(s.SolanaDexPoolMessage)
 	}
-	if s.typ == "SolanaDexTokenProfile" || s.SolanaDexTokenProfile != nil {
-		return json.Marshal(s.SolanaDexTokenProfile)
+	if s.typ == "SolanaDexWalletProfileMessage" || s.SolanaDexWalletProfileMessage != nil {
+		return json.Marshal(s.SolanaDexWalletProfileMessage)
+	}
+	if s.typ == "SolanaDexTokenProfileMessage" || s.SolanaDexTokenProfileMessage != nil {
+		return json.Marshal(s.SolanaDexTokenProfileMessage)
+	}
+	if s.typ == "SolanaAssetsTransferMessage" || s.SolanaAssetsTransferMessage != nil {
+		return json.Marshal(s.SolanaAssetsTransferMessage)
+	}
+	if s.typ == "SolanaAssetsBalanceChangeMessage" || s.SolanaAssetsBalanceChangeMessage != nil {
+		return json.Marshal(s.SolanaAssetsBalanceChangeMessage)
 	}
 	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
 }
 
 type SubscriptionMessageDataVisitor interface {
-	VisitSolanaDexPrice(*SolanaDexPrice) error
-	VisitSolanaDexSwap(*SolanaDexSwap) error
-	VisitSolanaDexTrade(*SolanaDexTrade) error
-	VisitSolanaDexWalletProfile(*SolanaDexWalletProfile) error
-	VisitSolanaDexTokenProfile(*SolanaDexTokenProfile) error
+	VisitSolanaDexPriceMessage(*SolanaDexPriceMessage) error
+	VisitSolanaDexSwapMessage(*SolanaDexSwapMessage) error
+	VisitSolanaDexTradeMessage(*SolanaDexTradeMessage) error
+	VisitSolanaDexPoolMessage(*SolanaDexPoolMessage) error
+	VisitSolanaDexWalletProfileMessage(*SolanaDexWalletProfileMessage) error
+	VisitSolanaDexTokenProfileMessage(*SolanaDexTokenProfileMessage) error
+	VisitSolanaAssetsTransferMessage(*SolanaAssetsTransferMessage) error
+	VisitSolanaAssetsBalanceChangeMessage(*SolanaAssetsBalanceChangeMessage) error
 }
 
 func (s *SubscriptionMessageData) Accept(visitor SubscriptionMessageDataVisitor) error {
-	if s.typ == "SolanaDexPrice" || s.SolanaDexPrice != nil {
-		return visitor.VisitSolanaDexPrice(s.SolanaDexPrice)
+	if s.typ == "SolanaDexPriceMessage" || s.SolanaDexPriceMessage != nil {
+		return visitor.VisitSolanaDexPriceMessage(s.SolanaDexPriceMessage)
 	}
-	if s.typ == "SolanaDexSwap" || s.SolanaDexSwap != nil {
-		return visitor.VisitSolanaDexSwap(s.SolanaDexSwap)
+	if s.typ == "SolanaDexSwapMessage" || s.SolanaDexSwapMessage != nil {
+		return visitor.VisitSolanaDexSwapMessage(s.SolanaDexSwapMessage)
 	}
-	if s.typ == "SolanaDexTrade" || s.SolanaDexTrade != nil {
-		return visitor.VisitSolanaDexTrade(s.SolanaDexTrade)
+	if s.typ == "SolanaDexTradeMessage" || s.SolanaDexTradeMessage != nil {
+		return visitor.VisitSolanaDexTradeMessage(s.SolanaDexTradeMessage)
 	}
-	if s.typ == "SolanaDexWalletProfile" || s.SolanaDexWalletProfile != nil {
-		return visitor.VisitSolanaDexWalletProfile(s.SolanaDexWalletProfile)
+	if s.typ == "SolanaDexPoolMessage" || s.SolanaDexPoolMessage != nil {
+		return visitor.VisitSolanaDexPoolMessage(s.SolanaDexPoolMessage)
 	}
-	if s.typ == "SolanaDexTokenProfile" || s.SolanaDexTokenProfile != nil {
-		return visitor.VisitSolanaDexTokenProfile(s.SolanaDexTokenProfile)
+	if s.typ == "SolanaDexWalletProfileMessage" || s.SolanaDexWalletProfileMessage != nil {
+		return visitor.VisitSolanaDexWalletProfileMessage(s.SolanaDexWalletProfileMessage)
+	}
+	if s.typ == "SolanaDexTokenProfileMessage" || s.SolanaDexTokenProfileMessage != nil {
+		return visitor.VisitSolanaDexTokenProfileMessage(s.SolanaDexTokenProfileMessage)
+	}
+	if s.typ == "SolanaAssetsTransferMessage" || s.SolanaAssetsTransferMessage != nil {
+		return visitor.VisitSolanaAssetsTransferMessage(s.SolanaAssetsTransferMessage)
+	}
+	if s.typ == "SolanaAssetsBalanceChangeMessage" || s.SolanaAssetsBalanceChangeMessage != nil {
+		return visitor.VisitSolanaAssetsBalanceChangeMessage(s.SolanaAssetsBalanceChangeMessage)
 	}
 	return fmt.Errorf("type %T does not include a non-empty union type", s)
 }
@@ -4494,34 +5501,37 @@ func (s SubscriptionMethodEnum) Ptr() *SubscriptionMethodEnum {
 type SubscriptionTopicEnum string
 
 const (
-	SubscriptionTopicEnumSolanaDexPrice           SubscriptionTopicEnum = "solana.dex.price"
-	SubscriptionTopicEnumSolanaDexSwapWallet      SubscriptionTopicEnum = "solana.dex.swap.wallet"
-	SubscriptionTopicEnumSolanaDexSwapToken       SubscriptionTopicEnum = "solana.dex.swap.token"
-	SubscriptionTopicEnumSolanaDexTradeWallet     SubscriptionTopicEnum = "solana.dex.trade.wallet"
-	SubscriptionTopicEnumSolanaDexTradeToken      SubscriptionTopicEnum = "solana.dex.trade.token"
-	SubscriptionTopicEnumSolanaDexProfileWallet   SubscriptionTopicEnum = "solana.dex.profile.wallet"
-	SubscriptionTopicEnumSolanaDexProfileToken    SubscriptionTopicEnum = "solana.dex.profile.token"
-	SubscriptionTopicEnumSolanaDexProfilePosition SubscriptionTopicEnum = "solana.dex.profile.position"
+	SubscriptionTopicEnumSolanaDexPrices            SubscriptionTopicEnum = "solana.dex.prices"
+	SubscriptionTopicEnumSolanaDexSwaps             SubscriptionTopicEnum = "solana.dex.swaps"
+	SubscriptionTopicEnumSolanaDexTrades            SubscriptionTopicEnum = "solana.dex.trades"
+	SubscriptionTopicEnumSolanaDexPools             SubscriptionTopicEnum = "solana.dex.pools"
+	SubscriptionTopicEnumSolanaDexProfilesWallet    SubscriptionTopicEnum = "solana.dex.profiles.wallet"
+	SubscriptionTopicEnumSolanaDexProfilesToken     SubscriptionTopicEnum = "solana.dex.profiles.token"
+	SubscriptionTopicEnumSolanaDexProfilesPosition  SubscriptionTopicEnum = "solana.dex.profiles.position"
+	SubscriptionTopicEnumSolanaAssetsTransfers      SubscriptionTopicEnum = "solana.assets.transfers"
+	SubscriptionTopicEnumSolanaAssetsBalanceChanges SubscriptionTopicEnum = "solana.assets.balance-changes"
 )
 
 func NewSubscriptionTopicEnumFromString(s string) (SubscriptionTopicEnum, error) {
 	switch s {
-	case "solana.dex.price":
-		return SubscriptionTopicEnumSolanaDexPrice, nil
-	case "solana.dex.swap.wallet":
-		return SubscriptionTopicEnumSolanaDexSwapWallet, nil
-	case "solana.dex.swap.token":
-		return SubscriptionTopicEnumSolanaDexSwapToken, nil
-	case "solana.dex.trade.wallet":
-		return SubscriptionTopicEnumSolanaDexTradeWallet, nil
-	case "solana.dex.trade.token":
-		return SubscriptionTopicEnumSolanaDexTradeToken, nil
-	case "solana.dex.profile.wallet":
-		return SubscriptionTopicEnumSolanaDexProfileWallet, nil
-	case "solana.dex.profile.token":
-		return SubscriptionTopicEnumSolanaDexProfileToken, nil
-	case "solana.dex.profile.position":
-		return SubscriptionTopicEnumSolanaDexProfilePosition, nil
+	case "solana.dex.prices":
+		return SubscriptionTopicEnumSolanaDexPrices, nil
+	case "solana.dex.swaps":
+		return SubscriptionTopicEnumSolanaDexSwaps, nil
+	case "solana.dex.trades":
+		return SubscriptionTopicEnumSolanaDexTrades, nil
+	case "solana.dex.pools":
+		return SubscriptionTopicEnumSolanaDexPools, nil
+	case "solana.dex.profiles.wallet":
+		return SubscriptionTopicEnumSolanaDexProfilesWallet, nil
+	case "solana.dex.profiles.token":
+		return SubscriptionTopicEnumSolanaDexProfilesToken, nil
+	case "solana.dex.profiles.position":
+		return SubscriptionTopicEnumSolanaDexProfilesPosition, nil
+	case "solana.assets.transfers":
+		return SubscriptionTopicEnumSolanaAssetsTransfers, nil
+	case "solana.assets.balance-changes":
+		return SubscriptionTopicEnumSolanaAssetsBalanceChanges, nil
 	}
 	var t SubscriptionTopicEnum
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -4533,14 +5543,13 @@ func (s SubscriptionTopicEnum) Ptr() *SubscriptionTopicEnum {
 
 var (
 	unsubscribePayloadFieldMethod = big.NewInt(1 << 0)
-	unsubscribePayloadFieldTopic  = big.NewInt(1 << 1)
-	unsubscribePayloadFieldParams = big.NewInt(1 << 2)
+	unsubscribePayloadFieldTopics = big.NewInt(1 << 1)
 )
 
 type UnsubscribePayload struct {
-	Method *SubscriptionMethodEnum   `json:"method,omitempty" url:"method,omitempty"`
-	Topic  *SubscriptionTopicEnum    `json:"topic,omitempty" url:"topic,omitempty"`
-	Params *UnsubscribePayloadParams `json:"params,omitempty" url:"params,omitempty"`
+	Method *SubscriptionMethodEnum `json:"method,omitempty" url:"method,omitempty"`
+	// The topics to unsubscribe from. Leave empty to unsubscribe from all topics.
+	Topics []SubscriptionTopicEnum `json:"topics,omitempty" url:"topics,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4556,18 +5565,11 @@ func (u *UnsubscribePayload) GetMethod() *SubscriptionMethodEnum {
 	return u.Method
 }
 
-func (u *UnsubscribePayload) GetTopic() *SubscriptionTopicEnum {
+func (u *UnsubscribePayload) GetTopics() []SubscriptionTopicEnum {
 	if u == nil {
 		return nil
 	}
-	return u.Topic
-}
-
-func (u *UnsubscribePayload) GetParams() *UnsubscribePayloadParams {
-	if u == nil {
-		return nil
-	}
-	return u.Params
+	return u.Topics
 }
 
 func (u *UnsubscribePayload) GetExtraProperties() map[string]interface{} {
@@ -4591,18 +5593,11 @@ func (u *UnsubscribePayload) SetMethod(method *SubscriptionMethodEnum) {
 	u.require(unsubscribePayloadFieldMethod)
 }
 
-// SetTopic sets the Topic field and marks it as non-optional;
+// SetTopics sets the Topics field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribePayload) SetTopic(topic *SubscriptionTopicEnum) {
-	u.Topic = topic
-	u.require(unsubscribePayloadFieldTopic)
-}
-
-// SetParams sets the Params field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UnsubscribePayload) SetParams(params *UnsubscribePayloadParams) {
-	u.Params = params
-	u.require(unsubscribePayloadFieldParams)
+func (u *UnsubscribePayload) SetTopics(topics []SubscriptionTopicEnum) {
+	u.Topics = topics
+	u.require(unsubscribePayloadFieldTopics)
 }
 
 func (u *UnsubscribePayload) UnmarshalJSON(data []byte) error {
@@ -4645,150 +5640,4 @@ func (u *UnsubscribePayload) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", u)
-}
-
-type UnsubscribePayloadParams struct {
-	UnsubscribeSolanaDexPricesParams           *UnsubscribeSolanaDexPricesParams
-	UnsubscribeSolanaDexSwapsParams            *UnsubscribeSolanaDexSwapsParams
-	UnsubscribeSolanaDexTradesParams           *UnsubscribeSolanaDexTradesParams
-	UnsubscribeSolanaDexWalletProfilesParams   *UnsubscribeSolanaDexWalletProfilesParams
-	UnsubscribeSolanaDexTokenProfilesParams    *UnsubscribeSolanaDexTokenProfilesParams
-	UnsubscribeSolanaDexPositionProfilesParams *UnsubscribeSolanaDexPositionProfilesParams
-
-	typ string
-}
-
-func (u *UnsubscribePayloadParams) GetUnsubscribeSolanaDexPricesParams() *UnsubscribeSolanaDexPricesParams {
-	if u == nil {
-		return nil
-	}
-	return u.UnsubscribeSolanaDexPricesParams
-}
-
-func (u *UnsubscribePayloadParams) GetUnsubscribeSolanaDexSwapsParams() *UnsubscribeSolanaDexSwapsParams {
-	if u == nil {
-		return nil
-	}
-	return u.UnsubscribeSolanaDexSwapsParams
-}
-
-func (u *UnsubscribePayloadParams) GetUnsubscribeSolanaDexTradesParams() *UnsubscribeSolanaDexTradesParams {
-	if u == nil {
-		return nil
-	}
-	return u.UnsubscribeSolanaDexTradesParams
-}
-
-func (u *UnsubscribePayloadParams) GetUnsubscribeSolanaDexWalletProfilesParams() *UnsubscribeSolanaDexWalletProfilesParams {
-	if u == nil {
-		return nil
-	}
-	return u.UnsubscribeSolanaDexWalletProfilesParams
-}
-
-func (u *UnsubscribePayloadParams) GetUnsubscribeSolanaDexTokenProfilesParams() *UnsubscribeSolanaDexTokenProfilesParams {
-	if u == nil {
-		return nil
-	}
-	return u.UnsubscribeSolanaDexTokenProfilesParams
-}
-
-func (u *UnsubscribePayloadParams) GetUnsubscribeSolanaDexPositionProfilesParams() *UnsubscribeSolanaDexPositionProfilesParams {
-	if u == nil {
-		return nil
-	}
-	return u.UnsubscribeSolanaDexPositionProfilesParams
-}
-
-func (u *UnsubscribePayloadParams) UnmarshalJSON(data []byte) error {
-	valueUnsubscribeSolanaDexPricesParams := new(UnsubscribeSolanaDexPricesParams)
-	if err := json.Unmarshal(data, &valueUnsubscribeSolanaDexPricesParams); err == nil {
-		u.typ = "UnsubscribeSolanaDexPricesParams"
-		u.UnsubscribeSolanaDexPricesParams = valueUnsubscribeSolanaDexPricesParams
-		return nil
-	}
-	valueUnsubscribeSolanaDexSwapsParams := new(UnsubscribeSolanaDexSwapsParams)
-	if err := json.Unmarshal(data, &valueUnsubscribeSolanaDexSwapsParams); err == nil {
-		u.typ = "UnsubscribeSolanaDexSwapsParams"
-		u.UnsubscribeSolanaDexSwapsParams = valueUnsubscribeSolanaDexSwapsParams
-		return nil
-	}
-	valueUnsubscribeSolanaDexTradesParams := new(UnsubscribeSolanaDexTradesParams)
-	if err := json.Unmarshal(data, &valueUnsubscribeSolanaDexTradesParams); err == nil {
-		u.typ = "UnsubscribeSolanaDexTradesParams"
-		u.UnsubscribeSolanaDexTradesParams = valueUnsubscribeSolanaDexTradesParams
-		return nil
-	}
-	valueUnsubscribeSolanaDexWalletProfilesParams := new(UnsubscribeSolanaDexWalletProfilesParams)
-	if err := json.Unmarshal(data, &valueUnsubscribeSolanaDexWalletProfilesParams); err == nil {
-		u.typ = "UnsubscribeSolanaDexWalletProfilesParams"
-		u.UnsubscribeSolanaDexWalletProfilesParams = valueUnsubscribeSolanaDexWalletProfilesParams
-		return nil
-	}
-	valueUnsubscribeSolanaDexTokenProfilesParams := new(UnsubscribeSolanaDexTokenProfilesParams)
-	if err := json.Unmarshal(data, &valueUnsubscribeSolanaDexTokenProfilesParams); err == nil {
-		u.typ = "UnsubscribeSolanaDexTokenProfilesParams"
-		u.UnsubscribeSolanaDexTokenProfilesParams = valueUnsubscribeSolanaDexTokenProfilesParams
-		return nil
-	}
-	valueUnsubscribeSolanaDexPositionProfilesParams := new(UnsubscribeSolanaDexPositionProfilesParams)
-	if err := json.Unmarshal(data, &valueUnsubscribeSolanaDexPositionProfilesParams); err == nil {
-		u.typ = "UnsubscribeSolanaDexPositionProfilesParams"
-		u.UnsubscribeSolanaDexPositionProfilesParams = valueUnsubscribeSolanaDexPositionProfilesParams
-		return nil
-	}
-	return fmt.Errorf("%s cannot be deserialized as a %T", data, u)
-}
-
-func (u UnsubscribePayloadParams) MarshalJSON() ([]byte, error) {
-	if u.typ == "UnsubscribeSolanaDexPricesParams" || u.UnsubscribeSolanaDexPricesParams != nil {
-		return json.Marshal(u.UnsubscribeSolanaDexPricesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexSwapsParams" || u.UnsubscribeSolanaDexSwapsParams != nil {
-		return json.Marshal(u.UnsubscribeSolanaDexSwapsParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexTradesParams" || u.UnsubscribeSolanaDexTradesParams != nil {
-		return json.Marshal(u.UnsubscribeSolanaDexTradesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexWalletProfilesParams" || u.UnsubscribeSolanaDexWalletProfilesParams != nil {
-		return json.Marshal(u.UnsubscribeSolanaDexWalletProfilesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexTokenProfilesParams" || u.UnsubscribeSolanaDexTokenProfilesParams != nil {
-		return json.Marshal(u.UnsubscribeSolanaDexTokenProfilesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexPositionProfilesParams" || u.UnsubscribeSolanaDexPositionProfilesParams != nil {
-		return json.Marshal(u.UnsubscribeSolanaDexPositionProfilesParams)
-	}
-	return nil, fmt.Errorf("type %T does not include a non-empty union type", u)
-}
-
-type UnsubscribePayloadParamsVisitor interface {
-	VisitUnsubscribeSolanaDexPricesParams(*UnsubscribeSolanaDexPricesParams) error
-	VisitUnsubscribeSolanaDexSwapsParams(*UnsubscribeSolanaDexSwapsParams) error
-	VisitUnsubscribeSolanaDexTradesParams(*UnsubscribeSolanaDexTradesParams) error
-	VisitUnsubscribeSolanaDexWalletProfilesParams(*UnsubscribeSolanaDexWalletProfilesParams) error
-	VisitUnsubscribeSolanaDexTokenProfilesParams(*UnsubscribeSolanaDexTokenProfilesParams) error
-	VisitUnsubscribeSolanaDexPositionProfilesParams(*UnsubscribeSolanaDexPositionProfilesParams) error
-}
-
-func (u *UnsubscribePayloadParams) Accept(visitor UnsubscribePayloadParamsVisitor) error {
-	if u.typ == "UnsubscribeSolanaDexPricesParams" || u.UnsubscribeSolanaDexPricesParams != nil {
-		return visitor.VisitUnsubscribeSolanaDexPricesParams(u.UnsubscribeSolanaDexPricesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexSwapsParams" || u.UnsubscribeSolanaDexSwapsParams != nil {
-		return visitor.VisitUnsubscribeSolanaDexSwapsParams(u.UnsubscribeSolanaDexSwapsParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexTradesParams" || u.UnsubscribeSolanaDexTradesParams != nil {
-		return visitor.VisitUnsubscribeSolanaDexTradesParams(u.UnsubscribeSolanaDexTradesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexWalletProfilesParams" || u.UnsubscribeSolanaDexWalletProfilesParams != nil {
-		return visitor.VisitUnsubscribeSolanaDexWalletProfilesParams(u.UnsubscribeSolanaDexWalletProfilesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexTokenProfilesParams" || u.UnsubscribeSolanaDexTokenProfilesParams != nil {
-		return visitor.VisitUnsubscribeSolanaDexTokenProfilesParams(u.UnsubscribeSolanaDexTokenProfilesParams)
-	}
-	if u.typ == "UnsubscribeSolanaDexPositionProfilesParams" || u.UnsubscribeSolanaDexPositionProfilesParams != nil {
-		return visitor.VisitUnsubscribeSolanaDexPositionProfilesParams(u.UnsubscribeSolanaDexPositionProfilesParams)
-	}
-	return fmt.Errorf("type %T does not include a non-empty union type", u)
 }
