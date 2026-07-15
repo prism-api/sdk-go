@@ -893,13 +893,15 @@ func (s *SolanaDexPoolMessageVault) String() string {
 
 var (
 	solanaDexPriceMessageFieldTokenAddress = big.NewInt(1 << 0)
-	solanaDexPriceMessageFieldUsdPrice     = big.NewInt(1 << 1)
-	solanaDexPriceMessageFieldBlockSlot    = big.NewInt(1 << 2)
-	solanaDexPriceMessageFieldBlockTime    = big.NewInt(1 << 3)
+	solanaDexPriceMessageFieldPoolAddress  = big.NewInt(1 << 1)
+	solanaDexPriceMessageFieldUsdPrice     = big.NewInt(1 << 2)
+	solanaDexPriceMessageFieldBlockSlot    = big.NewInt(1 << 3)
+	solanaDexPriceMessageFieldBlockTime    = big.NewInt(1 << 4)
 )
 
 type SolanaDexPriceMessage struct {
 	TokenAddress *string    `json:"token_address,omitempty" url:"token_address,omitempty"`
+	PoolAddress  *string    `json:"pool_address,omitempty" url:"pool_address,omitempty"`
 	UsdPrice     *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
 	BlockSlot    *int       `json:"block_slot,omitempty" url:"block_slot,omitempty"`
 	BlockTime    *time.Time `json:"block_time,omitempty" url:"block_time,omitempty"`
@@ -916,6 +918,13 @@ func (s *SolanaDexPriceMessage) GetTokenAddress() *string {
 		return nil
 	}
 	return s.TokenAddress
+}
+
+func (s *SolanaDexPriceMessage) GetPoolAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddress
 }
 
 func (s *SolanaDexPriceMessage) GetUsdPrice() *float64 {
@@ -958,6 +967,13 @@ func (s *SolanaDexPriceMessage) require(field *big.Int) {
 func (s *SolanaDexPriceMessage) SetTokenAddress(tokenAddress *string) {
 	s.TokenAddress = tokenAddress
 	s.require(solanaDexPriceMessageFieldTokenAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPriceMessage) SetPoolAddress(poolAddress *string) {
+	s.PoolAddress = poolAddress
+	s.require(solanaDexPriceMessageFieldPoolAddress)
 }
 
 // SetUsdPrice sets the UsdPrice field and marks it as non-optional;
@@ -1036,21 +1052,22 @@ var (
 	solanaDexSwapMessageFieldSwapType            = big.NewInt(1 << 1)
 	solanaDexSwapMessageFieldProtocol            = big.NewInt(1 << 2)
 	solanaDexSwapMessageFieldWalletAddress       = big.NewInt(1 << 3)
-	solanaDexSwapMessageFieldTokenAddressIn      = big.NewInt(1 << 4)
-	solanaDexSwapMessageFieldTokenAddressOut     = big.NewInt(1 << 5)
-	solanaDexSwapMessageFieldTokenAmountIn       = big.NewInt(1 << 6)
-	solanaDexSwapMessageFieldTokenAmountOut      = big.NewInt(1 << 7)
-	solanaDexSwapMessageFieldTokenPriceIn        = big.NewInt(1 << 8)
-	solanaDexSwapMessageFieldTokenPriceOut       = big.NewInt(1 << 9)
-	solanaDexSwapMessageFieldPreTokenBalanceIn   = big.NewInt(1 << 10)
-	solanaDexSwapMessageFieldPreTokenBalanceOut  = big.NewInt(1 << 11)
-	solanaDexSwapMessageFieldPostTokenBalanceIn  = big.NewInt(1 << 12)
-	solanaDexSwapMessageFieldPostTokenBalanceOut = big.NewInt(1 << 13)
-	solanaDexSwapMessageFieldUsdAmountIn         = big.NewInt(1 << 14)
-	solanaDexSwapMessageFieldUsdAmountOut        = big.NewInt(1 << 15)
-	solanaDexSwapMessageFieldBlockSlot           = big.NewInt(1 << 16)
-	solanaDexSwapMessageFieldBlockTime           = big.NewInt(1 << 17)
-	solanaDexSwapMessageFieldTxHash              = big.NewInt(1 << 18)
+	solanaDexSwapMessageFieldPoolAddress         = big.NewInt(1 << 4)
+	solanaDexSwapMessageFieldTokenAddressIn      = big.NewInt(1 << 5)
+	solanaDexSwapMessageFieldTokenAddressOut     = big.NewInt(1 << 6)
+	solanaDexSwapMessageFieldTokenAmountIn       = big.NewInt(1 << 7)
+	solanaDexSwapMessageFieldTokenAmountOut      = big.NewInt(1 << 8)
+	solanaDexSwapMessageFieldTokenPriceIn        = big.NewInt(1 << 9)
+	solanaDexSwapMessageFieldTokenPriceOut       = big.NewInt(1 << 10)
+	solanaDexSwapMessageFieldPreTokenBalanceIn   = big.NewInt(1 << 11)
+	solanaDexSwapMessageFieldPreTokenBalanceOut  = big.NewInt(1 << 12)
+	solanaDexSwapMessageFieldPostTokenBalanceIn  = big.NewInt(1 << 13)
+	solanaDexSwapMessageFieldPostTokenBalanceOut = big.NewInt(1 << 14)
+	solanaDexSwapMessageFieldUsdAmountIn         = big.NewInt(1 << 15)
+	solanaDexSwapMessageFieldUsdAmountOut        = big.NewInt(1 << 16)
+	solanaDexSwapMessageFieldBlockSlot           = big.NewInt(1 << 17)
+	solanaDexSwapMessageFieldBlockTime           = big.NewInt(1 << 18)
+	solanaDexSwapMessageFieldTxHash              = big.NewInt(1 << 19)
 )
 
 type SolanaDexSwapMessage struct {
@@ -1059,6 +1076,7 @@ type SolanaDexSwapMessage struct {
 	// Refer to [Data Sources](/documentation/solana/dex/overview#data-sources) for the list of supported protocols.
 	Protocol            *string    `json:"protocol,omitempty" url:"protocol,omitempty"`
 	WalletAddress       *string    `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	PoolAddress         *string    `json:"pool_address,omitempty" url:"pool_address,omitempty"`
 	TokenAddressIn      *string    `json:"token_address_in,omitempty" url:"token_address_in,omitempty"`
 	TokenAddressOut     *string    `json:"token_address_out,omitempty" url:"token_address_out,omitempty"`
 	TokenAmountIn       *float64   `json:"token_amount_in,omitempty" url:"token_amount_in,omitempty"`
@@ -1108,6 +1126,13 @@ func (s *SolanaDexSwapMessage) GetWalletAddress() *string {
 		return nil
 	}
 	return s.WalletAddress
+}
+
+func (s *SolanaDexSwapMessage) GetPoolAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddress
 }
 
 func (s *SolanaDexSwapMessage) GetTokenAddressIn() *string {
@@ -1255,6 +1280,13 @@ func (s *SolanaDexSwapMessage) SetProtocol(protocol *string) {
 func (s *SolanaDexSwapMessage) SetWalletAddress(walletAddress *string) {
 	s.WalletAddress = walletAddress
 	s.require(solanaDexSwapMessageFieldWalletAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexSwapMessage) SetPoolAddress(poolAddress *string) {
+	s.PoolAddress = poolAddress
+	s.require(solanaDexSwapMessageFieldPoolAddress)
 }
 
 // SetTokenAddressIn sets the TokenAddressIn field and marks it as non-optional;

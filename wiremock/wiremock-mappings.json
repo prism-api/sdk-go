@@ -169,7 +169,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"swap_type\": \"quote_token\",\n      \"protocol\": \"protocol\",\n      \"wallet_address\": \"wallet_address\",\n      \"token_address_in\": \"token_address_in\",\n      \"token_address_out\": \"token_address_out\",\n      \"token_amount_in\": 1.1,\n      \"token_amount_out\": 1.1,\n      \"token_price_in\": 1.1,\n      \"token_price_out\": 1.1,\n      \"pre_token_balance_in\": 1.1,\n      \"pre_token_balance_out\": 1.1,\n      \"post_token_balance_in\": 1.1,\n      \"post_token_balance_out\": 1.1,\n      \"usd_amount_in\": 1.1,\n      \"usd_amount_out\": 1.1,\n      \"block_slot\": 1,\n      \"block_time\": \"2024-01-15T09:30:00Z\",\n      \"tx_hash\": \"tx_hash\"\n    }\n  ]\n}",
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"swap_type\": \"quote_token\",\n      \"protocol\": \"protocol\",\n      \"wallet_address\": \"wallet_address\",\n      \"pool_address\": \"pool_address\",\n      \"token_address_in\": \"token_address_in\",\n      \"token_address_out\": \"token_address_out\",\n      \"token_amount_in\": 1.1,\n      \"token_amount_out\": 1.1,\n      \"token_price_in\": 1.1,\n      \"token_price_out\": 1.1,\n      \"pre_token_balance_in\": 1.1,\n      \"pre_token_balance_out\": 1.1,\n      \"post_token_balance_in\": 1.1,\n      \"post_token_balance_out\": 1.1,\n      \"usd_amount_in\": 1.1,\n      \"usd_amount_out\": 1.1,\n      \"block_slot\": 1,\n      \"block_time\": \"2024-01-15T09:30:00Z\",\n      \"tx_hash\": \"tx_hash\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -200,7 +200,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"usd_price\": 1.1,\n    \"block_slot\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"pool_address\": \"pool_address\",\n    \"usd_price\": 1.1,\n    \"block_slot\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -231,7 +231,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"usd_price\": 1.1,\n    \"usd_price_change_5m\": 1.1,\n    \"usd_price_change_1h\": 1.1,\n    \"usd_price_change_6h\": 1.1,\n    \"usd_price_change_12h\": 1.1,\n    \"usd_price_change_1d\": 1.1,\n    \"usd_price_change_7d\": 1.1,\n    \"usd_price_change_30d\": 1.1,\n    \"usd_volume_5m\": 1.1,\n    \"usd_volume_1h\": 1.1,\n    \"usd_volume_6h\": 1.1,\n    \"usd_volume_12h\": 1.1,\n    \"usd_volume_1d\": 1.1,\n    \"usd_volume_7d\": 1.1,\n    \"usd_volume_30d\": 1.1,\n    \"usd_volume_change_5m\": 1.1,\n    \"usd_volume_change_1h\": 1.1,\n    \"usd_volume_change_6h\": 1.1,\n    \"usd_volume_change_12h\": 1.1,\n    \"usd_volume_change_1d\": 1.1,\n    \"usd_volume_change_7d\": 1.1,\n    \"usd_volume_change_30d\": 1.1,\n    \"block_slot\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"pool_address\": \"pool_address\",\n    \"usd_price\": 1.1,\n    \"usd_price_change_5m\": 1.1,\n    \"usd_price_change_1h\": 1.1,\n    \"usd_price_change_6h\": 1.1,\n    \"usd_price_change_12h\": 1.1,\n    \"usd_price_change_1d\": 1.1,\n    \"usd_price_change_7d\": 1.1,\n    \"usd_price_change_30d\": 1.1,\n    \"usd_volume_5m\": 1.1,\n    \"usd_volume_1h\": 1.1,\n    \"usd_volume_6h\": 1.1,\n    \"usd_volume_12h\": 1.1,\n    \"usd_volume_1d\": 1.1,\n    \"usd_volume_7d\": 1.1,\n    \"usd_volume_30d\": 1.1,\n    \"usd_volume_change_5m\": 1.1,\n    \"usd_volume_change_1h\": 1.1,\n    \"usd_volume_change_6h\": 1.1,\n    \"usd_volume_change_12h\": 1.1,\n    \"usd_volume_change_1d\": 1.1,\n    \"usd_volume_change_7d\": 1.1,\n    \"usd_volume_change_30d\": 1.1,\n    \"block_slot\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -293,7 +293,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"prices\": [\n      {}\n    ]\n  }\n]",
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"pool_address\": \"pool_address\",\n    \"prices\": [\n      {}\n    ]\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }

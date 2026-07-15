@@ -8,9 +8,9 @@
       "path": "github.com/prism-api/sdk-go"
     }
   },
-  "originGitCommit": "855602fac765bc98c52efddb850d9fe23d593a6d",
-  "originGitCommitIsDirty": false,
+  "originGitCommit": "c765116cd85e77b41070eb3eb5c71ed083908aa5",
+  "originGitCommitIsDirty": true,
   "invokedBy": "manual",
-  "requestedVersion": "0.4.0",
-  "sdkVersion": "v0.4.0"
+  "requestedVersion": "0.4.1",
+  "sdkVersion": "v0.4.1"
 }

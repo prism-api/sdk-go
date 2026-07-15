@@ -13,11 +13,14 @@ import (
 
 var (
 	getPriceDexRequestFieldTokens = big.NewInt(1 << 0)
+	getPriceDexRequestFieldPools  = big.NewInt(1 << 1)
 )
 
 type GetPriceDexRequest struct {
-	// Token addresses to retrieve the latest prices for. Accepts between 1 and 1000 tokens per request.
-	Tokens []string `json:"tokens" url:"-"`
+	// Token addresses to retrieve the latest prices for.
+	Tokens []string `json:"tokens,omitempty" url:"-"`
+	// Pool addresses to retrieve the latest prices for.
+	Pools []string `json:"pools,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -35,6 +38,13 @@ func (g *GetPriceDexRequest) require(field *big.Int) {
 func (g *GetPriceDexRequest) SetTokens(tokens []string) {
 	g.Tokens = tokens
 	g.require(getPriceDexRequestFieldTokens)
+}
+
+// SetPools sets the Pools field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPriceDexRequest) SetPools(pools []string) {
+	g.Pools = pools
+	g.require(getPriceDexRequestFieldPools)
 }
 
 func (g *GetPriceDexRequest) UnmarshalJSON(data []byte) error {
@@ -59,24 +69,27 @@ func (g *GetPriceDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getPriceCandlesDexRequestFieldTokenAddress = big.NewInt(1 << 0)
-	getPriceCandlesDexRequestFieldFrom         = big.NewInt(1 << 1)
-	getPriceCandlesDexRequestFieldTo           = big.NewInt(1 << 2)
-	getPriceCandlesDexRequestFieldCount        = big.NewInt(1 << 3)
-	getPriceCandlesDexRequestFieldInterval     = big.NewInt(1 << 4)
+	getPriceCandlesDexRequestFieldToken    = big.NewInt(1 << 0)
+	getPriceCandlesDexRequestFieldPool     = big.NewInt(1 << 1)
+	getPriceCandlesDexRequestFieldFrom     = big.NewInt(1 << 2)
+	getPriceCandlesDexRequestFieldTo       = big.NewInt(1 << 3)
+	getPriceCandlesDexRequestFieldCount    = big.NewInt(1 << 4)
+	getPriceCandlesDexRequestFieldInterval = big.NewInt(1 << 5)
 )
 
 type GetPriceCandlesDexRequest struct {
-	// Token address to retrieve price candles for.
-	TokenAddress *string `json:"token_address,omitempty" url:"-"`
+	// Token address to filter by.
+	Token *string `json:"token,omitempty" url:"-"`
+	// Pool address to filter by.
+	Pool *string `json:"pool,omitempty" url:"-"`
 	// Start of the candle range, as a date-time RFC3339 string.
-	// Must be combined with `to` to define a bounded range.
+	// Can be combined with `to` to define a bounded range.
 	From *time.Time `json:"from,omitempty" url:"-"`
-	// End of the candle range, as a date-time RFC3339 string. Defaults to the current time.
-	// Must be combined with either `from` (to define a bounded range) or `count` (to return the N most recent candles ending at `to`).
+	// End of the candle range, as a date-time RFC3339 string.
+	// Defaults to the current time.
 	To *time.Time `json:"to,omitempty" url:"-"`
-	// Number of candles to return, ending at `to`.
-	// Must be combined with `to`.
+	// Number of candles to return.
+	// Must be combined with `from` or `to`.
 	Count *int `json:"count,omitempty" url:"-"`
 	// Sampling interval between data points, in seconds.
 	Interval int `json:"interval" url:"-"`
@@ -92,11 +105,18 @@ func (g *GetPriceCandlesDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// SetToken sets the Token field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetPriceCandlesDexRequest) SetTokenAddress(tokenAddress *string) {
-	g.TokenAddress = tokenAddress
-	g.require(getPriceCandlesDexRequestFieldTokenAddress)
+func (g *GetPriceCandlesDexRequest) SetToken(token *string) {
+	g.Token = token
+	g.require(getPriceCandlesDexRequestFieldToken)
+}
+
+// SetPool sets the Pool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPriceCandlesDexRequest) SetPool(pool *string) {
+	g.Pool = pool
+	g.require(getPriceCandlesDexRequestFieldPool)
 }
 
 // SetFrom sets the From field and marks it as non-optional;
@@ -154,17 +174,21 @@ func (g *GetPriceCandlesDexRequest) MarshalJSON() ([]byte, error) {
 
 var (
 	getPriceHistoryDexRequestFieldTokens   = big.NewInt(1 << 0)
-	getPriceHistoryDexRequestFieldFrom     = big.NewInt(1 << 1)
-	getPriceHistoryDexRequestFieldTo       = big.NewInt(1 << 2)
-	getPriceHistoryDexRequestFieldInterval = big.NewInt(1 << 3)
+	getPriceHistoryDexRequestFieldPools    = big.NewInt(1 << 1)
+	getPriceHistoryDexRequestFieldFrom     = big.NewInt(1 << 2)
+	getPriceHistoryDexRequestFieldTo       = big.NewInt(1 << 3)
+	getPriceHistoryDexRequestFieldInterval = big.NewInt(1 << 4)
 )
 
 type GetPriceHistoryDexRequest struct {
-	// Token addresses to retrieve price history for. Accepts between 1 and 100 tokens per request.
-	Tokens []string `json:"tokens" url:"-"`
+	// Token addresses to retrieve price history for.
+	Tokens []string `json:"tokens,omitempty" url:"-"`
+	// Pool addresses to retrieve price history for.
+	Pools []string `json:"pools,omitempty" url:"-"`
 	// Start of the history range, as a date-time RFC3339 string.
 	From time.Time `json:"from" url:"-"`
-	// End of the history range, as a date-time RFC3339 string. Defaults to the current time.
+	// End of the history range, as a date-time RFC3339 string.
+	// Defaults to the current time.
 	To *time.Time `json:"to,omitempty" url:"-"`
 	// Sampling interval between data points, in seconds.
 	Interval int `json:"interval" url:"-"`
@@ -185,6 +209,13 @@ func (g *GetPriceHistoryDexRequest) require(field *big.Int) {
 func (g *GetPriceHistoryDexRequest) SetTokens(tokens []string) {
 	g.Tokens = tokens
 	g.require(getPriceHistoryDexRequestFieldTokens)
+}
+
+// SetPools sets the Pools field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPriceHistoryDexRequest) SetPools(pools []string) {
+	g.Pools = pools
+	g.require(getPriceHistoryDexRequestFieldPools)
 }
 
 // SetFrom sets the From field and marks it as non-optional;
@@ -235,11 +266,14 @@ func (g *GetPriceHistoryDexRequest) MarshalJSON() ([]byte, error) {
 
 var (
 	getPriceStatsDexRequestFieldTokens = big.NewInt(1 << 0)
+	getPriceStatsDexRequestFieldPools  = big.NewInt(1 << 1)
 )
 
 type GetPriceStatsDexRequest struct {
-	// Token addresses to retrieve price statistics for. Accepts between 1 and 1000 tokens per request.
-	Tokens []string `json:"tokens" url:"-"`
+	// Token addresses to retrieve price statistics for.
+	Tokens []string `json:"tokens,omitempty" url:"-"`
+	// Pool addresses to retrieve price statistics for.
+	Pools []string `json:"pools,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -257,6 +291,13 @@ func (g *GetPriceStatsDexRequest) require(field *big.Int) {
 func (g *GetPriceStatsDexRequest) SetTokens(tokens []string) {
 	g.Tokens = tokens
 	g.require(getPriceStatsDexRequestFieldTokens)
+}
+
+// SetPools sets the Pools field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPriceStatsDexRequest) SetPools(pools []string) {
+	g.Pools = pools
+	g.require(getPriceStatsDexRequestFieldPools)
 }
 
 func (g *GetPriceStatsDexRequest) UnmarshalJSON(data []byte) error {
@@ -281,8 +322,9 @@ func (g *GetPriceStatsDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getSwapsDexRequestFieldWalletAddress = big.NewInt(1 << 0)
-	getSwapsDexRequestFieldTokenAddress  = big.NewInt(1 << 1)
+	getSwapsDexRequestFieldWallet = big.NewInt(1 << 0)
+	getSwapsDexRequestFieldToken  = big.NewInt(1 << 1)
+	getSwapsDexRequestFieldPool   = big.NewInt(1 << 2)
 )
 
 type GetSwapsDexRequest struct {
@@ -290,10 +332,12 @@ type GetSwapsDexRequest struct {
 	Limit *int `json:"limit,omitempty" url:"-"`
 	// Opaque cursor returned by a previous response. Pass it to fetch the next page of results.
 	Cursor *string `json:"cursor,omitempty" url:"-"`
-	// Wallet address to filter swaps by. When combined with `token`, returns only swaps for that wallet on that token.
-	WalletAddress *string `json:"wallet_address,omitempty" url:"-"`
-	// Token address to filter swaps by. When combined with `wallet`, returns only swaps for that wallet on that token.
-	TokenAddress *string `json:"token_address,omitempty" url:"-"`
+	// Wallet address to filter swaps by.
+	Wallet *string `json:"wallet,omitempty" url:"-"`
+	// Token address to filter swaps by.
+	Token *string `json:"token,omitempty" url:"-"`
+	// Pool address to filter swaps by.
+	Pool *string `json:"pool,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -306,18 +350,25 @@ func (g *GetSwapsDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// SetWallet sets the Wallet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSwapsDexRequest) SetWalletAddress(walletAddress *string) {
-	g.WalletAddress = walletAddress
-	g.require(getSwapsDexRequestFieldWalletAddress)
+func (g *GetSwapsDexRequest) SetWallet(wallet *string) {
+	g.Wallet = wallet
+	g.require(getSwapsDexRequestFieldWallet)
 }
 
-// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// SetToken sets the Token field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetSwapsDexRequest) SetTokenAddress(tokenAddress *string) {
-	g.TokenAddress = tokenAddress
-	g.require(getSwapsDexRequestFieldTokenAddress)
+func (g *GetSwapsDexRequest) SetToken(token *string) {
+	g.Token = token
+	g.require(getSwapsDexRequestFieldToken)
+}
+
+// SetPool sets the Pool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetSwapsDexRequest) SetPool(pool *string) {
+	g.Pool = pool
+	g.require(getSwapsDexRequestFieldPool)
 }
 
 func (g *GetSwapsDexRequest) UnmarshalJSON(data []byte) error {
@@ -342,14 +393,14 @@ func (g *GetSwapsDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getTokenProfileDexRequestFieldTokenAddress = big.NewInt(1 << 0)
-	getTokenProfileDexRequestFieldOptions      = big.NewInt(1 << 1)
+	getTokenProfileDexRequestFieldToken   = big.NewInt(1 << 0)
+	getTokenProfileDexRequestFieldOptions = big.NewInt(1 << 1)
 )
 
 type GetTokenProfileDexRequest struct {
 	// Token address to retrieve the profile for.
-	TokenAddress *string                                  `json:"token_address,omitempty" url:"-"`
-	Options      *api.SolanaDexTokenProfilePayloadOptions `json:"options,omitempty" url:"-"`
+	Token   string                                   `json:"token" url:"-"`
+	Options *api.SolanaDexTokenProfilePayloadOptions `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -362,11 +413,11 @@ func (g *GetTokenProfileDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// SetToken sets the Token field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTokenProfileDexRequest) SetTokenAddress(tokenAddress *string) {
-	g.TokenAddress = tokenAddress
-	g.require(getTokenProfileDexRequestFieldTokenAddress)
+func (g *GetTokenProfileDexRequest) SetToken(token string) {
+	g.Token = token
+	g.require(getTokenProfileDexRequestFieldToken)
 }
 
 // SetOptions sets the Options field and marks it as non-optional;
@@ -398,8 +449,8 @@ func (g *GetTokenProfileDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getTradesDexRequestFieldWalletAddress = big.NewInt(1 << 0)
-	getTradesDexRequestFieldTokenAddress  = big.NewInt(1 << 1)
+	getTradesDexRequestFieldWallet = big.NewInt(1 << 0)
+	getTradesDexRequestFieldToken  = big.NewInt(1 << 1)
 )
 
 type GetTradesDexRequest struct {
@@ -407,10 +458,10 @@ type GetTradesDexRequest struct {
 	Limit *int `json:"limit,omitempty" url:"-"`
 	// Opaque cursor returned by a previous response. Pass it to fetch the next page of results.
 	Cursor *string `json:"cursor,omitempty" url:"-"`
-	// Wallet address to filter trades by. When combined with `token`, returns only trades for that wallet on that token.
-	WalletAddress *string `json:"wallet_address,omitempty" url:"-"`
-	// Token address to filter trades by. When combined with `wallet`, returns only trades for that wallet on that token.
-	TokenAddress *string `json:"token_address,omitempty" url:"-"`
+	// Wallet address to filter trades by.
+	Wallet *string `json:"wallet,omitempty" url:"-"`
+	// Token address to filter trades by.
+	Token *string `json:"token,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -423,18 +474,18 @@ func (g *GetTradesDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// SetWallet sets the Wallet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTradesDexRequest) SetWalletAddress(walletAddress *string) {
-	g.WalletAddress = walletAddress
-	g.require(getTradesDexRequestFieldWalletAddress)
+func (g *GetTradesDexRequest) SetWallet(wallet *string) {
+	g.Wallet = wallet
+	g.require(getTradesDexRequestFieldWallet)
 }
 
-// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// SetToken sets the Token field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetTradesDexRequest) SetTokenAddress(tokenAddress *string) {
-	g.TokenAddress = tokenAddress
-	g.require(getTradesDexRequestFieldTokenAddress)
+func (g *GetTradesDexRequest) SetToken(token *string) {
+	g.Token = token
+	g.require(getTradesDexRequestFieldToken)
 }
 
 func (g *GetTradesDexRequest) UnmarshalJSON(data []byte) error {
@@ -459,14 +510,14 @@ func (g *GetTradesDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	getWalletProfileDexRequestFieldWalletAddress = big.NewInt(1 << 0)
-	getWalletProfileDexRequestFieldOptions       = big.NewInt(1 << 1)
+	getWalletProfileDexRequestFieldWallet  = big.NewInt(1 << 0)
+	getWalletProfileDexRequestFieldOptions = big.NewInt(1 << 1)
 )
 
 type GetWalletProfileDexRequest struct {
 	// Wallet address to retrieve the profile for.
-	WalletAddress *string                                   `json:"wallet_address,omitempty" url:"-"`
-	Options       *api.SolanaDexWalletProfilePayloadOptions `json:"options,omitempty" url:"-"`
+	Wallet  string                                    `json:"wallet" url:"-"`
+	Options *api.SolanaDexWalletProfilePayloadOptions `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -479,11 +530,11 @@ func (g *GetWalletProfileDexRequest) require(field *big.Int) {
 	g.explicitFields.Or(g.explicitFields, field)
 }
 
-// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// SetWallet sets the Wallet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetWalletProfileDexRequest) SetWalletAddress(walletAddress *string) {
-	g.WalletAddress = walletAddress
-	g.require(getWalletProfileDexRequestFieldWalletAddress)
+func (g *GetWalletProfileDexRequest) SetWallet(wallet string) {
+	g.Wallet = wallet
+	g.require(getWalletProfileDexRequestFieldWallet)
 }
 
 // SetOptions sets the Options field and marks it as non-optional;

@@ -468,13 +468,15 @@ func (p *PayloadPagination) String() string {
 
 var (
 	solanaDexPriceFieldTokenAddress = big.NewInt(1 << 0)
-	solanaDexPriceFieldUsdPrice     = big.NewInt(1 << 1)
-	solanaDexPriceFieldBlockSlot    = big.NewInt(1 << 2)
-	solanaDexPriceFieldBlockTime    = big.NewInt(1 << 3)
+	solanaDexPriceFieldPoolAddress  = big.NewInt(1 << 1)
+	solanaDexPriceFieldUsdPrice     = big.NewInt(1 << 2)
+	solanaDexPriceFieldBlockSlot    = big.NewInt(1 << 3)
+	solanaDexPriceFieldBlockTime    = big.NewInt(1 << 4)
 )
 
 type SolanaDexPrice struct {
 	TokenAddress *string    `json:"token_address,omitempty" url:"token_address,omitempty"`
+	PoolAddress  *string    `json:"pool_address,omitempty" url:"pool_address,omitempty"`
 	UsdPrice     *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
 	BlockSlot    *int       `json:"block_slot,omitempty" url:"block_slot,omitempty"`
 	BlockTime    *time.Time `json:"block_time,omitempty" url:"block_time,omitempty"`
@@ -491,6 +493,13 @@ func (s *SolanaDexPrice) GetTokenAddress() *string {
 		return nil
 	}
 	return s.TokenAddress
+}
+
+func (s *SolanaDexPrice) GetPoolAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddress
 }
 
 func (s *SolanaDexPrice) GetUsdPrice() *float64 {
@@ -533,6 +542,13 @@ func (s *SolanaDexPrice) require(field *big.Int) {
 func (s *SolanaDexPrice) SetTokenAddress(tokenAddress *string) {
 	s.TokenAddress = tokenAddress
 	s.require(solanaDexPriceFieldTokenAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPrice) SetPoolAddress(poolAddress *string) {
+	s.PoolAddress = poolAddress
+	s.require(solanaDexPriceFieldPoolAddress)
 }
 
 // SetUsdPrice sets the UsdPrice field and marks it as non-optional;
@@ -796,11 +812,13 @@ func (s *SolanaDexPriceCandle) String() string {
 
 var (
 	solanaDexPriceHistoryFieldTokenAddress = big.NewInt(1 << 0)
-	solanaDexPriceHistoryFieldPrices       = big.NewInt(1 << 1)
+	solanaDexPriceHistoryFieldPoolAddress  = big.NewInt(1 << 1)
+	solanaDexPriceHistoryFieldPrices       = big.NewInt(1 << 2)
 )
 
 type SolanaDexPriceHistory struct {
 	TokenAddress *string                   `json:"token_address,omitempty" url:"token_address,omitempty"`
+	PoolAddress  *string                   `json:"pool_address,omitempty" url:"pool_address,omitempty"`
 	Prices       []*SolanaDexPriceSnapshot `json:"prices,omitempty" url:"prices,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -815,6 +833,13 @@ func (s *SolanaDexPriceHistory) GetTokenAddress() *string {
 		return nil
 	}
 	return s.TokenAddress
+}
+
+func (s *SolanaDexPriceHistory) GetPoolAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddress
 }
 
 func (s *SolanaDexPriceHistory) GetPrices() []*SolanaDexPriceSnapshot {
@@ -843,6 +868,13 @@ func (s *SolanaDexPriceHistory) require(field *big.Int) {
 func (s *SolanaDexPriceHistory) SetTokenAddress(tokenAddress *string) {
 	s.TokenAddress = tokenAddress
 	s.require(solanaDexPriceHistoryFieldTokenAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPriceHistory) SetPoolAddress(poolAddress *string) {
+	s.PoolAddress = poolAddress
+	s.require(solanaDexPriceHistoryFieldPoolAddress)
 }
 
 // SetPrices sets the Prices field and marks it as non-optional;
@@ -1020,34 +1052,36 @@ func (s *SolanaDexPriceSnapshot) String() string {
 
 var (
 	solanaDexPriceStatsFieldTokenAddress       = big.NewInt(1 << 0)
-	solanaDexPriceStatsFieldUsdPrice           = big.NewInt(1 << 1)
-	solanaDexPriceStatsFieldUsdPriceChange5M   = big.NewInt(1 << 2)
-	solanaDexPriceStatsFieldUsdPriceChange1H   = big.NewInt(1 << 3)
-	solanaDexPriceStatsFieldUsdPriceChange6H   = big.NewInt(1 << 4)
-	solanaDexPriceStatsFieldUsdPriceChange12H  = big.NewInt(1 << 5)
-	solanaDexPriceStatsFieldUsdPriceChange1D   = big.NewInt(1 << 6)
-	solanaDexPriceStatsFieldUsdPriceChange7D   = big.NewInt(1 << 7)
-	solanaDexPriceStatsFieldUsdPriceChange30D  = big.NewInt(1 << 8)
-	solanaDexPriceStatsFieldUsdVolume5M        = big.NewInt(1 << 9)
-	solanaDexPriceStatsFieldUsdVolume1H        = big.NewInt(1 << 10)
-	solanaDexPriceStatsFieldUsdVolume6H        = big.NewInt(1 << 11)
-	solanaDexPriceStatsFieldUsdVolume12H       = big.NewInt(1 << 12)
-	solanaDexPriceStatsFieldUsdVolume1D        = big.NewInt(1 << 13)
-	solanaDexPriceStatsFieldUsdVolume7D        = big.NewInt(1 << 14)
-	solanaDexPriceStatsFieldUsdVolume30D       = big.NewInt(1 << 15)
-	solanaDexPriceStatsFieldUsdVolumeChange5M  = big.NewInt(1 << 16)
-	solanaDexPriceStatsFieldUsdVolumeChange1H  = big.NewInt(1 << 17)
-	solanaDexPriceStatsFieldUsdVolumeChange6H  = big.NewInt(1 << 18)
-	solanaDexPriceStatsFieldUsdVolumeChange12H = big.NewInt(1 << 19)
-	solanaDexPriceStatsFieldUsdVolumeChange1D  = big.NewInt(1 << 20)
-	solanaDexPriceStatsFieldUsdVolumeChange7D  = big.NewInt(1 << 21)
-	solanaDexPriceStatsFieldUsdVolumeChange30D = big.NewInt(1 << 22)
-	solanaDexPriceStatsFieldBlockSlot          = big.NewInt(1 << 23)
-	solanaDexPriceStatsFieldBlockTime          = big.NewInt(1 << 24)
+	solanaDexPriceStatsFieldPoolAddress        = big.NewInt(1 << 1)
+	solanaDexPriceStatsFieldUsdPrice           = big.NewInt(1 << 2)
+	solanaDexPriceStatsFieldUsdPriceChange5M   = big.NewInt(1 << 3)
+	solanaDexPriceStatsFieldUsdPriceChange1H   = big.NewInt(1 << 4)
+	solanaDexPriceStatsFieldUsdPriceChange6H   = big.NewInt(1 << 5)
+	solanaDexPriceStatsFieldUsdPriceChange12H  = big.NewInt(1 << 6)
+	solanaDexPriceStatsFieldUsdPriceChange1D   = big.NewInt(1 << 7)
+	solanaDexPriceStatsFieldUsdPriceChange7D   = big.NewInt(1 << 8)
+	solanaDexPriceStatsFieldUsdPriceChange30D  = big.NewInt(1 << 9)
+	solanaDexPriceStatsFieldUsdVolume5M        = big.NewInt(1 << 10)
+	solanaDexPriceStatsFieldUsdVolume1H        = big.NewInt(1 << 11)
+	solanaDexPriceStatsFieldUsdVolume6H        = big.NewInt(1 << 12)
+	solanaDexPriceStatsFieldUsdVolume12H       = big.NewInt(1 << 13)
+	solanaDexPriceStatsFieldUsdVolume1D        = big.NewInt(1 << 14)
+	solanaDexPriceStatsFieldUsdVolume7D        = big.NewInt(1 << 15)
+	solanaDexPriceStatsFieldUsdVolume30D       = big.NewInt(1 << 16)
+	solanaDexPriceStatsFieldUsdVolumeChange5M  = big.NewInt(1 << 17)
+	solanaDexPriceStatsFieldUsdVolumeChange1H  = big.NewInt(1 << 18)
+	solanaDexPriceStatsFieldUsdVolumeChange6H  = big.NewInt(1 << 19)
+	solanaDexPriceStatsFieldUsdVolumeChange12H = big.NewInt(1 << 20)
+	solanaDexPriceStatsFieldUsdVolumeChange1D  = big.NewInt(1 << 21)
+	solanaDexPriceStatsFieldUsdVolumeChange7D  = big.NewInt(1 << 22)
+	solanaDexPriceStatsFieldUsdVolumeChange30D = big.NewInt(1 << 23)
+	solanaDexPriceStatsFieldBlockSlot          = big.NewInt(1 << 24)
+	solanaDexPriceStatsFieldBlockTime          = big.NewInt(1 << 25)
 )
 
 type SolanaDexPriceStats struct {
 	TokenAddress       *string    `json:"token_address,omitempty" url:"token_address,omitempty"`
+	PoolAddress        *string    `json:"pool_address,omitempty" url:"pool_address,omitempty"`
 	UsdPrice           *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
 	UsdPriceChange5M   *float64   `json:"usd_price_change_5m,omitempty" url:"usd_price_change_5m,omitempty"`
 	UsdPriceChange1H   *float64   `json:"usd_price_change_1h,omitempty" url:"usd_price_change_1h,omitempty"`
@@ -1085,6 +1119,13 @@ func (s *SolanaDexPriceStats) GetTokenAddress() *string {
 		return nil
 	}
 	return s.TokenAddress
+}
+
+func (s *SolanaDexPriceStats) GetPoolAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddress
 }
 
 func (s *SolanaDexPriceStats) GetUsdPrice() *float64 {
@@ -1274,6 +1315,13 @@ func (s *SolanaDexPriceStats) require(field *big.Int) {
 func (s *SolanaDexPriceStats) SetTokenAddress(tokenAddress *string) {
 	s.TokenAddress = tokenAddress
 	s.require(solanaDexPriceStatsFieldTokenAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPriceStats) SetPoolAddress(poolAddress *string) {
+	s.PoolAddress = poolAddress
+	s.require(solanaDexPriceStatsFieldPoolAddress)
 }
 
 // SetUsdPrice sets the UsdPrice field and marks it as non-optional;
@@ -2371,21 +2419,22 @@ var (
 	solanaDexSwapFieldSwapType            = big.NewInt(1 << 1)
 	solanaDexSwapFieldProtocol            = big.NewInt(1 << 2)
 	solanaDexSwapFieldWalletAddress       = big.NewInt(1 << 3)
-	solanaDexSwapFieldTokenAddressIn      = big.NewInt(1 << 4)
-	solanaDexSwapFieldTokenAddressOut     = big.NewInt(1 << 5)
-	solanaDexSwapFieldTokenAmountIn       = big.NewInt(1 << 6)
-	solanaDexSwapFieldTokenAmountOut      = big.NewInt(1 << 7)
-	solanaDexSwapFieldTokenPriceIn        = big.NewInt(1 << 8)
-	solanaDexSwapFieldTokenPriceOut       = big.NewInt(1 << 9)
-	solanaDexSwapFieldPreTokenBalanceIn   = big.NewInt(1 << 10)
-	solanaDexSwapFieldPreTokenBalanceOut  = big.NewInt(1 << 11)
-	solanaDexSwapFieldPostTokenBalanceIn  = big.NewInt(1 << 12)
-	solanaDexSwapFieldPostTokenBalanceOut = big.NewInt(1 << 13)
-	solanaDexSwapFieldUsdAmountIn         = big.NewInt(1 << 14)
-	solanaDexSwapFieldUsdAmountOut        = big.NewInt(1 << 15)
-	solanaDexSwapFieldBlockSlot           = big.NewInt(1 << 16)
-	solanaDexSwapFieldBlockTime           = big.NewInt(1 << 17)
-	solanaDexSwapFieldTxHash              = big.NewInt(1 << 18)
+	solanaDexSwapFieldPoolAddress         = big.NewInt(1 << 4)
+	solanaDexSwapFieldTokenAddressIn      = big.NewInt(1 << 5)
+	solanaDexSwapFieldTokenAddressOut     = big.NewInt(1 << 6)
+	solanaDexSwapFieldTokenAmountIn       = big.NewInt(1 << 7)
+	solanaDexSwapFieldTokenAmountOut      = big.NewInt(1 << 8)
+	solanaDexSwapFieldTokenPriceIn        = big.NewInt(1 << 9)
+	solanaDexSwapFieldTokenPriceOut       = big.NewInt(1 << 10)
+	solanaDexSwapFieldPreTokenBalanceIn   = big.NewInt(1 << 11)
+	solanaDexSwapFieldPreTokenBalanceOut  = big.NewInt(1 << 12)
+	solanaDexSwapFieldPostTokenBalanceIn  = big.NewInt(1 << 13)
+	solanaDexSwapFieldPostTokenBalanceOut = big.NewInt(1 << 14)
+	solanaDexSwapFieldUsdAmountIn         = big.NewInt(1 << 15)
+	solanaDexSwapFieldUsdAmountOut        = big.NewInt(1 << 16)
+	solanaDexSwapFieldBlockSlot           = big.NewInt(1 << 17)
+	solanaDexSwapFieldBlockTime           = big.NewInt(1 << 18)
+	solanaDexSwapFieldTxHash              = big.NewInt(1 << 19)
 )
 
 type SolanaDexSwap struct {
@@ -2393,6 +2442,7 @@ type SolanaDexSwap struct {
 	SwapType            *SolanaDexSwapTypeEnum  `json:"swap_type,omitempty" url:"swap_type,omitempty"`
 	Protocol            *SolanaDexProtocolField `json:"protocol,omitempty" url:"protocol,omitempty"`
 	WalletAddress       *string                 `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	PoolAddress         *string                 `json:"pool_address,omitempty" url:"pool_address,omitempty"`
 	TokenAddressIn      *string                 `json:"token_address_in,omitempty" url:"token_address_in,omitempty"`
 	TokenAddressOut     *string                 `json:"token_address_out,omitempty" url:"token_address_out,omitempty"`
 	TokenAmountIn       *float64                `json:"token_amount_in,omitempty" url:"token_amount_in,omitempty"`
@@ -2442,6 +2492,13 @@ func (s *SolanaDexSwap) GetWalletAddress() *string {
 		return nil
 	}
 	return s.WalletAddress
+}
+
+func (s *SolanaDexSwap) GetPoolAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddress
 }
 
 func (s *SolanaDexSwap) GetTokenAddressIn() *string {
@@ -2589,6 +2646,13 @@ func (s *SolanaDexSwap) SetProtocol(protocol *SolanaDexProtocolField) {
 func (s *SolanaDexSwap) SetWalletAddress(walletAddress *string) {
 	s.WalletAddress = walletAddress
 	s.require(solanaDexSwapFieldWalletAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexSwap) SetPoolAddress(poolAddress *string) {
+	s.PoolAddress = poolAddress
+	s.require(solanaDexSwapFieldPoolAddress)
 }
 
 // SetTokenAddressIn sets the TokenAddressIn field and marks it as non-optional;

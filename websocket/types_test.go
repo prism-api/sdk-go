@@ -575,6 +575,14 @@ func TestSettersSubscribeSolanaDexSwapsParams(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetPoolAddresses", func(t *testing.T) {
+		obj := &SubscribeSolanaDexSwapsParams{}
+		var fernTestValuePoolAddresses []string
+		obj.SetPoolAddresses(fernTestValuePoolAddresses)
+		assert.Equal(t, fernTestValuePoolAddresses, obj.PoolAddresses)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersSubscribeSolanaDexSwapsParams(t *testing.T) {
@@ -644,6 +652,39 @@ func TestGettersSubscribeSolanaDexSwapsParams(t *testing.T) {
 		_ = obj.GetTokenAddresses() // Should return zero value
 	})
 
+	t.Run("GetPoolAddresses", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribeSolanaDexSwapsParams{}
+		var expected []string
+		obj.PoolAddresses = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPoolAddresses(), "getter should return the property value")
+	})
+
+	t.Run("GetPoolAddresses_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribeSolanaDexSwapsParams{}
+		obj.PoolAddresses = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPoolAddresses(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPoolAddresses_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscribeSolanaDexSwapsParams
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPoolAddresses() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitSubscribeSolanaDexSwapsParams(t *testing.T) {
@@ -686,6 +727,37 @@ func TestSettersMarkExplicitSubscribeSolanaDexSwapsParams(t *testing.T) {
 
 		// Act
 		obj.SetTokenAddresses(fernTestValueTokenAddresses)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPoolAddresses_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscribeSolanaDexSwapsParams{}
+		var fernTestValuePoolAddresses []string
+
+		// Act
+		obj.SetPoolAddresses(fernTestValuePoolAddresses)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

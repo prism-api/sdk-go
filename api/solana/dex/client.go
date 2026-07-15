@@ -103,7 +103,7 @@ func (c *Client) SearchTokenProfiles(
 	return response.Body, nil
 }
 
-// Returns trades for a wallet, token or both.
+// Returns trades for a combination of wallet, token and/or pool.
 func (c *Client) GetTrades(
 	ctx context.Context,
 	request *solana.GetTradesDexRequest,
@@ -120,7 +120,7 @@ func (c *Client) GetTrades(
 	return response.Body, nil
 }
 
-// Returns swaps for a wallet, token or both.
+// Returns swaps for a combination of wallet, token and/or pool.
 func (c *Client) GetSwaps(
 	ctx context.Context,
 	request *solana.GetSwapsDexRequest,
@@ -137,7 +137,7 @@ func (c *Client) GetSwaps(
 	return response.Body, nil
 }
 
-// Returns prices for one or more tokens.
+// Returns prices for one or more tokens or pools.
 func (c *Client) GetPrice(
 	ctx context.Context,
 	request *solana.GetPriceDexRequest,
@@ -154,7 +154,7 @@ func (c *Client) GetPrice(
 	return response.Body, nil
 }
 
-// Returns price stats for one or more tokens.
+// Returns price stats for one or more tokens or pools.
 func (c *Client) GetPriceStats(
 	ctx context.Context,
 	request *solana.GetPriceStatsDexRequest,
@@ -171,7 +171,7 @@ func (c *Client) GetPriceStats(
 	return response.Body, nil
 }
 
-// Returns price candles for a specific token.
+// Returns price candles for a specific token and/or pool.
 func (c *Client) GetPriceCandles(
 	ctx context.Context,
 	request *solana.GetPriceCandlesDexRequest,
@@ -188,7 +188,7 @@ func (c *Client) GetPriceCandles(
 	return response.Body, nil
 }
 
-// Returns price history for one or more tokens.
+// Returns price history for one or more tokens or pools.
 func (c *Client) GetPriceHistory(
 	ctx context.Context,
 	request *solana.GetPriceHistoryDexRequest,

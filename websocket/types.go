@@ -471,6 +471,7 @@ func (s *SubscribeSolanaDexPricesParams) String() string {
 var (
 	subscribeSolanaDexSwapsParamsFieldWalletAddresses = big.NewInt(1 << 0)
 	subscribeSolanaDexSwapsParamsFieldTokenAddresses  = big.NewInt(1 << 1)
+	subscribeSolanaDexSwapsParamsFieldPoolAddresses   = big.NewInt(1 << 2)
 )
 
 type SubscribeSolanaDexSwapsParams struct {
@@ -478,6 +479,8 @@ type SubscribeSolanaDexSwapsParams struct {
 	WalletAddresses []string `json:"wallet_addresses,omitempty" url:"wallet_addresses,omitempty"`
 	// The token addresses to filter by. Leave empty to subscribe to all tokens.
 	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
+	// The pool addresses to filter by. Leave empty to subscribe to all pools.
+	PoolAddresses []string `json:"pool_addresses,omitempty" url:"pool_addresses,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -498,6 +501,13 @@ func (s *SubscribeSolanaDexSwapsParams) GetTokenAddresses() []string {
 		return nil
 	}
 	return s.TokenAddresses
+}
+
+func (s *SubscribeSolanaDexSwapsParams) GetPoolAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddresses
 }
 
 func (s *SubscribeSolanaDexSwapsParams) GetExtraProperties() map[string]interface{} {
@@ -526,6 +536,13 @@ func (s *SubscribeSolanaDexSwapsParams) SetWalletAddresses(walletAddresses []str
 func (s *SubscribeSolanaDexSwapsParams) SetTokenAddresses(tokenAddresses []string) {
 	s.TokenAddresses = tokenAddresses
 	s.require(subscribeSolanaDexSwapsParamsFieldTokenAddresses)
+}
+
+// SetPoolAddresses sets the PoolAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeSolanaDexSwapsParams) SetPoolAddresses(poolAddresses []string) {
+	s.PoolAddresses = poolAddresses
+	s.require(subscribeSolanaDexSwapsParamsFieldPoolAddresses)
 }
 
 func (s *SubscribeSolanaDexSwapsParams) UnmarshalJSON(data []byte) error {
