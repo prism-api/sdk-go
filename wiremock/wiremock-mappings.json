@@ -125,6 +125,68 @@
       }
     },
     {
+      "id": "3743d67a-6b87-4c4a-809c-ea24d431aeb1",
+      "name": "Get Profile - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/profiles/positions/get-profile",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"updated_at\": \"2024-01-15T09:30:00Z\",\n  \"synced_at\": \"2024-01-15T09:30:00Z\",\n  \"position_address\": \"position_address\",\n  \"wallet_address\": \"wallet_address\",\n  \"token_address\": \"token_address\",\n  \"labels\": [\n    \"labels\"\n  ],\n  \"dynamic_labels\": [\n    \"dynamic_labels\"\n  ],\n  \"metadata\": {\n    \"last_trade_at\": \"2024-01-15T09:30:00Z\"\n  },\n  \"metrics\": {\n    \"key\": {\n      \"risk_score\": 1.1,\n      \"consistency_score\": 1.1,\n      \"largest_win\": 1.1,\n      \"largest_loss\": 1.1,\n      \"max_consecutive_wins\": 1,\n      \"max_consecutive_losses\": 1,\n      \"avg_buy_size\": 1.1,\n      \"avg_sell_size\": 1.1,\n      \"avg_buy_mcap\": 1.1,\n      \"avg_sell_mcap\": 1.1,\n      \"avg_daily_trade_count\": 1,\n      \"avg_daily_volume\": 1.1,\n      \"avg_daily_pnl\": 1.1,\n      \"avg_daily_roi\": 1.1,\n      \"avg_holding_duration\": 1,\n      \"avg_trade_delta\": 1,\n      \"avg_pnl\": 1.1,\n      \"avg_roi\": 1.1,\n      \"trade_count\": 1,\n      \"buy_count\": 1,\n      \"sell_count\": 1,\n      \"win_count\": 1,\n      \"loss_count\": 1,\n      \"pnl\": 1.1,\n      \"win_pnl\": 1.1,\n      \"loss_pnl\": 1.1,\n      \"volume\": 1.1,\n      \"buy_volume\": 1.1,\n      \"sell_volume\": 1.1,\n      \"winrate\": 1.1,\n      \"volume_weighted_winrate\": 1.1,\n      \"roi\": 1.1,\n      \"volume_weighted_roi\": 1.1,\n      \"pnl_volume_ratio\": 1.1,\n      \"win_loss_size_ratio\": 1.1,\n      \"profit_factor\": 1.1,\n      \"profit_expectancy\": 1.1,\n      \"recovery_factor\": 1.1,\n      \"winrate_stability\": 1.1,\n      \"winrate_volatility\": 1.1,\n      \"roi_stability\": 1.1,\n      \"roi_volatility\": 1.1,\n      \"pnl_stability\": 1.1,\n      \"pnl_volatility\": 1.1,\n      \"sharpe_ratio\": 1.1,\n      \"sortino_ratio\": 1.1,\n      \"max_drawdown\": 1.1,\n      \"risk_of_ruin\": 1.1,\n      \"turnover\": 1.1\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3743d67a-6b87-4c4a-809c-ea24d431aeb1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "1f769391-054b-448e-83a5-dc24a2ce0557",
+      "name": "Search Profiles - default",
+      "request": {
+        "urlPathTemplate": "/v1/solana/dex/profiles/positions/search-profiles",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"updated_at\": \"2024-01-15T09:30:00Z\",\n      \"synced_at\": \"2024-01-15T09:30:00Z\",\n      \"position_address\": \"position_address\",\n      \"wallet_address\": \"wallet_address\",\n      \"token_address\": \"token_address\",\n      \"labels\": [\n        \"labels\"\n      ],\n      \"dynamic_labels\": [\n        \"dynamic_labels\"\n      ],\n      \"metrics\": {\n        \"key\": {}\n      }\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1f769391-054b-448e-83a5-dc24a2ce0557",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "2f210ade-6f2e-4ed5-bc75-3d838103e019",
       "name": "Get Trades - default",
       "request": {
@@ -312,6 +374,6 @@
     }
   ],
   "meta": {
-    "total": 10
+    "total": 12
   }
 }

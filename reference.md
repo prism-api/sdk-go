@@ -404,6 +404,200 @@ client.API.Solana.Dex.SearchTokenProfiles(
 </dl>
 </details>
 
+<details><summary><code>client.API.Solana.Dex.GetPositionProfile(request) -> *api.SolanaDexPositionProfile</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a position profile for a specific wallet-token pair.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &solana.GetPositionProfileDexRequest{
+        Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
+        Token: "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
+        Options: &api.SolanaDexPositionProfilePayloadOptions{
+            IncludeMetadata: prism.Bool(
+                true,
+            ),
+            IncludeLabels: prism.Bool(
+                true,
+            ),
+            IncludeMetrics: []api.SolanaDexPositionProfileTimeWindowEnum{
+                api.SolanaDexPositionProfileTimeWindowEnumWindow7D,
+            },
+        },
+    }
+client.API.Solana.Dex.GetPositionProfile(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**wallet:** `string` — Wallet address of the position to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token:** `string` — Token address of the position to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**options:** `*api.SolanaDexPositionProfilePayloadOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.API.Solana.Dex.SearchPositionProfiles(request) -> *solana.SearchPositionProfilesDexResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Filter, query, and sort position profiles based on specified metrics and conditions.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &solana.SearchPositionProfilesDexRequest{
+        Limit: prism.Int(
+            10,
+        ),
+        Sort: &api.SolanaDexProfileSearchPayloadSort{
+            Field: "metrics.7d.pnl",
+            Direction: api.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
+        },
+        DynamicLabels: &api.SolanaDexProfileSearchPayloadDynamicLabels{
+            "winner": &api.SolanaDexProfileSearchPayloadFilter{},
+        },
+        Options: &api.SolanaDexPositionProfilePayloadOptions{
+            IncludeMetadata: prism.Bool(
+                true,
+            ),
+            IncludeLabels: prism.Bool(
+                true,
+            ),
+            IncludeMetrics: []api.SolanaDexPositionProfileTimeWindowEnum{
+                api.SolanaDexPositionProfileTimeWindowEnumWindow7D,
+            },
+        },
+    }
+client.API.Solana.Dex.SearchPositionProfiles(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**filter:** `*api.SolanaDexProfileSearchPayloadFilter` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `*api.SolanaDexProfileSearchPayloadSort` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dynamicLabels:** `*api.SolanaDexProfileSearchPayloadDynamicLabels` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**options:** `*api.SolanaDexPositionProfilePayloadOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.API.Solana.Dex.GetTrades(request) -> *solana.GetTradesDexResponse</code></summary>
 <dl>
 <dd>

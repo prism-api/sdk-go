@@ -12,6 +12,72 @@ import (
 )
 
 var (
+	getPositionProfileDexRequestFieldWallet  = big.NewInt(1 << 0)
+	getPositionProfileDexRequestFieldToken   = big.NewInt(1 << 1)
+	getPositionProfileDexRequestFieldOptions = big.NewInt(1 << 2)
+)
+
+type GetPositionProfileDexRequest struct {
+	// Wallet address of the position to retrieve.
+	Wallet string `json:"wallet" url:"-"`
+	// Token address of the position to retrieve.
+	Token   string                                      `json:"token" url:"-"`
+	Options *api.SolanaDexPositionProfilePayloadOptions `json:"options,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (g *GetPositionProfileDexRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetWallet sets the Wallet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPositionProfileDexRequest) SetWallet(wallet string) {
+	g.Wallet = wallet
+	g.require(getPositionProfileDexRequestFieldWallet)
+}
+
+// SetToken sets the Token field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPositionProfileDexRequest) SetToken(token string) {
+	g.Token = token
+	g.require(getPositionProfileDexRequestFieldToken)
+}
+
+// SetOptions sets the Options field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPositionProfileDexRequest) SetOptions(options *api.SolanaDexPositionProfilePayloadOptions) {
+	g.Options = options
+	g.require(getPositionProfileDexRequestFieldOptions)
+}
+
+func (g *GetPositionProfileDexRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GetPositionProfileDexRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*g = GetPositionProfileDexRequest(body)
+	return nil
+}
+
+func (g *GetPositionProfileDexRequest) MarshalJSON() ([]byte, error) {
+	type embed GetPositionProfileDexRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	getPriceDexRequestFieldTokens = big.NewInt(1 << 0)
 	getPriceDexRequestFieldPools  = big.NewInt(1 << 1)
 )
@@ -566,6 +632,83 @@ func (g *GetWalletProfileDexRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	searchPositionProfilesDexRequestFieldFilter        = big.NewInt(1 << 0)
+	searchPositionProfilesDexRequestFieldSort          = big.NewInt(1 << 1)
+	searchPositionProfilesDexRequestFieldDynamicLabels = big.NewInt(1 << 2)
+	searchPositionProfilesDexRequestFieldOptions       = big.NewInt(1 << 3)
+)
+
+type SearchPositionProfilesDexRequest struct {
+	// Maximum number of results to return in a single page.
+	Limit *int `json:"limit,omitempty" url:"-"`
+	// Opaque cursor returned by a previous response. Pass it to fetch the next page of results.
+	Cursor        *string                                         `json:"cursor,omitempty" url:"-"`
+	Filter        *api.SolanaDexProfileSearchPayloadFilter        `json:"filter,omitempty" url:"-"`
+	Sort          *api.SolanaDexProfileSearchPayloadSort          `json:"sort,omitempty" url:"-"`
+	DynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels `json:"dynamic_labels,omitempty" url:"-"`
+	Options       *api.SolanaDexPositionProfilePayloadOptions     `json:"options,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SearchPositionProfilesDexRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SearchPositionProfilesDexRequest) SetFilter(filter *api.SolanaDexProfileSearchPayloadFilter) {
+	s.Filter = filter
+	s.require(searchPositionProfilesDexRequestFieldFilter)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SearchPositionProfilesDexRequest) SetSort(sort *api.SolanaDexProfileSearchPayloadSort) {
+	s.Sort = sort
+	s.require(searchPositionProfilesDexRequestFieldSort)
+}
+
+// SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SearchPositionProfilesDexRequest) SetDynamicLabels(dynamicLabels *api.SolanaDexProfileSearchPayloadDynamicLabels) {
+	s.DynamicLabels = dynamicLabels
+	s.require(searchPositionProfilesDexRequestFieldDynamicLabels)
+}
+
+// SetOptions sets the Options field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SearchPositionProfilesDexRequest) SetOptions(options *api.SolanaDexPositionProfilePayloadOptions) {
+	s.Options = options
+	s.require(searchPositionProfilesDexRequestFieldOptions)
+}
+
+func (s *SearchPositionProfilesDexRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SearchPositionProfilesDexRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SearchPositionProfilesDexRequest(body)
+	return nil
+}
+
+func (s *SearchPositionProfilesDexRequest) MarshalJSON() ([]byte, error) {
+	type embed SearchPositionProfilesDexRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	searchTokenProfilesDexRequestFieldQuery         = big.NewInt(1 << 0)
 	searchTokenProfilesDexRequestFieldFilter        = big.NewInt(1 << 1)
 	searchTokenProfilesDexRequestFieldSort          = big.NewInt(1 << 2)
@@ -971,6 +1114,124 @@ func (g *GetTradesDexResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	searchPositionProfilesDexResponseFieldCount  = big.NewInt(1 << 0)
+	searchPositionProfilesDexResponseFieldCursor = big.NewInt(1 << 1)
+	searchPositionProfilesDexResponseFieldData   = big.NewInt(1 << 2)
+)
+
+type SearchPositionProfilesDexResponse struct {
+	// Total number of matching items
+	Count *int `json:"count,omitempty" url:"count,omitempty"`
+	// Cursor for pagination
+	Cursor *string                         `json:"cursor,omitempty" url:"cursor,omitempty"`
+	Data   []*api.SolanaDexPositionProfile `json:"data,omitempty" url:"data,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SearchPositionProfilesDexResponse) GetCount() *int {
+	if s == nil {
+		return nil
+	}
+	return s.Count
+}
+
+func (s *SearchPositionProfilesDexResponse) GetCursor() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Cursor
+}
+
+func (s *SearchPositionProfilesDexResponse) GetData() []*api.SolanaDexPositionProfile {
+	if s == nil {
+		return nil
+	}
+	return s.Data
+}
+
+func (s *SearchPositionProfilesDexResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SearchPositionProfilesDexResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetCount sets the Count field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SearchPositionProfilesDexResponse) SetCount(count *int) {
+	s.Count = count
+	s.require(searchPositionProfilesDexResponseFieldCount)
+}
+
+// SetCursor sets the Cursor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SearchPositionProfilesDexResponse) SetCursor(cursor *string) {
+	s.Cursor = cursor
+	s.require(searchPositionProfilesDexResponseFieldCursor)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SearchPositionProfilesDexResponse) SetData(data []*api.SolanaDexPositionProfile) {
+	s.Data = data
+	s.require(searchPositionProfilesDexResponseFieldData)
+}
+
+func (s *SearchPositionProfilesDexResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SearchPositionProfilesDexResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SearchPositionProfilesDexResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SearchPositionProfilesDexResponse) MarshalJSON() ([]byte, error) {
+	type embed SearchPositionProfilesDexResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SearchPositionProfilesDexResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }
 
 var (

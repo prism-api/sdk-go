@@ -467,6 +467,1327 @@ func (p *PayloadPagination) String() string {
 }
 
 var (
+	solanaDexPositionProfileFieldUpdatedAt       = big.NewInt(1 << 0)
+	solanaDexPositionProfileFieldSyncedAt        = big.NewInt(1 << 1)
+	solanaDexPositionProfileFieldPositionAddress = big.NewInt(1 << 2)
+	solanaDexPositionProfileFieldWalletAddress   = big.NewInt(1 << 3)
+	solanaDexPositionProfileFieldTokenAddress    = big.NewInt(1 << 4)
+	solanaDexPositionProfileFieldLabels          = big.NewInt(1 << 5)
+	solanaDexPositionProfileFieldDynamicLabels   = big.NewInt(1 << 6)
+	solanaDexPositionProfileFieldMetadata        = big.NewInt(1 << 7)
+	solanaDexPositionProfileFieldMetrics         = big.NewInt(1 << 8)
+)
+
+type SolanaDexPositionProfile struct {
+	UpdatedAt       *time.Time                                  `json:"updated_at,omitempty" url:"updated_at,omitempty"`
+	SyncedAt        *time.Time                                  `json:"synced_at,omitempty" url:"synced_at,omitempty"`
+	PositionAddress *string                                     `json:"position_address,omitempty" url:"position_address,omitempty"`
+	WalletAddress   *string                                     `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	TokenAddress    *string                                     `json:"token_address,omitempty" url:"token_address,omitempty"`
+	Labels          *SolanaDexPositionProfileLabels             `json:"labels,omitempty" url:"labels,omitempty"`
+	DynamicLabels   *SolanaDexProfileDynamicLabels              `json:"dynamic_labels,omitempty" url:"dynamic_labels,omitempty"`
+	Metadata        *SolanaDexPositionProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Metrics         map[string]*SolanaDexPositionProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexPositionProfile) GetUpdatedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.UpdatedAt
+}
+
+func (s *SolanaDexPositionProfile) GetSyncedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.SyncedAt
+}
+
+func (s *SolanaDexPositionProfile) GetPositionAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.PositionAddress
+}
+
+func (s *SolanaDexPositionProfile) GetWalletAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.WalletAddress
+}
+
+func (s *SolanaDexPositionProfile) GetTokenAddress() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddress
+}
+
+func (s *SolanaDexPositionProfile) GetLabels() *SolanaDexPositionProfileLabels {
+	if s == nil {
+		return nil
+	}
+	return s.Labels
+}
+
+func (s *SolanaDexPositionProfile) GetDynamicLabels() *SolanaDexProfileDynamicLabels {
+	if s == nil {
+		return nil
+	}
+	return s.DynamicLabels
+}
+
+func (s *SolanaDexPositionProfile) GetMetadata() *SolanaDexPositionProfileMetadata {
+	if s == nil {
+		return nil
+	}
+	return s.Metadata
+}
+
+func (s *SolanaDexPositionProfile) GetMetrics() map[string]*SolanaDexPositionProfileMetrics {
+	if s == nil {
+		return nil
+	}
+	return s.Metrics
+}
+
+func (s *SolanaDexPositionProfile) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexPositionProfile) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetUpdatedAt(updatedAt *time.Time) {
+	s.UpdatedAt = updatedAt
+	s.require(solanaDexPositionProfileFieldUpdatedAt)
+}
+
+// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetSyncedAt(syncedAt *time.Time) {
+	s.SyncedAt = syncedAt
+	s.require(solanaDexPositionProfileFieldSyncedAt)
+}
+
+// SetPositionAddress sets the PositionAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetPositionAddress(positionAddress *string) {
+	s.PositionAddress = positionAddress
+	s.require(solanaDexPositionProfileFieldPositionAddress)
+}
+
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetWalletAddress(walletAddress *string) {
+	s.WalletAddress = walletAddress
+	s.require(solanaDexPositionProfileFieldWalletAddress)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetTokenAddress(tokenAddress *string) {
+	s.TokenAddress = tokenAddress
+	s.require(solanaDexPositionProfileFieldTokenAddress)
+}
+
+// SetLabels sets the Labels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetLabels(labels *SolanaDexPositionProfileLabels) {
+	s.Labels = labels
+	s.require(solanaDexPositionProfileFieldLabels)
+}
+
+// SetDynamicLabels sets the DynamicLabels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetDynamicLabels(dynamicLabels *SolanaDexProfileDynamicLabels) {
+	s.DynamicLabels = dynamicLabels
+	s.require(solanaDexPositionProfileFieldDynamicLabels)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetMetadata(metadata *SolanaDexPositionProfileMetadata) {
+	s.Metadata = metadata
+	s.require(solanaDexPositionProfileFieldMetadata)
+}
+
+// SetMetrics sets the Metrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfile) SetMetrics(metrics map[string]*SolanaDexPositionProfileMetrics) {
+	s.Metrics = metrics
+	s.require(solanaDexPositionProfileFieldMetrics)
+}
+
+func (s *SolanaDexPositionProfile) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexPositionProfile
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SolanaDexPositionProfile(unmarshaler.embed)
+	s.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
+	s.SyncedAt = unmarshaler.SyncedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexPositionProfile) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexPositionProfile
+	var marshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed:     embed(*s),
+		UpdatedAt: internal.NewOptionalDateTime(s.UpdatedAt),
+		SyncedAt:  internal.NewOptionalDateTime(s.SyncedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexPositionProfile) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SolanaDexPositionProfileLabels = []string
+
+var (
+	solanaDexPositionProfileMetadataFieldLastTradeAt = big.NewInt(1 << 0)
+)
+
+type SolanaDexPositionProfileMetadata struct {
+	LastTradeAt *time.Time `json:"last_trade_at,omitempty" url:"last_trade_at,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexPositionProfileMetadata) GetLastTradeAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.LastTradeAt
+}
+
+func (s *SolanaDexPositionProfileMetadata) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexPositionProfileMetadata) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetLastTradeAt sets the LastTradeAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetadata) SetLastTradeAt(lastTradeAt *time.Time) {
+	s.LastTradeAt = lastTradeAt
+	s.require(solanaDexPositionProfileMetadataFieldLastTradeAt)
+}
+
+func (s *SolanaDexPositionProfileMetadata) UnmarshalJSON(data []byte) error {
+	type embed SolanaDexPositionProfileMetadata
+	var unmarshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SolanaDexPositionProfileMetadata(unmarshaler.embed)
+	s.LastTradeAt = unmarshaler.LastTradeAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexPositionProfileMetadata) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexPositionProfileMetadata
+	var marshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+	}{
+		embed:       embed(*s),
+		LastTradeAt: internal.NewOptionalDateTime(s.LastTradeAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexPositionProfileMetadata) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	solanaDexPositionProfileMetricsFieldRiskScore             = big.NewInt(1 << 0)
+	solanaDexPositionProfileMetricsFieldConsistencyScore      = big.NewInt(1 << 1)
+	solanaDexPositionProfileMetricsFieldLargestWin            = big.NewInt(1 << 2)
+	solanaDexPositionProfileMetricsFieldLargestLoss           = big.NewInt(1 << 3)
+	solanaDexPositionProfileMetricsFieldMaxConsecutiveWins    = big.NewInt(1 << 4)
+	solanaDexPositionProfileMetricsFieldMaxConsecutiveLosses  = big.NewInt(1 << 5)
+	solanaDexPositionProfileMetricsFieldAvgBuySize            = big.NewInt(1 << 6)
+	solanaDexPositionProfileMetricsFieldAvgSellSize           = big.NewInt(1 << 7)
+	solanaDexPositionProfileMetricsFieldAvgBuyMcap            = big.NewInt(1 << 8)
+	solanaDexPositionProfileMetricsFieldAvgSellMcap           = big.NewInt(1 << 9)
+	solanaDexPositionProfileMetricsFieldAvgDailyTradeCount    = big.NewInt(1 << 10)
+	solanaDexPositionProfileMetricsFieldAvgDailyVolume        = big.NewInt(1 << 11)
+	solanaDexPositionProfileMetricsFieldAvgDailyPnl           = big.NewInt(1 << 12)
+	solanaDexPositionProfileMetricsFieldAvgDailyRoi           = big.NewInt(1 << 13)
+	solanaDexPositionProfileMetricsFieldAvgHoldingDuration    = big.NewInt(1 << 14)
+	solanaDexPositionProfileMetricsFieldAvgTradeDelta         = big.NewInt(1 << 15)
+	solanaDexPositionProfileMetricsFieldAvgPnl                = big.NewInt(1 << 16)
+	solanaDexPositionProfileMetricsFieldAvgRoi                = big.NewInt(1 << 17)
+	solanaDexPositionProfileMetricsFieldTradeCount            = big.NewInt(1 << 18)
+	solanaDexPositionProfileMetricsFieldBuyCount              = big.NewInt(1 << 19)
+	solanaDexPositionProfileMetricsFieldSellCount             = big.NewInt(1 << 20)
+	solanaDexPositionProfileMetricsFieldWinCount              = big.NewInt(1 << 21)
+	solanaDexPositionProfileMetricsFieldLossCount             = big.NewInt(1 << 22)
+	solanaDexPositionProfileMetricsFieldPnl                   = big.NewInt(1 << 23)
+	solanaDexPositionProfileMetricsFieldWinPnl                = big.NewInt(1 << 24)
+	solanaDexPositionProfileMetricsFieldLossPnl               = big.NewInt(1 << 25)
+	solanaDexPositionProfileMetricsFieldVolume                = big.NewInt(1 << 26)
+	solanaDexPositionProfileMetricsFieldBuyVolume             = big.NewInt(1 << 27)
+	solanaDexPositionProfileMetricsFieldSellVolume            = big.NewInt(1 << 28)
+	solanaDexPositionProfileMetricsFieldWinrate               = big.NewInt(1 << 29)
+	solanaDexPositionProfileMetricsFieldVolumeWeightedWinrate = big.NewInt(1 << 30)
+	solanaDexPositionProfileMetricsFieldRoi                   = big.NewInt(1 << 31)
+	solanaDexPositionProfileMetricsFieldVolumeWeightedRoi     = big.NewInt(1 << 32)
+	solanaDexPositionProfileMetricsFieldPnlVolumeRatio        = big.NewInt(1 << 33)
+	solanaDexPositionProfileMetricsFieldWinLossSizeRatio      = big.NewInt(1 << 34)
+	solanaDexPositionProfileMetricsFieldProfitFactor          = big.NewInt(1 << 35)
+	solanaDexPositionProfileMetricsFieldProfitExpectancy      = big.NewInt(1 << 36)
+	solanaDexPositionProfileMetricsFieldRecoveryFactor        = big.NewInt(1 << 37)
+	solanaDexPositionProfileMetricsFieldWinrateStability      = big.NewInt(1 << 38)
+	solanaDexPositionProfileMetricsFieldWinrateVolatility     = big.NewInt(1 << 39)
+	solanaDexPositionProfileMetricsFieldRoiStability          = big.NewInt(1 << 40)
+	solanaDexPositionProfileMetricsFieldRoiVolatility         = big.NewInt(1 << 41)
+	solanaDexPositionProfileMetricsFieldPnlStability          = big.NewInt(1 << 42)
+	solanaDexPositionProfileMetricsFieldPnlVolatility         = big.NewInt(1 << 43)
+	solanaDexPositionProfileMetricsFieldSharpeRatio           = big.NewInt(1 << 44)
+	solanaDexPositionProfileMetricsFieldSortinoRatio          = big.NewInt(1 << 45)
+	solanaDexPositionProfileMetricsFieldMaxDrawdown           = big.NewInt(1 << 46)
+	solanaDexPositionProfileMetricsFieldRiskOfRuin            = big.NewInt(1 << 47)
+	solanaDexPositionProfileMetricsFieldTurnover              = big.NewInt(1 << 48)
+)
+
+type SolanaDexPositionProfileMetrics struct {
+	RiskScore             *float64 `json:"risk_score,omitempty" url:"risk_score,omitempty"`
+	ConsistencyScore      *float64 `json:"consistency_score,omitempty" url:"consistency_score,omitempty"`
+	LargestWin            *float64 `json:"largest_win,omitempty" url:"largest_win,omitempty"`
+	LargestLoss           *float64 `json:"largest_loss,omitempty" url:"largest_loss,omitempty"`
+	MaxConsecutiveWins    *int     `json:"max_consecutive_wins,omitempty" url:"max_consecutive_wins,omitempty"`
+	MaxConsecutiveLosses  *int     `json:"max_consecutive_losses,omitempty" url:"max_consecutive_losses,omitempty"`
+	AvgBuySize            *float64 `json:"avg_buy_size,omitempty" url:"avg_buy_size,omitempty"`
+	AvgSellSize           *float64 `json:"avg_sell_size,omitempty" url:"avg_sell_size,omitempty"`
+	AvgBuyMcap            *float64 `json:"avg_buy_mcap,omitempty" url:"avg_buy_mcap,omitempty"`
+	AvgSellMcap           *float64 `json:"avg_sell_mcap,omitempty" url:"avg_sell_mcap,omitempty"`
+	AvgDailyTradeCount    *int     `json:"avg_daily_trade_count,omitempty" url:"avg_daily_trade_count,omitempty"`
+	AvgDailyVolume        *float64 `json:"avg_daily_volume,omitempty" url:"avg_daily_volume,omitempty"`
+	AvgDailyPnl           *float64 `json:"avg_daily_pnl,omitempty" url:"avg_daily_pnl,omitempty"`
+	AvgDailyRoi           *float64 `json:"avg_daily_roi,omitempty" url:"avg_daily_roi,omitempty"`
+	AvgHoldingDuration    *int     `json:"avg_holding_duration,omitempty" url:"avg_holding_duration,omitempty"`
+	AvgTradeDelta         *int     `json:"avg_trade_delta,omitempty" url:"avg_trade_delta,omitempty"`
+	AvgPnl                *float64 `json:"avg_pnl,omitempty" url:"avg_pnl,omitempty"`
+	AvgRoi                *float64 `json:"avg_roi,omitempty" url:"avg_roi,omitempty"`
+	TradeCount            *int     `json:"trade_count,omitempty" url:"trade_count,omitempty"`
+	BuyCount              *int     `json:"buy_count,omitempty" url:"buy_count,omitempty"`
+	SellCount             *int     `json:"sell_count,omitempty" url:"sell_count,omitempty"`
+	WinCount              *int     `json:"win_count,omitempty" url:"win_count,omitempty"`
+	LossCount             *int     `json:"loss_count,omitempty" url:"loss_count,omitempty"`
+	Pnl                   *float64 `json:"pnl,omitempty" url:"pnl,omitempty"`
+	WinPnl                *float64 `json:"win_pnl,omitempty" url:"win_pnl,omitempty"`
+	LossPnl               *float64 `json:"loss_pnl,omitempty" url:"loss_pnl,omitempty"`
+	Volume                *float64 `json:"volume,omitempty" url:"volume,omitempty"`
+	BuyVolume             *float64 `json:"buy_volume,omitempty" url:"buy_volume,omitempty"`
+	SellVolume            *float64 `json:"sell_volume,omitempty" url:"sell_volume,omitempty"`
+	Winrate               *float64 `json:"winrate,omitempty" url:"winrate,omitempty"`
+	VolumeWeightedWinrate *float64 `json:"volume_weighted_winrate,omitempty" url:"volume_weighted_winrate,omitempty"`
+	Roi                   *float64 `json:"roi,omitempty" url:"roi,omitempty"`
+	VolumeWeightedRoi     *float64 `json:"volume_weighted_roi,omitempty" url:"volume_weighted_roi,omitempty"`
+	PnlVolumeRatio        *float64 `json:"pnl_volume_ratio,omitempty" url:"pnl_volume_ratio,omitempty"`
+	WinLossSizeRatio      *float64 `json:"win_loss_size_ratio,omitempty" url:"win_loss_size_ratio,omitempty"`
+	ProfitFactor          *float64 `json:"profit_factor,omitempty" url:"profit_factor,omitempty"`
+	ProfitExpectancy      *float64 `json:"profit_expectancy,omitempty" url:"profit_expectancy,omitempty"`
+	RecoveryFactor        *float64 `json:"recovery_factor,omitempty" url:"recovery_factor,omitempty"`
+	WinrateStability      *float64 `json:"winrate_stability,omitempty" url:"winrate_stability,omitempty"`
+	WinrateVolatility     *float64 `json:"winrate_volatility,omitempty" url:"winrate_volatility,omitempty"`
+	RoiStability          *float64 `json:"roi_stability,omitempty" url:"roi_stability,omitempty"`
+	RoiVolatility         *float64 `json:"roi_volatility,omitempty" url:"roi_volatility,omitempty"`
+	PnlStability          *float64 `json:"pnl_stability,omitempty" url:"pnl_stability,omitempty"`
+	PnlVolatility         *float64 `json:"pnl_volatility,omitempty" url:"pnl_volatility,omitempty"`
+	SharpeRatio           *float64 `json:"sharpe_ratio,omitempty" url:"sharpe_ratio,omitempty"`
+	SortinoRatio          *float64 `json:"sortino_ratio,omitempty" url:"sortino_ratio,omitempty"`
+	MaxDrawdown           *float64 `json:"max_drawdown,omitempty" url:"max_drawdown,omitempty"`
+	RiskOfRuin            *float64 `json:"risk_of_ruin,omitempty" url:"risk_of_ruin,omitempty"`
+	Turnover              *float64 `json:"turnover,omitempty" url:"turnover,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetRiskScore() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.RiskScore
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetConsistencyScore() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.ConsistencyScore
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetLargestWin() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.LargestWin
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetLargestLoss() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.LargestLoss
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetMaxConsecutiveWins() *int {
+	if s == nil {
+		return nil
+	}
+	return s.MaxConsecutiveWins
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetMaxConsecutiveLosses() *int {
+	if s == nil {
+		return nil
+	}
+	return s.MaxConsecutiveLosses
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgBuySize() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgBuySize
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgSellSize() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgSellSize
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgBuyMcap() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgBuyMcap
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgSellMcap() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgSellMcap
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgDailyTradeCount() *int {
+	if s == nil {
+		return nil
+	}
+	return s.AvgDailyTradeCount
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgDailyVolume() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgDailyVolume
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgDailyPnl() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgDailyPnl
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgDailyRoi() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgDailyRoi
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgHoldingDuration() *int {
+	if s == nil {
+		return nil
+	}
+	return s.AvgHoldingDuration
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgTradeDelta() *int {
+	if s == nil {
+		return nil
+	}
+	return s.AvgTradeDelta
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgPnl() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgPnl
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetAvgRoi() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.AvgRoi
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetTradeCount() *int {
+	if s == nil {
+		return nil
+	}
+	return s.TradeCount
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetBuyCount() *int {
+	if s == nil {
+		return nil
+	}
+	return s.BuyCount
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetSellCount() *int {
+	if s == nil {
+		return nil
+	}
+	return s.SellCount
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetWinCount() *int {
+	if s == nil {
+		return nil
+	}
+	return s.WinCount
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetLossCount() *int {
+	if s == nil {
+		return nil
+	}
+	return s.LossCount
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetPnl() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.Pnl
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetWinPnl() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.WinPnl
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetLossPnl() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.LossPnl
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetVolume() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.Volume
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetBuyVolume() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.BuyVolume
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetSellVolume() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.SellVolume
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetWinrate() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.Winrate
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetVolumeWeightedWinrate() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.VolumeWeightedWinrate
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetRoi() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.Roi
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetVolumeWeightedRoi() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.VolumeWeightedRoi
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetPnlVolumeRatio() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.PnlVolumeRatio
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetWinLossSizeRatio() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.WinLossSizeRatio
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetProfitFactor() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.ProfitFactor
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetProfitExpectancy() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.ProfitExpectancy
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetRecoveryFactor() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.RecoveryFactor
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetWinrateStability() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.WinrateStability
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetWinrateVolatility() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.WinrateVolatility
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetRoiStability() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.RoiStability
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetRoiVolatility() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.RoiVolatility
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetPnlStability() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.PnlStability
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetPnlVolatility() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.PnlVolatility
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetSharpeRatio() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.SharpeRatio
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetSortinoRatio() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.SortinoRatio
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetMaxDrawdown() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.MaxDrawdown
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetRiskOfRuin() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.RiskOfRuin
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetTurnover() *float64 {
+	if s == nil {
+		return nil
+	}
+	return s.Turnover
+}
+
+func (s *SolanaDexPositionProfileMetrics) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexPositionProfileMetrics) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetRiskScore sets the RiskScore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetRiskScore(riskScore *float64) {
+	s.RiskScore = riskScore
+	s.require(solanaDexPositionProfileMetricsFieldRiskScore)
+}
+
+// SetConsistencyScore sets the ConsistencyScore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetConsistencyScore(consistencyScore *float64) {
+	s.ConsistencyScore = consistencyScore
+	s.require(solanaDexPositionProfileMetricsFieldConsistencyScore)
+}
+
+// SetLargestWin sets the LargestWin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetLargestWin(largestWin *float64) {
+	s.LargestWin = largestWin
+	s.require(solanaDexPositionProfileMetricsFieldLargestWin)
+}
+
+// SetLargestLoss sets the LargestLoss field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetLargestLoss(largestLoss *float64) {
+	s.LargestLoss = largestLoss
+	s.require(solanaDexPositionProfileMetricsFieldLargestLoss)
+}
+
+// SetMaxConsecutiveWins sets the MaxConsecutiveWins field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetMaxConsecutiveWins(maxConsecutiveWins *int) {
+	s.MaxConsecutiveWins = maxConsecutiveWins
+	s.require(solanaDexPositionProfileMetricsFieldMaxConsecutiveWins)
+}
+
+// SetMaxConsecutiveLosses sets the MaxConsecutiveLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetMaxConsecutiveLosses(maxConsecutiveLosses *int) {
+	s.MaxConsecutiveLosses = maxConsecutiveLosses
+	s.require(solanaDexPositionProfileMetricsFieldMaxConsecutiveLosses)
+}
+
+// SetAvgBuySize sets the AvgBuySize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgBuySize(avgBuySize *float64) {
+	s.AvgBuySize = avgBuySize
+	s.require(solanaDexPositionProfileMetricsFieldAvgBuySize)
+}
+
+// SetAvgSellSize sets the AvgSellSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgSellSize(avgSellSize *float64) {
+	s.AvgSellSize = avgSellSize
+	s.require(solanaDexPositionProfileMetricsFieldAvgSellSize)
+}
+
+// SetAvgBuyMcap sets the AvgBuyMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgBuyMcap(avgBuyMcap *float64) {
+	s.AvgBuyMcap = avgBuyMcap
+	s.require(solanaDexPositionProfileMetricsFieldAvgBuyMcap)
+}
+
+// SetAvgSellMcap sets the AvgSellMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgSellMcap(avgSellMcap *float64) {
+	s.AvgSellMcap = avgSellMcap
+	s.require(solanaDexPositionProfileMetricsFieldAvgSellMcap)
+}
+
+// SetAvgDailyTradeCount sets the AvgDailyTradeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgDailyTradeCount(avgDailyTradeCount *int) {
+	s.AvgDailyTradeCount = avgDailyTradeCount
+	s.require(solanaDexPositionProfileMetricsFieldAvgDailyTradeCount)
+}
+
+// SetAvgDailyVolume sets the AvgDailyVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgDailyVolume(avgDailyVolume *float64) {
+	s.AvgDailyVolume = avgDailyVolume
+	s.require(solanaDexPositionProfileMetricsFieldAvgDailyVolume)
+}
+
+// SetAvgDailyPnl sets the AvgDailyPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgDailyPnl(avgDailyPnl *float64) {
+	s.AvgDailyPnl = avgDailyPnl
+	s.require(solanaDexPositionProfileMetricsFieldAvgDailyPnl)
+}
+
+// SetAvgDailyRoi sets the AvgDailyRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgDailyRoi(avgDailyRoi *float64) {
+	s.AvgDailyRoi = avgDailyRoi
+	s.require(solanaDexPositionProfileMetricsFieldAvgDailyRoi)
+}
+
+// SetAvgHoldingDuration sets the AvgHoldingDuration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgHoldingDuration(avgHoldingDuration *int) {
+	s.AvgHoldingDuration = avgHoldingDuration
+	s.require(solanaDexPositionProfileMetricsFieldAvgHoldingDuration)
+}
+
+// SetAvgTradeDelta sets the AvgTradeDelta field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgTradeDelta(avgTradeDelta *int) {
+	s.AvgTradeDelta = avgTradeDelta
+	s.require(solanaDexPositionProfileMetricsFieldAvgTradeDelta)
+}
+
+// SetAvgPnl sets the AvgPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgPnl(avgPnl *float64) {
+	s.AvgPnl = avgPnl
+	s.require(solanaDexPositionProfileMetricsFieldAvgPnl)
+}
+
+// SetAvgRoi sets the AvgRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetAvgRoi(avgRoi *float64) {
+	s.AvgRoi = avgRoi
+	s.require(solanaDexPositionProfileMetricsFieldAvgRoi)
+}
+
+// SetTradeCount sets the TradeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetTradeCount(tradeCount *int) {
+	s.TradeCount = tradeCount
+	s.require(solanaDexPositionProfileMetricsFieldTradeCount)
+}
+
+// SetBuyCount sets the BuyCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetBuyCount(buyCount *int) {
+	s.BuyCount = buyCount
+	s.require(solanaDexPositionProfileMetricsFieldBuyCount)
+}
+
+// SetSellCount sets the SellCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetSellCount(sellCount *int) {
+	s.SellCount = sellCount
+	s.require(solanaDexPositionProfileMetricsFieldSellCount)
+}
+
+// SetWinCount sets the WinCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetWinCount(winCount *int) {
+	s.WinCount = winCount
+	s.require(solanaDexPositionProfileMetricsFieldWinCount)
+}
+
+// SetLossCount sets the LossCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetLossCount(lossCount *int) {
+	s.LossCount = lossCount
+	s.require(solanaDexPositionProfileMetricsFieldLossCount)
+}
+
+// SetPnl sets the Pnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetPnl(pnl *float64) {
+	s.Pnl = pnl
+	s.require(solanaDexPositionProfileMetricsFieldPnl)
+}
+
+// SetWinPnl sets the WinPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetWinPnl(winPnl *float64) {
+	s.WinPnl = winPnl
+	s.require(solanaDexPositionProfileMetricsFieldWinPnl)
+}
+
+// SetLossPnl sets the LossPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetLossPnl(lossPnl *float64) {
+	s.LossPnl = lossPnl
+	s.require(solanaDexPositionProfileMetricsFieldLossPnl)
+}
+
+// SetVolume sets the Volume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetVolume(volume *float64) {
+	s.Volume = volume
+	s.require(solanaDexPositionProfileMetricsFieldVolume)
+}
+
+// SetBuyVolume sets the BuyVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetBuyVolume(buyVolume *float64) {
+	s.BuyVolume = buyVolume
+	s.require(solanaDexPositionProfileMetricsFieldBuyVolume)
+}
+
+// SetSellVolume sets the SellVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetSellVolume(sellVolume *float64) {
+	s.SellVolume = sellVolume
+	s.require(solanaDexPositionProfileMetricsFieldSellVolume)
+}
+
+// SetWinrate sets the Winrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetWinrate(winrate *float64) {
+	s.Winrate = winrate
+	s.require(solanaDexPositionProfileMetricsFieldWinrate)
+}
+
+// SetVolumeWeightedWinrate sets the VolumeWeightedWinrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetVolumeWeightedWinrate(volumeWeightedWinrate *float64) {
+	s.VolumeWeightedWinrate = volumeWeightedWinrate
+	s.require(solanaDexPositionProfileMetricsFieldVolumeWeightedWinrate)
+}
+
+// SetRoi sets the Roi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetRoi(roi *float64) {
+	s.Roi = roi
+	s.require(solanaDexPositionProfileMetricsFieldRoi)
+}
+
+// SetVolumeWeightedRoi sets the VolumeWeightedRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetVolumeWeightedRoi(volumeWeightedRoi *float64) {
+	s.VolumeWeightedRoi = volumeWeightedRoi
+	s.require(solanaDexPositionProfileMetricsFieldVolumeWeightedRoi)
+}
+
+// SetPnlVolumeRatio sets the PnlVolumeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetPnlVolumeRatio(pnlVolumeRatio *float64) {
+	s.PnlVolumeRatio = pnlVolumeRatio
+	s.require(solanaDexPositionProfileMetricsFieldPnlVolumeRatio)
+}
+
+// SetWinLossSizeRatio sets the WinLossSizeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetWinLossSizeRatio(winLossSizeRatio *float64) {
+	s.WinLossSizeRatio = winLossSizeRatio
+	s.require(solanaDexPositionProfileMetricsFieldWinLossSizeRatio)
+}
+
+// SetProfitFactor sets the ProfitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetProfitFactor(profitFactor *float64) {
+	s.ProfitFactor = profitFactor
+	s.require(solanaDexPositionProfileMetricsFieldProfitFactor)
+}
+
+// SetProfitExpectancy sets the ProfitExpectancy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetProfitExpectancy(profitExpectancy *float64) {
+	s.ProfitExpectancy = profitExpectancy
+	s.require(solanaDexPositionProfileMetricsFieldProfitExpectancy)
+}
+
+// SetRecoveryFactor sets the RecoveryFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetRecoveryFactor(recoveryFactor *float64) {
+	s.RecoveryFactor = recoveryFactor
+	s.require(solanaDexPositionProfileMetricsFieldRecoveryFactor)
+}
+
+// SetWinrateStability sets the WinrateStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetWinrateStability(winrateStability *float64) {
+	s.WinrateStability = winrateStability
+	s.require(solanaDexPositionProfileMetricsFieldWinrateStability)
+}
+
+// SetWinrateVolatility sets the WinrateVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetWinrateVolatility(winrateVolatility *float64) {
+	s.WinrateVolatility = winrateVolatility
+	s.require(solanaDexPositionProfileMetricsFieldWinrateVolatility)
+}
+
+// SetRoiStability sets the RoiStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetRoiStability(roiStability *float64) {
+	s.RoiStability = roiStability
+	s.require(solanaDexPositionProfileMetricsFieldRoiStability)
+}
+
+// SetRoiVolatility sets the RoiVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetRoiVolatility(roiVolatility *float64) {
+	s.RoiVolatility = roiVolatility
+	s.require(solanaDexPositionProfileMetricsFieldRoiVolatility)
+}
+
+// SetPnlStability sets the PnlStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetPnlStability(pnlStability *float64) {
+	s.PnlStability = pnlStability
+	s.require(solanaDexPositionProfileMetricsFieldPnlStability)
+}
+
+// SetPnlVolatility sets the PnlVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetPnlVolatility(pnlVolatility *float64) {
+	s.PnlVolatility = pnlVolatility
+	s.require(solanaDexPositionProfileMetricsFieldPnlVolatility)
+}
+
+// SetSharpeRatio sets the SharpeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetSharpeRatio(sharpeRatio *float64) {
+	s.SharpeRatio = sharpeRatio
+	s.require(solanaDexPositionProfileMetricsFieldSharpeRatio)
+}
+
+// SetSortinoRatio sets the SortinoRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetSortinoRatio(sortinoRatio *float64) {
+	s.SortinoRatio = sortinoRatio
+	s.require(solanaDexPositionProfileMetricsFieldSortinoRatio)
+}
+
+// SetMaxDrawdown sets the MaxDrawdown field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetMaxDrawdown(maxDrawdown *float64) {
+	s.MaxDrawdown = maxDrawdown
+	s.require(solanaDexPositionProfileMetricsFieldMaxDrawdown)
+}
+
+// SetRiskOfRuin sets the RiskOfRuin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetRiskOfRuin(riskOfRuin *float64) {
+	s.RiskOfRuin = riskOfRuin
+	s.require(solanaDexPositionProfileMetricsFieldRiskOfRuin)
+}
+
+// SetTurnover sets the Turnover field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfileMetrics) SetTurnover(turnover *float64) {
+	s.Turnover = turnover
+	s.require(solanaDexPositionProfileMetricsFieldTurnover)
+}
+
+func (s *SolanaDexPositionProfileMetrics) UnmarshalJSON(data []byte) error {
+	type unmarshaler SolanaDexPositionProfileMetrics
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SolanaDexPositionProfileMetrics(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexPositionProfileMetrics) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexPositionProfileMetrics
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexPositionProfileMetrics) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+// Controls which optional sections are included in each returned position profile.
+var (
+	solanaDexPositionProfilePayloadOptionsFieldIncludeMetadata = big.NewInt(1 << 0)
+	solanaDexPositionProfilePayloadOptionsFieldIncludeLabels   = big.NewInt(1 << 1)
+	solanaDexPositionProfilePayloadOptionsFieldIncludeMetrics  = big.NewInt(1 << 2)
+)
+
+type SolanaDexPositionProfilePayloadOptions struct {
+	// When true, includes the `metadata` object in each returned profile.
+	IncludeMetadata *bool `json:"include_metadata,omitempty" url:"include_metadata,omitempty"`
+	// When true, includes the `labels` array in each returned profile.
+	IncludeLabels *bool `json:"include_labels,omitempty" url:"include_labels,omitempty"`
+	// Time windows for which metrics should be included. Windows not listed are omitted from the response.
+	IncludeMetrics []SolanaDexPositionProfileTimeWindowEnum `json:"include_metrics,omitempty" url:"include_metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) GetIncludeMetadata() *bool {
+	if s == nil {
+		return nil
+	}
+	return s.IncludeMetadata
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) GetIncludeLabels() *bool {
+	if s == nil {
+		return nil
+	}
+	return s.IncludeLabels
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) GetIncludeMetrics() []SolanaDexPositionProfileTimeWindowEnum {
+	if s == nil {
+		return nil
+	}
+	return s.IncludeMetrics
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetIncludeMetadata sets the IncludeMetadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfilePayloadOptions) SetIncludeMetadata(includeMetadata *bool) {
+	s.IncludeMetadata = includeMetadata
+	s.require(solanaDexPositionProfilePayloadOptionsFieldIncludeMetadata)
+}
+
+// SetIncludeLabels sets the IncludeLabels field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfilePayloadOptions) SetIncludeLabels(includeLabels *bool) {
+	s.IncludeLabels = includeLabels
+	s.require(solanaDexPositionProfilePayloadOptionsFieldIncludeLabels)
+}
+
+// SetIncludeMetrics sets the IncludeMetrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SolanaDexPositionProfilePayloadOptions) SetIncludeMetrics(includeMetrics []SolanaDexPositionProfileTimeWindowEnum) {
+	s.IncludeMetrics = includeMetrics
+	s.require(solanaDexPositionProfilePayloadOptionsFieldIncludeMetrics)
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) UnmarshalJSON(data []byte) error {
+	type unmarshaler SolanaDexPositionProfilePayloadOptions
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SolanaDexPositionProfilePayloadOptions(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) MarshalJSON() ([]byte, error) {
+	type embed SolanaDexPositionProfilePayloadOptions
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SolanaDexPositionProfilePayloadOptions) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SolanaDexPositionProfileTimeWindowEnum string
+
+const (
+	SolanaDexPositionProfileTimeWindowEnumWindow30D SolanaDexPositionProfileTimeWindowEnum = "30d"
+	SolanaDexPositionProfileTimeWindowEnumWindow14D SolanaDexPositionProfileTimeWindowEnum = "14d"
+	SolanaDexPositionProfileTimeWindowEnumWindow7D  SolanaDexPositionProfileTimeWindowEnum = "7d"
+	SolanaDexPositionProfileTimeWindowEnumWindow3D  SolanaDexPositionProfileTimeWindowEnum = "3d"
+	SolanaDexPositionProfileTimeWindowEnumWindow1D  SolanaDexPositionProfileTimeWindowEnum = "1d"
+)
+
+func NewSolanaDexPositionProfileTimeWindowEnumFromString(s string) (SolanaDexPositionProfileTimeWindowEnum, error) {
+	switch s {
+	case "30d":
+		return SolanaDexPositionProfileTimeWindowEnumWindow30D, nil
+	case "14d":
+		return SolanaDexPositionProfileTimeWindowEnumWindow14D, nil
+	case "7d":
+		return SolanaDexPositionProfileTimeWindowEnumWindow7D, nil
+	case "3d":
+		return SolanaDexPositionProfileTimeWindowEnumWindow3D, nil
+	case "1d":
+		return SolanaDexPositionProfileTimeWindowEnumWindow1D, nil
+	}
+	var t SolanaDexPositionProfileTimeWindowEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SolanaDexPositionProfileTimeWindowEnum) Ptr() *SolanaDexPositionProfileTimeWindowEnum {
+	return &s
+}
+
+var (
 	solanaDexPriceFieldTokenAddress = big.NewInt(1 << 0)
 	solanaDexPriceFieldPoolAddress  = big.NewInt(1 << 1)
 	solanaDexPriceFieldUsdPrice     = big.NewInt(1 << 2)

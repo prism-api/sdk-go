@@ -559,6 +559,4506 @@ func TestSettersMarkExplicitPayloadPagination(t *testing.T) {
 
 }
 
+func TestSettersSolanaDexPositionProfile(t *testing.T) {
+	t.Run("SetUpdatedAt", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueUpdatedAt *time.Time
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+		assert.Equal(t, fernTestValueUpdatedAt, obj.UpdatedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSyncedAt", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueSyncedAt *time.Time
+		obj.SetSyncedAt(fernTestValueSyncedAt)
+		assert.Equal(t, fernTestValueSyncedAt, obj.SyncedAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPositionAddress", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValuePositionAddress *string
+		obj.SetPositionAddress(fernTestValuePositionAddress)
+		assert.Equal(t, fernTestValuePositionAddress, obj.PositionAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWalletAddress", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueWalletAddress *string
+		obj.SetWalletAddress(fernTestValueWalletAddress)
+		assert.Equal(t, fernTestValueWalletAddress, obj.WalletAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTokenAddress", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueTokenAddress *string
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+		assert.Equal(t, fernTestValueTokenAddress, obj.TokenAddress)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLabels", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueLabels *SolanaDexPositionProfileLabels
+		obj.SetLabels(fernTestValueLabels)
+		assert.Equal(t, fernTestValueLabels, obj.Labels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDynamicLabels", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueDynamicLabels *SolanaDexProfileDynamicLabels
+		obj.SetDynamicLabels(fernTestValueDynamicLabels)
+		assert.Equal(t, fernTestValueDynamicLabels, obj.DynamicLabels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMetadata", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueMetadata *SolanaDexPositionProfileMetadata
+		obj.SetMetadata(fernTestValueMetadata)
+		assert.Equal(t, fernTestValueMetadata, obj.Metadata)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMetrics", func(t *testing.T) {
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueMetrics map[string]*SolanaDexPositionProfileMetrics
+		obj.SetMetrics(fernTestValueMetrics)
+		assert.Equal(t, fernTestValueMetrics, obj.Metrics)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexPositionProfile(t *testing.T) {
+	t.Run("GetUpdatedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *time.Time
+		obj.UpdatedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetUpdatedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetUpdatedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.UpdatedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetUpdatedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetUpdatedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetUpdatedAt() // Should return zero value
+	})
+
+	t.Run("GetSyncedAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *time.Time
+		obj.SyncedAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSyncedAt(), "getter should return the property value")
+	})
+
+	t.Run("GetSyncedAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.SyncedAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSyncedAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSyncedAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSyncedAt() // Should return zero value
+	})
+
+	t.Run("GetPositionAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *string
+		obj.PositionAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPositionAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetPositionAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.PositionAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPositionAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPositionAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPositionAddress() // Should return zero value
+	})
+
+	t.Run("GetWalletAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *string
+		obj.WalletAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWalletAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetWalletAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.WalletAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWalletAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWalletAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWalletAddress() // Should return zero value
+	})
+
+	t.Run("GetTokenAddress", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *string
+		obj.TokenAddress = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTokenAddress(), "getter should return the property value")
+	})
+
+	t.Run("GetTokenAddress_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.TokenAddress = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTokenAddress(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTokenAddress_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTokenAddress() // Should return zero value
+	})
+
+	t.Run("GetLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *SolanaDexPositionProfileLabels
+		obj.Labels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.Labels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLabels() // Should return zero value
+	})
+
+	t.Run("GetDynamicLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *SolanaDexProfileDynamicLabels
+		obj.DynamicLabels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDynamicLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetDynamicLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.DynamicLabels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDynamicLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDynamicLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDynamicLabels() // Should return zero value
+	})
+
+	t.Run("GetMetadata", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected *SolanaDexPositionProfileMetadata
+		obj.Metadata = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMetadata(), "getter should return the property value")
+	})
+
+	t.Run("GetMetadata_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.Metadata = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMetadata(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMetadata_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMetadata() // Should return zero value
+	})
+
+	t.Run("GetMetrics", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var expected map[string]*SolanaDexPositionProfileMetrics
+		obj.Metrics = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMetrics(), "getter should return the property value")
+	})
+
+	t.Run("GetMetrics_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		obj.Metrics = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMetrics(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMetrics_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMetrics() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexPositionProfile(t *testing.T) {
+	t.Run("SetUpdatedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueUpdatedAt *time.Time
+
+		// Act
+		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSyncedAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueSyncedAt *time.Time
+
+		// Act
+		obj.SetSyncedAt(fernTestValueSyncedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPositionAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValuePositionAddress *string
+
+		// Act
+		obj.SetPositionAddress(fernTestValuePositionAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWalletAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueWalletAddress *string
+
+		// Act
+		obj.SetWalletAddress(fernTestValueWalletAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTokenAddress_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueTokenAddress *string
+
+		// Act
+		obj.SetTokenAddress(fernTestValueTokenAddress)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueLabels *SolanaDexPositionProfileLabels
+
+		// Act
+		obj.SetLabels(fernTestValueLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDynamicLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueDynamicLabels *SolanaDexProfileDynamicLabels
+
+		// Act
+		obj.SetDynamicLabels(fernTestValueDynamicLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMetadata_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueMetadata *SolanaDexPositionProfileMetadata
+
+		// Act
+		obj.SetMetadata(fernTestValueMetadata)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMetrics_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+		var fernTestValueMetrics map[string]*SolanaDexPositionProfileMetrics
+
+		// Act
+		obj.SetMetrics(fernTestValueMetrics)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexPositionProfileMetadata(t *testing.T) {
+	t.Run("SetLastTradeAt", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetadata{}
+		var fernTestValueLastTradeAt *time.Time
+		obj.SetLastTradeAt(fernTestValueLastTradeAt)
+		assert.Equal(t, fernTestValueLastTradeAt, obj.LastTradeAt)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexPositionProfileMetadata(t *testing.T) {
+	t.Run("GetLastTradeAt", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetadata{}
+		var expected *time.Time
+		obj.LastTradeAt = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLastTradeAt(), "getter should return the property value")
+	})
+
+	t.Run("GetLastTradeAt_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetadata{}
+		obj.LastTradeAt = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLastTradeAt(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLastTradeAt_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetadata
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLastTradeAt() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexPositionProfileMetadata(t *testing.T) {
+	t.Run("SetLastTradeAt_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetadata{}
+		var fernTestValueLastTradeAt *time.Time
+
+		// Act
+		obj.SetLastTradeAt(fernTestValueLastTradeAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexPositionProfileMetrics(t *testing.T) {
+	t.Run("SetRiskScore", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRiskScore *float64
+		obj.SetRiskScore(fernTestValueRiskScore)
+		assert.Equal(t, fernTestValueRiskScore, obj.RiskScore)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetConsistencyScore", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueConsistencyScore *float64
+		obj.SetConsistencyScore(fernTestValueConsistencyScore)
+		assert.Equal(t, fernTestValueConsistencyScore, obj.ConsistencyScore)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLargestWin", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLargestWin *float64
+		obj.SetLargestWin(fernTestValueLargestWin)
+		assert.Equal(t, fernTestValueLargestWin, obj.LargestWin)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLargestLoss", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLargestLoss *float64
+		obj.SetLargestLoss(fernTestValueLargestLoss)
+		assert.Equal(t, fernTestValueLargestLoss, obj.LargestLoss)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMaxConsecutiveWins", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueMaxConsecutiveWins *int
+		obj.SetMaxConsecutiveWins(fernTestValueMaxConsecutiveWins)
+		assert.Equal(t, fernTestValueMaxConsecutiveWins, obj.MaxConsecutiveWins)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMaxConsecutiveLosses", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueMaxConsecutiveLosses *int
+		obj.SetMaxConsecutiveLosses(fernTestValueMaxConsecutiveLosses)
+		assert.Equal(t, fernTestValueMaxConsecutiveLosses, obj.MaxConsecutiveLosses)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgBuySize", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgBuySize *float64
+		obj.SetAvgBuySize(fernTestValueAvgBuySize)
+		assert.Equal(t, fernTestValueAvgBuySize, obj.AvgBuySize)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgSellSize", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgSellSize *float64
+		obj.SetAvgSellSize(fernTestValueAvgSellSize)
+		assert.Equal(t, fernTestValueAvgSellSize, obj.AvgSellSize)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgBuyMcap", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgBuyMcap *float64
+		obj.SetAvgBuyMcap(fernTestValueAvgBuyMcap)
+		assert.Equal(t, fernTestValueAvgBuyMcap, obj.AvgBuyMcap)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgSellMcap", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgSellMcap *float64
+		obj.SetAvgSellMcap(fernTestValueAvgSellMcap)
+		assert.Equal(t, fernTestValueAvgSellMcap, obj.AvgSellMcap)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgDailyTradeCount", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyTradeCount *int
+		obj.SetAvgDailyTradeCount(fernTestValueAvgDailyTradeCount)
+		assert.Equal(t, fernTestValueAvgDailyTradeCount, obj.AvgDailyTradeCount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgDailyVolume", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyVolume *float64
+		obj.SetAvgDailyVolume(fernTestValueAvgDailyVolume)
+		assert.Equal(t, fernTestValueAvgDailyVolume, obj.AvgDailyVolume)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgDailyPnl", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyPnl *float64
+		obj.SetAvgDailyPnl(fernTestValueAvgDailyPnl)
+		assert.Equal(t, fernTestValueAvgDailyPnl, obj.AvgDailyPnl)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgDailyRoi", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyRoi *float64
+		obj.SetAvgDailyRoi(fernTestValueAvgDailyRoi)
+		assert.Equal(t, fernTestValueAvgDailyRoi, obj.AvgDailyRoi)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgHoldingDuration", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgHoldingDuration *int
+		obj.SetAvgHoldingDuration(fernTestValueAvgHoldingDuration)
+		assert.Equal(t, fernTestValueAvgHoldingDuration, obj.AvgHoldingDuration)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgTradeDelta", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgTradeDelta *int
+		obj.SetAvgTradeDelta(fernTestValueAvgTradeDelta)
+		assert.Equal(t, fernTestValueAvgTradeDelta, obj.AvgTradeDelta)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgPnl", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgPnl *float64
+		obj.SetAvgPnl(fernTestValueAvgPnl)
+		assert.Equal(t, fernTestValueAvgPnl, obj.AvgPnl)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAvgRoi", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgRoi *float64
+		obj.SetAvgRoi(fernTestValueAvgRoi)
+		assert.Equal(t, fernTestValueAvgRoi, obj.AvgRoi)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTradeCount", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueTradeCount *int
+		obj.SetTradeCount(fernTestValueTradeCount)
+		assert.Equal(t, fernTestValueTradeCount, obj.TradeCount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBuyCount", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueBuyCount *int
+		obj.SetBuyCount(fernTestValueBuyCount)
+		assert.Equal(t, fernTestValueBuyCount, obj.BuyCount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSellCount", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSellCount *int
+		obj.SetSellCount(fernTestValueSellCount)
+		assert.Equal(t, fernTestValueSellCount, obj.SellCount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWinCount", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinCount *int
+		obj.SetWinCount(fernTestValueWinCount)
+		assert.Equal(t, fernTestValueWinCount, obj.WinCount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLossCount", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLossCount *int
+		obj.SetLossCount(fernTestValueLossCount)
+		assert.Equal(t, fernTestValueLossCount, obj.LossCount)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPnl", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnl *float64
+		obj.SetPnl(fernTestValuePnl)
+		assert.Equal(t, fernTestValuePnl, obj.Pnl)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWinPnl", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinPnl *float64
+		obj.SetWinPnl(fernTestValueWinPnl)
+		assert.Equal(t, fernTestValueWinPnl, obj.WinPnl)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLossPnl", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLossPnl *float64
+		obj.SetLossPnl(fernTestValueLossPnl)
+		assert.Equal(t, fernTestValueLossPnl, obj.LossPnl)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVolume", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueVolume *float64
+		obj.SetVolume(fernTestValueVolume)
+		assert.Equal(t, fernTestValueVolume, obj.Volume)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBuyVolume", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueBuyVolume *float64
+		obj.SetBuyVolume(fernTestValueBuyVolume)
+		assert.Equal(t, fernTestValueBuyVolume, obj.BuyVolume)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSellVolume", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSellVolume *float64
+		obj.SetSellVolume(fernTestValueSellVolume)
+		assert.Equal(t, fernTestValueSellVolume, obj.SellVolume)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWinrate", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinrate *float64
+		obj.SetWinrate(fernTestValueWinrate)
+		assert.Equal(t, fernTestValueWinrate, obj.Winrate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVolumeWeightedWinrate", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueVolumeWeightedWinrate *float64
+		obj.SetVolumeWeightedWinrate(fernTestValueVolumeWeightedWinrate)
+		assert.Equal(t, fernTestValueVolumeWeightedWinrate, obj.VolumeWeightedWinrate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRoi", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRoi *float64
+		obj.SetRoi(fernTestValueRoi)
+		assert.Equal(t, fernTestValueRoi, obj.Roi)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVolumeWeightedRoi", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueVolumeWeightedRoi *float64
+		obj.SetVolumeWeightedRoi(fernTestValueVolumeWeightedRoi)
+		assert.Equal(t, fernTestValueVolumeWeightedRoi, obj.VolumeWeightedRoi)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPnlVolumeRatio", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnlVolumeRatio *float64
+		obj.SetPnlVolumeRatio(fernTestValuePnlVolumeRatio)
+		assert.Equal(t, fernTestValuePnlVolumeRatio, obj.PnlVolumeRatio)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWinLossSizeRatio", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinLossSizeRatio *float64
+		obj.SetWinLossSizeRatio(fernTestValueWinLossSizeRatio)
+		assert.Equal(t, fernTestValueWinLossSizeRatio, obj.WinLossSizeRatio)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetProfitFactor", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueProfitFactor *float64
+		obj.SetProfitFactor(fernTestValueProfitFactor)
+		assert.Equal(t, fernTestValueProfitFactor, obj.ProfitFactor)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetProfitExpectancy", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueProfitExpectancy *float64
+		obj.SetProfitExpectancy(fernTestValueProfitExpectancy)
+		assert.Equal(t, fernTestValueProfitExpectancy, obj.ProfitExpectancy)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRecoveryFactor", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRecoveryFactor *float64
+		obj.SetRecoveryFactor(fernTestValueRecoveryFactor)
+		assert.Equal(t, fernTestValueRecoveryFactor, obj.RecoveryFactor)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWinrateStability", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinrateStability *float64
+		obj.SetWinrateStability(fernTestValueWinrateStability)
+		assert.Equal(t, fernTestValueWinrateStability, obj.WinrateStability)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWinrateVolatility", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinrateVolatility *float64
+		obj.SetWinrateVolatility(fernTestValueWinrateVolatility)
+		assert.Equal(t, fernTestValueWinrateVolatility, obj.WinrateVolatility)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRoiStability", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRoiStability *float64
+		obj.SetRoiStability(fernTestValueRoiStability)
+		assert.Equal(t, fernTestValueRoiStability, obj.RoiStability)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRoiVolatility", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRoiVolatility *float64
+		obj.SetRoiVolatility(fernTestValueRoiVolatility)
+		assert.Equal(t, fernTestValueRoiVolatility, obj.RoiVolatility)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPnlStability", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnlStability *float64
+		obj.SetPnlStability(fernTestValuePnlStability)
+		assert.Equal(t, fernTestValuePnlStability, obj.PnlStability)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPnlVolatility", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnlVolatility *float64
+		obj.SetPnlVolatility(fernTestValuePnlVolatility)
+		assert.Equal(t, fernTestValuePnlVolatility, obj.PnlVolatility)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSharpeRatio", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSharpeRatio *float64
+		obj.SetSharpeRatio(fernTestValueSharpeRatio)
+		assert.Equal(t, fernTestValueSharpeRatio, obj.SharpeRatio)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSortinoRatio", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSortinoRatio *float64
+		obj.SetSortinoRatio(fernTestValueSortinoRatio)
+		assert.Equal(t, fernTestValueSortinoRatio, obj.SortinoRatio)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetMaxDrawdown", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueMaxDrawdown *float64
+		obj.SetMaxDrawdown(fernTestValueMaxDrawdown)
+		assert.Equal(t, fernTestValueMaxDrawdown, obj.MaxDrawdown)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRiskOfRuin", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRiskOfRuin *float64
+		obj.SetRiskOfRuin(fernTestValueRiskOfRuin)
+		assert.Equal(t, fernTestValueRiskOfRuin, obj.RiskOfRuin)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTurnover", func(t *testing.T) {
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueTurnover *float64
+		obj.SetTurnover(fernTestValueTurnover)
+		assert.Equal(t, fernTestValueTurnover, obj.Turnover)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexPositionProfileMetrics(t *testing.T) {
+	t.Run("GetRiskScore", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.RiskScore = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRiskScore(), "getter should return the property value")
+	})
+
+	t.Run("GetRiskScore_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.RiskScore = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRiskScore(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRiskScore_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRiskScore() // Should return zero value
+	})
+
+	t.Run("GetConsistencyScore", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.ConsistencyScore = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConsistencyScore(), "getter should return the property value")
+	})
+
+	t.Run("GetConsistencyScore_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.ConsistencyScore = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetConsistencyScore(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetConsistencyScore_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConsistencyScore() // Should return zero value
+	})
+
+	t.Run("GetLargestWin", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.LargestWin = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLargestWin(), "getter should return the property value")
+	})
+
+	t.Run("GetLargestWin_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.LargestWin = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLargestWin(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLargestWin_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLargestWin() // Should return zero value
+	})
+
+	t.Run("GetLargestLoss", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.LargestLoss = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLargestLoss(), "getter should return the property value")
+	})
+
+	t.Run("GetLargestLoss_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.LargestLoss = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLargestLoss(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLargestLoss_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLargestLoss() // Should return zero value
+	})
+
+	t.Run("GetMaxConsecutiveWins", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.MaxConsecutiveWins = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMaxConsecutiveWins(), "getter should return the property value")
+	})
+
+	t.Run("GetMaxConsecutiveWins_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.MaxConsecutiveWins = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMaxConsecutiveWins(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMaxConsecutiveWins_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMaxConsecutiveWins() // Should return zero value
+	})
+
+	t.Run("GetMaxConsecutiveLosses", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.MaxConsecutiveLosses = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMaxConsecutiveLosses(), "getter should return the property value")
+	})
+
+	t.Run("GetMaxConsecutiveLosses_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.MaxConsecutiveLosses = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMaxConsecutiveLosses(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMaxConsecutiveLosses_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMaxConsecutiveLosses() // Should return zero value
+	})
+
+	t.Run("GetAvgBuySize", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgBuySize = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgBuySize(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgBuySize_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgBuySize = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgBuySize(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgBuySize_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgBuySize() // Should return zero value
+	})
+
+	t.Run("GetAvgSellSize", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgSellSize = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgSellSize(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgSellSize_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgSellSize = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgSellSize(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgSellSize_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgSellSize() // Should return zero value
+	})
+
+	t.Run("GetAvgBuyMcap", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgBuyMcap = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgBuyMcap(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgBuyMcap_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgBuyMcap = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgBuyMcap(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgBuyMcap_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgBuyMcap() // Should return zero value
+	})
+
+	t.Run("GetAvgSellMcap", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgSellMcap = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgSellMcap(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgSellMcap_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgSellMcap = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgSellMcap(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgSellMcap_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgSellMcap() // Should return zero value
+	})
+
+	t.Run("GetAvgDailyTradeCount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.AvgDailyTradeCount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgDailyTradeCount(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgDailyTradeCount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgDailyTradeCount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgDailyTradeCount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgDailyTradeCount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgDailyTradeCount() // Should return zero value
+	})
+
+	t.Run("GetAvgDailyVolume", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgDailyVolume = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgDailyVolume(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgDailyVolume_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgDailyVolume = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgDailyVolume(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgDailyVolume_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgDailyVolume() // Should return zero value
+	})
+
+	t.Run("GetAvgDailyPnl", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgDailyPnl = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgDailyPnl(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgDailyPnl_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgDailyPnl = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgDailyPnl(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgDailyPnl_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgDailyPnl() // Should return zero value
+	})
+
+	t.Run("GetAvgDailyRoi", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgDailyRoi = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgDailyRoi(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgDailyRoi_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgDailyRoi = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgDailyRoi(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgDailyRoi_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgDailyRoi() // Should return zero value
+	})
+
+	t.Run("GetAvgHoldingDuration", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.AvgHoldingDuration = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgHoldingDuration(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgHoldingDuration_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgHoldingDuration = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgHoldingDuration(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgHoldingDuration_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgHoldingDuration() // Should return zero value
+	})
+
+	t.Run("GetAvgTradeDelta", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.AvgTradeDelta = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgTradeDelta(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgTradeDelta_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgTradeDelta = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgTradeDelta(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgTradeDelta_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgTradeDelta() // Should return zero value
+	})
+
+	t.Run("GetAvgPnl", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgPnl = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgPnl(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgPnl_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgPnl = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgPnl(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgPnl_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgPnl() // Should return zero value
+	})
+
+	t.Run("GetAvgRoi", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.AvgRoi = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAvgRoi(), "getter should return the property value")
+	})
+
+	t.Run("GetAvgRoi_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.AvgRoi = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAvgRoi(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAvgRoi_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAvgRoi() // Should return zero value
+	})
+
+	t.Run("GetTradeCount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.TradeCount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTradeCount(), "getter should return the property value")
+	})
+
+	t.Run("GetTradeCount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.TradeCount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTradeCount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTradeCount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTradeCount() // Should return zero value
+	})
+
+	t.Run("GetBuyCount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.BuyCount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBuyCount(), "getter should return the property value")
+	})
+
+	t.Run("GetBuyCount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.BuyCount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBuyCount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBuyCount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBuyCount() // Should return zero value
+	})
+
+	t.Run("GetSellCount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.SellCount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSellCount(), "getter should return the property value")
+	})
+
+	t.Run("GetSellCount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.SellCount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSellCount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSellCount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSellCount() // Should return zero value
+	})
+
+	t.Run("GetWinCount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.WinCount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWinCount(), "getter should return the property value")
+	})
+
+	t.Run("GetWinCount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.WinCount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWinCount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWinCount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWinCount() // Should return zero value
+	})
+
+	t.Run("GetLossCount", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *int
+		obj.LossCount = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLossCount(), "getter should return the property value")
+	})
+
+	t.Run("GetLossCount_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.LossCount = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLossCount(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLossCount_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLossCount() // Should return zero value
+	})
+
+	t.Run("GetPnl", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.Pnl = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPnl(), "getter should return the property value")
+	})
+
+	t.Run("GetPnl_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.Pnl = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPnl(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPnl_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPnl() // Should return zero value
+	})
+
+	t.Run("GetWinPnl", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.WinPnl = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWinPnl(), "getter should return the property value")
+	})
+
+	t.Run("GetWinPnl_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.WinPnl = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWinPnl(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWinPnl_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWinPnl() // Should return zero value
+	})
+
+	t.Run("GetLossPnl", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.LossPnl = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLossPnl(), "getter should return the property value")
+	})
+
+	t.Run("GetLossPnl_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.LossPnl = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLossPnl(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetLossPnl_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLossPnl() // Should return zero value
+	})
+
+	t.Run("GetVolume", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.Volume = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVolume(), "getter should return the property value")
+	})
+
+	t.Run("GetVolume_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.Volume = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVolume(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVolume_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVolume() // Should return zero value
+	})
+
+	t.Run("GetBuyVolume", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.BuyVolume = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBuyVolume(), "getter should return the property value")
+	})
+
+	t.Run("GetBuyVolume_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.BuyVolume = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBuyVolume(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBuyVolume_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBuyVolume() // Should return zero value
+	})
+
+	t.Run("GetSellVolume", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.SellVolume = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSellVolume(), "getter should return the property value")
+	})
+
+	t.Run("GetSellVolume_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.SellVolume = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSellVolume(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSellVolume_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSellVolume() // Should return zero value
+	})
+
+	t.Run("GetWinrate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.Winrate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWinrate(), "getter should return the property value")
+	})
+
+	t.Run("GetWinrate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.Winrate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWinrate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWinrate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWinrate() // Should return zero value
+	})
+
+	t.Run("GetVolumeWeightedWinrate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.VolumeWeightedWinrate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVolumeWeightedWinrate(), "getter should return the property value")
+	})
+
+	t.Run("GetVolumeWeightedWinrate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.VolumeWeightedWinrate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVolumeWeightedWinrate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVolumeWeightedWinrate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVolumeWeightedWinrate() // Should return zero value
+	})
+
+	t.Run("GetRoi", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.Roi = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRoi(), "getter should return the property value")
+	})
+
+	t.Run("GetRoi_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.Roi = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRoi(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRoi_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRoi() // Should return zero value
+	})
+
+	t.Run("GetVolumeWeightedRoi", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.VolumeWeightedRoi = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVolumeWeightedRoi(), "getter should return the property value")
+	})
+
+	t.Run("GetVolumeWeightedRoi_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.VolumeWeightedRoi = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVolumeWeightedRoi(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVolumeWeightedRoi_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVolumeWeightedRoi() // Should return zero value
+	})
+
+	t.Run("GetPnlVolumeRatio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.PnlVolumeRatio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPnlVolumeRatio(), "getter should return the property value")
+	})
+
+	t.Run("GetPnlVolumeRatio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.PnlVolumeRatio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPnlVolumeRatio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPnlVolumeRatio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPnlVolumeRatio() // Should return zero value
+	})
+
+	t.Run("GetWinLossSizeRatio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.WinLossSizeRatio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWinLossSizeRatio(), "getter should return the property value")
+	})
+
+	t.Run("GetWinLossSizeRatio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.WinLossSizeRatio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWinLossSizeRatio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWinLossSizeRatio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWinLossSizeRatio() // Should return zero value
+	})
+
+	t.Run("GetProfitFactor", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.ProfitFactor = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetProfitFactor(), "getter should return the property value")
+	})
+
+	t.Run("GetProfitFactor_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.ProfitFactor = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetProfitFactor(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetProfitFactor_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetProfitFactor() // Should return zero value
+	})
+
+	t.Run("GetProfitExpectancy", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.ProfitExpectancy = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetProfitExpectancy(), "getter should return the property value")
+	})
+
+	t.Run("GetProfitExpectancy_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.ProfitExpectancy = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetProfitExpectancy(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetProfitExpectancy_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetProfitExpectancy() // Should return zero value
+	})
+
+	t.Run("GetRecoveryFactor", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.RecoveryFactor = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRecoveryFactor(), "getter should return the property value")
+	})
+
+	t.Run("GetRecoveryFactor_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.RecoveryFactor = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRecoveryFactor(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRecoveryFactor_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRecoveryFactor() // Should return zero value
+	})
+
+	t.Run("GetWinrateStability", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.WinrateStability = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWinrateStability(), "getter should return the property value")
+	})
+
+	t.Run("GetWinrateStability_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.WinrateStability = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWinrateStability(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWinrateStability_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWinrateStability() // Should return zero value
+	})
+
+	t.Run("GetWinrateVolatility", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.WinrateVolatility = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWinrateVolatility(), "getter should return the property value")
+	})
+
+	t.Run("GetWinrateVolatility_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.WinrateVolatility = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetWinrateVolatility(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetWinrateVolatility_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWinrateVolatility() // Should return zero value
+	})
+
+	t.Run("GetRoiStability", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.RoiStability = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRoiStability(), "getter should return the property value")
+	})
+
+	t.Run("GetRoiStability_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.RoiStability = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRoiStability(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRoiStability_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRoiStability() // Should return zero value
+	})
+
+	t.Run("GetRoiVolatility", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.RoiVolatility = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRoiVolatility(), "getter should return the property value")
+	})
+
+	t.Run("GetRoiVolatility_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.RoiVolatility = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRoiVolatility(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRoiVolatility_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRoiVolatility() // Should return zero value
+	})
+
+	t.Run("GetPnlStability", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.PnlStability = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPnlStability(), "getter should return the property value")
+	})
+
+	t.Run("GetPnlStability_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.PnlStability = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPnlStability(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPnlStability_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPnlStability() // Should return zero value
+	})
+
+	t.Run("GetPnlVolatility", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.PnlVolatility = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPnlVolatility(), "getter should return the property value")
+	})
+
+	t.Run("GetPnlVolatility_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.PnlVolatility = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPnlVolatility(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPnlVolatility_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPnlVolatility() // Should return zero value
+	})
+
+	t.Run("GetSharpeRatio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.SharpeRatio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSharpeRatio(), "getter should return the property value")
+	})
+
+	t.Run("GetSharpeRatio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.SharpeRatio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSharpeRatio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSharpeRatio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSharpeRatio() // Should return zero value
+	})
+
+	t.Run("GetSortinoRatio", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.SortinoRatio = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSortinoRatio(), "getter should return the property value")
+	})
+
+	t.Run("GetSortinoRatio_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.SortinoRatio = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSortinoRatio(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSortinoRatio_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSortinoRatio() // Should return zero value
+	})
+
+	t.Run("GetMaxDrawdown", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.MaxDrawdown = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetMaxDrawdown(), "getter should return the property value")
+	})
+
+	t.Run("GetMaxDrawdown_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.MaxDrawdown = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetMaxDrawdown(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetMaxDrawdown_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetMaxDrawdown() // Should return zero value
+	})
+
+	t.Run("GetRiskOfRuin", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.RiskOfRuin = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRiskOfRuin(), "getter should return the property value")
+	})
+
+	t.Run("GetRiskOfRuin_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.RiskOfRuin = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRiskOfRuin(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRiskOfRuin_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRiskOfRuin() // Should return zero value
+	})
+
+	t.Run("GetTurnover", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var expected *float64
+		obj.Turnover = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTurnover(), "getter should return the property value")
+	})
+
+	t.Run("GetTurnover_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		obj.Turnover = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTurnover(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTurnover_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTurnover() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexPositionProfileMetrics(t *testing.T) {
+	t.Run("SetRiskScore_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRiskScore *float64
+
+		// Act
+		obj.SetRiskScore(fernTestValueRiskScore)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetConsistencyScore_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueConsistencyScore *float64
+
+		// Act
+		obj.SetConsistencyScore(fernTestValueConsistencyScore)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLargestWin_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLargestWin *float64
+
+		// Act
+		obj.SetLargestWin(fernTestValueLargestWin)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLargestLoss_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLargestLoss *float64
+
+		// Act
+		obj.SetLargestLoss(fernTestValueLargestLoss)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMaxConsecutiveWins_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueMaxConsecutiveWins *int
+
+		// Act
+		obj.SetMaxConsecutiveWins(fernTestValueMaxConsecutiveWins)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMaxConsecutiveLosses_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueMaxConsecutiveLosses *int
+
+		// Act
+		obj.SetMaxConsecutiveLosses(fernTestValueMaxConsecutiveLosses)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgBuySize_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgBuySize *float64
+
+		// Act
+		obj.SetAvgBuySize(fernTestValueAvgBuySize)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgSellSize_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgSellSize *float64
+
+		// Act
+		obj.SetAvgSellSize(fernTestValueAvgSellSize)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgBuyMcap_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgBuyMcap *float64
+
+		// Act
+		obj.SetAvgBuyMcap(fernTestValueAvgBuyMcap)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgSellMcap_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgSellMcap *float64
+
+		// Act
+		obj.SetAvgSellMcap(fernTestValueAvgSellMcap)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgDailyTradeCount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyTradeCount *int
+
+		// Act
+		obj.SetAvgDailyTradeCount(fernTestValueAvgDailyTradeCount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgDailyVolume_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyVolume *float64
+
+		// Act
+		obj.SetAvgDailyVolume(fernTestValueAvgDailyVolume)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgDailyPnl_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyPnl *float64
+
+		// Act
+		obj.SetAvgDailyPnl(fernTestValueAvgDailyPnl)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgDailyRoi_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgDailyRoi *float64
+
+		// Act
+		obj.SetAvgDailyRoi(fernTestValueAvgDailyRoi)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgHoldingDuration_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgHoldingDuration *int
+
+		// Act
+		obj.SetAvgHoldingDuration(fernTestValueAvgHoldingDuration)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgTradeDelta_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgTradeDelta *int
+
+		// Act
+		obj.SetAvgTradeDelta(fernTestValueAvgTradeDelta)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgPnl_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgPnl *float64
+
+		// Act
+		obj.SetAvgPnl(fernTestValueAvgPnl)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAvgRoi_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueAvgRoi *float64
+
+		// Act
+		obj.SetAvgRoi(fernTestValueAvgRoi)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTradeCount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueTradeCount *int
+
+		// Act
+		obj.SetTradeCount(fernTestValueTradeCount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBuyCount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueBuyCount *int
+
+		// Act
+		obj.SetBuyCount(fernTestValueBuyCount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSellCount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSellCount *int
+
+		// Act
+		obj.SetSellCount(fernTestValueSellCount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWinCount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinCount *int
+
+		// Act
+		obj.SetWinCount(fernTestValueWinCount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLossCount_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLossCount *int
+
+		// Act
+		obj.SetLossCount(fernTestValueLossCount)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPnl_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnl *float64
+
+		// Act
+		obj.SetPnl(fernTestValuePnl)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWinPnl_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinPnl *float64
+
+		// Act
+		obj.SetWinPnl(fernTestValueWinPnl)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLossPnl_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueLossPnl *float64
+
+		// Act
+		obj.SetLossPnl(fernTestValueLossPnl)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVolume_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueVolume *float64
+
+		// Act
+		obj.SetVolume(fernTestValueVolume)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBuyVolume_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueBuyVolume *float64
+
+		// Act
+		obj.SetBuyVolume(fernTestValueBuyVolume)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSellVolume_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSellVolume *float64
+
+		// Act
+		obj.SetSellVolume(fernTestValueSellVolume)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWinrate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinrate *float64
+
+		// Act
+		obj.SetWinrate(fernTestValueWinrate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVolumeWeightedWinrate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueVolumeWeightedWinrate *float64
+
+		// Act
+		obj.SetVolumeWeightedWinrate(fernTestValueVolumeWeightedWinrate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRoi_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRoi *float64
+
+		// Act
+		obj.SetRoi(fernTestValueRoi)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVolumeWeightedRoi_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueVolumeWeightedRoi *float64
+
+		// Act
+		obj.SetVolumeWeightedRoi(fernTestValueVolumeWeightedRoi)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPnlVolumeRatio_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnlVolumeRatio *float64
+
+		// Act
+		obj.SetPnlVolumeRatio(fernTestValuePnlVolumeRatio)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWinLossSizeRatio_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinLossSizeRatio *float64
+
+		// Act
+		obj.SetWinLossSizeRatio(fernTestValueWinLossSizeRatio)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetProfitFactor_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueProfitFactor *float64
+
+		// Act
+		obj.SetProfitFactor(fernTestValueProfitFactor)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetProfitExpectancy_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueProfitExpectancy *float64
+
+		// Act
+		obj.SetProfitExpectancy(fernTestValueProfitExpectancy)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRecoveryFactor_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRecoveryFactor *float64
+
+		// Act
+		obj.SetRecoveryFactor(fernTestValueRecoveryFactor)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWinrateStability_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinrateStability *float64
+
+		// Act
+		obj.SetWinrateStability(fernTestValueWinrateStability)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWinrateVolatility_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueWinrateVolatility *float64
+
+		// Act
+		obj.SetWinrateVolatility(fernTestValueWinrateVolatility)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRoiStability_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRoiStability *float64
+
+		// Act
+		obj.SetRoiStability(fernTestValueRoiStability)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRoiVolatility_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRoiVolatility *float64
+
+		// Act
+		obj.SetRoiVolatility(fernTestValueRoiVolatility)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPnlStability_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnlStability *float64
+
+		// Act
+		obj.SetPnlStability(fernTestValuePnlStability)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPnlVolatility_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValuePnlVolatility *float64
+
+		// Act
+		obj.SetPnlVolatility(fernTestValuePnlVolatility)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSharpeRatio_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSharpeRatio *float64
+
+		// Act
+		obj.SetSharpeRatio(fernTestValueSharpeRatio)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSortinoRatio_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueSortinoRatio *float64
+
+		// Act
+		obj.SetSortinoRatio(fernTestValueSortinoRatio)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetMaxDrawdown_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueMaxDrawdown *float64
+
+		// Act
+		obj.SetMaxDrawdown(fernTestValueMaxDrawdown)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRiskOfRuin_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueRiskOfRuin *float64
+
+		// Act
+		obj.SetRiskOfRuin(fernTestValueRiskOfRuin)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTurnover_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+		var fernTestValueTurnover *float64
+
+		// Act
+		obj.SetTurnover(fernTestValueTurnover)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSolanaDexPositionProfilePayloadOptions(t *testing.T) {
+	t.Run("SetIncludeMetadata", func(t *testing.T) {
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var fernTestValueIncludeMetadata *bool
+		obj.SetIncludeMetadata(fernTestValueIncludeMetadata)
+		assert.Equal(t, fernTestValueIncludeMetadata, obj.IncludeMetadata)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetIncludeLabels", func(t *testing.T) {
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var fernTestValueIncludeLabels *bool
+		obj.SetIncludeLabels(fernTestValueIncludeLabels)
+		assert.Equal(t, fernTestValueIncludeLabels, obj.IncludeLabels)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetIncludeMetrics", func(t *testing.T) {
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var fernTestValueIncludeMetrics []SolanaDexPositionProfileTimeWindowEnum
+		obj.SetIncludeMetrics(fernTestValueIncludeMetrics)
+		assert.Equal(t, fernTestValueIncludeMetrics, obj.IncludeMetrics)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSolanaDexPositionProfilePayloadOptions(t *testing.T) {
+	t.Run("GetIncludeMetadata", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var expected *bool
+		obj.IncludeMetadata = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIncludeMetadata(), "getter should return the property value")
+	})
+
+	t.Run("GetIncludeMetadata_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		obj.IncludeMetadata = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIncludeMetadata(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIncludeMetadata_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfilePayloadOptions
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIncludeMetadata() // Should return zero value
+	})
+
+	t.Run("GetIncludeLabels", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var expected *bool
+		obj.IncludeLabels = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIncludeLabels(), "getter should return the property value")
+	})
+
+	t.Run("GetIncludeLabels_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		obj.IncludeLabels = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIncludeLabels(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIncludeLabels_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfilePayloadOptions
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIncludeLabels() // Should return zero value
+	})
+
+	t.Run("GetIncludeMetrics", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var expected []SolanaDexPositionProfileTimeWindowEnum
+		obj.IncludeMetrics = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIncludeMetrics(), "getter should return the property value")
+	})
+
+	t.Run("GetIncludeMetrics_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		obj.IncludeMetrics = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIncludeMetrics(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIncludeMetrics_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfilePayloadOptions
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIncludeMetrics() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSolanaDexPositionProfilePayloadOptions(t *testing.T) {
+	t.Run("SetIncludeMetadata_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var fernTestValueIncludeMetadata *bool
+
+		// Act
+		obj.SetIncludeMetadata(fernTestValueIncludeMetadata)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetIncludeLabels_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var fernTestValueIncludeLabels *bool
+
+		// Act
+		obj.SetIncludeLabels(fernTestValueIncludeLabels)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetIncludeMetrics_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		var fernTestValueIncludeMetrics []SolanaDexPositionProfileTimeWindowEnum
+
+		// Act
+		obj.SetIncludeMetrics(fernTestValueIncludeMetrics)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersSolanaDexPrice(t *testing.T) {
 	t.Run("SetTokenAddress", func(t *testing.T) {
 		obj := &SolanaDexPrice{}
@@ -20077,6 +24577,138 @@ func TestJSONMarshalingPayloadPagination(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingSolanaDexPositionProfile(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfile{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexPositionProfile
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfile
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfile
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexPositionProfileMetadata(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetadata{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexPositionProfileMetadata
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfileMetadata
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfileMetadata
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexPositionProfileMetrics(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfileMetrics{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexPositionProfileMetrics
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfileMetrics
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfileMetrics
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSolanaDexPositionProfilePayloadOptions(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SolanaDexPositionProfilePayloadOptions
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfilePayloadOptions
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SolanaDexPositionProfilePayloadOptions
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingSolanaDexPrice(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -20982,6 +25614,70 @@ func TestStringPayloadPagination(t *testing.T) {
 	})
 }
 
+func TestStringSolanaDexPositionProfile(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfile{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexPositionProfileMetadata(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfileMetadata{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetadata
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexPositionProfileMetrics(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfileMetrics{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSolanaDexPositionProfilePayloadOptions(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfilePayloadOptions
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringSolanaDexPrice(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -21379,6 +26075,56 @@ func TestStringUnauthorizedErrorBody(t *testing.T) {
 		var obj *UnauthorizedErrorBody
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestEnumSolanaDexPositionProfileTimeWindowEnum(t *testing.T) {
+	t.Run("NewFromString_30d", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPositionProfileTimeWindowEnumFromString("30d")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPositionProfileTimeWindowEnum("30d"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_14d", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPositionProfileTimeWindowEnumFromString("14d")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPositionProfileTimeWindowEnum("14d"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_7d", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPositionProfileTimeWindowEnumFromString("7d")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPositionProfileTimeWindowEnum("7d"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_3d", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPositionProfileTimeWindowEnumFromString("3d")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPositionProfileTimeWindowEnum("3d"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_1d", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSolanaDexPositionProfileTimeWindowEnumFromString("1d")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SolanaDexPositionProfileTimeWindowEnum("1d"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSolanaDexPositionProfileTimeWindowEnumFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSolanaDexPositionProfileTimeWindowEnumFromString("30d")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
 	})
 }
 
@@ -21936,6 +26682,98 @@ func TestExtraPropertiesPayloadPagination(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *PayloadPagination
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexPositionProfile(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfile{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfile
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexPositionProfileMetadata(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfileMetadata{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetadata
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexPositionProfileMetrics(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfileMetrics{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfileMetrics
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSolanaDexPositionProfilePayloadOptions(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SolanaDexPositionProfilePayloadOptions{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SolanaDexPositionProfilePayloadOptions
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

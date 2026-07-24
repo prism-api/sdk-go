@@ -103,6 +103,40 @@ func (c *Client) SearchTokenProfiles(
 	return response.Body, nil
 }
 
+// Returns a position profile for a specific wallet-token pair.
+func (c *Client) GetPositionProfile(
+	ctx context.Context,
+	request *solana.GetPositionProfileDexRequest,
+	opts ...option.RequestOption,
+) (*api.SolanaDexPositionProfile, error) {
+	response, err := c.WithRawResponse.GetPositionProfile(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Filter, query, and sort position profiles based on specified metrics and conditions.
+func (c *Client) SearchPositionProfiles(
+	ctx context.Context,
+	request *solana.SearchPositionProfilesDexRequest,
+	opts ...option.RequestOption,
+) (*solana.SearchPositionProfilesDexResponse, error) {
+	response, err := c.WithRawResponse.SearchPositionProfiles(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Returns trades for a combination of wallet, token and/or pool.
 func (c *Client) GetTrades(
 	ctx context.Context,

@@ -209,6 +209,94 @@ func (r *RawClient) SearchTokenProfiles(
 	}, nil
 }
 
+func (r *RawClient) GetPositionProfile(
+	ctx context.Context,
+	request *solana.GetPositionProfileDexRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*api.SolanaDexPositionProfile], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://refract.prismapi.io",
+	)
+	endpointURL := baseURL + "/v1/solana/dex/profiles/positions/get-profile"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *api.SolanaDexPositionProfile
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(solana.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*api.SolanaDexPositionProfile]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) SearchPositionProfiles(
+	ctx context.Context,
+	request *solana.SearchPositionProfilesDexRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*solana.SearchPositionProfilesDexResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://refract.prismapi.io",
+	)
+	endpointURL := baseURL + "/v1/solana/dex/profiles/positions/search-profiles"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *solana.SearchPositionProfilesDexResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(solana.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*solana.SearchPositionProfilesDexResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) GetTrades(
 	ctx context.Context,
 	request *solana.GetTradesDexRequest,

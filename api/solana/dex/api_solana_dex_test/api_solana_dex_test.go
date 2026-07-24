@@ -263,6 +263,90 @@ func TestAPISolanaDexSearchTokenProfilesWithWireMock(
 	VerifyRequestCount(t, "TestAPISolanaDexSearchTokenProfilesWithWireMock", "POST", "/v1/solana/dex/profiles/tokens/search-profiles", nil, 1)
 }
 
+func TestAPISolanaDexGetPositionProfileWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-value"),
+	)
+	request := &solana.GetPositionProfileDexRequest{
+		Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
+		Token:  "Z4d9YXR4pSkdKcu9UBcwxHp7i32buzdDtAR1b1Gbonk",
+		Options: &api.SolanaDexPositionProfilePayloadOptions{
+			IncludeMetadata: prism.Bool(
+				true,
+			),
+			IncludeLabels: prism.Bool(
+				true,
+			),
+			IncludeMetrics: []api.SolanaDexPositionProfileTimeWindowEnum{
+				api.SolanaDexPositionProfileTimeWindowEnumWindow7D,
+			},
+		},
+	}
+	_, invocationErr := client.API.Solana.Dex.GetPositionProfile(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAPISolanaDexGetPositionProfileWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAPISolanaDexGetPositionProfileWithWireMock", "POST", "/v1/solana/dex/profiles/positions/get-profile", nil, 1)
+}
+
+func TestAPISolanaDexSearchPositionProfilesWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-value"),
+	)
+	request := &solana.SearchPositionProfilesDexRequest{
+		Limit: prism.Int(
+			10,
+		),
+		Sort: &api.SolanaDexProfileSearchPayloadSort{
+			Field:     "metrics.7d.pnl",
+			Direction: api.SolanaDexProfileSearchPayloadSortDirectionEnumDesc,
+		},
+		DynamicLabels: &api.SolanaDexProfileSearchPayloadDynamicLabels{
+			"winner": &api.SolanaDexProfileSearchPayloadFilter{},
+		},
+		Options: &api.SolanaDexPositionProfilePayloadOptions{
+			IncludeMetadata: prism.Bool(
+				true,
+			),
+			IncludeLabels: prism.Bool(
+				true,
+			),
+			IncludeMetrics: []api.SolanaDexPositionProfileTimeWindowEnum{
+				api.SolanaDexPositionProfileTimeWindowEnumWindow7D,
+			},
+		},
+	}
+	_, invocationErr := client.API.Solana.Dex.SearchPositionProfiles(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAPISolanaDexSearchPositionProfilesWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAPISolanaDexSearchPositionProfilesWithWireMock", "POST", "/v1/solana/dex/profiles/positions/search-profiles", nil, 1)
+}
+
 func TestAPISolanaDexGetTradesWithWireMock(
 	t *testing.T,
 ) {
