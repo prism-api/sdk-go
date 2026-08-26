@@ -10,6 +10,807 @@ import (
 )
 
 var (
+	subscribeEvmAssetsTransfersParamsFieldChainID       = big.NewInt(1 << 0)
+	subscribeEvmAssetsTransfersParamsFieldFromAddresses = big.NewInt(1 << 1)
+	subscribeEvmAssetsTransfersParamsFieldToAddresses   = big.NewInt(1 << 2)
+)
+
+type SubscribeEvmAssetsTransfersParams struct {
+	// Numeric EVM chain ID to receive updates for. See [Supported Chains](/documentation/evm/overview#supported-chains).
+	ChainID int `json:"chain_id" url:"chain_id"`
+	// The from addresses to filter by. Leave empty to subscribe to all from addresses on the chain.
+	FromAddresses []string `json:"from_addresses,omitempty" url:"from_addresses,omitempty"`
+	// The to addresses to filter by. Leave empty to subscribe to all to addresses on the chain.
+	ToAddresses []string `json:"to_addresses,omitempty" url:"to_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) GetChainID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ChainID
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) GetFromAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.FromAddresses
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) GetToAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.ToAddresses
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmAssetsTransfersParams) SetChainID(chainID int) {
+	s.ChainID = chainID
+	s.require(subscribeEvmAssetsTransfersParamsFieldChainID)
+}
+
+// SetFromAddresses sets the FromAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmAssetsTransfersParams) SetFromAddresses(fromAddresses []string) {
+	s.FromAddresses = fromAddresses
+	s.require(subscribeEvmAssetsTransfersParamsFieldFromAddresses)
+}
+
+// SetToAddresses sets the ToAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmAssetsTransfersParams) SetToAddresses(toAddresses []string) {
+	s.ToAddresses = toAddresses
+	s.require(subscribeEvmAssetsTransfersParamsFieldToAddresses)
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeEvmAssetsTransfersParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeEvmAssetsTransfersParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeEvmAssetsTransfersParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeEvmAssetsTransfersParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeEvmDexPoolsParamsFieldChainID       = big.NewInt(1 << 0)
+	subscribeEvmDexPoolsParamsFieldPoolAddresses = big.NewInt(1 << 1)
+)
+
+type SubscribeEvmDexPoolsParams struct {
+	// Numeric EVM chain ID to receive updates for. See [Supported Chains](/documentation/evm/overview#supported-chains).
+	ChainID int `json:"chain_id" url:"chain_id"`
+	// The pool addresses to filter by. Unlike the other EVM subscriptions, an empty list
+	// matches no pools rather than all of them, so at least one address is required to
+	// receive updates.
+	PoolAddresses []string `json:"pool_addresses,omitempty" url:"pool_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeEvmDexPoolsParams) GetChainID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ChainID
+}
+
+func (s *SubscribeEvmDexPoolsParams) GetPoolAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddresses
+}
+
+func (s *SubscribeEvmDexPoolsParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeEvmDexPoolsParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexPoolsParams) SetChainID(chainID int) {
+	s.ChainID = chainID
+	s.require(subscribeEvmDexPoolsParamsFieldChainID)
+}
+
+// SetPoolAddresses sets the PoolAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexPoolsParams) SetPoolAddresses(poolAddresses []string) {
+	s.PoolAddresses = poolAddresses
+	s.require(subscribeEvmDexPoolsParamsFieldPoolAddresses)
+}
+
+func (s *SubscribeEvmDexPoolsParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeEvmDexPoolsParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeEvmDexPoolsParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeEvmDexPoolsParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeEvmDexPoolsParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeEvmDexPoolsParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeEvmDexPricesParamsFieldChainID        = big.NewInt(1 << 0)
+	subscribeEvmDexPricesParamsFieldTokenAddresses = big.NewInt(1 << 1)
+	subscribeEvmDexPricesParamsFieldPoolAddresses  = big.NewInt(1 << 2)
+)
+
+type SubscribeEvmDexPricesParams struct {
+	// Numeric EVM chain ID to receive updates for. See [Supported Chains](/documentation/evm/overview#supported-chains).
+	ChainID int `json:"chain_id" url:"chain_id"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens on the chain.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
+	// The pool addresses to filter by. Leave empty to subscribe to all pools on the chain.
+	PoolAddresses []string `json:"pool_addresses,omitempty" url:"pool_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeEvmDexPricesParams) GetChainID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ChainID
+}
+
+func (s *SubscribeEvmDexPricesParams) GetTokenAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddresses
+}
+
+func (s *SubscribeEvmDexPricesParams) GetPoolAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddresses
+}
+
+func (s *SubscribeEvmDexPricesParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeEvmDexPricesParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexPricesParams) SetChainID(chainID int) {
+	s.ChainID = chainID
+	s.require(subscribeEvmDexPricesParamsFieldChainID)
+}
+
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexPricesParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeEvmDexPricesParamsFieldTokenAddresses)
+}
+
+// SetPoolAddresses sets the PoolAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexPricesParams) SetPoolAddresses(poolAddresses []string) {
+	s.PoolAddresses = poolAddresses
+	s.require(subscribeEvmDexPricesParamsFieldPoolAddresses)
+}
+
+func (s *SubscribeEvmDexPricesParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeEvmDexPricesParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeEvmDexPricesParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeEvmDexPricesParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeEvmDexPricesParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeEvmDexPricesParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeEvmDexSwapsParamsFieldChainID         = big.NewInt(1 << 0)
+	subscribeEvmDexSwapsParamsFieldWalletAddresses = big.NewInt(1 << 1)
+	subscribeEvmDexSwapsParamsFieldTokenAddresses  = big.NewInt(1 << 2)
+	subscribeEvmDexSwapsParamsFieldPoolAddresses   = big.NewInt(1 << 3)
+)
+
+type SubscribeEvmDexSwapsParams struct {
+	// Numeric EVM chain ID to receive updates for. See [Supported Chains](/documentation/evm/overview#supported-chains).
+	ChainID int `json:"chain_id" url:"chain_id"`
+	// The wallet addresses to filter by. Leave empty to subscribe to all wallets on the chain.
+	WalletAddresses []string `json:"wallet_addresses,omitempty" url:"wallet_addresses,omitempty"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens on the chain.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
+	// The pool addresses to filter by. Leave empty to subscribe to all pools on the chain.
+	PoolAddresses []string `json:"pool_addresses,omitempty" url:"pool_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeEvmDexSwapsParams) GetChainID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ChainID
+}
+
+func (s *SubscribeEvmDexSwapsParams) GetWalletAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.WalletAddresses
+}
+
+func (s *SubscribeEvmDexSwapsParams) GetTokenAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddresses
+}
+
+func (s *SubscribeEvmDexSwapsParams) GetPoolAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.PoolAddresses
+}
+
+func (s *SubscribeEvmDexSwapsParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeEvmDexSwapsParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexSwapsParams) SetChainID(chainID int) {
+	s.ChainID = chainID
+	s.require(subscribeEvmDexSwapsParamsFieldChainID)
+}
+
+// SetWalletAddresses sets the WalletAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexSwapsParams) SetWalletAddresses(walletAddresses []string) {
+	s.WalletAddresses = walletAddresses
+	s.require(subscribeEvmDexSwapsParamsFieldWalletAddresses)
+}
+
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexSwapsParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeEvmDexSwapsParamsFieldTokenAddresses)
+}
+
+// SetPoolAddresses sets the PoolAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexSwapsParams) SetPoolAddresses(poolAddresses []string) {
+	s.PoolAddresses = poolAddresses
+	s.require(subscribeEvmDexSwapsParamsFieldPoolAddresses)
+}
+
+func (s *SubscribeEvmDexSwapsParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeEvmDexSwapsParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeEvmDexSwapsParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeEvmDexSwapsParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeEvmDexSwapsParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeEvmDexSwapsParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeEvmDexTokenProfilesParamsFieldChainID        = big.NewInt(1 << 0)
+	subscribeEvmDexTokenProfilesParamsFieldTokenAddresses = big.NewInt(1 << 1)
+)
+
+type SubscribeEvmDexTokenProfilesParams struct {
+	// Numeric EVM chain ID to receive updates for. See [Supported Chains](/documentation/evm/overview#supported-chains).
+	ChainID int `json:"chain_id" url:"chain_id"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens on the chain.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeEvmDexTokenProfilesParams) GetChainID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ChainID
+}
+
+func (s *SubscribeEvmDexTokenProfilesParams) GetTokenAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddresses
+}
+
+func (s *SubscribeEvmDexTokenProfilesParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeEvmDexTokenProfilesParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexTokenProfilesParams) SetChainID(chainID int) {
+	s.ChainID = chainID
+	s.require(subscribeEvmDexTokenProfilesParamsFieldChainID)
+}
+
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexTokenProfilesParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeEvmDexTokenProfilesParamsFieldTokenAddresses)
+}
+
+func (s *SubscribeEvmDexTokenProfilesParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeEvmDexTokenProfilesParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeEvmDexTokenProfilesParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeEvmDexTokenProfilesParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeEvmDexTokenProfilesParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeEvmDexTokenProfilesParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeEvmDexTradesParamsFieldChainID         = big.NewInt(1 << 0)
+	subscribeEvmDexTradesParamsFieldTokenAddresses  = big.NewInt(1 << 1)
+	subscribeEvmDexTradesParamsFieldWalletAddresses = big.NewInt(1 << 2)
+)
+
+type SubscribeEvmDexTradesParams struct {
+	// Numeric EVM chain ID to receive updates for. See [Supported Chains](/documentation/evm/overview#supported-chains).
+	ChainID int `json:"chain_id" url:"chain_id"`
+	// The token addresses to filter by. Leave empty to subscribe to all tokens on the chain.
+	TokenAddresses []string `json:"token_addresses,omitempty" url:"token_addresses,omitempty"`
+	// The wallet addresses to filter by. Leave empty to subscribe to all wallets on the chain.
+	WalletAddresses []string `json:"wallet_addresses,omitempty" url:"wallet_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeEvmDexTradesParams) GetChainID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ChainID
+}
+
+func (s *SubscribeEvmDexTradesParams) GetTokenAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.TokenAddresses
+}
+
+func (s *SubscribeEvmDexTradesParams) GetWalletAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.WalletAddresses
+}
+
+func (s *SubscribeEvmDexTradesParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeEvmDexTradesParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexTradesParams) SetChainID(chainID int) {
+	s.ChainID = chainID
+	s.require(subscribeEvmDexTradesParamsFieldChainID)
+}
+
+// SetTokenAddresses sets the TokenAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexTradesParams) SetTokenAddresses(tokenAddresses []string) {
+	s.TokenAddresses = tokenAddresses
+	s.require(subscribeEvmDexTradesParamsFieldTokenAddresses)
+}
+
+// SetWalletAddresses sets the WalletAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexTradesParams) SetWalletAddresses(walletAddresses []string) {
+	s.WalletAddresses = walletAddresses
+	s.require(subscribeEvmDexTradesParamsFieldWalletAddresses)
+}
+
+func (s *SubscribeEvmDexTradesParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeEvmDexTradesParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeEvmDexTradesParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeEvmDexTradesParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeEvmDexTradesParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeEvmDexTradesParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	subscribeEvmDexWalletProfilesParamsFieldChainID         = big.NewInt(1 << 0)
+	subscribeEvmDexWalletProfilesParamsFieldWalletAddresses = big.NewInt(1 << 1)
+)
+
+type SubscribeEvmDexWalletProfilesParams struct {
+	// Numeric EVM chain ID to receive updates for. See [Supported Chains](/documentation/evm/overview#supported-chains).
+	ChainID int `json:"chain_id" url:"chain_id"`
+	// The wallet addresses to filter by. Leave empty to subscribe to all wallets on the chain.
+	WalletAddresses []string `json:"wallet_addresses,omitempty" url:"wallet_addresses,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscribeEvmDexWalletProfilesParams) GetChainID() int {
+	if s == nil {
+		return 0
+	}
+	return s.ChainID
+}
+
+func (s *SubscribeEvmDexWalletProfilesParams) GetWalletAddresses() []string {
+	if s == nil {
+		return nil
+	}
+	return s.WalletAddresses
+}
+
+func (s *SubscribeEvmDexWalletProfilesParams) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscribeEvmDexWalletProfilesParams) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexWalletProfilesParams) SetChainID(chainID int) {
+	s.ChainID = chainID
+	s.require(subscribeEvmDexWalletProfilesParamsFieldChainID)
+}
+
+// SetWalletAddresses sets the WalletAddresses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscribeEvmDexWalletProfilesParams) SetWalletAddresses(walletAddresses []string) {
+	s.WalletAddresses = walletAddresses
+	s.require(subscribeEvmDexWalletProfilesParamsFieldWalletAddresses)
+}
+
+func (s *SubscribeEvmDexWalletProfilesParams) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscribeEvmDexWalletProfilesParams
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubscribeEvmDexWalletProfilesParams(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscribeEvmDexWalletProfilesParams) MarshalJSON() ([]byte, error) {
+	type embed SubscribeEvmDexWalletProfilesParams
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscribeEvmDexWalletProfilesParams) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
 	subscribeSolanaAssetsBalanceChangesParamsFieldOwnerAddresses = big.NewInt(1 << 0)
 	subscribeSolanaAssetsBalanceChangesParamsFieldTokenAddresses = big.NewInt(1 << 1)
 )

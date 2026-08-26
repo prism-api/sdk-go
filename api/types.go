@@ -95,6 +95,7223 @@ func (b *BadRequestErrorBody) String() string {
 }
 
 var (
+	evmDexPositionProfileFieldUpdatedAt       = big.NewInt(1 << 0)
+	evmDexPositionProfileFieldSyncedAt        = big.NewInt(1 << 1)
+	evmDexPositionProfileFieldChainID         = big.NewInt(1 << 2)
+	evmDexPositionProfileFieldPositionAddress = big.NewInt(1 << 3)
+	evmDexPositionProfileFieldWalletAddress   = big.NewInt(1 << 4)
+	evmDexPositionProfileFieldTokenAddress    = big.NewInt(1 << 5)
+	evmDexPositionProfileFieldMetadata        = big.NewInt(1 << 6)
+	evmDexPositionProfileFieldMetrics         = big.NewInt(1 << 7)
+)
+
+type EvmDexPositionProfile struct {
+	UpdatedAt *time.Time `json:"updated_at,omitempty" url:"updated_at,omitempty"`
+	SyncedAt  *time.Time `json:"synced_at,omitempty" url:"synced_at,omitempty"`
+	// Numeric EVM chain ID the record belongs to.
+	ChainID         *int                                     `json:"chain_id,omitempty" url:"chain_id,omitempty"`
+	PositionAddress *string                                  `json:"position_address,omitempty" url:"position_address,omitempty"`
+	WalletAddress   *string                                  `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	TokenAddress    *string                                  `json:"token_address,omitempty" url:"token_address,omitempty"`
+	Metadata        *EvmDexPositionProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Metrics         map[string]*EvmDexPositionProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPositionProfile) GetUpdatedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.UpdatedAt
+}
+
+func (e *EvmDexPositionProfile) GetSyncedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.SyncedAt
+}
+
+func (e *EvmDexPositionProfile) GetChainID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ChainID
+}
+
+func (e *EvmDexPositionProfile) GetPositionAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PositionAddress
+}
+
+func (e *EvmDexPositionProfile) GetWalletAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.WalletAddress
+}
+
+func (e *EvmDexPositionProfile) GetTokenAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddress
+}
+
+func (e *EvmDexPositionProfile) GetMetadata() *EvmDexPositionProfileMetadata {
+	if e == nil {
+		return nil
+	}
+	return e.Metadata
+}
+
+func (e *EvmDexPositionProfile) GetMetrics() map[string]*EvmDexPositionProfileMetrics {
+	if e == nil {
+		return nil
+	}
+	return e.Metrics
+}
+
+func (e *EvmDexPositionProfile) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPositionProfile) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetUpdatedAt(updatedAt *time.Time) {
+	e.UpdatedAt = updatedAt
+	e.require(evmDexPositionProfileFieldUpdatedAt)
+}
+
+// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetSyncedAt(syncedAt *time.Time) {
+	e.SyncedAt = syncedAt
+	e.require(evmDexPositionProfileFieldSyncedAt)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetChainID(chainID *int) {
+	e.ChainID = chainID
+	e.require(evmDexPositionProfileFieldChainID)
+}
+
+// SetPositionAddress sets the PositionAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetPositionAddress(positionAddress *string) {
+	e.PositionAddress = positionAddress
+	e.require(evmDexPositionProfileFieldPositionAddress)
+}
+
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetWalletAddress(walletAddress *string) {
+	e.WalletAddress = walletAddress
+	e.require(evmDexPositionProfileFieldWalletAddress)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetTokenAddress(tokenAddress *string) {
+	e.TokenAddress = tokenAddress
+	e.require(evmDexPositionProfileFieldTokenAddress)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetMetadata(metadata *EvmDexPositionProfileMetadata) {
+	e.Metadata = metadata
+	e.require(evmDexPositionProfileFieldMetadata)
+}
+
+// SetMetrics sets the Metrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfile) SetMetrics(metrics map[string]*EvmDexPositionProfileMetrics) {
+	e.Metrics = metrics
+	e.require(evmDexPositionProfileFieldMetrics)
+}
+
+func (e *EvmDexPositionProfile) UnmarshalJSON(data []byte) error {
+	type embed EvmDexPositionProfile
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexPositionProfile(unmarshaler.embed)
+	e.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
+	e.SyncedAt = unmarshaler.SyncedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPositionProfile) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPositionProfile
+	var marshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed:     embed(*e),
+		UpdatedAt: internal.NewOptionalDateTime(e.UpdatedAt),
+		SyncedAt:  internal.NewOptionalDateTime(e.SyncedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPositionProfile) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexPositionProfileMetadataFieldLastTradeAt = big.NewInt(1 << 0)
+)
+
+type EvmDexPositionProfileMetadata struct {
+	LastTradeAt *time.Time `json:"last_trade_at,omitempty" url:"last_trade_at,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPositionProfileMetadata) GetLastTradeAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.LastTradeAt
+}
+
+func (e *EvmDexPositionProfileMetadata) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPositionProfileMetadata) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetLastTradeAt sets the LastTradeAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetadata) SetLastTradeAt(lastTradeAt *time.Time) {
+	e.LastTradeAt = lastTradeAt
+	e.require(evmDexPositionProfileMetadataFieldLastTradeAt)
+}
+
+func (e *EvmDexPositionProfileMetadata) UnmarshalJSON(data []byte) error {
+	type embed EvmDexPositionProfileMetadata
+	var unmarshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexPositionProfileMetadata(unmarshaler.embed)
+	e.LastTradeAt = unmarshaler.LastTradeAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPositionProfileMetadata) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPositionProfileMetadata
+	var marshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+	}{
+		embed:       embed(*e),
+		LastTradeAt: internal.NewOptionalDateTime(e.LastTradeAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPositionProfileMetadata) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexPositionProfileMetricsFieldRiskScore             = big.NewInt(1 << 0)
+	evmDexPositionProfileMetricsFieldConsistencyScore      = big.NewInt(1 << 1)
+	evmDexPositionProfileMetricsFieldLargestWin            = big.NewInt(1 << 2)
+	evmDexPositionProfileMetricsFieldLargestLoss           = big.NewInt(1 << 3)
+	evmDexPositionProfileMetricsFieldMaxConsecutiveWins    = big.NewInt(1 << 4)
+	evmDexPositionProfileMetricsFieldMaxConsecutiveLosses  = big.NewInt(1 << 5)
+	evmDexPositionProfileMetricsFieldAvgBuySize            = big.NewInt(1 << 6)
+	evmDexPositionProfileMetricsFieldAvgSellSize           = big.NewInt(1 << 7)
+	evmDexPositionProfileMetricsFieldAvgBuyMcap            = big.NewInt(1 << 8)
+	evmDexPositionProfileMetricsFieldAvgSellMcap           = big.NewInt(1 << 9)
+	evmDexPositionProfileMetricsFieldAvgDailyTradeCount    = big.NewInt(1 << 10)
+	evmDexPositionProfileMetricsFieldAvgDailyVolume        = big.NewInt(1 << 11)
+	evmDexPositionProfileMetricsFieldAvgDailyPnl           = big.NewInt(1 << 12)
+	evmDexPositionProfileMetricsFieldAvgDailyRoi           = big.NewInt(1 << 13)
+	evmDexPositionProfileMetricsFieldAvgHoldingDuration    = big.NewInt(1 << 14)
+	evmDexPositionProfileMetricsFieldAvgTradeDelta         = big.NewInt(1 << 15)
+	evmDexPositionProfileMetricsFieldAvgPnl                = big.NewInt(1 << 16)
+	evmDexPositionProfileMetricsFieldAvgRoi                = big.NewInt(1 << 17)
+	evmDexPositionProfileMetricsFieldTradeCount            = big.NewInt(1 << 18)
+	evmDexPositionProfileMetricsFieldBuyCount              = big.NewInt(1 << 19)
+	evmDexPositionProfileMetricsFieldSellCount             = big.NewInt(1 << 20)
+	evmDexPositionProfileMetricsFieldWinCount              = big.NewInt(1 << 21)
+	evmDexPositionProfileMetricsFieldLossCount             = big.NewInt(1 << 22)
+	evmDexPositionProfileMetricsFieldPnl                   = big.NewInt(1 << 23)
+	evmDexPositionProfileMetricsFieldWinPnl                = big.NewInt(1 << 24)
+	evmDexPositionProfileMetricsFieldLossPnl               = big.NewInt(1 << 25)
+	evmDexPositionProfileMetricsFieldVolume                = big.NewInt(1 << 26)
+	evmDexPositionProfileMetricsFieldBuyVolume             = big.NewInt(1 << 27)
+	evmDexPositionProfileMetricsFieldSellVolume            = big.NewInt(1 << 28)
+	evmDexPositionProfileMetricsFieldWinrate               = big.NewInt(1 << 29)
+	evmDexPositionProfileMetricsFieldVolumeWeightedWinrate = big.NewInt(1 << 30)
+	evmDexPositionProfileMetricsFieldRoi                   = big.NewInt(1 << 31)
+	evmDexPositionProfileMetricsFieldVolumeWeightedRoi     = big.NewInt(1 << 32)
+	evmDexPositionProfileMetricsFieldPnlVolumeRatio        = big.NewInt(1 << 33)
+	evmDexPositionProfileMetricsFieldWinLossSizeRatio      = big.NewInt(1 << 34)
+	evmDexPositionProfileMetricsFieldProfitFactor          = big.NewInt(1 << 35)
+	evmDexPositionProfileMetricsFieldProfitExpectancy      = big.NewInt(1 << 36)
+	evmDexPositionProfileMetricsFieldRecoveryFactor        = big.NewInt(1 << 37)
+	evmDexPositionProfileMetricsFieldWinrateStability      = big.NewInt(1 << 38)
+	evmDexPositionProfileMetricsFieldWinrateVolatility     = big.NewInt(1 << 39)
+	evmDexPositionProfileMetricsFieldRoiStability          = big.NewInt(1 << 40)
+	evmDexPositionProfileMetricsFieldRoiVolatility         = big.NewInt(1 << 41)
+	evmDexPositionProfileMetricsFieldPnlStability          = big.NewInt(1 << 42)
+	evmDexPositionProfileMetricsFieldPnlVolatility         = big.NewInt(1 << 43)
+	evmDexPositionProfileMetricsFieldSharpeRatio           = big.NewInt(1 << 44)
+	evmDexPositionProfileMetricsFieldSortinoRatio          = big.NewInt(1 << 45)
+	evmDexPositionProfileMetricsFieldMaxDrawdown           = big.NewInt(1 << 46)
+	evmDexPositionProfileMetricsFieldRiskOfRuin            = big.NewInt(1 << 47)
+	evmDexPositionProfileMetricsFieldTurnover              = big.NewInt(1 << 48)
+)
+
+type EvmDexPositionProfileMetrics struct {
+	RiskScore             *float64 `json:"risk_score,omitempty" url:"risk_score,omitempty"`
+	ConsistencyScore      *float64 `json:"consistency_score,omitempty" url:"consistency_score,omitempty"`
+	LargestWin            *float64 `json:"largest_win,omitempty" url:"largest_win,omitempty"`
+	LargestLoss           *float64 `json:"largest_loss,omitempty" url:"largest_loss,omitempty"`
+	MaxConsecutiveWins    *int     `json:"max_consecutive_wins,omitempty" url:"max_consecutive_wins,omitempty"`
+	MaxConsecutiveLosses  *int     `json:"max_consecutive_losses,omitempty" url:"max_consecutive_losses,omitempty"`
+	AvgBuySize            *float64 `json:"avg_buy_size,omitempty" url:"avg_buy_size,omitempty"`
+	AvgSellSize           *float64 `json:"avg_sell_size,omitempty" url:"avg_sell_size,omitempty"`
+	AvgBuyMcap            *float64 `json:"avg_buy_mcap,omitempty" url:"avg_buy_mcap,omitempty"`
+	AvgSellMcap           *float64 `json:"avg_sell_mcap,omitempty" url:"avg_sell_mcap,omitempty"`
+	AvgDailyTradeCount    *int     `json:"avg_daily_trade_count,omitempty" url:"avg_daily_trade_count,omitempty"`
+	AvgDailyVolume        *float64 `json:"avg_daily_volume,omitempty" url:"avg_daily_volume,omitempty"`
+	AvgDailyPnl           *float64 `json:"avg_daily_pnl,omitempty" url:"avg_daily_pnl,omitempty"`
+	AvgDailyRoi           *float64 `json:"avg_daily_roi,omitempty" url:"avg_daily_roi,omitempty"`
+	AvgHoldingDuration    *int     `json:"avg_holding_duration,omitempty" url:"avg_holding_duration,omitempty"`
+	AvgTradeDelta         *int     `json:"avg_trade_delta,omitempty" url:"avg_trade_delta,omitempty"`
+	AvgPnl                *float64 `json:"avg_pnl,omitempty" url:"avg_pnl,omitempty"`
+	AvgRoi                *float64 `json:"avg_roi,omitempty" url:"avg_roi,omitempty"`
+	TradeCount            *int     `json:"trade_count,omitempty" url:"trade_count,omitempty"`
+	BuyCount              *int     `json:"buy_count,omitempty" url:"buy_count,omitempty"`
+	SellCount             *int     `json:"sell_count,omitempty" url:"sell_count,omitempty"`
+	WinCount              *int     `json:"win_count,omitempty" url:"win_count,omitempty"`
+	LossCount             *int     `json:"loss_count,omitempty" url:"loss_count,omitempty"`
+	Pnl                   *float64 `json:"pnl,omitempty" url:"pnl,omitempty"`
+	WinPnl                *float64 `json:"win_pnl,omitempty" url:"win_pnl,omitempty"`
+	LossPnl               *float64 `json:"loss_pnl,omitempty" url:"loss_pnl,omitempty"`
+	Volume                *float64 `json:"volume,omitempty" url:"volume,omitempty"`
+	BuyVolume             *float64 `json:"buy_volume,omitempty" url:"buy_volume,omitempty"`
+	SellVolume            *float64 `json:"sell_volume,omitempty" url:"sell_volume,omitempty"`
+	Winrate               *float64 `json:"winrate,omitempty" url:"winrate,omitempty"`
+	VolumeWeightedWinrate *float64 `json:"volume_weighted_winrate,omitempty" url:"volume_weighted_winrate,omitempty"`
+	Roi                   *float64 `json:"roi,omitempty" url:"roi,omitempty"`
+	VolumeWeightedRoi     *float64 `json:"volume_weighted_roi,omitempty" url:"volume_weighted_roi,omitempty"`
+	PnlVolumeRatio        *float64 `json:"pnl_volume_ratio,omitempty" url:"pnl_volume_ratio,omitempty"`
+	WinLossSizeRatio      *float64 `json:"win_loss_size_ratio,omitempty" url:"win_loss_size_ratio,omitempty"`
+	ProfitFactor          *float64 `json:"profit_factor,omitempty" url:"profit_factor,omitempty"`
+	ProfitExpectancy      *float64 `json:"profit_expectancy,omitempty" url:"profit_expectancy,omitempty"`
+	RecoveryFactor        *float64 `json:"recovery_factor,omitempty" url:"recovery_factor,omitempty"`
+	WinrateStability      *float64 `json:"winrate_stability,omitempty" url:"winrate_stability,omitempty"`
+	WinrateVolatility     *float64 `json:"winrate_volatility,omitempty" url:"winrate_volatility,omitempty"`
+	RoiStability          *float64 `json:"roi_stability,omitempty" url:"roi_stability,omitempty"`
+	RoiVolatility         *float64 `json:"roi_volatility,omitempty" url:"roi_volatility,omitempty"`
+	PnlStability          *float64 `json:"pnl_stability,omitempty" url:"pnl_stability,omitempty"`
+	PnlVolatility         *float64 `json:"pnl_volatility,omitempty" url:"pnl_volatility,omitempty"`
+	SharpeRatio           *float64 `json:"sharpe_ratio,omitempty" url:"sharpe_ratio,omitempty"`
+	SortinoRatio          *float64 `json:"sortino_ratio,omitempty" url:"sortino_ratio,omitempty"`
+	MaxDrawdown           *float64 `json:"max_drawdown,omitempty" url:"max_drawdown,omitempty"`
+	RiskOfRuin            *float64 `json:"risk_of_ruin,omitempty" url:"risk_of_ruin,omitempty"`
+	Turnover              *float64 `json:"turnover,omitempty" url:"turnover,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPositionProfileMetrics) GetRiskScore() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RiskScore
+}
+
+func (e *EvmDexPositionProfileMetrics) GetConsistencyScore() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.ConsistencyScore
+}
+
+func (e *EvmDexPositionProfileMetrics) GetLargestWin() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LargestWin
+}
+
+func (e *EvmDexPositionProfileMetrics) GetLargestLoss() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LargestLoss
+}
+
+func (e *EvmDexPositionProfileMetrics) GetMaxConsecutiveWins() *int {
+	if e == nil {
+		return nil
+	}
+	return e.MaxConsecutiveWins
+}
+
+func (e *EvmDexPositionProfileMetrics) GetMaxConsecutiveLosses() *int {
+	if e == nil {
+		return nil
+	}
+	return e.MaxConsecutiveLosses
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgBuySize() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgBuySize
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgSellSize() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgSellSize
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgBuyMcap() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgBuyMcap
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgSellMcap() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgSellMcap
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgDailyTradeCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyTradeCount
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgDailyVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyVolume
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgDailyPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyPnl
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgDailyRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyRoi
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgHoldingDuration() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgHoldingDuration
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgTradeDelta() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgTradeDelta
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgPnl
+}
+
+func (e *EvmDexPositionProfileMetrics) GetAvgRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgRoi
+}
+
+func (e *EvmDexPositionProfileMetrics) GetTradeCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.TradeCount
+}
+
+func (e *EvmDexPositionProfileMetrics) GetBuyCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BuyCount
+}
+
+func (e *EvmDexPositionProfileMetrics) GetSellCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.SellCount
+}
+
+func (e *EvmDexPositionProfileMetrics) GetWinCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.WinCount
+}
+
+func (e *EvmDexPositionProfileMetrics) GetLossCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.LossCount
+}
+
+func (e *EvmDexPositionProfileMetrics) GetPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Pnl
+}
+
+func (e *EvmDexPositionProfileMetrics) GetWinPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinPnl
+}
+
+func (e *EvmDexPositionProfileMetrics) GetLossPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LossPnl
+}
+
+func (e *EvmDexPositionProfileMetrics) GetVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Volume
+}
+
+func (e *EvmDexPositionProfileMetrics) GetBuyVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.BuyVolume
+}
+
+func (e *EvmDexPositionProfileMetrics) GetSellVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SellVolume
+}
+
+func (e *EvmDexPositionProfileMetrics) GetWinrate() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Winrate
+}
+
+func (e *EvmDexPositionProfileMetrics) GetVolumeWeightedWinrate() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.VolumeWeightedWinrate
+}
+
+func (e *EvmDexPositionProfileMetrics) GetRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Roi
+}
+
+func (e *EvmDexPositionProfileMetrics) GetVolumeWeightedRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.VolumeWeightedRoi
+}
+
+func (e *EvmDexPositionProfileMetrics) GetPnlVolumeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlVolumeRatio
+}
+
+func (e *EvmDexPositionProfileMetrics) GetWinLossSizeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinLossSizeRatio
+}
+
+func (e *EvmDexPositionProfileMetrics) GetProfitFactor() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.ProfitFactor
+}
+
+func (e *EvmDexPositionProfileMetrics) GetProfitExpectancy() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.ProfitExpectancy
+}
+
+func (e *EvmDexPositionProfileMetrics) GetRecoveryFactor() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RecoveryFactor
+}
+
+func (e *EvmDexPositionProfileMetrics) GetWinrateStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinrateStability
+}
+
+func (e *EvmDexPositionProfileMetrics) GetWinrateVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinrateVolatility
+}
+
+func (e *EvmDexPositionProfileMetrics) GetRoiStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RoiStability
+}
+
+func (e *EvmDexPositionProfileMetrics) GetRoiVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RoiVolatility
+}
+
+func (e *EvmDexPositionProfileMetrics) GetPnlStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlStability
+}
+
+func (e *EvmDexPositionProfileMetrics) GetPnlVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlVolatility
+}
+
+func (e *EvmDexPositionProfileMetrics) GetSharpeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SharpeRatio
+}
+
+func (e *EvmDexPositionProfileMetrics) GetSortinoRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SortinoRatio
+}
+
+func (e *EvmDexPositionProfileMetrics) GetMaxDrawdown() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.MaxDrawdown
+}
+
+func (e *EvmDexPositionProfileMetrics) GetRiskOfRuin() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RiskOfRuin
+}
+
+func (e *EvmDexPositionProfileMetrics) GetTurnover() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Turnover
+}
+
+func (e *EvmDexPositionProfileMetrics) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPositionProfileMetrics) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRiskScore sets the RiskScore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetRiskScore(riskScore *float64) {
+	e.RiskScore = riskScore
+	e.require(evmDexPositionProfileMetricsFieldRiskScore)
+}
+
+// SetConsistencyScore sets the ConsistencyScore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetConsistencyScore(consistencyScore *float64) {
+	e.ConsistencyScore = consistencyScore
+	e.require(evmDexPositionProfileMetricsFieldConsistencyScore)
+}
+
+// SetLargestWin sets the LargestWin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetLargestWin(largestWin *float64) {
+	e.LargestWin = largestWin
+	e.require(evmDexPositionProfileMetricsFieldLargestWin)
+}
+
+// SetLargestLoss sets the LargestLoss field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetLargestLoss(largestLoss *float64) {
+	e.LargestLoss = largestLoss
+	e.require(evmDexPositionProfileMetricsFieldLargestLoss)
+}
+
+// SetMaxConsecutiveWins sets the MaxConsecutiveWins field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetMaxConsecutiveWins(maxConsecutiveWins *int) {
+	e.MaxConsecutiveWins = maxConsecutiveWins
+	e.require(evmDexPositionProfileMetricsFieldMaxConsecutiveWins)
+}
+
+// SetMaxConsecutiveLosses sets the MaxConsecutiveLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetMaxConsecutiveLosses(maxConsecutiveLosses *int) {
+	e.MaxConsecutiveLosses = maxConsecutiveLosses
+	e.require(evmDexPositionProfileMetricsFieldMaxConsecutiveLosses)
+}
+
+// SetAvgBuySize sets the AvgBuySize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgBuySize(avgBuySize *float64) {
+	e.AvgBuySize = avgBuySize
+	e.require(evmDexPositionProfileMetricsFieldAvgBuySize)
+}
+
+// SetAvgSellSize sets the AvgSellSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgSellSize(avgSellSize *float64) {
+	e.AvgSellSize = avgSellSize
+	e.require(evmDexPositionProfileMetricsFieldAvgSellSize)
+}
+
+// SetAvgBuyMcap sets the AvgBuyMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgBuyMcap(avgBuyMcap *float64) {
+	e.AvgBuyMcap = avgBuyMcap
+	e.require(evmDexPositionProfileMetricsFieldAvgBuyMcap)
+}
+
+// SetAvgSellMcap sets the AvgSellMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgSellMcap(avgSellMcap *float64) {
+	e.AvgSellMcap = avgSellMcap
+	e.require(evmDexPositionProfileMetricsFieldAvgSellMcap)
+}
+
+// SetAvgDailyTradeCount sets the AvgDailyTradeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgDailyTradeCount(avgDailyTradeCount *int) {
+	e.AvgDailyTradeCount = avgDailyTradeCount
+	e.require(evmDexPositionProfileMetricsFieldAvgDailyTradeCount)
+}
+
+// SetAvgDailyVolume sets the AvgDailyVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgDailyVolume(avgDailyVolume *float64) {
+	e.AvgDailyVolume = avgDailyVolume
+	e.require(evmDexPositionProfileMetricsFieldAvgDailyVolume)
+}
+
+// SetAvgDailyPnl sets the AvgDailyPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgDailyPnl(avgDailyPnl *float64) {
+	e.AvgDailyPnl = avgDailyPnl
+	e.require(evmDexPositionProfileMetricsFieldAvgDailyPnl)
+}
+
+// SetAvgDailyRoi sets the AvgDailyRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgDailyRoi(avgDailyRoi *float64) {
+	e.AvgDailyRoi = avgDailyRoi
+	e.require(evmDexPositionProfileMetricsFieldAvgDailyRoi)
+}
+
+// SetAvgHoldingDuration sets the AvgHoldingDuration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgHoldingDuration(avgHoldingDuration *int) {
+	e.AvgHoldingDuration = avgHoldingDuration
+	e.require(evmDexPositionProfileMetricsFieldAvgHoldingDuration)
+}
+
+// SetAvgTradeDelta sets the AvgTradeDelta field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgTradeDelta(avgTradeDelta *int) {
+	e.AvgTradeDelta = avgTradeDelta
+	e.require(evmDexPositionProfileMetricsFieldAvgTradeDelta)
+}
+
+// SetAvgPnl sets the AvgPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgPnl(avgPnl *float64) {
+	e.AvgPnl = avgPnl
+	e.require(evmDexPositionProfileMetricsFieldAvgPnl)
+}
+
+// SetAvgRoi sets the AvgRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetAvgRoi(avgRoi *float64) {
+	e.AvgRoi = avgRoi
+	e.require(evmDexPositionProfileMetricsFieldAvgRoi)
+}
+
+// SetTradeCount sets the TradeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetTradeCount(tradeCount *int) {
+	e.TradeCount = tradeCount
+	e.require(evmDexPositionProfileMetricsFieldTradeCount)
+}
+
+// SetBuyCount sets the BuyCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetBuyCount(buyCount *int) {
+	e.BuyCount = buyCount
+	e.require(evmDexPositionProfileMetricsFieldBuyCount)
+}
+
+// SetSellCount sets the SellCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetSellCount(sellCount *int) {
+	e.SellCount = sellCount
+	e.require(evmDexPositionProfileMetricsFieldSellCount)
+}
+
+// SetWinCount sets the WinCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetWinCount(winCount *int) {
+	e.WinCount = winCount
+	e.require(evmDexPositionProfileMetricsFieldWinCount)
+}
+
+// SetLossCount sets the LossCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetLossCount(lossCount *int) {
+	e.LossCount = lossCount
+	e.require(evmDexPositionProfileMetricsFieldLossCount)
+}
+
+// SetPnl sets the Pnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetPnl(pnl *float64) {
+	e.Pnl = pnl
+	e.require(evmDexPositionProfileMetricsFieldPnl)
+}
+
+// SetWinPnl sets the WinPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetWinPnl(winPnl *float64) {
+	e.WinPnl = winPnl
+	e.require(evmDexPositionProfileMetricsFieldWinPnl)
+}
+
+// SetLossPnl sets the LossPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetLossPnl(lossPnl *float64) {
+	e.LossPnl = lossPnl
+	e.require(evmDexPositionProfileMetricsFieldLossPnl)
+}
+
+// SetVolume sets the Volume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetVolume(volume *float64) {
+	e.Volume = volume
+	e.require(evmDexPositionProfileMetricsFieldVolume)
+}
+
+// SetBuyVolume sets the BuyVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetBuyVolume(buyVolume *float64) {
+	e.BuyVolume = buyVolume
+	e.require(evmDexPositionProfileMetricsFieldBuyVolume)
+}
+
+// SetSellVolume sets the SellVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetSellVolume(sellVolume *float64) {
+	e.SellVolume = sellVolume
+	e.require(evmDexPositionProfileMetricsFieldSellVolume)
+}
+
+// SetWinrate sets the Winrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetWinrate(winrate *float64) {
+	e.Winrate = winrate
+	e.require(evmDexPositionProfileMetricsFieldWinrate)
+}
+
+// SetVolumeWeightedWinrate sets the VolumeWeightedWinrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetVolumeWeightedWinrate(volumeWeightedWinrate *float64) {
+	e.VolumeWeightedWinrate = volumeWeightedWinrate
+	e.require(evmDexPositionProfileMetricsFieldVolumeWeightedWinrate)
+}
+
+// SetRoi sets the Roi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetRoi(roi *float64) {
+	e.Roi = roi
+	e.require(evmDexPositionProfileMetricsFieldRoi)
+}
+
+// SetVolumeWeightedRoi sets the VolumeWeightedRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetVolumeWeightedRoi(volumeWeightedRoi *float64) {
+	e.VolumeWeightedRoi = volumeWeightedRoi
+	e.require(evmDexPositionProfileMetricsFieldVolumeWeightedRoi)
+}
+
+// SetPnlVolumeRatio sets the PnlVolumeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetPnlVolumeRatio(pnlVolumeRatio *float64) {
+	e.PnlVolumeRatio = pnlVolumeRatio
+	e.require(evmDexPositionProfileMetricsFieldPnlVolumeRatio)
+}
+
+// SetWinLossSizeRatio sets the WinLossSizeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetWinLossSizeRatio(winLossSizeRatio *float64) {
+	e.WinLossSizeRatio = winLossSizeRatio
+	e.require(evmDexPositionProfileMetricsFieldWinLossSizeRatio)
+}
+
+// SetProfitFactor sets the ProfitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetProfitFactor(profitFactor *float64) {
+	e.ProfitFactor = profitFactor
+	e.require(evmDexPositionProfileMetricsFieldProfitFactor)
+}
+
+// SetProfitExpectancy sets the ProfitExpectancy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetProfitExpectancy(profitExpectancy *float64) {
+	e.ProfitExpectancy = profitExpectancy
+	e.require(evmDexPositionProfileMetricsFieldProfitExpectancy)
+}
+
+// SetRecoveryFactor sets the RecoveryFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetRecoveryFactor(recoveryFactor *float64) {
+	e.RecoveryFactor = recoveryFactor
+	e.require(evmDexPositionProfileMetricsFieldRecoveryFactor)
+}
+
+// SetWinrateStability sets the WinrateStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetWinrateStability(winrateStability *float64) {
+	e.WinrateStability = winrateStability
+	e.require(evmDexPositionProfileMetricsFieldWinrateStability)
+}
+
+// SetWinrateVolatility sets the WinrateVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetWinrateVolatility(winrateVolatility *float64) {
+	e.WinrateVolatility = winrateVolatility
+	e.require(evmDexPositionProfileMetricsFieldWinrateVolatility)
+}
+
+// SetRoiStability sets the RoiStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetRoiStability(roiStability *float64) {
+	e.RoiStability = roiStability
+	e.require(evmDexPositionProfileMetricsFieldRoiStability)
+}
+
+// SetRoiVolatility sets the RoiVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetRoiVolatility(roiVolatility *float64) {
+	e.RoiVolatility = roiVolatility
+	e.require(evmDexPositionProfileMetricsFieldRoiVolatility)
+}
+
+// SetPnlStability sets the PnlStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetPnlStability(pnlStability *float64) {
+	e.PnlStability = pnlStability
+	e.require(evmDexPositionProfileMetricsFieldPnlStability)
+}
+
+// SetPnlVolatility sets the PnlVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetPnlVolatility(pnlVolatility *float64) {
+	e.PnlVolatility = pnlVolatility
+	e.require(evmDexPositionProfileMetricsFieldPnlVolatility)
+}
+
+// SetSharpeRatio sets the SharpeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetSharpeRatio(sharpeRatio *float64) {
+	e.SharpeRatio = sharpeRatio
+	e.require(evmDexPositionProfileMetricsFieldSharpeRatio)
+}
+
+// SetSortinoRatio sets the SortinoRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetSortinoRatio(sortinoRatio *float64) {
+	e.SortinoRatio = sortinoRatio
+	e.require(evmDexPositionProfileMetricsFieldSortinoRatio)
+}
+
+// SetMaxDrawdown sets the MaxDrawdown field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetMaxDrawdown(maxDrawdown *float64) {
+	e.MaxDrawdown = maxDrawdown
+	e.require(evmDexPositionProfileMetricsFieldMaxDrawdown)
+}
+
+// SetRiskOfRuin sets the RiskOfRuin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetRiskOfRuin(riskOfRuin *float64) {
+	e.RiskOfRuin = riskOfRuin
+	e.require(evmDexPositionProfileMetricsFieldRiskOfRuin)
+}
+
+// SetTurnover sets the Turnover field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfileMetrics) SetTurnover(turnover *float64) {
+	e.Turnover = turnover
+	e.require(evmDexPositionProfileMetricsFieldTurnover)
+}
+
+func (e *EvmDexPositionProfileMetrics) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexPositionProfileMetrics
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexPositionProfileMetrics(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPositionProfileMetrics) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPositionProfileMetrics
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPositionProfileMetrics) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Controls which optional sections are included in each returned position profile.
+var (
+	evmDexPositionProfilePayloadOptionsFieldIncludeMetadata = big.NewInt(1 << 0)
+	evmDexPositionProfilePayloadOptionsFieldIncludeMetrics  = big.NewInt(1 << 1)
+)
+
+type EvmDexPositionProfilePayloadOptions struct {
+	// When true, includes the `metadata` object in each returned profile.
+	IncludeMetadata *bool `json:"include_metadata,omitempty" url:"include_metadata,omitempty"`
+	// Time windows for which metrics should be included. Windows not listed are omitted from the response.
+	IncludeMetrics []EvmDexPositionProfileTimeWindowEnum `json:"include_metrics,omitempty" url:"include_metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPositionProfilePayloadOptions) GetIncludeMetadata() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.IncludeMetadata
+}
+
+func (e *EvmDexPositionProfilePayloadOptions) GetIncludeMetrics() []EvmDexPositionProfileTimeWindowEnum {
+	if e == nil {
+		return nil
+	}
+	return e.IncludeMetrics
+}
+
+func (e *EvmDexPositionProfilePayloadOptions) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPositionProfilePayloadOptions) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetIncludeMetadata sets the IncludeMetadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfilePayloadOptions) SetIncludeMetadata(includeMetadata *bool) {
+	e.IncludeMetadata = includeMetadata
+	e.require(evmDexPositionProfilePayloadOptionsFieldIncludeMetadata)
+}
+
+// SetIncludeMetrics sets the IncludeMetrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPositionProfilePayloadOptions) SetIncludeMetrics(includeMetrics []EvmDexPositionProfileTimeWindowEnum) {
+	e.IncludeMetrics = includeMetrics
+	e.require(evmDexPositionProfilePayloadOptionsFieldIncludeMetrics)
+}
+
+func (e *EvmDexPositionProfilePayloadOptions) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexPositionProfilePayloadOptions
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexPositionProfilePayloadOptions(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPositionProfilePayloadOptions) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPositionProfilePayloadOptions
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPositionProfilePayloadOptions) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EvmDexPositionProfileTimeWindowEnum string
+
+const (
+	EvmDexPositionProfileTimeWindowEnumWindow30D EvmDexPositionProfileTimeWindowEnum = "30d"
+	EvmDexPositionProfileTimeWindowEnumWindow14D EvmDexPositionProfileTimeWindowEnum = "14d"
+	EvmDexPositionProfileTimeWindowEnumWindow7D  EvmDexPositionProfileTimeWindowEnum = "7d"
+	EvmDexPositionProfileTimeWindowEnumWindow3D  EvmDexPositionProfileTimeWindowEnum = "3d"
+	EvmDexPositionProfileTimeWindowEnumWindow1D  EvmDexPositionProfileTimeWindowEnum = "1d"
+)
+
+func NewEvmDexPositionProfileTimeWindowEnumFromString(s string) (EvmDexPositionProfileTimeWindowEnum, error) {
+	switch s {
+	case "30d":
+		return EvmDexPositionProfileTimeWindowEnumWindow30D, nil
+	case "14d":
+		return EvmDexPositionProfileTimeWindowEnumWindow14D, nil
+	case "7d":
+		return EvmDexPositionProfileTimeWindowEnumWindow7D, nil
+	case "3d":
+		return EvmDexPositionProfileTimeWindowEnumWindow3D, nil
+	case "1d":
+		return EvmDexPositionProfileTimeWindowEnumWindow1D, nil
+	}
+	var t EvmDexPositionProfileTimeWindowEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexPositionProfileTimeWindowEnum) Ptr() *EvmDexPositionProfileTimeWindowEnum {
+	return &e
+}
+
+var (
+	evmDexPriceFieldChainID      = big.NewInt(1 << 0)
+	evmDexPriceFieldTokenAddress = big.NewInt(1 << 1)
+	evmDexPriceFieldPoolAddress  = big.NewInt(1 << 2)
+	evmDexPriceFieldUsdPrice     = big.NewInt(1 << 3)
+	evmDexPriceFieldBlockNumber  = big.NewInt(1 << 4)
+	evmDexPriceFieldBlockTime    = big.NewInt(1 << 5)
+)
+
+type EvmDexPrice struct {
+	// Numeric EVM chain ID the record belongs to.
+	ChainID      *int       `json:"chain_id,omitempty" url:"chain_id,omitempty"`
+	TokenAddress *string    `json:"token_address,omitempty" url:"token_address,omitempty"`
+	PoolAddress  *string    `json:"pool_address,omitempty" url:"pool_address,omitempty"`
+	UsdPrice     *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
+	BlockNumber  *int       `json:"block_number,omitempty" url:"block_number,omitempty"`
+	BlockTime    *time.Time `json:"block_time,omitempty" url:"block_time,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPrice) GetChainID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ChainID
+}
+
+func (e *EvmDexPrice) GetTokenAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddress
+}
+
+func (e *EvmDexPrice) GetPoolAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PoolAddress
+}
+
+func (e *EvmDexPrice) GetUsdPrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPrice
+}
+
+func (e *EvmDexPrice) GetBlockNumber() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BlockNumber
+}
+
+func (e *EvmDexPrice) GetBlockTime() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BlockTime
+}
+
+func (e *EvmDexPrice) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPrice) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPrice) SetChainID(chainID *int) {
+	e.ChainID = chainID
+	e.require(evmDexPriceFieldChainID)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPrice) SetTokenAddress(tokenAddress *string) {
+	e.TokenAddress = tokenAddress
+	e.require(evmDexPriceFieldTokenAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPrice) SetPoolAddress(poolAddress *string) {
+	e.PoolAddress = poolAddress
+	e.require(evmDexPriceFieldPoolAddress)
+}
+
+// SetUsdPrice sets the UsdPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPrice) SetUsdPrice(usdPrice *float64) {
+	e.UsdPrice = usdPrice
+	e.require(evmDexPriceFieldUsdPrice)
+}
+
+// SetBlockNumber sets the BlockNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPrice) SetBlockNumber(blockNumber *int) {
+	e.BlockNumber = blockNumber
+	e.require(evmDexPriceFieldBlockNumber)
+}
+
+// SetBlockTime sets the BlockTime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPrice) SetBlockTime(blockTime *time.Time) {
+	e.BlockTime = blockTime
+	e.require(evmDexPriceFieldBlockTime)
+}
+
+func (e *EvmDexPrice) UnmarshalJSON(data []byte) error {
+	type embed EvmDexPrice
+	var unmarshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexPrice(unmarshaler.embed)
+	e.BlockTime = unmarshaler.BlockTime.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPrice) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPrice
+	var marshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed:     embed(*e),
+		BlockTime: internal.NewOptionalDateTime(e.BlockTime),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPrice) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexPriceCandleFieldTimestamp = big.NewInt(1 << 0)
+	evmDexPriceCandleFieldOpen      = big.NewInt(1 << 1)
+	evmDexPriceCandleFieldHigh      = big.NewInt(1 << 2)
+	evmDexPriceCandleFieldLow       = big.NewInt(1 << 3)
+	evmDexPriceCandleFieldClose     = big.NewInt(1 << 4)
+	evmDexPriceCandleFieldVolume    = big.NewInt(1 << 5)
+	evmDexPriceCandleFieldCount     = big.NewInt(1 << 6)
+)
+
+type EvmDexPriceCandle struct {
+	Timestamp *time.Time `json:"timestamp,omitempty" url:"timestamp,omitempty"`
+	Open      *float64   `json:"open,omitempty" url:"open,omitempty"`
+	High      *float64   `json:"high,omitempty" url:"high,omitempty"`
+	Low       *float64   `json:"low,omitempty" url:"low,omitempty"`
+	Close     *float64   `json:"close,omitempty" url:"close,omitempty"`
+	Volume    *float64   `json:"volume,omitempty" url:"volume,omitempty"`
+	Count     *int       `json:"count,omitempty" url:"count,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPriceCandle) GetTimestamp() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.Timestamp
+}
+
+func (e *EvmDexPriceCandle) GetOpen() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Open
+}
+
+func (e *EvmDexPriceCandle) GetHigh() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.High
+}
+
+func (e *EvmDexPriceCandle) GetLow() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Low
+}
+
+func (e *EvmDexPriceCandle) GetClose() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Close
+}
+
+func (e *EvmDexPriceCandle) GetVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Volume
+}
+
+func (e *EvmDexPriceCandle) GetCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.Count
+}
+
+func (e *EvmDexPriceCandle) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPriceCandle) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetTimestamp sets the Timestamp field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceCandle) SetTimestamp(timestamp *time.Time) {
+	e.Timestamp = timestamp
+	e.require(evmDexPriceCandleFieldTimestamp)
+}
+
+// SetOpen sets the Open field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceCandle) SetOpen(open *float64) {
+	e.Open = open
+	e.require(evmDexPriceCandleFieldOpen)
+}
+
+// SetHigh sets the High field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceCandle) SetHigh(high *float64) {
+	e.High = high
+	e.require(evmDexPriceCandleFieldHigh)
+}
+
+// SetLow sets the Low field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceCandle) SetLow(low *float64) {
+	e.Low = low
+	e.require(evmDexPriceCandleFieldLow)
+}
+
+// SetClose sets the Close field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceCandle) SetClose(close *float64) {
+	e.Close = close
+	e.require(evmDexPriceCandleFieldClose)
+}
+
+// SetVolume sets the Volume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceCandle) SetVolume(volume *float64) {
+	e.Volume = volume
+	e.require(evmDexPriceCandleFieldVolume)
+}
+
+// SetCount sets the Count field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceCandle) SetCount(count *int) {
+	e.Count = count
+	e.require(evmDexPriceCandleFieldCount)
+}
+
+func (e *EvmDexPriceCandle) UnmarshalJSON(data []byte) error {
+	type embed EvmDexPriceCandle
+	var unmarshaler = struct {
+		embed
+		Timestamp *internal.DateTime `json:"timestamp,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexPriceCandle(unmarshaler.embed)
+	e.Timestamp = unmarshaler.Timestamp.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPriceCandle) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPriceCandle
+	var marshaler = struct {
+		embed
+		Timestamp *internal.DateTime `json:"timestamp,omitempty"`
+	}{
+		embed:     embed(*e),
+		Timestamp: internal.NewOptionalDateTime(e.Timestamp),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPriceCandle) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexPriceHistoryFieldTokenAddress = big.NewInt(1 << 0)
+	evmDexPriceHistoryFieldPoolAddress  = big.NewInt(1 << 1)
+	evmDexPriceHistoryFieldPrices       = big.NewInt(1 << 2)
+)
+
+type EvmDexPriceHistory struct {
+	TokenAddress *string                `json:"token_address,omitempty" url:"token_address,omitempty"`
+	PoolAddress  *string                `json:"pool_address,omitempty" url:"pool_address,omitempty"`
+	Prices       []*EvmDexPriceSnapshot `json:"prices,omitempty" url:"prices,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPriceHistory) GetTokenAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddress
+}
+
+func (e *EvmDexPriceHistory) GetPoolAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PoolAddress
+}
+
+func (e *EvmDexPriceHistory) GetPrices() []*EvmDexPriceSnapshot {
+	if e == nil {
+		return nil
+	}
+	return e.Prices
+}
+
+func (e *EvmDexPriceHistory) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPriceHistory) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceHistory) SetTokenAddress(tokenAddress *string) {
+	e.TokenAddress = tokenAddress
+	e.require(evmDexPriceHistoryFieldTokenAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceHistory) SetPoolAddress(poolAddress *string) {
+	e.PoolAddress = poolAddress
+	e.require(evmDexPriceHistoryFieldPoolAddress)
+}
+
+// SetPrices sets the Prices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceHistory) SetPrices(prices []*EvmDexPriceSnapshot) {
+	e.Prices = prices
+	e.require(evmDexPriceHistoryFieldPrices)
+}
+
+func (e *EvmDexPriceHistory) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexPriceHistory
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexPriceHistory(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPriceHistory) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPriceHistory
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPriceHistory) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexPriceSnapshotFieldTimestamp = big.NewInt(1 << 0)
+	evmDexPriceSnapshotFieldUsdPrice  = big.NewInt(1 << 1)
+	evmDexPriceSnapshotFieldUsdVolume = big.NewInt(1 << 2)
+)
+
+type EvmDexPriceSnapshot struct {
+	Timestamp *time.Time `json:"timestamp,omitempty" url:"timestamp,omitempty"`
+	UsdPrice  *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
+	UsdVolume *float64   `json:"usd_volume,omitempty" url:"usd_volume,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPriceSnapshot) GetTimestamp() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.Timestamp
+}
+
+func (e *EvmDexPriceSnapshot) GetUsdPrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPrice
+}
+
+func (e *EvmDexPriceSnapshot) GetUsdVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume
+}
+
+func (e *EvmDexPriceSnapshot) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPriceSnapshot) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetTimestamp sets the Timestamp field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceSnapshot) SetTimestamp(timestamp *time.Time) {
+	e.Timestamp = timestamp
+	e.require(evmDexPriceSnapshotFieldTimestamp)
+}
+
+// SetUsdPrice sets the UsdPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceSnapshot) SetUsdPrice(usdPrice *float64) {
+	e.UsdPrice = usdPrice
+	e.require(evmDexPriceSnapshotFieldUsdPrice)
+}
+
+// SetUsdVolume sets the UsdVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceSnapshot) SetUsdVolume(usdVolume *float64) {
+	e.UsdVolume = usdVolume
+	e.require(evmDexPriceSnapshotFieldUsdVolume)
+}
+
+func (e *EvmDexPriceSnapshot) UnmarshalJSON(data []byte) error {
+	type embed EvmDexPriceSnapshot
+	var unmarshaler = struct {
+		embed
+		Timestamp *internal.DateTime `json:"timestamp,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexPriceSnapshot(unmarshaler.embed)
+	e.Timestamp = unmarshaler.Timestamp.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPriceSnapshot) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPriceSnapshot
+	var marshaler = struct {
+		embed
+		Timestamp *internal.DateTime `json:"timestamp,omitempty"`
+	}{
+		embed:     embed(*e),
+		Timestamp: internal.NewOptionalDateTime(e.Timestamp),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPriceSnapshot) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexPriceStatsFieldTokenAddress       = big.NewInt(1 << 0)
+	evmDexPriceStatsFieldPoolAddress        = big.NewInt(1 << 1)
+	evmDexPriceStatsFieldUsdPrice           = big.NewInt(1 << 2)
+	evmDexPriceStatsFieldUsdPriceChange5M   = big.NewInt(1 << 3)
+	evmDexPriceStatsFieldUsdPriceChange1H   = big.NewInt(1 << 4)
+	evmDexPriceStatsFieldUsdPriceChange6H   = big.NewInt(1 << 5)
+	evmDexPriceStatsFieldUsdPriceChange12H  = big.NewInt(1 << 6)
+	evmDexPriceStatsFieldUsdPriceChange1D   = big.NewInt(1 << 7)
+	evmDexPriceStatsFieldUsdPriceChange7D   = big.NewInt(1 << 8)
+	evmDexPriceStatsFieldUsdPriceChange30D  = big.NewInt(1 << 9)
+	evmDexPriceStatsFieldUsdVolume5M        = big.NewInt(1 << 10)
+	evmDexPriceStatsFieldUsdVolume1H        = big.NewInt(1 << 11)
+	evmDexPriceStatsFieldUsdVolume6H        = big.NewInt(1 << 12)
+	evmDexPriceStatsFieldUsdVolume12H       = big.NewInt(1 << 13)
+	evmDexPriceStatsFieldUsdVolume1D        = big.NewInt(1 << 14)
+	evmDexPriceStatsFieldUsdVolume7D        = big.NewInt(1 << 15)
+	evmDexPriceStatsFieldUsdVolume30D       = big.NewInt(1 << 16)
+	evmDexPriceStatsFieldUsdVolumeChange5M  = big.NewInt(1 << 17)
+	evmDexPriceStatsFieldUsdVolumeChange1H  = big.NewInt(1 << 18)
+	evmDexPriceStatsFieldUsdVolumeChange6H  = big.NewInt(1 << 19)
+	evmDexPriceStatsFieldUsdVolumeChange12H = big.NewInt(1 << 20)
+	evmDexPriceStatsFieldUsdVolumeChange1D  = big.NewInt(1 << 21)
+	evmDexPriceStatsFieldUsdVolumeChange7D  = big.NewInt(1 << 22)
+	evmDexPriceStatsFieldUsdVolumeChange30D = big.NewInt(1 << 23)
+	evmDexPriceStatsFieldBlockNumber        = big.NewInt(1 << 24)
+	evmDexPriceStatsFieldBlockTime          = big.NewInt(1 << 25)
+)
+
+type EvmDexPriceStats struct {
+	TokenAddress       *string    `json:"token_address,omitempty" url:"token_address,omitempty"`
+	PoolAddress        *string    `json:"pool_address,omitempty" url:"pool_address,omitempty"`
+	UsdPrice           *float64   `json:"usd_price,omitempty" url:"usd_price,omitempty"`
+	UsdPriceChange5M   *float64   `json:"usd_price_change_5m,omitempty" url:"usd_price_change_5m,omitempty"`
+	UsdPriceChange1H   *float64   `json:"usd_price_change_1h,omitempty" url:"usd_price_change_1h,omitempty"`
+	UsdPriceChange6H   *float64   `json:"usd_price_change_6h,omitempty" url:"usd_price_change_6h,omitempty"`
+	UsdPriceChange12H  *float64   `json:"usd_price_change_12h,omitempty" url:"usd_price_change_12h,omitempty"`
+	UsdPriceChange1D   *float64   `json:"usd_price_change_1d,omitempty" url:"usd_price_change_1d,omitempty"`
+	UsdPriceChange7D   *float64   `json:"usd_price_change_7d,omitempty" url:"usd_price_change_7d,omitempty"`
+	UsdPriceChange30D  *float64   `json:"usd_price_change_30d,omitempty" url:"usd_price_change_30d,omitempty"`
+	UsdVolume5M        *float64   `json:"usd_volume_5m,omitempty" url:"usd_volume_5m,omitempty"`
+	UsdVolume1H        *float64   `json:"usd_volume_1h,omitempty" url:"usd_volume_1h,omitempty"`
+	UsdVolume6H        *float64   `json:"usd_volume_6h,omitempty" url:"usd_volume_6h,omitempty"`
+	UsdVolume12H       *float64   `json:"usd_volume_12h,omitempty" url:"usd_volume_12h,omitempty"`
+	UsdVolume1D        *float64   `json:"usd_volume_1d,omitempty" url:"usd_volume_1d,omitempty"`
+	UsdVolume7D        *float64   `json:"usd_volume_7d,omitempty" url:"usd_volume_7d,omitempty"`
+	UsdVolume30D       *float64   `json:"usd_volume_30d,omitempty" url:"usd_volume_30d,omitempty"`
+	UsdVolumeChange5M  *float64   `json:"usd_volume_change_5m,omitempty" url:"usd_volume_change_5m,omitempty"`
+	UsdVolumeChange1H  *float64   `json:"usd_volume_change_1h,omitempty" url:"usd_volume_change_1h,omitempty"`
+	UsdVolumeChange6H  *float64   `json:"usd_volume_change_6h,omitempty" url:"usd_volume_change_6h,omitempty"`
+	UsdVolumeChange12H *float64   `json:"usd_volume_change_12h,omitempty" url:"usd_volume_change_12h,omitempty"`
+	UsdVolumeChange1D  *float64   `json:"usd_volume_change_1d,omitempty" url:"usd_volume_change_1d,omitempty"`
+	UsdVolumeChange7D  *float64   `json:"usd_volume_change_7d,omitempty" url:"usd_volume_change_7d,omitempty"`
+	UsdVolumeChange30D *float64   `json:"usd_volume_change_30d,omitempty" url:"usd_volume_change_30d,omitempty"`
+	BlockNumber        *int       `json:"block_number,omitempty" url:"block_number,omitempty"`
+	BlockTime          *time.Time `json:"block_time,omitempty" url:"block_time,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexPriceStats) GetTokenAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddress
+}
+
+func (e *EvmDexPriceStats) GetPoolAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PoolAddress
+}
+
+func (e *EvmDexPriceStats) GetUsdPrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPrice
+}
+
+func (e *EvmDexPriceStats) GetUsdPriceChange5M() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPriceChange5M
+}
+
+func (e *EvmDexPriceStats) GetUsdPriceChange1H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPriceChange1H
+}
+
+func (e *EvmDexPriceStats) GetUsdPriceChange6H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPriceChange6H
+}
+
+func (e *EvmDexPriceStats) GetUsdPriceChange12H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPriceChange12H
+}
+
+func (e *EvmDexPriceStats) GetUsdPriceChange1D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPriceChange1D
+}
+
+func (e *EvmDexPriceStats) GetUsdPriceChange7D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPriceChange7D
+}
+
+func (e *EvmDexPriceStats) GetUsdPriceChange30D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdPriceChange30D
+}
+
+func (e *EvmDexPriceStats) GetUsdVolume5M() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume5M
+}
+
+func (e *EvmDexPriceStats) GetUsdVolume1H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume1H
+}
+
+func (e *EvmDexPriceStats) GetUsdVolume6H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume6H
+}
+
+func (e *EvmDexPriceStats) GetUsdVolume12H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume12H
+}
+
+func (e *EvmDexPriceStats) GetUsdVolume1D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume1D
+}
+
+func (e *EvmDexPriceStats) GetUsdVolume7D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume7D
+}
+
+func (e *EvmDexPriceStats) GetUsdVolume30D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolume30D
+}
+
+func (e *EvmDexPriceStats) GetUsdVolumeChange5M() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolumeChange5M
+}
+
+func (e *EvmDexPriceStats) GetUsdVolumeChange1H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolumeChange1H
+}
+
+func (e *EvmDexPriceStats) GetUsdVolumeChange6H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolumeChange6H
+}
+
+func (e *EvmDexPriceStats) GetUsdVolumeChange12H() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolumeChange12H
+}
+
+func (e *EvmDexPriceStats) GetUsdVolumeChange1D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolumeChange1D
+}
+
+func (e *EvmDexPriceStats) GetUsdVolumeChange7D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolumeChange7D
+}
+
+func (e *EvmDexPriceStats) GetUsdVolumeChange30D() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdVolumeChange30D
+}
+
+func (e *EvmDexPriceStats) GetBlockNumber() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BlockNumber
+}
+
+func (e *EvmDexPriceStats) GetBlockTime() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BlockTime
+}
+
+func (e *EvmDexPriceStats) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexPriceStats) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetTokenAddress(tokenAddress *string) {
+	e.TokenAddress = tokenAddress
+	e.require(evmDexPriceStatsFieldTokenAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetPoolAddress(poolAddress *string) {
+	e.PoolAddress = poolAddress
+	e.require(evmDexPriceStatsFieldPoolAddress)
+}
+
+// SetUsdPrice sets the UsdPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPrice(usdPrice *float64) {
+	e.UsdPrice = usdPrice
+	e.require(evmDexPriceStatsFieldUsdPrice)
+}
+
+// SetUsdPriceChange5M sets the UsdPriceChange5M field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPriceChange5M(usdPriceChange5M *float64) {
+	e.UsdPriceChange5M = usdPriceChange5M
+	e.require(evmDexPriceStatsFieldUsdPriceChange5M)
+}
+
+// SetUsdPriceChange1H sets the UsdPriceChange1H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPriceChange1H(usdPriceChange1H *float64) {
+	e.UsdPriceChange1H = usdPriceChange1H
+	e.require(evmDexPriceStatsFieldUsdPriceChange1H)
+}
+
+// SetUsdPriceChange6H sets the UsdPriceChange6H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPriceChange6H(usdPriceChange6H *float64) {
+	e.UsdPriceChange6H = usdPriceChange6H
+	e.require(evmDexPriceStatsFieldUsdPriceChange6H)
+}
+
+// SetUsdPriceChange12H sets the UsdPriceChange12H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPriceChange12H(usdPriceChange12H *float64) {
+	e.UsdPriceChange12H = usdPriceChange12H
+	e.require(evmDexPriceStatsFieldUsdPriceChange12H)
+}
+
+// SetUsdPriceChange1D sets the UsdPriceChange1D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPriceChange1D(usdPriceChange1D *float64) {
+	e.UsdPriceChange1D = usdPriceChange1D
+	e.require(evmDexPriceStatsFieldUsdPriceChange1D)
+}
+
+// SetUsdPriceChange7D sets the UsdPriceChange7D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPriceChange7D(usdPriceChange7D *float64) {
+	e.UsdPriceChange7D = usdPriceChange7D
+	e.require(evmDexPriceStatsFieldUsdPriceChange7D)
+}
+
+// SetUsdPriceChange30D sets the UsdPriceChange30D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdPriceChange30D(usdPriceChange30D *float64) {
+	e.UsdPriceChange30D = usdPriceChange30D
+	e.require(evmDexPriceStatsFieldUsdPriceChange30D)
+}
+
+// SetUsdVolume5M sets the UsdVolume5M field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolume5M(usdVolume5M *float64) {
+	e.UsdVolume5M = usdVolume5M
+	e.require(evmDexPriceStatsFieldUsdVolume5M)
+}
+
+// SetUsdVolume1H sets the UsdVolume1H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolume1H(usdVolume1H *float64) {
+	e.UsdVolume1H = usdVolume1H
+	e.require(evmDexPriceStatsFieldUsdVolume1H)
+}
+
+// SetUsdVolume6H sets the UsdVolume6H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolume6H(usdVolume6H *float64) {
+	e.UsdVolume6H = usdVolume6H
+	e.require(evmDexPriceStatsFieldUsdVolume6H)
+}
+
+// SetUsdVolume12H sets the UsdVolume12H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolume12H(usdVolume12H *float64) {
+	e.UsdVolume12H = usdVolume12H
+	e.require(evmDexPriceStatsFieldUsdVolume12H)
+}
+
+// SetUsdVolume1D sets the UsdVolume1D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolume1D(usdVolume1D *float64) {
+	e.UsdVolume1D = usdVolume1D
+	e.require(evmDexPriceStatsFieldUsdVolume1D)
+}
+
+// SetUsdVolume7D sets the UsdVolume7D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolume7D(usdVolume7D *float64) {
+	e.UsdVolume7D = usdVolume7D
+	e.require(evmDexPriceStatsFieldUsdVolume7D)
+}
+
+// SetUsdVolume30D sets the UsdVolume30D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolume30D(usdVolume30D *float64) {
+	e.UsdVolume30D = usdVolume30D
+	e.require(evmDexPriceStatsFieldUsdVolume30D)
+}
+
+// SetUsdVolumeChange5M sets the UsdVolumeChange5M field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolumeChange5M(usdVolumeChange5M *float64) {
+	e.UsdVolumeChange5M = usdVolumeChange5M
+	e.require(evmDexPriceStatsFieldUsdVolumeChange5M)
+}
+
+// SetUsdVolumeChange1H sets the UsdVolumeChange1H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolumeChange1H(usdVolumeChange1H *float64) {
+	e.UsdVolumeChange1H = usdVolumeChange1H
+	e.require(evmDexPriceStatsFieldUsdVolumeChange1H)
+}
+
+// SetUsdVolumeChange6H sets the UsdVolumeChange6H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolumeChange6H(usdVolumeChange6H *float64) {
+	e.UsdVolumeChange6H = usdVolumeChange6H
+	e.require(evmDexPriceStatsFieldUsdVolumeChange6H)
+}
+
+// SetUsdVolumeChange12H sets the UsdVolumeChange12H field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolumeChange12H(usdVolumeChange12H *float64) {
+	e.UsdVolumeChange12H = usdVolumeChange12H
+	e.require(evmDexPriceStatsFieldUsdVolumeChange12H)
+}
+
+// SetUsdVolumeChange1D sets the UsdVolumeChange1D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolumeChange1D(usdVolumeChange1D *float64) {
+	e.UsdVolumeChange1D = usdVolumeChange1D
+	e.require(evmDexPriceStatsFieldUsdVolumeChange1D)
+}
+
+// SetUsdVolumeChange7D sets the UsdVolumeChange7D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolumeChange7D(usdVolumeChange7D *float64) {
+	e.UsdVolumeChange7D = usdVolumeChange7D
+	e.require(evmDexPriceStatsFieldUsdVolumeChange7D)
+}
+
+// SetUsdVolumeChange30D sets the UsdVolumeChange30D field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetUsdVolumeChange30D(usdVolumeChange30D *float64) {
+	e.UsdVolumeChange30D = usdVolumeChange30D
+	e.require(evmDexPriceStatsFieldUsdVolumeChange30D)
+}
+
+// SetBlockNumber sets the BlockNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetBlockNumber(blockNumber *int) {
+	e.BlockNumber = blockNumber
+	e.require(evmDexPriceStatsFieldBlockNumber)
+}
+
+// SetBlockTime sets the BlockTime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexPriceStats) SetBlockTime(blockTime *time.Time) {
+	e.BlockTime = blockTime
+	e.require(evmDexPriceStatsFieldBlockTime)
+}
+
+func (e *EvmDexPriceStats) UnmarshalJSON(data []byte) error {
+	type embed EvmDexPriceStats
+	var unmarshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexPriceStats(unmarshaler.embed)
+	e.BlockTime = unmarshaler.BlockTime.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexPriceStats) MarshalJSON() ([]byte, error) {
+	type embed EvmDexPriceStats
+	var marshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed:     embed(*e),
+		BlockTime: internal.NewOptionalDateTime(e.BlockTime),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexPriceStats) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Conditions that a profile must satisfy to be included in the results.
+// Each key is either a field path paired with comparison operators, or a logical operator (`$and`, `$or`) that combines nested filter objects.
+var (
+	evmDexProfileSearchPayloadFilterFieldAnd = big.NewInt(1 << 0)
+	evmDexProfileSearchPayloadFilterFieldOr  = big.NewInt(1 << 1)
+)
+
+type EvmDexProfileSearchPayloadFilter struct {
+	// Logical AND. A profile must satisfy every nested filter to match.
+	And []*EvmDexProfileSearchPayloadFilter `json:"$and,omitempty" url:"$and,omitempty"`
+	// Logical OR. A profile must satisfy at least one nested filter to match.
+	Or []*EvmDexProfileSearchPayloadFilter `json:"$or,omitempty" url:"$or,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexProfileSearchPayloadFilter) GetAnd() []*EvmDexProfileSearchPayloadFilter {
+	if e == nil {
+		return nil
+	}
+	return e.And
+}
+
+func (e *EvmDexProfileSearchPayloadFilter) GetOr() []*EvmDexProfileSearchPayloadFilter {
+	if e == nil {
+		return nil
+	}
+	return e.Or
+}
+
+func (e *EvmDexProfileSearchPayloadFilter) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexProfileSearchPayloadFilter) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetAnd sets the And field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilter) SetAnd(and []*EvmDexProfileSearchPayloadFilter) {
+	e.And = and
+	e.require(evmDexProfileSearchPayloadFilterFieldAnd)
+}
+
+// SetOr sets the Or field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilter) SetOr(or []*EvmDexProfileSearchPayloadFilter) {
+	e.Or = or
+	e.require(evmDexProfileSearchPayloadFilterFieldOr)
+}
+
+func (e *EvmDexProfileSearchPayloadFilter) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexProfileSearchPayloadFilter
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexProfileSearchPayloadFilter(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexProfileSearchPayloadFilter) MarshalJSON() ([]byte, error) {
+	type embed EvmDexProfileSearchPayloadFilter
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexProfileSearchPayloadFilter) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Comparison operators applied to a single field. At least one operator must be provided.
+var (
+	evmDexProfileSearchPayloadFilterOperatorsFieldEq  = big.NewInt(1 << 0)
+	evmDexProfileSearchPayloadFilterOperatorsFieldNe  = big.NewInt(1 << 1)
+	evmDexProfileSearchPayloadFilterOperatorsFieldGt  = big.NewInt(1 << 2)
+	evmDexProfileSearchPayloadFilterOperatorsFieldLt  = big.NewInt(1 << 3)
+	evmDexProfileSearchPayloadFilterOperatorsFieldGte = big.NewInt(1 << 4)
+	evmDexProfileSearchPayloadFilterOperatorsFieldLte = big.NewInt(1 << 5)
+	evmDexProfileSearchPayloadFilterOperatorsFieldIn  = big.NewInt(1 << 6)
+	evmDexProfileSearchPayloadFilterOperatorsFieldNin = big.NewInt(1 << 7)
+)
+
+type EvmDexProfileSearchPayloadFilterOperators struct {
+	// Equal to.
+	Eq *EvmDexProfileSearchPayloadFilterOperatorsEq `json:"$eq,omitempty" url:"$eq,omitempty"`
+	// Not equal to.
+	Ne *EvmDexProfileSearchPayloadFilterOperatorsNe `json:"$ne,omitempty" url:"$ne,omitempty"`
+	// Greater than.
+	Gt *float64 `json:"$gt,omitempty" url:"$gt,omitempty"`
+	// Less than.
+	Lt *float64 `json:"$lt,omitempty" url:"$lt,omitempty"`
+	// Greater than or equal to.
+	Gte *float64 `json:"$gte,omitempty" url:"$gte,omitempty"`
+	// Less than or equal to.
+	Lte *float64 `json:"$lte,omitempty" url:"$lte,omitempty"`
+	// In the list.
+	In []*EvmDexProfileSearchPayloadFilterOperatorsInItem `json:"$in,omitempty" url:"$in,omitempty"`
+	// Not in the list.
+	Nin []*EvmDexProfileSearchPayloadFilterOperatorsNinItem `json:"$nin,omitempty" url:"$nin,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetEq() *EvmDexProfileSearchPayloadFilterOperatorsEq {
+	if e == nil {
+		return nil
+	}
+	return e.Eq
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetNe() *EvmDexProfileSearchPayloadFilterOperatorsNe {
+	if e == nil {
+		return nil
+	}
+	return e.Ne
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetGt() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Gt
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetLt() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Lt
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetGte() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Gte
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetLte() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Lte
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetIn() []*EvmDexProfileSearchPayloadFilterOperatorsInItem {
+	if e == nil {
+		return nil
+	}
+	return e.In
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetNin() []*EvmDexProfileSearchPayloadFilterOperatorsNinItem {
+	if e == nil {
+		return nil
+	}
+	return e.Nin
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetEq sets the Eq field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetEq(eq *EvmDexProfileSearchPayloadFilterOperatorsEq) {
+	e.Eq = eq
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldEq)
+}
+
+// SetNe sets the Ne field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetNe(ne *EvmDexProfileSearchPayloadFilterOperatorsNe) {
+	e.Ne = ne
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldNe)
+}
+
+// SetGt sets the Gt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetGt(gt *float64) {
+	e.Gt = gt
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldGt)
+}
+
+// SetLt sets the Lt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetLt(lt *float64) {
+	e.Lt = lt
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldLt)
+}
+
+// SetGte sets the Gte field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetGte(gte *float64) {
+	e.Gte = gte
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldGte)
+}
+
+// SetLte sets the Lte field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetLte(lte *float64) {
+	e.Lte = lte
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldLte)
+}
+
+// SetIn sets the In field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetIn(in []*EvmDexProfileSearchPayloadFilterOperatorsInItem) {
+	e.In = in
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldIn)
+}
+
+// SetNin sets the Nin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadFilterOperators) SetNin(nin []*EvmDexProfileSearchPayloadFilterOperatorsNinItem) {
+	e.Nin = nin
+	e.require(evmDexProfileSearchPayloadFilterOperatorsFieldNin)
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexProfileSearchPayloadFilterOperators
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexProfileSearchPayloadFilterOperators(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) MarshalJSON() ([]byte, error) {
+	type embed EvmDexProfileSearchPayloadFilterOperators
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperators) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Equal to.
+type EvmDexProfileSearchPayloadFilterOperatorsEq struct {
+	String  string
+	Double  float64
+	Boolean bool
+
+	typ string
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsEq) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsEq) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsEq) GetBoolean() bool {
+	if e == nil {
+		return false
+	}
+	return e.Boolean
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsEq) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		e.typ = "Boolean"
+		e.Boolean = valueBoolean
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e EvmDexProfileSearchPayloadFilterOperatorsEq) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return json.Marshal(e.Boolean)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EvmDexProfileSearchPayloadFilterOperatorsEqVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsEq) Accept(visitor EvmDexProfileSearchPayloadFilterOperatorsEqVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return visitor.VisitBoolean(e.Boolean)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EvmDexProfileSearchPayloadFilterOperatorsInItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsInItem) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsInItem) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsInItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e EvmDexProfileSearchPayloadFilterOperatorsInItem) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EvmDexProfileSearchPayloadFilterOperatorsInItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsInItem) Accept(visitor EvmDexProfileSearchPayloadFilterOperatorsInItemVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+// Not equal to.
+type EvmDexProfileSearchPayloadFilterOperatorsNe struct {
+	String  string
+	Double  float64
+	Boolean bool
+
+	typ string
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNe) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNe) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNe) GetBoolean() bool {
+	if e == nil {
+		return false
+	}
+	return e.Boolean
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNe) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		e.typ = "Boolean"
+		e.Boolean = valueBoolean
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e EvmDexProfileSearchPayloadFilterOperatorsNe) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return json.Marshal(e.Boolean)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EvmDexProfileSearchPayloadFilterOperatorsNeVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNe) Accept(visitor EvmDexProfileSearchPayloadFilterOperatorsNeVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return visitor.VisitBoolean(e.Boolean)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EvmDexProfileSearchPayloadFilterOperatorsNinItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNinItem) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNinItem) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNinItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e EvmDexProfileSearchPayloadFilterOperatorsNinItem) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type EvmDexProfileSearchPayloadFilterOperatorsNinItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (e *EvmDexProfileSearchPayloadFilterOperatorsNinItem) Accept(visitor EvmDexProfileSearchPayloadFilterOperatorsNinItemVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+// Full-text query used to match profiles by a text value against one or more fields.
+var (
+	evmDexProfileSearchPayloadQueryFieldText         = big.NewInt(1 << 0)
+	evmDexProfileSearchPayloadQueryFieldFields       = big.NewInt(1 << 1)
+	evmDexProfileSearchPayloadQueryFieldFuzzy        = big.NewInt(1 << 2)
+	evmDexProfileSearchPayloadQueryFieldAutocomplete = big.NewInt(1 << 3)
+)
+
+type EvmDexProfileSearchPayloadQuery struct {
+	// Text value to match against the selected fields.
+	Text string `json:"text" url:"text"`
+	// Fields that the text value should be matched against.
+	Fields []string `json:"fields" url:"fields"`
+	// When true, matches values that are approximately similar to `text`, allowing for minor typos and variations.
+	Fuzzy *bool `json:"fuzzy,omitempty" url:"fuzzy,omitempty"`
+	// When true, matches values that start with `text`, useful for type-ahead lookups.
+	Autocomplete *bool `json:"autocomplete,omitempty" url:"autocomplete,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) GetText() string {
+	if e == nil {
+		return ""
+	}
+	return e.Text
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) GetFields() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Fields
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) GetFuzzy() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.Fuzzy
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) GetAutocomplete() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.Autocomplete
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadQuery) SetText(text string) {
+	e.Text = text
+	e.require(evmDexProfileSearchPayloadQueryFieldText)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadQuery) SetFields(fields []string) {
+	e.Fields = fields
+	e.require(evmDexProfileSearchPayloadQueryFieldFields)
+}
+
+// SetFuzzy sets the Fuzzy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadQuery) SetFuzzy(fuzzy *bool) {
+	e.Fuzzy = fuzzy
+	e.require(evmDexProfileSearchPayloadQueryFieldFuzzy)
+}
+
+// SetAutocomplete sets the Autocomplete field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadQuery) SetAutocomplete(autocomplete *bool) {
+	e.Autocomplete = autocomplete
+	e.require(evmDexProfileSearchPayloadQueryFieldAutocomplete)
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexProfileSearchPayloadQuery
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexProfileSearchPayloadQuery(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) MarshalJSON() ([]byte, error) {
+	type embed EvmDexProfileSearchPayloadQuery
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexProfileSearchPayloadQuery) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Rule that determines the order in which matching profiles are returned.
+var (
+	evmDexProfileSearchPayloadSortFieldField     = big.NewInt(1 << 0)
+	evmDexProfileSearchPayloadSortFieldDirection = big.NewInt(1 << 1)
+)
+
+type EvmDexProfileSearchPayloadSort struct {
+	// Field path to sort results by.
+	Field     string                                      `json:"field" url:"field"`
+	Direction EvmDexProfileSearchPayloadSortDirectionEnum `json:"direction" url:"direction"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexProfileSearchPayloadSort) GetField() string {
+	if e == nil {
+		return ""
+	}
+	return e.Field
+}
+
+func (e *EvmDexProfileSearchPayloadSort) GetDirection() EvmDexProfileSearchPayloadSortDirectionEnum {
+	if e == nil {
+		return ""
+	}
+	return e.Direction
+}
+
+func (e *EvmDexProfileSearchPayloadSort) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexProfileSearchPayloadSort) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadSort) SetField(field string) {
+	e.Field = field
+	e.require(evmDexProfileSearchPayloadSortFieldField)
+}
+
+// SetDirection sets the Direction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexProfileSearchPayloadSort) SetDirection(direction EvmDexProfileSearchPayloadSortDirectionEnum) {
+	e.Direction = direction
+	e.require(evmDexProfileSearchPayloadSortFieldDirection)
+}
+
+func (e *EvmDexProfileSearchPayloadSort) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexProfileSearchPayloadSort
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexProfileSearchPayloadSort(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexProfileSearchPayloadSort) MarshalJSON() ([]byte, error) {
+	type embed EvmDexProfileSearchPayloadSort
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexProfileSearchPayloadSort) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Direction to sort results in.
+type EvmDexProfileSearchPayloadSortDirectionEnum string
+
+const (
+	EvmDexProfileSearchPayloadSortDirectionEnumAsc  EvmDexProfileSearchPayloadSortDirectionEnum = "asc"
+	EvmDexProfileSearchPayloadSortDirectionEnumDesc EvmDexProfileSearchPayloadSortDirectionEnum = "desc"
+)
+
+func NewEvmDexProfileSearchPayloadSortDirectionEnumFromString(s string) (EvmDexProfileSearchPayloadSortDirectionEnum, error) {
+	switch s {
+	case "asc":
+		return EvmDexProfileSearchPayloadSortDirectionEnumAsc, nil
+	case "desc":
+		return EvmDexProfileSearchPayloadSortDirectionEnumDesc, nil
+	}
+	var t EvmDexProfileSearchPayloadSortDirectionEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexProfileSearchPayloadSortDirectionEnum) Ptr() *EvmDexProfileSearchPayloadSortDirectionEnum {
+	return &e
+}
+
+// Refer to [Data Sources](/documentation/evm/dex/overview#data-sources) for the list of supported protocols.
+type EvmDexProtocolField = string
+
+var (
+	evmDexSwapFieldID                  = big.NewInt(1 << 0)
+	evmDexSwapFieldChainID             = big.NewInt(1 << 1)
+	evmDexSwapFieldSwapType            = big.NewInt(1 << 2)
+	evmDexSwapFieldProtocol            = big.NewInt(1 << 3)
+	evmDexSwapFieldWalletAddress       = big.NewInt(1 << 4)
+	evmDexSwapFieldPoolAddress         = big.NewInt(1 << 5)
+	evmDexSwapFieldTokenAddressIn      = big.NewInt(1 << 6)
+	evmDexSwapFieldTokenAddressOut     = big.NewInt(1 << 7)
+	evmDexSwapFieldTokenAmountIn       = big.NewInt(1 << 8)
+	evmDexSwapFieldTokenAmountOut      = big.NewInt(1 << 9)
+	evmDexSwapFieldTokenPriceIn        = big.NewInt(1 << 10)
+	evmDexSwapFieldTokenPriceOut       = big.NewInt(1 << 11)
+	evmDexSwapFieldPreTokenBalanceIn   = big.NewInt(1 << 12)
+	evmDexSwapFieldPreTokenBalanceOut  = big.NewInt(1 << 13)
+	evmDexSwapFieldPostTokenBalanceIn  = big.NewInt(1 << 14)
+	evmDexSwapFieldPostTokenBalanceOut = big.NewInt(1 << 15)
+	evmDexSwapFieldUsdAmountIn         = big.NewInt(1 << 16)
+	evmDexSwapFieldUsdAmountOut        = big.NewInt(1 << 17)
+	evmDexSwapFieldBlockNumber         = big.NewInt(1 << 18)
+	evmDexSwapFieldBlockTime           = big.NewInt(1 << 19)
+	evmDexSwapFieldTxHash              = big.NewInt(1 << 20)
+)
+
+type EvmDexSwap struct {
+	ID *int `json:"id,omitempty" url:"id,omitempty"`
+	// Numeric EVM chain ID the record belongs to.
+	ChainID             *int                 `json:"chain_id,omitempty" url:"chain_id,omitempty"`
+	SwapType            *EvmDexSwapTypeEnum  `json:"swap_type,omitempty" url:"swap_type,omitempty"`
+	Protocol            *EvmDexProtocolField `json:"protocol,omitempty" url:"protocol,omitempty"`
+	WalletAddress       *string              `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	PoolAddress         *string              `json:"pool_address,omitempty" url:"pool_address,omitempty"`
+	TokenAddressIn      *string              `json:"token_address_in,omitempty" url:"token_address_in,omitempty"`
+	TokenAddressOut     *string              `json:"token_address_out,omitempty" url:"token_address_out,omitempty"`
+	TokenAmountIn       *float64             `json:"token_amount_in,omitempty" url:"token_amount_in,omitempty"`
+	TokenAmountOut      *float64             `json:"token_amount_out,omitempty" url:"token_amount_out,omitempty"`
+	TokenPriceIn        *float64             `json:"token_price_in,omitempty" url:"token_price_in,omitempty"`
+	TokenPriceOut       *float64             `json:"token_price_out,omitempty" url:"token_price_out,omitempty"`
+	PreTokenBalanceIn   *float64             `json:"pre_token_balance_in,omitempty" url:"pre_token_balance_in,omitempty"`
+	PreTokenBalanceOut  *float64             `json:"pre_token_balance_out,omitempty" url:"pre_token_balance_out,omitempty"`
+	PostTokenBalanceIn  *float64             `json:"post_token_balance_in,omitempty" url:"post_token_balance_in,omitempty"`
+	PostTokenBalanceOut *float64             `json:"post_token_balance_out,omitempty" url:"post_token_balance_out,omitempty"`
+	UsdAmountIn         *float64             `json:"usd_amount_in,omitempty" url:"usd_amount_in,omitempty"`
+	UsdAmountOut        *float64             `json:"usd_amount_out,omitempty" url:"usd_amount_out,omitempty"`
+	BlockNumber         *int                 `json:"block_number,omitempty" url:"block_number,omitempty"`
+	BlockTime           *time.Time           `json:"block_time,omitempty" url:"block_time,omitempty"`
+	TxHash              *string              `json:"tx_hash,omitempty" url:"tx_hash,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexSwap) GetID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ID
+}
+
+func (e *EvmDexSwap) GetChainID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ChainID
+}
+
+func (e *EvmDexSwap) GetSwapType() *EvmDexSwapTypeEnum {
+	if e == nil {
+		return nil
+	}
+	return e.SwapType
+}
+
+func (e *EvmDexSwap) GetProtocol() *EvmDexProtocolField {
+	if e == nil {
+		return nil
+	}
+	return e.Protocol
+}
+
+func (e *EvmDexSwap) GetWalletAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.WalletAddress
+}
+
+func (e *EvmDexSwap) GetPoolAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PoolAddress
+}
+
+func (e *EvmDexSwap) GetTokenAddressIn() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddressIn
+}
+
+func (e *EvmDexSwap) GetTokenAddressOut() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddressOut
+}
+
+func (e *EvmDexSwap) GetTokenAmountIn() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAmountIn
+}
+
+func (e *EvmDexSwap) GetTokenAmountOut() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAmountOut
+}
+
+func (e *EvmDexSwap) GetTokenPriceIn() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenPriceIn
+}
+
+func (e *EvmDexSwap) GetTokenPriceOut() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenPriceOut
+}
+
+func (e *EvmDexSwap) GetPreTokenBalanceIn() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PreTokenBalanceIn
+}
+
+func (e *EvmDexSwap) GetPreTokenBalanceOut() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PreTokenBalanceOut
+}
+
+func (e *EvmDexSwap) GetPostTokenBalanceIn() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PostTokenBalanceIn
+}
+
+func (e *EvmDexSwap) GetPostTokenBalanceOut() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PostTokenBalanceOut
+}
+
+func (e *EvmDexSwap) GetUsdAmountIn() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdAmountIn
+}
+
+func (e *EvmDexSwap) GetUsdAmountOut() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdAmountOut
+}
+
+func (e *EvmDexSwap) GetBlockNumber() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BlockNumber
+}
+
+func (e *EvmDexSwap) GetBlockTime() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BlockTime
+}
+
+func (e *EvmDexSwap) GetTxHash() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TxHash
+}
+
+func (e *EvmDexSwap) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexSwap) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetID(id *int) {
+	e.ID = id
+	e.require(evmDexSwapFieldID)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetChainID(chainID *int) {
+	e.ChainID = chainID
+	e.require(evmDexSwapFieldChainID)
+}
+
+// SetSwapType sets the SwapType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetSwapType(swapType *EvmDexSwapTypeEnum) {
+	e.SwapType = swapType
+	e.require(evmDexSwapFieldSwapType)
+}
+
+// SetProtocol sets the Protocol field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetProtocol(protocol *EvmDexProtocolField) {
+	e.Protocol = protocol
+	e.require(evmDexSwapFieldProtocol)
+}
+
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetWalletAddress(walletAddress *string) {
+	e.WalletAddress = walletAddress
+	e.require(evmDexSwapFieldWalletAddress)
+}
+
+// SetPoolAddress sets the PoolAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetPoolAddress(poolAddress *string) {
+	e.PoolAddress = poolAddress
+	e.require(evmDexSwapFieldPoolAddress)
+}
+
+// SetTokenAddressIn sets the TokenAddressIn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetTokenAddressIn(tokenAddressIn *string) {
+	e.TokenAddressIn = tokenAddressIn
+	e.require(evmDexSwapFieldTokenAddressIn)
+}
+
+// SetTokenAddressOut sets the TokenAddressOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetTokenAddressOut(tokenAddressOut *string) {
+	e.TokenAddressOut = tokenAddressOut
+	e.require(evmDexSwapFieldTokenAddressOut)
+}
+
+// SetTokenAmountIn sets the TokenAmountIn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetTokenAmountIn(tokenAmountIn *float64) {
+	e.TokenAmountIn = tokenAmountIn
+	e.require(evmDexSwapFieldTokenAmountIn)
+}
+
+// SetTokenAmountOut sets the TokenAmountOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetTokenAmountOut(tokenAmountOut *float64) {
+	e.TokenAmountOut = tokenAmountOut
+	e.require(evmDexSwapFieldTokenAmountOut)
+}
+
+// SetTokenPriceIn sets the TokenPriceIn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetTokenPriceIn(tokenPriceIn *float64) {
+	e.TokenPriceIn = tokenPriceIn
+	e.require(evmDexSwapFieldTokenPriceIn)
+}
+
+// SetTokenPriceOut sets the TokenPriceOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetTokenPriceOut(tokenPriceOut *float64) {
+	e.TokenPriceOut = tokenPriceOut
+	e.require(evmDexSwapFieldTokenPriceOut)
+}
+
+// SetPreTokenBalanceIn sets the PreTokenBalanceIn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetPreTokenBalanceIn(preTokenBalanceIn *float64) {
+	e.PreTokenBalanceIn = preTokenBalanceIn
+	e.require(evmDexSwapFieldPreTokenBalanceIn)
+}
+
+// SetPreTokenBalanceOut sets the PreTokenBalanceOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetPreTokenBalanceOut(preTokenBalanceOut *float64) {
+	e.PreTokenBalanceOut = preTokenBalanceOut
+	e.require(evmDexSwapFieldPreTokenBalanceOut)
+}
+
+// SetPostTokenBalanceIn sets the PostTokenBalanceIn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetPostTokenBalanceIn(postTokenBalanceIn *float64) {
+	e.PostTokenBalanceIn = postTokenBalanceIn
+	e.require(evmDexSwapFieldPostTokenBalanceIn)
+}
+
+// SetPostTokenBalanceOut sets the PostTokenBalanceOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetPostTokenBalanceOut(postTokenBalanceOut *float64) {
+	e.PostTokenBalanceOut = postTokenBalanceOut
+	e.require(evmDexSwapFieldPostTokenBalanceOut)
+}
+
+// SetUsdAmountIn sets the UsdAmountIn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetUsdAmountIn(usdAmountIn *float64) {
+	e.UsdAmountIn = usdAmountIn
+	e.require(evmDexSwapFieldUsdAmountIn)
+}
+
+// SetUsdAmountOut sets the UsdAmountOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetUsdAmountOut(usdAmountOut *float64) {
+	e.UsdAmountOut = usdAmountOut
+	e.require(evmDexSwapFieldUsdAmountOut)
+}
+
+// SetBlockNumber sets the BlockNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetBlockNumber(blockNumber *int) {
+	e.BlockNumber = blockNumber
+	e.require(evmDexSwapFieldBlockNumber)
+}
+
+// SetBlockTime sets the BlockTime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetBlockTime(blockTime *time.Time) {
+	e.BlockTime = blockTime
+	e.require(evmDexSwapFieldBlockTime)
+}
+
+// SetTxHash sets the TxHash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexSwap) SetTxHash(txHash *string) {
+	e.TxHash = txHash
+	e.require(evmDexSwapFieldTxHash)
+}
+
+func (e *EvmDexSwap) UnmarshalJSON(data []byte) error {
+	type embed EvmDexSwap
+	var unmarshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexSwap(unmarshaler.embed)
+	e.BlockTime = unmarshaler.BlockTime.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexSwap) MarshalJSON() ([]byte, error) {
+	type embed EvmDexSwap
+	var marshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed:     embed(*e),
+		BlockTime: internal.NewOptionalDateTime(e.BlockTime),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexSwap) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EvmDexSwapTypeEnum string
+
+const (
+	EvmDexSwapTypeEnumQuoteToken EvmDexSwapTypeEnum = "quote_token"
+	EvmDexSwapTypeEnumTokenQuote EvmDexSwapTypeEnum = "token_quote"
+	EvmDexSwapTypeEnumTokenToken EvmDexSwapTypeEnum = "token_token"
+	EvmDexSwapTypeEnumQuoteQuote EvmDexSwapTypeEnum = "quote_quote"
+)
+
+func NewEvmDexSwapTypeEnumFromString(s string) (EvmDexSwapTypeEnum, error) {
+	switch s {
+	case "quote_token":
+		return EvmDexSwapTypeEnumQuoteToken, nil
+	case "token_quote":
+		return EvmDexSwapTypeEnumTokenQuote, nil
+	case "token_token":
+		return EvmDexSwapTypeEnumTokenToken, nil
+	case "quote_quote":
+		return EvmDexSwapTypeEnumQuoteQuote, nil
+	}
+	var t EvmDexSwapTypeEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexSwapTypeEnum) Ptr() *EvmDexSwapTypeEnum {
+	return &e
+}
+
+var (
+	evmDexTokenProfileFieldUpdatedAt    = big.NewInt(1 << 0)
+	evmDexTokenProfileFieldSyncedAt     = big.NewInt(1 << 1)
+	evmDexTokenProfileFieldChainID      = big.NewInt(1 << 2)
+	evmDexTokenProfileFieldTokenAddress = big.NewInt(1 << 3)
+	evmDexTokenProfileFieldMetadata     = big.NewInt(1 << 4)
+	evmDexTokenProfileFieldMetrics      = big.NewInt(1 << 5)
+)
+
+type EvmDexTokenProfile struct {
+	UpdatedAt *time.Time `json:"updated_at,omitempty" url:"updated_at,omitempty"`
+	SyncedAt  *time.Time `json:"synced_at,omitempty" url:"synced_at,omitempty"`
+	// Numeric EVM chain ID the record belongs to.
+	ChainID      *int                                  `json:"chain_id,omitempty" url:"chain_id,omitempty"`
+	TokenAddress *string                               `json:"token_address,omitempty" url:"token_address,omitempty"`
+	Metadata     *EvmDexTokenProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Metrics      map[string]*EvmDexTokenProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexTokenProfile) GetUpdatedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.UpdatedAt
+}
+
+func (e *EvmDexTokenProfile) GetSyncedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.SyncedAt
+}
+
+func (e *EvmDexTokenProfile) GetChainID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ChainID
+}
+
+func (e *EvmDexTokenProfile) GetTokenAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddress
+}
+
+func (e *EvmDexTokenProfile) GetMetadata() *EvmDexTokenProfileMetadata {
+	if e == nil {
+		return nil
+	}
+	return e.Metadata
+}
+
+func (e *EvmDexTokenProfile) GetMetrics() map[string]*EvmDexTokenProfileMetrics {
+	if e == nil {
+		return nil
+	}
+	return e.Metrics
+}
+
+func (e *EvmDexTokenProfile) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexTokenProfile) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfile) SetUpdatedAt(updatedAt *time.Time) {
+	e.UpdatedAt = updatedAt
+	e.require(evmDexTokenProfileFieldUpdatedAt)
+}
+
+// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfile) SetSyncedAt(syncedAt *time.Time) {
+	e.SyncedAt = syncedAt
+	e.require(evmDexTokenProfileFieldSyncedAt)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfile) SetChainID(chainID *int) {
+	e.ChainID = chainID
+	e.require(evmDexTokenProfileFieldChainID)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfile) SetTokenAddress(tokenAddress *string) {
+	e.TokenAddress = tokenAddress
+	e.require(evmDexTokenProfileFieldTokenAddress)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfile) SetMetadata(metadata *EvmDexTokenProfileMetadata) {
+	e.Metadata = metadata
+	e.require(evmDexTokenProfileFieldMetadata)
+}
+
+// SetMetrics sets the Metrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfile) SetMetrics(metrics map[string]*EvmDexTokenProfileMetrics) {
+	e.Metrics = metrics
+	e.require(evmDexTokenProfileFieldMetrics)
+}
+
+func (e *EvmDexTokenProfile) UnmarshalJSON(data []byte) error {
+	type embed EvmDexTokenProfile
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexTokenProfile(unmarshaler.embed)
+	e.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
+	e.SyncedAt = unmarshaler.SyncedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexTokenProfile) MarshalJSON() ([]byte, error) {
+	type embed EvmDexTokenProfile
+	var marshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed:     embed(*e),
+		UpdatedAt: internal.NewOptionalDateTime(e.UpdatedAt),
+		SyncedAt:  internal.NewOptionalDateTime(e.SyncedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexTokenProfile) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexTokenProfileMetadataFieldLastTradeAt    = big.NewInt(1 << 0)
+	evmDexTokenProfileMetadataFieldCreatedAt      = big.NewInt(1 << 1)
+	evmDexTokenProfileMetadataFieldSymbol         = big.NewInt(1 << 2)
+	evmDexTokenProfileMetadataFieldName           = big.NewInt(1 << 3)
+	evmDexTokenProfileMetadataFieldImage          = big.NewInt(1 << 4)
+	evmDexTokenProfileMetadataFieldVerified       = big.NewInt(1 << 5)
+	evmDexTokenProfileMetadataFieldCreatorAddress = big.NewInt(1 << 6)
+	evmDexTokenProfileMetadataFieldTwitter        = big.NewInt(1 << 7)
+	evmDexTokenProfileMetadataFieldDiscord        = big.NewInt(1 << 8)
+	evmDexTokenProfileMetadataFieldWebsite        = big.NewInt(1 << 9)
+	evmDexTokenProfileMetadataFieldTelegram       = big.NewInt(1 << 10)
+)
+
+type EvmDexTokenProfileMetadata struct {
+	LastTradeAt    *time.Time `json:"last_trade_at,omitempty" url:"last_trade_at,omitempty"`
+	CreatedAt      *time.Time `json:"created_at,omitempty" url:"created_at,omitempty"`
+	Symbol         *string    `json:"symbol,omitempty" url:"symbol,omitempty"`
+	Name           *string    `json:"name,omitempty" url:"name,omitempty"`
+	Image          *string    `json:"image,omitempty" url:"image,omitempty"`
+	Verified       *bool      `json:"verified,omitempty" url:"verified,omitempty"`
+	CreatorAddress *string    `json:"creator_address,omitempty" url:"creator_address,omitempty"`
+	Twitter        *string    `json:"twitter,omitempty" url:"twitter,omitempty"`
+	Discord        *string    `json:"discord,omitempty" url:"discord,omitempty"`
+	Website        *string    `json:"website,omitempty" url:"website,omitempty"`
+	Telegram       *string    `json:"telegram,omitempty" url:"telegram,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexTokenProfileMetadata) GetLastTradeAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.LastTradeAt
+}
+
+func (e *EvmDexTokenProfileMetadata) GetCreatedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.CreatedAt
+}
+
+func (e *EvmDexTokenProfileMetadata) GetSymbol() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Symbol
+}
+
+func (e *EvmDexTokenProfileMetadata) GetName() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Name
+}
+
+func (e *EvmDexTokenProfileMetadata) GetImage() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Image
+}
+
+func (e *EvmDexTokenProfileMetadata) GetVerified() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.Verified
+}
+
+func (e *EvmDexTokenProfileMetadata) GetCreatorAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CreatorAddress
+}
+
+func (e *EvmDexTokenProfileMetadata) GetTwitter() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Twitter
+}
+
+func (e *EvmDexTokenProfileMetadata) GetDiscord() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Discord
+}
+
+func (e *EvmDexTokenProfileMetadata) GetWebsite() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Website
+}
+
+func (e *EvmDexTokenProfileMetadata) GetTelegram() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Telegram
+}
+
+func (e *EvmDexTokenProfileMetadata) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexTokenProfileMetadata) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetLastTradeAt sets the LastTradeAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetLastTradeAt(lastTradeAt *time.Time) {
+	e.LastTradeAt = lastTradeAt
+	e.require(evmDexTokenProfileMetadataFieldLastTradeAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetCreatedAt(createdAt *time.Time) {
+	e.CreatedAt = createdAt
+	e.require(evmDexTokenProfileMetadataFieldCreatedAt)
+}
+
+// SetSymbol sets the Symbol field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetSymbol(symbol *string) {
+	e.Symbol = symbol
+	e.require(evmDexTokenProfileMetadataFieldSymbol)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetName(name *string) {
+	e.Name = name
+	e.require(evmDexTokenProfileMetadataFieldName)
+}
+
+// SetImage sets the Image field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetImage(image *string) {
+	e.Image = image
+	e.require(evmDexTokenProfileMetadataFieldImage)
+}
+
+// SetVerified sets the Verified field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetVerified(verified *bool) {
+	e.Verified = verified
+	e.require(evmDexTokenProfileMetadataFieldVerified)
+}
+
+// SetCreatorAddress sets the CreatorAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetCreatorAddress(creatorAddress *string) {
+	e.CreatorAddress = creatorAddress
+	e.require(evmDexTokenProfileMetadataFieldCreatorAddress)
+}
+
+// SetTwitter sets the Twitter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetTwitter(twitter *string) {
+	e.Twitter = twitter
+	e.require(evmDexTokenProfileMetadataFieldTwitter)
+}
+
+// SetDiscord sets the Discord field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetDiscord(discord *string) {
+	e.Discord = discord
+	e.require(evmDexTokenProfileMetadataFieldDiscord)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetWebsite(website *string) {
+	e.Website = website
+	e.require(evmDexTokenProfileMetadataFieldWebsite)
+}
+
+// SetTelegram sets the Telegram field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetadata) SetTelegram(telegram *string) {
+	e.Telegram = telegram
+	e.require(evmDexTokenProfileMetadataFieldTelegram)
+}
+
+func (e *EvmDexTokenProfileMetadata) UnmarshalJSON(data []byte) error {
+	type embed EvmDexTokenProfileMetadata
+	var unmarshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+		CreatedAt   *internal.DateTime `json:"created_at,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexTokenProfileMetadata(unmarshaler.embed)
+	e.LastTradeAt = unmarshaler.LastTradeAt.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexTokenProfileMetadata) MarshalJSON() ([]byte, error) {
+	type embed EvmDexTokenProfileMetadata
+	var marshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+		CreatedAt   *internal.DateTime `json:"created_at,omitempty"`
+	}{
+		embed:       embed(*e),
+		LastTradeAt: internal.NewOptionalDateTime(e.LastTradeAt),
+		CreatedAt:   internal.NewOptionalDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexTokenProfileMetadata) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexTokenProfileMetricsFieldLargestTradeWin       = big.NewInt(1 << 0)
+	evmDexTokenProfileMetricsFieldLargestTradeLoss      = big.NewInt(1 << 1)
+	evmDexTokenProfileMetricsFieldAvgBuySize            = big.NewInt(1 << 2)
+	evmDexTokenProfileMetricsFieldAvgSellSize           = big.NewInt(1 << 3)
+	evmDexTokenProfileMetricsFieldAvgPrice              = big.NewInt(1 << 4)
+	evmDexTokenProfileMetricsFieldAvgBuyPrice           = big.NewInt(1 << 5)
+	evmDexTokenProfileMetricsFieldAvgSellPrice          = big.NewInt(1 << 6)
+	evmDexTokenProfileMetricsFieldAvgBuyMcap            = big.NewInt(1 << 7)
+	evmDexTokenProfileMetricsFieldAvgSellMcap           = big.NewInt(1 << 8)
+	evmDexTokenProfileMetricsFieldAvgHoldingDuration    = big.NewInt(1 << 9)
+	evmDexTokenProfileMetricsFieldAvgTradePnl           = big.NewInt(1 << 10)
+	evmDexTokenProfileMetricsFieldAvgTradeRoi           = big.NewInt(1 << 11)
+	evmDexTokenProfileMetricsFieldAvgWalletWinrate      = big.NewInt(1 << 12)
+	evmDexTokenProfileMetricsFieldAvgWalletPnl          = big.NewInt(1 << 13)
+	evmDexTokenProfileMetricsFieldAvgWalletRoi          = big.NewInt(1 << 14)
+	evmDexTokenProfileMetricsFieldWalletRoiDistribution = big.NewInt(1 << 15)
+	evmDexTokenProfileMetricsFieldMakersCount           = big.NewInt(1 << 16)
+	evmDexTokenProfileMetricsFieldBuyersCount           = big.NewInt(1 << 17)
+	evmDexTokenProfileMetricsFieldSellersCount          = big.NewInt(1 << 18)
+	evmDexTokenProfileMetricsFieldBuyCount              = big.NewInt(1 << 19)
+	evmDexTokenProfileMetricsFieldSellCount             = big.NewInt(1 << 20)
+	evmDexTokenProfileMetricsFieldWinPositionCount      = big.NewInt(1 << 21)
+	evmDexTokenProfileMetricsFieldLossPositionCount     = big.NewInt(1 << 22)
+	evmDexTokenProfileMetricsFieldWinPnl                = big.NewInt(1 << 23)
+	evmDexTokenProfileMetricsFieldLossPnl               = big.NewInt(1 << 24)
+	evmDexTokenProfileMetricsFieldBuyVolume             = big.NewInt(1 << 25)
+	evmDexTokenProfileMetricsFieldSellVolume            = big.NewInt(1 << 26)
+	evmDexTokenProfileMetricsFieldPnl                   = big.NewInt(1 << 27)
+	evmDexTokenProfileMetricsFieldTradeCount            = big.NewInt(1 << 28)
+	evmDexTokenProfileMetricsFieldVolume                = big.NewInt(1 << 29)
+	evmDexTokenProfileMetricsFieldPositionCount         = big.NewInt(1 << 30)
+	evmDexTokenProfileMetricsFieldVolumeWeightedWinrate = big.NewInt(1 << 31)
+	evmDexTokenProfileMetricsFieldVolumeWeightedRoi     = big.NewInt(1 << 32)
+	evmDexTokenProfileMetricsFieldWalletHitRatio        = big.NewInt(1 << 33)
+	evmDexTokenProfileMetricsFieldProfitFactor          = big.NewInt(1 << 34)
+	evmDexTokenProfileMetricsFieldWinLossSizeRatio      = big.NewInt(1 << 35)
+	evmDexTokenProfileMetricsFieldPnlVolumeRatio        = big.NewInt(1 << 36)
+	evmDexTokenProfileMetricsFieldPriceStability        = big.NewInt(1 << 37)
+	evmDexTokenProfileMetricsFieldPriceVolatility       = big.NewInt(1 << 38)
+	evmDexTokenProfileMetricsFieldRoiStability          = big.NewInt(1 << 39)
+	evmDexTokenProfileMetricsFieldRoiVolatility         = big.NewInt(1 << 40)
+	evmDexTokenProfileMetricsFieldPnlVolatility         = big.NewInt(1 << 41)
+	evmDexTokenProfileMetricsFieldPnlStability          = big.NewInt(1 << 42)
+	evmDexTokenProfileMetricsFieldSharpeRatio           = big.NewInt(1 << 43)
+	evmDexTokenProfileMetricsFieldSortinoRatio          = big.NewInt(1 << 44)
+	evmDexTokenProfileMetricsFieldMaxDrawdown           = big.NewInt(1 << 45)
+)
+
+type EvmDexTokenProfileMetrics struct {
+	LargestTradeWin       *float64       `json:"largest_trade_win,omitempty" url:"largest_trade_win,omitempty"`
+	LargestTradeLoss      *float64       `json:"largest_trade_loss,omitempty" url:"largest_trade_loss,omitempty"`
+	AvgBuySize            *float64       `json:"avg_buy_size,omitempty" url:"avg_buy_size,omitempty"`
+	AvgSellSize           *float64       `json:"avg_sell_size,omitempty" url:"avg_sell_size,omitempty"`
+	AvgPrice              *float64       `json:"avg_price,omitempty" url:"avg_price,omitempty"`
+	AvgBuyPrice           *float64       `json:"avg_buy_price,omitempty" url:"avg_buy_price,omitempty"`
+	AvgSellPrice          *float64       `json:"avg_sell_price,omitempty" url:"avg_sell_price,omitempty"`
+	AvgBuyMcap            *float64       `json:"avg_buy_mcap,omitempty" url:"avg_buy_mcap,omitempty"`
+	AvgSellMcap           *float64       `json:"avg_sell_mcap,omitempty" url:"avg_sell_mcap,omitempty"`
+	AvgHoldingDuration    *int           `json:"avg_holding_duration,omitempty" url:"avg_holding_duration,omitempty"`
+	AvgTradePnl           *float64       `json:"avg_trade_pnl,omitempty" url:"avg_trade_pnl,omitempty"`
+	AvgTradeRoi           *float64       `json:"avg_trade_roi,omitempty" url:"avg_trade_roi,omitempty"`
+	AvgWalletWinrate      *float64       `json:"avg_wallet_winrate,omitempty" url:"avg_wallet_winrate,omitempty"`
+	AvgWalletPnl          *float64       `json:"avg_wallet_pnl,omitempty" url:"avg_wallet_pnl,omitempty"`
+	AvgWalletRoi          *float64       `json:"avg_wallet_roi,omitempty" url:"avg_wallet_roi,omitempty"`
+	WalletRoiDistribution map[string]int `json:"wallet_roi_distribution,omitempty" url:"wallet_roi_distribution,omitempty"`
+	MakersCount           *int           `json:"makers_count,omitempty" url:"makers_count,omitempty"`
+	BuyersCount           *int           `json:"buyers_count,omitempty" url:"buyers_count,omitempty"`
+	SellersCount          *int           `json:"sellers_count,omitempty" url:"sellers_count,omitempty"`
+	BuyCount              *int           `json:"buy_count,omitempty" url:"buy_count,omitempty"`
+	SellCount             *int           `json:"sell_count,omitempty" url:"sell_count,omitempty"`
+	WinPositionCount      *int           `json:"win_position_count,omitempty" url:"win_position_count,omitempty"`
+	LossPositionCount     *int           `json:"loss_position_count,omitempty" url:"loss_position_count,omitempty"`
+	WinPnl                *float64       `json:"win_pnl,omitempty" url:"win_pnl,omitempty"`
+	LossPnl               *float64       `json:"loss_pnl,omitempty" url:"loss_pnl,omitempty"`
+	BuyVolume             *float64       `json:"buy_volume,omitempty" url:"buy_volume,omitempty"`
+	SellVolume            *float64       `json:"sell_volume,omitempty" url:"sell_volume,omitempty"`
+	Pnl                   *float64       `json:"pnl,omitempty" url:"pnl,omitempty"`
+	TradeCount            *int           `json:"trade_count,omitempty" url:"trade_count,omitempty"`
+	Volume                *float64       `json:"volume,omitempty" url:"volume,omitempty"`
+	PositionCount         *int           `json:"position_count,omitempty" url:"position_count,omitempty"`
+	VolumeWeightedWinrate *float64       `json:"volume_weighted_winrate,omitempty" url:"volume_weighted_winrate,omitempty"`
+	VolumeWeightedRoi     *float64       `json:"volume_weighted_roi,omitempty" url:"volume_weighted_roi,omitempty"`
+	WalletHitRatio        *float64       `json:"wallet_hit_ratio,omitempty" url:"wallet_hit_ratio,omitempty"`
+	ProfitFactor          *float64       `json:"profit_factor,omitempty" url:"profit_factor,omitempty"`
+	WinLossSizeRatio      *float64       `json:"win_loss_size_ratio,omitempty" url:"win_loss_size_ratio,omitempty"`
+	PnlVolumeRatio        *float64       `json:"pnl_volume_ratio,omitempty" url:"pnl_volume_ratio,omitempty"`
+	PriceStability        *float64       `json:"price_stability,omitempty" url:"price_stability,omitempty"`
+	PriceVolatility       *float64       `json:"price_volatility,omitempty" url:"price_volatility,omitempty"`
+	RoiStability          *float64       `json:"roi_stability,omitempty" url:"roi_stability,omitempty"`
+	RoiVolatility         *float64       `json:"roi_volatility,omitempty" url:"roi_volatility,omitempty"`
+	PnlVolatility         *float64       `json:"pnl_volatility,omitempty" url:"pnl_volatility,omitempty"`
+	PnlStability          *float64       `json:"pnl_stability,omitempty" url:"pnl_stability,omitempty"`
+	SharpeRatio           *float64       `json:"sharpe_ratio,omitempty" url:"sharpe_ratio,omitempty"`
+	SortinoRatio          *float64       `json:"sortino_ratio,omitempty" url:"sortino_ratio,omitempty"`
+	MaxDrawdown           *float64       `json:"max_drawdown,omitempty" url:"max_drawdown,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexTokenProfileMetrics) GetLargestTradeWin() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LargestTradeWin
+}
+
+func (e *EvmDexTokenProfileMetrics) GetLargestTradeLoss() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LargestTradeLoss
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgBuySize() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgBuySize
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgSellSize() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgSellSize
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgPrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgPrice
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgBuyPrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgBuyPrice
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgSellPrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgSellPrice
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgBuyMcap() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgBuyMcap
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgSellMcap() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgSellMcap
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgHoldingDuration() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgHoldingDuration
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgTradePnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgTradePnl
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgTradeRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgTradeRoi
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgWalletWinrate() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgWalletWinrate
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgWalletPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgWalletPnl
+}
+
+func (e *EvmDexTokenProfileMetrics) GetAvgWalletRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgWalletRoi
+}
+
+func (e *EvmDexTokenProfileMetrics) GetWalletRoiDistribution() map[string]int {
+	if e == nil {
+		return nil
+	}
+	return e.WalletRoiDistribution
+}
+
+func (e *EvmDexTokenProfileMetrics) GetMakersCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.MakersCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetBuyersCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BuyersCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetSellersCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.SellersCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetBuyCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BuyCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetSellCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.SellCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetWinPositionCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.WinPositionCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetLossPositionCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.LossPositionCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetWinPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinPnl
+}
+
+func (e *EvmDexTokenProfileMetrics) GetLossPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LossPnl
+}
+
+func (e *EvmDexTokenProfileMetrics) GetBuyVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.BuyVolume
+}
+
+func (e *EvmDexTokenProfileMetrics) GetSellVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SellVolume
+}
+
+func (e *EvmDexTokenProfileMetrics) GetPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Pnl
+}
+
+func (e *EvmDexTokenProfileMetrics) GetTradeCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.TradeCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Volume
+}
+
+func (e *EvmDexTokenProfileMetrics) GetPositionCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.PositionCount
+}
+
+func (e *EvmDexTokenProfileMetrics) GetVolumeWeightedWinrate() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.VolumeWeightedWinrate
+}
+
+func (e *EvmDexTokenProfileMetrics) GetVolumeWeightedRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.VolumeWeightedRoi
+}
+
+func (e *EvmDexTokenProfileMetrics) GetWalletHitRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WalletHitRatio
+}
+
+func (e *EvmDexTokenProfileMetrics) GetProfitFactor() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.ProfitFactor
+}
+
+func (e *EvmDexTokenProfileMetrics) GetWinLossSizeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinLossSizeRatio
+}
+
+func (e *EvmDexTokenProfileMetrics) GetPnlVolumeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlVolumeRatio
+}
+
+func (e *EvmDexTokenProfileMetrics) GetPriceStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PriceStability
+}
+
+func (e *EvmDexTokenProfileMetrics) GetPriceVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PriceVolatility
+}
+
+func (e *EvmDexTokenProfileMetrics) GetRoiStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RoiStability
+}
+
+func (e *EvmDexTokenProfileMetrics) GetRoiVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RoiVolatility
+}
+
+func (e *EvmDexTokenProfileMetrics) GetPnlVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlVolatility
+}
+
+func (e *EvmDexTokenProfileMetrics) GetPnlStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlStability
+}
+
+func (e *EvmDexTokenProfileMetrics) GetSharpeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SharpeRatio
+}
+
+func (e *EvmDexTokenProfileMetrics) GetSortinoRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SortinoRatio
+}
+
+func (e *EvmDexTokenProfileMetrics) GetMaxDrawdown() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.MaxDrawdown
+}
+
+func (e *EvmDexTokenProfileMetrics) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexTokenProfileMetrics) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetLargestTradeWin sets the LargestTradeWin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetLargestTradeWin(largestTradeWin *float64) {
+	e.LargestTradeWin = largestTradeWin
+	e.require(evmDexTokenProfileMetricsFieldLargestTradeWin)
+}
+
+// SetLargestTradeLoss sets the LargestTradeLoss field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetLargestTradeLoss(largestTradeLoss *float64) {
+	e.LargestTradeLoss = largestTradeLoss
+	e.require(evmDexTokenProfileMetricsFieldLargestTradeLoss)
+}
+
+// SetAvgBuySize sets the AvgBuySize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgBuySize(avgBuySize *float64) {
+	e.AvgBuySize = avgBuySize
+	e.require(evmDexTokenProfileMetricsFieldAvgBuySize)
+}
+
+// SetAvgSellSize sets the AvgSellSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgSellSize(avgSellSize *float64) {
+	e.AvgSellSize = avgSellSize
+	e.require(evmDexTokenProfileMetricsFieldAvgSellSize)
+}
+
+// SetAvgPrice sets the AvgPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgPrice(avgPrice *float64) {
+	e.AvgPrice = avgPrice
+	e.require(evmDexTokenProfileMetricsFieldAvgPrice)
+}
+
+// SetAvgBuyPrice sets the AvgBuyPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgBuyPrice(avgBuyPrice *float64) {
+	e.AvgBuyPrice = avgBuyPrice
+	e.require(evmDexTokenProfileMetricsFieldAvgBuyPrice)
+}
+
+// SetAvgSellPrice sets the AvgSellPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgSellPrice(avgSellPrice *float64) {
+	e.AvgSellPrice = avgSellPrice
+	e.require(evmDexTokenProfileMetricsFieldAvgSellPrice)
+}
+
+// SetAvgBuyMcap sets the AvgBuyMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgBuyMcap(avgBuyMcap *float64) {
+	e.AvgBuyMcap = avgBuyMcap
+	e.require(evmDexTokenProfileMetricsFieldAvgBuyMcap)
+}
+
+// SetAvgSellMcap sets the AvgSellMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgSellMcap(avgSellMcap *float64) {
+	e.AvgSellMcap = avgSellMcap
+	e.require(evmDexTokenProfileMetricsFieldAvgSellMcap)
+}
+
+// SetAvgHoldingDuration sets the AvgHoldingDuration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgHoldingDuration(avgHoldingDuration *int) {
+	e.AvgHoldingDuration = avgHoldingDuration
+	e.require(evmDexTokenProfileMetricsFieldAvgHoldingDuration)
+}
+
+// SetAvgTradePnl sets the AvgTradePnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgTradePnl(avgTradePnl *float64) {
+	e.AvgTradePnl = avgTradePnl
+	e.require(evmDexTokenProfileMetricsFieldAvgTradePnl)
+}
+
+// SetAvgTradeRoi sets the AvgTradeRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgTradeRoi(avgTradeRoi *float64) {
+	e.AvgTradeRoi = avgTradeRoi
+	e.require(evmDexTokenProfileMetricsFieldAvgTradeRoi)
+}
+
+// SetAvgWalletWinrate sets the AvgWalletWinrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgWalletWinrate(avgWalletWinrate *float64) {
+	e.AvgWalletWinrate = avgWalletWinrate
+	e.require(evmDexTokenProfileMetricsFieldAvgWalletWinrate)
+}
+
+// SetAvgWalletPnl sets the AvgWalletPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgWalletPnl(avgWalletPnl *float64) {
+	e.AvgWalletPnl = avgWalletPnl
+	e.require(evmDexTokenProfileMetricsFieldAvgWalletPnl)
+}
+
+// SetAvgWalletRoi sets the AvgWalletRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetAvgWalletRoi(avgWalletRoi *float64) {
+	e.AvgWalletRoi = avgWalletRoi
+	e.require(evmDexTokenProfileMetricsFieldAvgWalletRoi)
+}
+
+// SetWalletRoiDistribution sets the WalletRoiDistribution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetWalletRoiDistribution(walletRoiDistribution map[string]int) {
+	e.WalletRoiDistribution = walletRoiDistribution
+	e.require(evmDexTokenProfileMetricsFieldWalletRoiDistribution)
+}
+
+// SetMakersCount sets the MakersCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetMakersCount(makersCount *int) {
+	e.MakersCount = makersCount
+	e.require(evmDexTokenProfileMetricsFieldMakersCount)
+}
+
+// SetBuyersCount sets the BuyersCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetBuyersCount(buyersCount *int) {
+	e.BuyersCount = buyersCount
+	e.require(evmDexTokenProfileMetricsFieldBuyersCount)
+}
+
+// SetSellersCount sets the SellersCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetSellersCount(sellersCount *int) {
+	e.SellersCount = sellersCount
+	e.require(evmDexTokenProfileMetricsFieldSellersCount)
+}
+
+// SetBuyCount sets the BuyCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetBuyCount(buyCount *int) {
+	e.BuyCount = buyCount
+	e.require(evmDexTokenProfileMetricsFieldBuyCount)
+}
+
+// SetSellCount sets the SellCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetSellCount(sellCount *int) {
+	e.SellCount = sellCount
+	e.require(evmDexTokenProfileMetricsFieldSellCount)
+}
+
+// SetWinPositionCount sets the WinPositionCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetWinPositionCount(winPositionCount *int) {
+	e.WinPositionCount = winPositionCount
+	e.require(evmDexTokenProfileMetricsFieldWinPositionCount)
+}
+
+// SetLossPositionCount sets the LossPositionCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetLossPositionCount(lossPositionCount *int) {
+	e.LossPositionCount = lossPositionCount
+	e.require(evmDexTokenProfileMetricsFieldLossPositionCount)
+}
+
+// SetWinPnl sets the WinPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetWinPnl(winPnl *float64) {
+	e.WinPnl = winPnl
+	e.require(evmDexTokenProfileMetricsFieldWinPnl)
+}
+
+// SetLossPnl sets the LossPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetLossPnl(lossPnl *float64) {
+	e.LossPnl = lossPnl
+	e.require(evmDexTokenProfileMetricsFieldLossPnl)
+}
+
+// SetBuyVolume sets the BuyVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetBuyVolume(buyVolume *float64) {
+	e.BuyVolume = buyVolume
+	e.require(evmDexTokenProfileMetricsFieldBuyVolume)
+}
+
+// SetSellVolume sets the SellVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetSellVolume(sellVolume *float64) {
+	e.SellVolume = sellVolume
+	e.require(evmDexTokenProfileMetricsFieldSellVolume)
+}
+
+// SetPnl sets the Pnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetPnl(pnl *float64) {
+	e.Pnl = pnl
+	e.require(evmDexTokenProfileMetricsFieldPnl)
+}
+
+// SetTradeCount sets the TradeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetTradeCount(tradeCount *int) {
+	e.TradeCount = tradeCount
+	e.require(evmDexTokenProfileMetricsFieldTradeCount)
+}
+
+// SetVolume sets the Volume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetVolume(volume *float64) {
+	e.Volume = volume
+	e.require(evmDexTokenProfileMetricsFieldVolume)
+}
+
+// SetPositionCount sets the PositionCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetPositionCount(positionCount *int) {
+	e.PositionCount = positionCount
+	e.require(evmDexTokenProfileMetricsFieldPositionCount)
+}
+
+// SetVolumeWeightedWinrate sets the VolumeWeightedWinrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetVolumeWeightedWinrate(volumeWeightedWinrate *float64) {
+	e.VolumeWeightedWinrate = volumeWeightedWinrate
+	e.require(evmDexTokenProfileMetricsFieldVolumeWeightedWinrate)
+}
+
+// SetVolumeWeightedRoi sets the VolumeWeightedRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetVolumeWeightedRoi(volumeWeightedRoi *float64) {
+	e.VolumeWeightedRoi = volumeWeightedRoi
+	e.require(evmDexTokenProfileMetricsFieldVolumeWeightedRoi)
+}
+
+// SetWalletHitRatio sets the WalletHitRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetWalletHitRatio(walletHitRatio *float64) {
+	e.WalletHitRatio = walletHitRatio
+	e.require(evmDexTokenProfileMetricsFieldWalletHitRatio)
+}
+
+// SetProfitFactor sets the ProfitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetProfitFactor(profitFactor *float64) {
+	e.ProfitFactor = profitFactor
+	e.require(evmDexTokenProfileMetricsFieldProfitFactor)
+}
+
+// SetWinLossSizeRatio sets the WinLossSizeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetWinLossSizeRatio(winLossSizeRatio *float64) {
+	e.WinLossSizeRatio = winLossSizeRatio
+	e.require(evmDexTokenProfileMetricsFieldWinLossSizeRatio)
+}
+
+// SetPnlVolumeRatio sets the PnlVolumeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetPnlVolumeRatio(pnlVolumeRatio *float64) {
+	e.PnlVolumeRatio = pnlVolumeRatio
+	e.require(evmDexTokenProfileMetricsFieldPnlVolumeRatio)
+}
+
+// SetPriceStability sets the PriceStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetPriceStability(priceStability *float64) {
+	e.PriceStability = priceStability
+	e.require(evmDexTokenProfileMetricsFieldPriceStability)
+}
+
+// SetPriceVolatility sets the PriceVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetPriceVolatility(priceVolatility *float64) {
+	e.PriceVolatility = priceVolatility
+	e.require(evmDexTokenProfileMetricsFieldPriceVolatility)
+}
+
+// SetRoiStability sets the RoiStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetRoiStability(roiStability *float64) {
+	e.RoiStability = roiStability
+	e.require(evmDexTokenProfileMetricsFieldRoiStability)
+}
+
+// SetRoiVolatility sets the RoiVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetRoiVolatility(roiVolatility *float64) {
+	e.RoiVolatility = roiVolatility
+	e.require(evmDexTokenProfileMetricsFieldRoiVolatility)
+}
+
+// SetPnlVolatility sets the PnlVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetPnlVolatility(pnlVolatility *float64) {
+	e.PnlVolatility = pnlVolatility
+	e.require(evmDexTokenProfileMetricsFieldPnlVolatility)
+}
+
+// SetPnlStability sets the PnlStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetPnlStability(pnlStability *float64) {
+	e.PnlStability = pnlStability
+	e.require(evmDexTokenProfileMetricsFieldPnlStability)
+}
+
+// SetSharpeRatio sets the SharpeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetSharpeRatio(sharpeRatio *float64) {
+	e.SharpeRatio = sharpeRatio
+	e.require(evmDexTokenProfileMetricsFieldSharpeRatio)
+}
+
+// SetSortinoRatio sets the SortinoRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetSortinoRatio(sortinoRatio *float64) {
+	e.SortinoRatio = sortinoRatio
+	e.require(evmDexTokenProfileMetricsFieldSortinoRatio)
+}
+
+// SetMaxDrawdown sets the MaxDrawdown field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileMetrics) SetMaxDrawdown(maxDrawdown *float64) {
+	e.MaxDrawdown = maxDrawdown
+	e.require(evmDexTokenProfileMetricsFieldMaxDrawdown)
+}
+
+func (e *EvmDexTokenProfileMetrics) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexTokenProfileMetrics
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexTokenProfileMetrics(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexTokenProfileMetrics) MarshalJSON() ([]byte, error) {
+	type embed EvmDexTokenProfileMetrics
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexTokenProfileMetrics) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Controls which optional sections are included in each returned token profile.
+var (
+	evmDexTokenProfilePayloadOptionsFieldIncludeMetadata = big.NewInt(1 << 0)
+	evmDexTokenProfilePayloadOptionsFieldIncludeMetrics  = big.NewInt(1 << 1)
+)
+
+type EvmDexTokenProfilePayloadOptions struct {
+	// When true, includes the `metadata` object in each returned profile.
+	IncludeMetadata *bool `json:"include_metadata,omitempty" url:"include_metadata,omitempty"`
+	// Time windows for which metrics should be included. Windows not listed are omitted from the response.
+	IncludeMetrics []EvmDexTokenProfileTimeWindowEnum `json:"include_metrics,omitempty" url:"include_metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexTokenProfilePayloadOptions) GetIncludeMetadata() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.IncludeMetadata
+}
+
+func (e *EvmDexTokenProfilePayloadOptions) GetIncludeMetrics() []EvmDexTokenProfileTimeWindowEnum {
+	if e == nil {
+		return nil
+	}
+	return e.IncludeMetrics
+}
+
+func (e *EvmDexTokenProfilePayloadOptions) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexTokenProfilePayloadOptions) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetIncludeMetadata sets the IncludeMetadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfilePayloadOptions) SetIncludeMetadata(includeMetadata *bool) {
+	e.IncludeMetadata = includeMetadata
+	e.require(evmDexTokenProfilePayloadOptionsFieldIncludeMetadata)
+}
+
+// SetIncludeMetrics sets the IncludeMetrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfilePayloadOptions) SetIncludeMetrics(includeMetrics []EvmDexTokenProfileTimeWindowEnum) {
+	e.IncludeMetrics = includeMetrics
+	e.require(evmDexTokenProfilePayloadOptionsFieldIncludeMetrics)
+}
+
+func (e *EvmDexTokenProfilePayloadOptions) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexTokenProfilePayloadOptions
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexTokenProfilePayloadOptions(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexTokenProfilePayloadOptions) MarshalJSON() ([]byte, error) {
+	type embed EvmDexTokenProfilePayloadOptions
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexTokenProfilePayloadOptions) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexTokenProfileSearchPayloadQueryFieldFieldFields       = big.NewInt(1 << 0)
+	evmDexTokenProfileSearchPayloadQueryFieldFieldText         = big.NewInt(1 << 1)
+	evmDexTokenProfileSearchPayloadQueryFieldFieldFuzzy        = big.NewInt(1 << 2)
+	evmDexTokenProfileSearchPayloadQueryFieldFieldAutocomplete = big.NewInt(1 << 3)
+)
+
+type EvmDexTokenProfileSearchPayloadQueryField struct {
+	// Token profile fields that the text value should be matched against.
+	Fields []EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum `json:"fields,omitempty" url:"fields,omitempty"`
+	// Text value to match against the selected fields.
+	Text string `json:"text" url:"text"`
+	// When true, matches values that are approximately similar to `text`, allowing for minor typos and variations.
+	Fuzzy *bool `json:"fuzzy,omitempty" url:"fuzzy,omitempty"`
+	// When true, matches values that start with `text`, useful for type-ahead lookups.
+	Autocomplete *bool `json:"autocomplete,omitempty" url:"autocomplete,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) GetFields() []EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum {
+	if e == nil {
+		return nil
+	}
+	return e.Fields
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) GetText() string {
+	if e == nil {
+		return ""
+	}
+	return e.Text
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) GetFuzzy() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.Fuzzy
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) GetAutocomplete() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.Autocomplete
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileSearchPayloadQueryField) SetFields(fields []EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum) {
+	e.Fields = fields
+	e.require(evmDexTokenProfileSearchPayloadQueryFieldFieldFields)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileSearchPayloadQueryField) SetText(text string) {
+	e.Text = text
+	e.require(evmDexTokenProfileSearchPayloadQueryFieldFieldText)
+}
+
+// SetFuzzy sets the Fuzzy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileSearchPayloadQueryField) SetFuzzy(fuzzy *bool) {
+	e.Fuzzy = fuzzy
+	e.require(evmDexTokenProfileSearchPayloadQueryFieldFieldFuzzy)
+}
+
+// SetAutocomplete sets the Autocomplete field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTokenProfileSearchPayloadQueryField) SetAutocomplete(autocomplete *bool) {
+	e.Autocomplete = autocomplete
+	e.require(evmDexTokenProfileSearchPayloadQueryFieldFieldAutocomplete)
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexTokenProfileSearchPayloadQueryField
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexTokenProfileSearchPayloadQueryField(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) MarshalJSON() ([]byte, error) {
+	type embed EvmDexTokenProfileSearchPayloadQueryField
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexTokenProfileSearchPayloadQueryField) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum string
+
+const (
+	EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnumTokenAddress EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum = "token_address"
+)
+
+func NewEvmDexTokenProfileSearchPayloadQueryFieldTargetsEnumFromString(s string) (EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum, error) {
+	switch s {
+	case "token_address":
+		return EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnumTokenAddress, nil
+	}
+	var t EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum) Ptr() *EvmDexTokenProfileSearchPayloadQueryFieldTargetsEnum {
+	return &e
+}
+
+type EvmDexTokenProfileTimeWindowEnum string
+
+const (
+	EvmDexTokenProfileTimeWindowEnumWindow7D EvmDexTokenProfileTimeWindowEnum = "7d"
+	EvmDexTokenProfileTimeWindowEnumWindow1D EvmDexTokenProfileTimeWindowEnum = "1d"
+	EvmDexTokenProfileTimeWindowEnumWindow6H EvmDexTokenProfileTimeWindowEnum = "6h"
+	EvmDexTokenProfileTimeWindowEnumWindow1H EvmDexTokenProfileTimeWindowEnum = "1h"
+	EvmDexTokenProfileTimeWindowEnumWindow5M EvmDexTokenProfileTimeWindowEnum = "5m"
+	EvmDexTokenProfileTimeWindowEnumWindow1M EvmDexTokenProfileTimeWindowEnum = "1m"
+)
+
+func NewEvmDexTokenProfileTimeWindowEnumFromString(s string) (EvmDexTokenProfileTimeWindowEnum, error) {
+	switch s {
+	case "7d":
+		return EvmDexTokenProfileTimeWindowEnumWindow7D, nil
+	case "1d":
+		return EvmDexTokenProfileTimeWindowEnumWindow1D, nil
+	case "6h":
+		return EvmDexTokenProfileTimeWindowEnumWindow6H, nil
+	case "1h":
+		return EvmDexTokenProfileTimeWindowEnumWindow1H, nil
+	case "5m":
+		return EvmDexTokenProfileTimeWindowEnumWindow5M, nil
+	case "1m":
+		return EvmDexTokenProfileTimeWindowEnumWindow1M, nil
+	}
+	var t EvmDexTokenProfileTimeWindowEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexTokenProfileTimeWindowEnum) Ptr() *EvmDexTokenProfileTimeWindowEnum {
+	return &e
+}
+
+var (
+	evmDexTradeFieldID               = big.NewInt(1 << 0)
+	evmDexTradeFieldChainID          = big.NewInt(1 << 1)
+	evmDexTradeFieldProtocol         = big.NewInt(1 << 2)
+	evmDexTradeFieldSwapType         = big.NewInt(1 << 3)
+	evmDexTradeFieldWalletAddress    = big.NewInt(1 << 4)
+	evmDexTradeFieldTokenAddress     = big.NewInt(1 << 5)
+	evmDexTradeFieldQuoteAddress     = big.NewInt(1 << 6)
+	evmDexTradeFieldPositionAddress  = big.NewInt(1 << 7)
+	evmDexTradeFieldDirection        = big.NewInt(1 << 8)
+	evmDexTradeFieldPositionState    = big.NewInt(1 << 9)
+	evmDexTradeFieldTokenAmount      = big.NewInt(1 << 10)
+	evmDexTradeFieldQuoteAmount      = big.NewInt(1 << 11)
+	evmDexTradeFieldNativeAmount     = big.NewInt(1 << 12)
+	evmDexTradeFieldUsdAmount        = big.NewInt(1 << 13)
+	evmDexTradeFieldPreTokenBalance  = big.NewInt(1 << 14)
+	evmDexTradeFieldPostTokenBalance = big.NewInt(1 << 15)
+	evmDexTradeFieldTokenPrice       = big.NewInt(1 << 16)
+	evmDexTradeFieldQuotePrice       = big.NewInt(1 << 17)
+	evmDexTradeFieldTokenMcap        = big.NewInt(1 << 18)
+	evmDexTradeFieldBlockNumber      = big.NewInt(1 << 19)
+	evmDexTradeFieldBlockTime        = big.NewInt(1 << 20)
+	evmDexTradeFieldTxHash           = big.NewInt(1 << 21)
+)
+
+type EvmDexTrade struct {
+	ID *int `json:"id,omitempty" url:"id,omitempty"`
+	// Numeric EVM chain ID the record belongs to.
+	ChainID          *int                          `json:"chain_id,omitempty" url:"chain_id,omitempty"`
+	Protocol         *EvmDexProtocolField          `json:"protocol,omitempty" url:"protocol,omitempty"`
+	SwapType         *EvmDexSwapTypeEnum           `json:"swap_type,omitempty" url:"swap_type,omitempty"`
+	WalletAddress    *string                       `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	TokenAddress     *string                       `json:"token_address,omitempty" url:"token_address,omitempty"`
+	QuoteAddress     *string                       `json:"quote_address,omitempty" url:"quote_address,omitempty"`
+	PositionAddress  *string                       `json:"position_address,omitempty" url:"position_address,omitempty"`
+	Direction        *EvmDexTradeDirectionEnum     `json:"direction,omitempty" url:"direction,omitempty"`
+	PositionState    *EvmDexTradePositionStateEnum `json:"position_state,omitempty" url:"position_state,omitempty"`
+	TokenAmount      *float64                      `json:"token_amount,omitempty" url:"token_amount,omitempty"`
+	QuoteAmount      *float64                      `json:"quote_amount,omitempty" url:"quote_amount,omitempty"`
+	NativeAmount     *float64                      `json:"native_amount,omitempty" url:"native_amount,omitempty"`
+	UsdAmount        *float64                      `json:"usd_amount,omitempty" url:"usd_amount,omitempty"`
+	PreTokenBalance  *float64                      `json:"pre_token_balance,omitempty" url:"pre_token_balance,omitempty"`
+	PostTokenBalance *float64                      `json:"post_token_balance,omitempty" url:"post_token_balance,omitempty"`
+	TokenPrice       *float64                      `json:"token_price,omitempty" url:"token_price,omitempty"`
+	QuotePrice       *float64                      `json:"quote_price,omitempty" url:"quote_price,omitempty"`
+	TokenMcap        *float64                      `json:"token_mcap,omitempty" url:"token_mcap,omitempty"`
+	BlockNumber      *int                          `json:"block_number,omitempty" url:"block_number,omitempty"`
+	BlockTime        *time.Time                    `json:"block_time,omitempty" url:"block_time,omitempty"`
+	TxHash           *string                       `json:"tx_hash,omitempty" url:"tx_hash,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexTrade) GetID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ID
+}
+
+func (e *EvmDexTrade) GetChainID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ChainID
+}
+
+func (e *EvmDexTrade) GetProtocol() *EvmDexProtocolField {
+	if e == nil {
+		return nil
+	}
+	return e.Protocol
+}
+
+func (e *EvmDexTrade) GetSwapType() *EvmDexSwapTypeEnum {
+	if e == nil {
+		return nil
+	}
+	return e.SwapType
+}
+
+func (e *EvmDexTrade) GetWalletAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.WalletAddress
+}
+
+func (e *EvmDexTrade) GetTokenAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAddress
+}
+
+func (e *EvmDexTrade) GetQuoteAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.QuoteAddress
+}
+
+func (e *EvmDexTrade) GetPositionAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PositionAddress
+}
+
+func (e *EvmDexTrade) GetDirection() *EvmDexTradeDirectionEnum {
+	if e == nil {
+		return nil
+	}
+	return e.Direction
+}
+
+func (e *EvmDexTrade) GetPositionState() *EvmDexTradePositionStateEnum {
+	if e == nil {
+		return nil
+	}
+	return e.PositionState
+}
+
+func (e *EvmDexTrade) GetTokenAmount() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenAmount
+}
+
+func (e *EvmDexTrade) GetQuoteAmount() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.QuoteAmount
+}
+
+func (e *EvmDexTrade) GetNativeAmount() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.NativeAmount
+}
+
+func (e *EvmDexTrade) GetUsdAmount() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.UsdAmount
+}
+
+func (e *EvmDexTrade) GetPreTokenBalance() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PreTokenBalance
+}
+
+func (e *EvmDexTrade) GetPostTokenBalance() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PostTokenBalance
+}
+
+func (e *EvmDexTrade) GetTokenPrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenPrice
+}
+
+func (e *EvmDexTrade) GetQuotePrice() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.QuotePrice
+}
+
+func (e *EvmDexTrade) GetTokenMcap() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenMcap
+}
+
+func (e *EvmDexTrade) GetBlockNumber() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BlockNumber
+}
+
+func (e *EvmDexTrade) GetBlockTime() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.BlockTime
+}
+
+func (e *EvmDexTrade) GetTxHash() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TxHash
+}
+
+func (e *EvmDexTrade) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexTrade) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetID(id *int) {
+	e.ID = id
+	e.require(evmDexTradeFieldID)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetChainID(chainID *int) {
+	e.ChainID = chainID
+	e.require(evmDexTradeFieldChainID)
+}
+
+// SetProtocol sets the Protocol field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetProtocol(protocol *EvmDexProtocolField) {
+	e.Protocol = protocol
+	e.require(evmDexTradeFieldProtocol)
+}
+
+// SetSwapType sets the SwapType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetSwapType(swapType *EvmDexSwapTypeEnum) {
+	e.SwapType = swapType
+	e.require(evmDexTradeFieldSwapType)
+}
+
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetWalletAddress(walletAddress *string) {
+	e.WalletAddress = walletAddress
+	e.require(evmDexTradeFieldWalletAddress)
+}
+
+// SetTokenAddress sets the TokenAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetTokenAddress(tokenAddress *string) {
+	e.TokenAddress = tokenAddress
+	e.require(evmDexTradeFieldTokenAddress)
+}
+
+// SetQuoteAddress sets the QuoteAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetQuoteAddress(quoteAddress *string) {
+	e.QuoteAddress = quoteAddress
+	e.require(evmDexTradeFieldQuoteAddress)
+}
+
+// SetPositionAddress sets the PositionAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetPositionAddress(positionAddress *string) {
+	e.PositionAddress = positionAddress
+	e.require(evmDexTradeFieldPositionAddress)
+}
+
+// SetDirection sets the Direction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetDirection(direction *EvmDexTradeDirectionEnum) {
+	e.Direction = direction
+	e.require(evmDexTradeFieldDirection)
+}
+
+// SetPositionState sets the PositionState field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetPositionState(positionState *EvmDexTradePositionStateEnum) {
+	e.PositionState = positionState
+	e.require(evmDexTradeFieldPositionState)
+}
+
+// SetTokenAmount sets the TokenAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetTokenAmount(tokenAmount *float64) {
+	e.TokenAmount = tokenAmount
+	e.require(evmDexTradeFieldTokenAmount)
+}
+
+// SetQuoteAmount sets the QuoteAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetQuoteAmount(quoteAmount *float64) {
+	e.QuoteAmount = quoteAmount
+	e.require(evmDexTradeFieldQuoteAmount)
+}
+
+// SetNativeAmount sets the NativeAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetNativeAmount(nativeAmount *float64) {
+	e.NativeAmount = nativeAmount
+	e.require(evmDexTradeFieldNativeAmount)
+}
+
+// SetUsdAmount sets the UsdAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetUsdAmount(usdAmount *float64) {
+	e.UsdAmount = usdAmount
+	e.require(evmDexTradeFieldUsdAmount)
+}
+
+// SetPreTokenBalance sets the PreTokenBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetPreTokenBalance(preTokenBalance *float64) {
+	e.PreTokenBalance = preTokenBalance
+	e.require(evmDexTradeFieldPreTokenBalance)
+}
+
+// SetPostTokenBalance sets the PostTokenBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetPostTokenBalance(postTokenBalance *float64) {
+	e.PostTokenBalance = postTokenBalance
+	e.require(evmDexTradeFieldPostTokenBalance)
+}
+
+// SetTokenPrice sets the TokenPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetTokenPrice(tokenPrice *float64) {
+	e.TokenPrice = tokenPrice
+	e.require(evmDexTradeFieldTokenPrice)
+}
+
+// SetQuotePrice sets the QuotePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetQuotePrice(quotePrice *float64) {
+	e.QuotePrice = quotePrice
+	e.require(evmDexTradeFieldQuotePrice)
+}
+
+// SetTokenMcap sets the TokenMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetTokenMcap(tokenMcap *float64) {
+	e.TokenMcap = tokenMcap
+	e.require(evmDexTradeFieldTokenMcap)
+}
+
+// SetBlockNumber sets the BlockNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetBlockNumber(blockNumber *int) {
+	e.BlockNumber = blockNumber
+	e.require(evmDexTradeFieldBlockNumber)
+}
+
+// SetBlockTime sets the BlockTime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetBlockTime(blockTime *time.Time) {
+	e.BlockTime = blockTime
+	e.require(evmDexTradeFieldBlockTime)
+}
+
+// SetTxHash sets the TxHash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexTrade) SetTxHash(txHash *string) {
+	e.TxHash = txHash
+	e.require(evmDexTradeFieldTxHash)
+}
+
+func (e *EvmDexTrade) UnmarshalJSON(data []byte) error {
+	type embed EvmDexTrade
+	var unmarshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexTrade(unmarshaler.embed)
+	e.BlockTime = unmarshaler.BlockTime.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexTrade) MarshalJSON() ([]byte, error) {
+	type embed EvmDexTrade
+	var marshaler = struct {
+		embed
+		BlockTime *internal.DateTime `json:"block_time,omitempty"`
+	}{
+		embed:     embed(*e),
+		BlockTime: internal.NewOptionalDateTime(e.BlockTime),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexTrade) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EvmDexTradeDirectionEnum string
+
+const (
+	EvmDexTradeDirectionEnumBuy  EvmDexTradeDirectionEnum = "buy"
+	EvmDexTradeDirectionEnumSell EvmDexTradeDirectionEnum = "sell"
+)
+
+func NewEvmDexTradeDirectionEnumFromString(s string) (EvmDexTradeDirectionEnum, error) {
+	switch s {
+	case "buy":
+		return EvmDexTradeDirectionEnumBuy, nil
+	case "sell":
+		return EvmDexTradeDirectionEnumSell, nil
+	}
+	var t EvmDexTradeDirectionEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexTradeDirectionEnum) Ptr() *EvmDexTradeDirectionEnum {
+	return &e
+}
+
+type EvmDexTradePositionStateEnum string
+
+const (
+	EvmDexTradePositionStateEnumOpen    EvmDexTradePositionStateEnum = "open"
+	EvmDexTradePositionStateEnumClose   EvmDexTradePositionStateEnum = "close"
+	EvmDexTradePositionStateEnumTrade   EvmDexTradePositionStateEnum = "trade"
+	EvmDexTradePositionStateEnumUnknown EvmDexTradePositionStateEnum = "unknown"
+)
+
+func NewEvmDexTradePositionStateEnumFromString(s string) (EvmDexTradePositionStateEnum, error) {
+	switch s {
+	case "open":
+		return EvmDexTradePositionStateEnumOpen, nil
+	case "close":
+		return EvmDexTradePositionStateEnumClose, nil
+	case "trade":
+		return EvmDexTradePositionStateEnumTrade, nil
+	case "unknown":
+		return EvmDexTradePositionStateEnumUnknown, nil
+	}
+	var t EvmDexTradePositionStateEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexTradePositionStateEnum) Ptr() *EvmDexTradePositionStateEnum {
+	return &e
+}
+
+var (
+	evmDexWalletProfileFieldUpdatedAt     = big.NewInt(1 << 0)
+	evmDexWalletProfileFieldSyncedAt      = big.NewInt(1 << 1)
+	evmDexWalletProfileFieldChainID       = big.NewInt(1 << 2)
+	evmDexWalletProfileFieldWalletAddress = big.NewInt(1 << 3)
+	evmDexWalletProfileFieldMetadata      = big.NewInt(1 << 4)
+	evmDexWalletProfileFieldMetrics       = big.NewInt(1 << 5)
+)
+
+type EvmDexWalletProfile struct {
+	UpdatedAt *time.Time `json:"updated_at,omitempty" url:"updated_at,omitempty"`
+	SyncedAt  *time.Time `json:"synced_at,omitempty" url:"synced_at,omitempty"`
+	// Numeric EVM chain ID the record belongs to.
+	ChainID       *int                                   `json:"chain_id,omitempty" url:"chain_id,omitempty"`
+	WalletAddress *string                                `json:"wallet_address,omitempty" url:"wallet_address,omitempty"`
+	Metadata      *EvmDexWalletProfileMetadata           `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Metrics       map[string]*EvmDexWalletProfileMetrics `json:"metrics,omitempty" url:"metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexWalletProfile) GetUpdatedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.UpdatedAt
+}
+
+func (e *EvmDexWalletProfile) GetSyncedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.SyncedAt
+}
+
+func (e *EvmDexWalletProfile) GetChainID() *int {
+	if e == nil {
+		return nil
+	}
+	return e.ChainID
+}
+
+func (e *EvmDexWalletProfile) GetWalletAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.WalletAddress
+}
+
+func (e *EvmDexWalletProfile) GetMetadata() *EvmDexWalletProfileMetadata {
+	if e == nil {
+		return nil
+	}
+	return e.Metadata
+}
+
+func (e *EvmDexWalletProfile) GetMetrics() map[string]*EvmDexWalletProfileMetrics {
+	if e == nil {
+		return nil
+	}
+	return e.Metrics
+}
+
+func (e *EvmDexWalletProfile) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexWalletProfile) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfile) SetUpdatedAt(updatedAt *time.Time) {
+	e.UpdatedAt = updatedAt
+	e.require(evmDexWalletProfileFieldUpdatedAt)
+}
+
+// SetSyncedAt sets the SyncedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfile) SetSyncedAt(syncedAt *time.Time) {
+	e.SyncedAt = syncedAt
+	e.require(evmDexWalletProfileFieldSyncedAt)
+}
+
+// SetChainID sets the ChainID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfile) SetChainID(chainID *int) {
+	e.ChainID = chainID
+	e.require(evmDexWalletProfileFieldChainID)
+}
+
+// SetWalletAddress sets the WalletAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfile) SetWalletAddress(walletAddress *string) {
+	e.WalletAddress = walletAddress
+	e.require(evmDexWalletProfileFieldWalletAddress)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfile) SetMetadata(metadata *EvmDexWalletProfileMetadata) {
+	e.Metadata = metadata
+	e.require(evmDexWalletProfileFieldMetadata)
+}
+
+// SetMetrics sets the Metrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfile) SetMetrics(metrics map[string]*EvmDexWalletProfileMetrics) {
+	e.Metrics = metrics
+	e.require(evmDexWalletProfileFieldMetrics)
+}
+
+func (e *EvmDexWalletProfile) UnmarshalJSON(data []byte) error {
+	type embed EvmDexWalletProfile
+	var unmarshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexWalletProfile(unmarshaler.embed)
+	e.UpdatedAt = unmarshaler.UpdatedAt.TimePtr()
+	e.SyncedAt = unmarshaler.SyncedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexWalletProfile) MarshalJSON() ([]byte, error) {
+	type embed EvmDexWalletProfile
+	var marshaler = struct {
+		embed
+		UpdatedAt *internal.DateTime `json:"updated_at,omitempty"`
+		SyncedAt  *internal.DateTime `json:"synced_at,omitempty"`
+	}{
+		embed:     embed(*e),
+		UpdatedAt: internal.NewOptionalDateTime(e.UpdatedAt),
+		SyncedAt:  internal.NewOptionalDateTime(e.SyncedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexWalletProfile) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexWalletProfileMetadataFieldLastTradeAt = big.NewInt(1 << 0)
+)
+
+type EvmDexWalletProfileMetadata struct {
+	LastTradeAt *time.Time `json:"last_trade_at,omitempty" url:"last_trade_at,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexWalletProfileMetadata) GetLastTradeAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.LastTradeAt
+}
+
+func (e *EvmDexWalletProfileMetadata) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexWalletProfileMetadata) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetLastTradeAt sets the LastTradeAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetadata) SetLastTradeAt(lastTradeAt *time.Time) {
+	e.LastTradeAt = lastTradeAt
+	e.require(evmDexWalletProfileMetadataFieldLastTradeAt)
+}
+
+func (e *EvmDexWalletProfileMetadata) UnmarshalJSON(data []byte) error {
+	type embed EvmDexWalletProfileMetadata
+	var unmarshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EvmDexWalletProfileMetadata(unmarshaler.embed)
+	e.LastTradeAt = unmarshaler.LastTradeAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexWalletProfileMetadata) MarshalJSON() ([]byte, error) {
+	type embed EvmDexWalletProfileMetadata
+	var marshaler = struct {
+		embed
+		LastTradeAt *internal.DateTime `json:"last_trade_at,omitempty"`
+	}{
+		embed:       embed(*e),
+		LastTradeAt: internal.NewOptionalDateTime(e.LastTradeAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexWalletProfileMetadata) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexWalletProfileMetricsFieldRiskScore             = big.NewInt(1 << 0)
+	evmDexWalletProfileMetricsFieldConsistencyScore      = big.NewInt(1 << 1)
+	evmDexWalletProfileMetricsFieldLargestWin            = big.NewInt(1 << 2)
+	evmDexWalletProfileMetricsFieldLargestLoss           = big.NewInt(1 << 3)
+	evmDexWalletProfileMetricsFieldMaxConsecutiveWins    = big.NewInt(1 << 4)
+	evmDexWalletProfileMetricsFieldMaxConsecutiveLosses  = big.NewInt(1 << 5)
+	evmDexWalletProfileMetricsFieldAvgBuySize            = big.NewInt(1 << 6)
+	evmDexWalletProfileMetricsFieldAvgSellSize           = big.NewInt(1 << 7)
+	evmDexWalletProfileMetricsFieldAvgBuyMcap            = big.NewInt(1 << 8)
+	evmDexWalletProfileMetricsFieldAvgSellMcap           = big.NewInt(1 << 9)
+	evmDexWalletProfileMetricsFieldAvgDailyPnl           = big.NewInt(1 << 10)
+	evmDexWalletProfileMetricsFieldAvgDailyRoi           = big.NewInt(1 << 11)
+	evmDexWalletProfileMetricsFieldAvgDailyTradeCount    = big.NewInt(1 << 12)
+	evmDexWalletProfileMetricsFieldAvgDailyTradedTokens  = big.NewInt(1 << 13)
+	evmDexWalletProfileMetricsFieldAvgDailyVolume        = big.NewInt(1 << 14)
+	evmDexWalletProfileMetricsFieldAvgHoldingDuration    = big.NewInt(1 << 15)
+	evmDexWalletProfileMetricsFieldAvgTradeDelta         = big.NewInt(1 << 16)
+	evmDexWalletProfileMetricsFieldAvgPnl                = big.NewInt(1 << 17)
+	evmDexWalletProfileMetricsFieldAvgRoi                = big.NewInt(1 << 18)
+	evmDexWalletProfileMetricsFieldAvgTokenPnl           = big.NewInt(1 << 19)
+	evmDexWalletProfileMetricsFieldAvgTokenRoi           = big.NewInt(1 << 20)
+	evmDexWalletProfileMetricsFieldTokenRoiDistribution  = big.NewInt(1 << 21)
+	evmDexWalletProfileMetricsFieldTradeCount            = big.NewInt(1 << 22)
+	evmDexWalletProfileMetricsFieldBuyCount              = big.NewInt(1 << 23)
+	evmDexWalletProfileMetricsFieldSellCount             = big.NewInt(1 << 24)
+	evmDexWalletProfileMetricsFieldPositionCount         = big.NewInt(1 << 25)
+	evmDexWalletProfileMetricsFieldWinCount              = big.NewInt(1 << 26)
+	evmDexWalletProfileMetricsFieldLossCount             = big.NewInt(1 << 27)
+	evmDexWalletProfileMetricsFieldPnl                   = big.NewInt(1 << 28)
+	evmDexWalletProfileMetricsFieldWinPnl                = big.NewInt(1 << 29)
+	evmDexWalletProfileMetricsFieldLossPnl               = big.NewInt(1 << 30)
+	evmDexWalletProfileMetricsFieldVolume                = big.NewInt(1 << 31)
+	evmDexWalletProfileMetricsFieldBuyVolume             = big.NewInt(1 << 32)
+	evmDexWalletProfileMetricsFieldSellVolume            = big.NewInt(1 << 33)
+	evmDexWalletProfileMetricsFieldWinrate               = big.NewInt(1 << 34)
+	evmDexWalletProfileMetricsFieldVolumeWeightedWinrate = big.NewInt(1 << 35)
+	evmDexWalletProfileMetricsFieldRoi                   = big.NewInt(1 << 36)
+	evmDexWalletProfileMetricsFieldVolumeWeightedRoi     = big.NewInt(1 << 37)
+	evmDexWalletProfileMetricsFieldTimeWeightedRoi       = big.NewInt(1 << 38)
+	evmDexWalletProfileMetricsFieldPnlVolumeRatio        = big.NewInt(1 << 39)
+	evmDexWalletProfileMetricsFieldTokenHitRatio         = big.NewInt(1 << 40)
+	evmDexWalletProfileMetricsFieldWinLossSizeRatio      = big.NewInt(1 << 41)
+	evmDexWalletProfileMetricsFieldProfitFactor          = big.NewInt(1 << 42)
+	evmDexWalletProfileMetricsFieldProfitExpectancy      = big.NewInt(1 << 43)
+	evmDexWalletProfileMetricsFieldRecoveryFactor        = big.NewInt(1 << 44)
+	evmDexWalletProfileMetricsFieldWinrateStability      = big.NewInt(1 << 45)
+	evmDexWalletProfileMetricsFieldWinrateVolatility     = big.NewInt(1 << 46)
+	evmDexWalletProfileMetricsFieldPnlStability          = big.NewInt(1 << 47)
+	evmDexWalletProfileMetricsFieldPnlVolatility         = big.NewInt(1 << 48)
+	evmDexWalletProfileMetricsFieldRoiStability          = big.NewInt(1 << 49)
+	evmDexWalletProfileMetricsFieldRoiVolatility         = big.NewInt(1 << 50)
+	evmDexWalletProfileMetricsFieldSharpeRatio           = big.NewInt(1 << 51)
+	evmDexWalletProfileMetricsFieldSortinoRatio          = big.NewInt(1 << 52)
+	evmDexWalletProfileMetricsFieldMaxDrawdown           = big.NewInt(1 << 53)
+	evmDexWalletProfileMetricsFieldRiskOfRuin            = big.NewInt(1 << 54)
+	evmDexWalletProfileMetricsFieldTurnover              = big.NewInt(1 << 55)
+)
+
+type EvmDexWalletProfileMetrics struct {
+	RiskScore             *float64       `json:"risk_score,omitempty" url:"risk_score,omitempty"`
+	ConsistencyScore      *float64       `json:"consistency_score,omitempty" url:"consistency_score,omitempty"`
+	LargestWin            *float64       `json:"largest_win,omitempty" url:"largest_win,omitempty"`
+	LargestLoss           *float64       `json:"largest_loss,omitempty" url:"largest_loss,omitempty"`
+	MaxConsecutiveWins    *int           `json:"max_consecutive_wins,omitempty" url:"max_consecutive_wins,omitempty"`
+	MaxConsecutiveLosses  *int           `json:"max_consecutive_losses,omitempty" url:"max_consecutive_losses,omitempty"`
+	AvgBuySize            *float64       `json:"avg_buy_size,omitempty" url:"avg_buy_size,omitempty"`
+	AvgSellSize           *float64       `json:"avg_sell_size,omitempty" url:"avg_sell_size,omitempty"`
+	AvgBuyMcap            *float64       `json:"avg_buy_mcap,omitempty" url:"avg_buy_mcap,omitempty"`
+	AvgSellMcap           *float64       `json:"avg_sell_mcap,omitempty" url:"avg_sell_mcap,omitempty"`
+	AvgDailyPnl           *float64       `json:"avg_daily_pnl,omitempty" url:"avg_daily_pnl,omitempty"`
+	AvgDailyRoi           *float64       `json:"avg_daily_roi,omitempty" url:"avg_daily_roi,omitempty"`
+	AvgDailyTradeCount    *int           `json:"avg_daily_trade_count,omitempty" url:"avg_daily_trade_count,omitempty"`
+	AvgDailyTradedTokens  *int           `json:"avg_daily_traded_tokens,omitempty" url:"avg_daily_traded_tokens,omitempty"`
+	AvgDailyVolume        *float64       `json:"avg_daily_volume,omitempty" url:"avg_daily_volume,omitempty"`
+	AvgHoldingDuration    *int           `json:"avg_holding_duration,omitempty" url:"avg_holding_duration,omitempty"`
+	AvgTradeDelta         *int           `json:"avg_trade_delta,omitempty" url:"avg_trade_delta,omitempty"`
+	AvgPnl                *float64       `json:"avg_pnl,omitempty" url:"avg_pnl,omitempty"`
+	AvgRoi                *float64       `json:"avg_roi,omitempty" url:"avg_roi,omitempty"`
+	AvgTokenPnl           *float64       `json:"avg_token_pnl,omitempty" url:"avg_token_pnl,omitempty"`
+	AvgTokenRoi           *float64       `json:"avg_token_roi,omitempty" url:"avg_token_roi,omitempty"`
+	TokenRoiDistribution  map[string]int `json:"token_roi_distribution,omitempty" url:"token_roi_distribution,omitempty"`
+	TradeCount            *int           `json:"trade_count,omitempty" url:"trade_count,omitempty"`
+	BuyCount              *int           `json:"buy_count,omitempty" url:"buy_count,omitempty"`
+	SellCount             *int           `json:"sell_count,omitempty" url:"sell_count,omitempty"`
+	PositionCount         *int           `json:"position_count,omitempty" url:"position_count,omitempty"`
+	WinCount              *int           `json:"win_count,omitempty" url:"win_count,omitempty"`
+	LossCount             *int           `json:"loss_count,omitempty" url:"loss_count,omitempty"`
+	Pnl                   *float64       `json:"pnl,omitempty" url:"pnl,omitempty"`
+	WinPnl                *float64       `json:"win_pnl,omitempty" url:"win_pnl,omitempty"`
+	LossPnl               *float64       `json:"loss_pnl,omitempty" url:"loss_pnl,omitempty"`
+	Volume                *float64       `json:"volume,omitempty" url:"volume,omitempty"`
+	BuyVolume             *float64       `json:"buy_volume,omitempty" url:"buy_volume,omitempty"`
+	SellVolume            *float64       `json:"sell_volume,omitempty" url:"sell_volume,omitempty"`
+	Winrate               *float64       `json:"winrate,omitempty" url:"winrate,omitempty"`
+	VolumeWeightedWinrate *float64       `json:"volume_weighted_winrate,omitempty" url:"volume_weighted_winrate,omitempty"`
+	Roi                   *float64       `json:"roi,omitempty" url:"roi,omitempty"`
+	VolumeWeightedRoi     *float64       `json:"volume_weighted_roi,omitempty" url:"volume_weighted_roi,omitempty"`
+	TimeWeightedRoi       *float64       `json:"time_weighted_roi,omitempty" url:"time_weighted_roi,omitempty"`
+	PnlVolumeRatio        *float64       `json:"pnl_volume_ratio,omitempty" url:"pnl_volume_ratio,omitempty"`
+	TokenHitRatio         *float64       `json:"token_hit_ratio,omitempty" url:"token_hit_ratio,omitempty"`
+	WinLossSizeRatio      *float64       `json:"win_loss_size_ratio,omitempty" url:"win_loss_size_ratio,omitempty"`
+	ProfitFactor          *float64       `json:"profit_factor,omitempty" url:"profit_factor,omitempty"`
+	ProfitExpectancy      *float64       `json:"profit_expectancy,omitempty" url:"profit_expectancy,omitempty"`
+	RecoveryFactor        *float64       `json:"recovery_factor,omitempty" url:"recovery_factor,omitempty"`
+	WinrateStability      *float64       `json:"winrate_stability,omitempty" url:"winrate_stability,omitempty"`
+	WinrateVolatility     *float64       `json:"winrate_volatility,omitempty" url:"winrate_volatility,omitempty"`
+	PnlStability          *float64       `json:"pnl_stability,omitempty" url:"pnl_stability,omitempty"`
+	PnlVolatility         *float64       `json:"pnl_volatility,omitempty" url:"pnl_volatility,omitempty"`
+	RoiStability          *float64       `json:"roi_stability,omitempty" url:"roi_stability,omitempty"`
+	RoiVolatility         *float64       `json:"roi_volatility,omitempty" url:"roi_volatility,omitempty"`
+	SharpeRatio           *float64       `json:"sharpe_ratio,omitempty" url:"sharpe_ratio,omitempty"`
+	SortinoRatio          *float64       `json:"sortino_ratio,omitempty" url:"sortino_ratio,omitempty"`
+	MaxDrawdown           *float64       `json:"max_drawdown,omitempty" url:"max_drawdown,omitempty"`
+	RiskOfRuin            *float64       `json:"risk_of_ruin,omitempty" url:"risk_of_ruin,omitempty"`
+	Turnover              *float64       `json:"turnover,omitempty" url:"turnover,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexWalletProfileMetrics) GetRiskScore() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RiskScore
+}
+
+func (e *EvmDexWalletProfileMetrics) GetConsistencyScore() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.ConsistencyScore
+}
+
+func (e *EvmDexWalletProfileMetrics) GetLargestWin() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LargestWin
+}
+
+func (e *EvmDexWalletProfileMetrics) GetLargestLoss() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LargestLoss
+}
+
+func (e *EvmDexWalletProfileMetrics) GetMaxConsecutiveWins() *int {
+	if e == nil {
+		return nil
+	}
+	return e.MaxConsecutiveWins
+}
+
+func (e *EvmDexWalletProfileMetrics) GetMaxConsecutiveLosses() *int {
+	if e == nil {
+		return nil
+	}
+	return e.MaxConsecutiveLosses
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgBuySize() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgBuySize
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgSellSize() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgSellSize
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgBuyMcap() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgBuyMcap
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgSellMcap() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgSellMcap
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgDailyPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyPnl
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgDailyRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyRoi
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgDailyTradeCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyTradeCount
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgDailyTradedTokens() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyTradedTokens
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgDailyVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgDailyVolume
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgHoldingDuration() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgHoldingDuration
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgTradeDelta() *int {
+	if e == nil {
+		return nil
+	}
+	return e.AvgTradeDelta
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgPnl
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgRoi
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgTokenPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgTokenPnl
+}
+
+func (e *EvmDexWalletProfileMetrics) GetAvgTokenRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.AvgTokenRoi
+}
+
+func (e *EvmDexWalletProfileMetrics) GetTokenRoiDistribution() map[string]int {
+	if e == nil {
+		return nil
+	}
+	return e.TokenRoiDistribution
+}
+
+func (e *EvmDexWalletProfileMetrics) GetTradeCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.TradeCount
+}
+
+func (e *EvmDexWalletProfileMetrics) GetBuyCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.BuyCount
+}
+
+func (e *EvmDexWalletProfileMetrics) GetSellCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.SellCount
+}
+
+func (e *EvmDexWalletProfileMetrics) GetPositionCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.PositionCount
+}
+
+func (e *EvmDexWalletProfileMetrics) GetWinCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.WinCount
+}
+
+func (e *EvmDexWalletProfileMetrics) GetLossCount() *int {
+	if e == nil {
+		return nil
+	}
+	return e.LossCount
+}
+
+func (e *EvmDexWalletProfileMetrics) GetPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Pnl
+}
+
+func (e *EvmDexWalletProfileMetrics) GetWinPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinPnl
+}
+
+func (e *EvmDexWalletProfileMetrics) GetLossPnl() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.LossPnl
+}
+
+func (e *EvmDexWalletProfileMetrics) GetVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Volume
+}
+
+func (e *EvmDexWalletProfileMetrics) GetBuyVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.BuyVolume
+}
+
+func (e *EvmDexWalletProfileMetrics) GetSellVolume() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SellVolume
+}
+
+func (e *EvmDexWalletProfileMetrics) GetWinrate() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Winrate
+}
+
+func (e *EvmDexWalletProfileMetrics) GetVolumeWeightedWinrate() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.VolumeWeightedWinrate
+}
+
+func (e *EvmDexWalletProfileMetrics) GetRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Roi
+}
+
+func (e *EvmDexWalletProfileMetrics) GetVolumeWeightedRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.VolumeWeightedRoi
+}
+
+func (e *EvmDexWalletProfileMetrics) GetTimeWeightedRoi() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TimeWeightedRoi
+}
+
+func (e *EvmDexWalletProfileMetrics) GetPnlVolumeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlVolumeRatio
+}
+
+func (e *EvmDexWalletProfileMetrics) GetTokenHitRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.TokenHitRatio
+}
+
+func (e *EvmDexWalletProfileMetrics) GetWinLossSizeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinLossSizeRatio
+}
+
+func (e *EvmDexWalletProfileMetrics) GetProfitFactor() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.ProfitFactor
+}
+
+func (e *EvmDexWalletProfileMetrics) GetProfitExpectancy() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.ProfitExpectancy
+}
+
+func (e *EvmDexWalletProfileMetrics) GetRecoveryFactor() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RecoveryFactor
+}
+
+func (e *EvmDexWalletProfileMetrics) GetWinrateStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinrateStability
+}
+
+func (e *EvmDexWalletProfileMetrics) GetWinrateVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.WinrateVolatility
+}
+
+func (e *EvmDexWalletProfileMetrics) GetPnlStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlStability
+}
+
+func (e *EvmDexWalletProfileMetrics) GetPnlVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.PnlVolatility
+}
+
+func (e *EvmDexWalletProfileMetrics) GetRoiStability() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RoiStability
+}
+
+func (e *EvmDexWalletProfileMetrics) GetRoiVolatility() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RoiVolatility
+}
+
+func (e *EvmDexWalletProfileMetrics) GetSharpeRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SharpeRatio
+}
+
+func (e *EvmDexWalletProfileMetrics) GetSortinoRatio() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.SortinoRatio
+}
+
+func (e *EvmDexWalletProfileMetrics) GetMaxDrawdown() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.MaxDrawdown
+}
+
+func (e *EvmDexWalletProfileMetrics) GetRiskOfRuin() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.RiskOfRuin
+}
+
+func (e *EvmDexWalletProfileMetrics) GetTurnover() *float64 {
+	if e == nil {
+		return nil
+	}
+	return e.Turnover
+}
+
+func (e *EvmDexWalletProfileMetrics) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexWalletProfileMetrics) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRiskScore sets the RiskScore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetRiskScore(riskScore *float64) {
+	e.RiskScore = riskScore
+	e.require(evmDexWalletProfileMetricsFieldRiskScore)
+}
+
+// SetConsistencyScore sets the ConsistencyScore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetConsistencyScore(consistencyScore *float64) {
+	e.ConsistencyScore = consistencyScore
+	e.require(evmDexWalletProfileMetricsFieldConsistencyScore)
+}
+
+// SetLargestWin sets the LargestWin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetLargestWin(largestWin *float64) {
+	e.LargestWin = largestWin
+	e.require(evmDexWalletProfileMetricsFieldLargestWin)
+}
+
+// SetLargestLoss sets the LargestLoss field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetLargestLoss(largestLoss *float64) {
+	e.LargestLoss = largestLoss
+	e.require(evmDexWalletProfileMetricsFieldLargestLoss)
+}
+
+// SetMaxConsecutiveWins sets the MaxConsecutiveWins field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetMaxConsecutiveWins(maxConsecutiveWins *int) {
+	e.MaxConsecutiveWins = maxConsecutiveWins
+	e.require(evmDexWalletProfileMetricsFieldMaxConsecutiveWins)
+}
+
+// SetMaxConsecutiveLosses sets the MaxConsecutiveLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetMaxConsecutiveLosses(maxConsecutiveLosses *int) {
+	e.MaxConsecutiveLosses = maxConsecutiveLosses
+	e.require(evmDexWalletProfileMetricsFieldMaxConsecutiveLosses)
+}
+
+// SetAvgBuySize sets the AvgBuySize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgBuySize(avgBuySize *float64) {
+	e.AvgBuySize = avgBuySize
+	e.require(evmDexWalletProfileMetricsFieldAvgBuySize)
+}
+
+// SetAvgSellSize sets the AvgSellSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgSellSize(avgSellSize *float64) {
+	e.AvgSellSize = avgSellSize
+	e.require(evmDexWalletProfileMetricsFieldAvgSellSize)
+}
+
+// SetAvgBuyMcap sets the AvgBuyMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgBuyMcap(avgBuyMcap *float64) {
+	e.AvgBuyMcap = avgBuyMcap
+	e.require(evmDexWalletProfileMetricsFieldAvgBuyMcap)
+}
+
+// SetAvgSellMcap sets the AvgSellMcap field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgSellMcap(avgSellMcap *float64) {
+	e.AvgSellMcap = avgSellMcap
+	e.require(evmDexWalletProfileMetricsFieldAvgSellMcap)
+}
+
+// SetAvgDailyPnl sets the AvgDailyPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgDailyPnl(avgDailyPnl *float64) {
+	e.AvgDailyPnl = avgDailyPnl
+	e.require(evmDexWalletProfileMetricsFieldAvgDailyPnl)
+}
+
+// SetAvgDailyRoi sets the AvgDailyRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgDailyRoi(avgDailyRoi *float64) {
+	e.AvgDailyRoi = avgDailyRoi
+	e.require(evmDexWalletProfileMetricsFieldAvgDailyRoi)
+}
+
+// SetAvgDailyTradeCount sets the AvgDailyTradeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgDailyTradeCount(avgDailyTradeCount *int) {
+	e.AvgDailyTradeCount = avgDailyTradeCount
+	e.require(evmDexWalletProfileMetricsFieldAvgDailyTradeCount)
+}
+
+// SetAvgDailyTradedTokens sets the AvgDailyTradedTokens field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgDailyTradedTokens(avgDailyTradedTokens *int) {
+	e.AvgDailyTradedTokens = avgDailyTradedTokens
+	e.require(evmDexWalletProfileMetricsFieldAvgDailyTradedTokens)
+}
+
+// SetAvgDailyVolume sets the AvgDailyVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgDailyVolume(avgDailyVolume *float64) {
+	e.AvgDailyVolume = avgDailyVolume
+	e.require(evmDexWalletProfileMetricsFieldAvgDailyVolume)
+}
+
+// SetAvgHoldingDuration sets the AvgHoldingDuration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgHoldingDuration(avgHoldingDuration *int) {
+	e.AvgHoldingDuration = avgHoldingDuration
+	e.require(evmDexWalletProfileMetricsFieldAvgHoldingDuration)
+}
+
+// SetAvgTradeDelta sets the AvgTradeDelta field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgTradeDelta(avgTradeDelta *int) {
+	e.AvgTradeDelta = avgTradeDelta
+	e.require(evmDexWalletProfileMetricsFieldAvgTradeDelta)
+}
+
+// SetAvgPnl sets the AvgPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgPnl(avgPnl *float64) {
+	e.AvgPnl = avgPnl
+	e.require(evmDexWalletProfileMetricsFieldAvgPnl)
+}
+
+// SetAvgRoi sets the AvgRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgRoi(avgRoi *float64) {
+	e.AvgRoi = avgRoi
+	e.require(evmDexWalletProfileMetricsFieldAvgRoi)
+}
+
+// SetAvgTokenPnl sets the AvgTokenPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgTokenPnl(avgTokenPnl *float64) {
+	e.AvgTokenPnl = avgTokenPnl
+	e.require(evmDexWalletProfileMetricsFieldAvgTokenPnl)
+}
+
+// SetAvgTokenRoi sets the AvgTokenRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetAvgTokenRoi(avgTokenRoi *float64) {
+	e.AvgTokenRoi = avgTokenRoi
+	e.require(evmDexWalletProfileMetricsFieldAvgTokenRoi)
+}
+
+// SetTokenRoiDistribution sets the TokenRoiDistribution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetTokenRoiDistribution(tokenRoiDistribution map[string]int) {
+	e.TokenRoiDistribution = tokenRoiDistribution
+	e.require(evmDexWalletProfileMetricsFieldTokenRoiDistribution)
+}
+
+// SetTradeCount sets the TradeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetTradeCount(tradeCount *int) {
+	e.TradeCount = tradeCount
+	e.require(evmDexWalletProfileMetricsFieldTradeCount)
+}
+
+// SetBuyCount sets the BuyCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetBuyCount(buyCount *int) {
+	e.BuyCount = buyCount
+	e.require(evmDexWalletProfileMetricsFieldBuyCount)
+}
+
+// SetSellCount sets the SellCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetSellCount(sellCount *int) {
+	e.SellCount = sellCount
+	e.require(evmDexWalletProfileMetricsFieldSellCount)
+}
+
+// SetPositionCount sets the PositionCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetPositionCount(positionCount *int) {
+	e.PositionCount = positionCount
+	e.require(evmDexWalletProfileMetricsFieldPositionCount)
+}
+
+// SetWinCount sets the WinCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetWinCount(winCount *int) {
+	e.WinCount = winCount
+	e.require(evmDexWalletProfileMetricsFieldWinCount)
+}
+
+// SetLossCount sets the LossCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetLossCount(lossCount *int) {
+	e.LossCount = lossCount
+	e.require(evmDexWalletProfileMetricsFieldLossCount)
+}
+
+// SetPnl sets the Pnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetPnl(pnl *float64) {
+	e.Pnl = pnl
+	e.require(evmDexWalletProfileMetricsFieldPnl)
+}
+
+// SetWinPnl sets the WinPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetWinPnl(winPnl *float64) {
+	e.WinPnl = winPnl
+	e.require(evmDexWalletProfileMetricsFieldWinPnl)
+}
+
+// SetLossPnl sets the LossPnl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetLossPnl(lossPnl *float64) {
+	e.LossPnl = lossPnl
+	e.require(evmDexWalletProfileMetricsFieldLossPnl)
+}
+
+// SetVolume sets the Volume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetVolume(volume *float64) {
+	e.Volume = volume
+	e.require(evmDexWalletProfileMetricsFieldVolume)
+}
+
+// SetBuyVolume sets the BuyVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetBuyVolume(buyVolume *float64) {
+	e.BuyVolume = buyVolume
+	e.require(evmDexWalletProfileMetricsFieldBuyVolume)
+}
+
+// SetSellVolume sets the SellVolume field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetSellVolume(sellVolume *float64) {
+	e.SellVolume = sellVolume
+	e.require(evmDexWalletProfileMetricsFieldSellVolume)
+}
+
+// SetWinrate sets the Winrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetWinrate(winrate *float64) {
+	e.Winrate = winrate
+	e.require(evmDexWalletProfileMetricsFieldWinrate)
+}
+
+// SetVolumeWeightedWinrate sets the VolumeWeightedWinrate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetVolumeWeightedWinrate(volumeWeightedWinrate *float64) {
+	e.VolumeWeightedWinrate = volumeWeightedWinrate
+	e.require(evmDexWalletProfileMetricsFieldVolumeWeightedWinrate)
+}
+
+// SetRoi sets the Roi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetRoi(roi *float64) {
+	e.Roi = roi
+	e.require(evmDexWalletProfileMetricsFieldRoi)
+}
+
+// SetVolumeWeightedRoi sets the VolumeWeightedRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetVolumeWeightedRoi(volumeWeightedRoi *float64) {
+	e.VolumeWeightedRoi = volumeWeightedRoi
+	e.require(evmDexWalletProfileMetricsFieldVolumeWeightedRoi)
+}
+
+// SetTimeWeightedRoi sets the TimeWeightedRoi field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetTimeWeightedRoi(timeWeightedRoi *float64) {
+	e.TimeWeightedRoi = timeWeightedRoi
+	e.require(evmDexWalletProfileMetricsFieldTimeWeightedRoi)
+}
+
+// SetPnlVolumeRatio sets the PnlVolumeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetPnlVolumeRatio(pnlVolumeRatio *float64) {
+	e.PnlVolumeRatio = pnlVolumeRatio
+	e.require(evmDexWalletProfileMetricsFieldPnlVolumeRatio)
+}
+
+// SetTokenHitRatio sets the TokenHitRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetTokenHitRatio(tokenHitRatio *float64) {
+	e.TokenHitRatio = tokenHitRatio
+	e.require(evmDexWalletProfileMetricsFieldTokenHitRatio)
+}
+
+// SetWinLossSizeRatio sets the WinLossSizeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetWinLossSizeRatio(winLossSizeRatio *float64) {
+	e.WinLossSizeRatio = winLossSizeRatio
+	e.require(evmDexWalletProfileMetricsFieldWinLossSizeRatio)
+}
+
+// SetProfitFactor sets the ProfitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetProfitFactor(profitFactor *float64) {
+	e.ProfitFactor = profitFactor
+	e.require(evmDexWalletProfileMetricsFieldProfitFactor)
+}
+
+// SetProfitExpectancy sets the ProfitExpectancy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetProfitExpectancy(profitExpectancy *float64) {
+	e.ProfitExpectancy = profitExpectancy
+	e.require(evmDexWalletProfileMetricsFieldProfitExpectancy)
+}
+
+// SetRecoveryFactor sets the RecoveryFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetRecoveryFactor(recoveryFactor *float64) {
+	e.RecoveryFactor = recoveryFactor
+	e.require(evmDexWalletProfileMetricsFieldRecoveryFactor)
+}
+
+// SetWinrateStability sets the WinrateStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetWinrateStability(winrateStability *float64) {
+	e.WinrateStability = winrateStability
+	e.require(evmDexWalletProfileMetricsFieldWinrateStability)
+}
+
+// SetWinrateVolatility sets the WinrateVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetWinrateVolatility(winrateVolatility *float64) {
+	e.WinrateVolatility = winrateVolatility
+	e.require(evmDexWalletProfileMetricsFieldWinrateVolatility)
+}
+
+// SetPnlStability sets the PnlStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetPnlStability(pnlStability *float64) {
+	e.PnlStability = pnlStability
+	e.require(evmDexWalletProfileMetricsFieldPnlStability)
+}
+
+// SetPnlVolatility sets the PnlVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetPnlVolatility(pnlVolatility *float64) {
+	e.PnlVolatility = pnlVolatility
+	e.require(evmDexWalletProfileMetricsFieldPnlVolatility)
+}
+
+// SetRoiStability sets the RoiStability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetRoiStability(roiStability *float64) {
+	e.RoiStability = roiStability
+	e.require(evmDexWalletProfileMetricsFieldRoiStability)
+}
+
+// SetRoiVolatility sets the RoiVolatility field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetRoiVolatility(roiVolatility *float64) {
+	e.RoiVolatility = roiVolatility
+	e.require(evmDexWalletProfileMetricsFieldRoiVolatility)
+}
+
+// SetSharpeRatio sets the SharpeRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetSharpeRatio(sharpeRatio *float64) {
+	e.SharpeRatio = sharpeRatio
+	e.require(evmDexWalletProfileMetricsFieldSharpeRatio)
+}
+
+// SetSortinoRatio sets the SortinoRatio field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetSortinoRatio(sortinoRatio *float64) {
+	e.SortinoRatio = sortinoRatio
+	e.require(evmDexWalletProfileMetricsFieldSortinoRatio)
+}
+
+// SetMaxDrawdown sets the MaxDrawdown field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetMaxDrawdown(maxDrawdown *float64) {
+	e.MaxDrawdown = maxDrawdown
+	e.require(evmDexWalletProfileMetricsFieldMaxDrawdown)
+}
+
+// SetRiskOfRuin sets the RiskOfRuin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetRiskOfRuin(riskOfRuin *float64) {
+	e.RiskOfRuin = riskOfRuin
+	e.require(evmDexWalletProfileMetricsFieldRiskOfRuin)
+}
+
+// SetTurnover sets the Turnover field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileMetrics) SetTurnover(turnover *float64) {
+	e.Turnover = turnover
+	e.require(evmDexWalletProfileMetricsFieldTurnover)
+}
+
+func (e *EvmDexWalletProfileMetrics) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexWalletProfileMetrics
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexWalletProfileMetrics(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexWalletProfileMetrics) MarshalJSON() ([]byte, error) {
+	type embed EvmDexWalletProfileMetrics
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexWalletProfileMetrics) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// Controls which optional sections are included in each returned wallet profile.
+var (
+	evmDexWalletProfilePayloadOptionsFieldIncludeMetadata = big.NewInt(1 << 0)
+	evmDexWalletProfilePayloadOptionsFieldIncludeMetrics  = big.NewInt(1 << 1)
+)
+
+type EvmDexWalletProfilePayloadOptions struct {
+	// When true, includes the `metadata` object in each returned profile.
+	IncludeMetadata *bool `json:"include_metadata,omitempty" url:"include_metadata,omitempty"`
+	// Time windows for which metrics should be included. Windows not listed are omitted from the response.
+	IncludeMetrics []EvmDexWalletProfileTimeWindowEnum `json:"include_metrics,omitempty" url:"include_metrics,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexWalletProfilePayloadOptions) GetIncludeMetadata() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.IncludeMetadata
+}
+
+func (e *EvmDexWalletProfilePayloadOptions) GetIncludeMetrics() []EvmDexWalletProfileTimeWindowEnum {
+	if e == nil {
+		return nil
+	}
+	return e.IncludeMetrics
+}
+
+func (e *EvmDexWalletProfilePayloadOptions) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexWalletProfilePayloadOptions) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetIncludeMetadata sets the IncludeMetadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfilePayloadOptions) SetIncludeMetadata(includeMetadata *bool) {
+	e.IncludeMetadata = includeMetadata
+	e.require(evmDexWalletProfilePayloadOptionsFieldIncludeMetadata)
+}
+
+// SetIncludeMetrics sets the IncludeMetrics field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfilePayloadOptions) SetIncludeMetrics(includeMetrics []EvmDexWalletProfileTimeWindowEnum) {
+	e.IncludeMetrics = includeMetrics
+	e.require(evmDexWalletProfilePayloadOptionsFieldIncludeMetrics)
+}
+
+func (e *EvmDexWalletProfilePayloadOptions) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexWalletProfilePayloadOptions
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexWalletProfilePayloadOptions(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexWalletProfilePayloadOptions) MarshalJSON() ([]byte, error) {
+	type embed EvmDexWalletProfilePayloadOptions
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexWalletProfilePayloadOptions) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	evmDexWalletProfileSearchPayloadQueryFieldFields       = big.NewInt(1 << 0)
+	evmDexWalletProfileSearchPayloadQueryFieldText         = big.NewInt(1 << 1)
+	evmDexWalletProfileSearchPayloadQueryFieldFuzzy        = big.NewInt(1 << 2)
+	evmDexWalletProfileSearchPayloadQueryFieldAutocomplete = big.NewInt(1 << 3)
+)
+
+type EvmDexWalletProfileSearchPayloadQuery struct {
+	// Wallet profile fields that the text value should be matched against.
+	Fields []EvmDexWalletProfileSearchPayloadQueryTargetsEnum `json:"fields,omitempty" url:"fields,omitempty"`
+	// Text value to match against the selected fields.
+	Text string `json:"text" url:"text"`
+	// When true, matches values that are approximately similar to `text`, allowing for minor typos and variations.
+	Fuzzy *bool `json:"fuzzy,omitempty" url:"fuzzy,omitempty"`
+	// When true, matches values that start with `text`, useful for type-ahead lookups.
+	Autocomplete *bool `json:"autocomplete,omitempty" url:"autocomplete,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) GetFields() []EvmDexWalletProfileSearchPayloadQueryTargetsEnum {
+	if e == nil {
+		return nil
+	}
+	return e.Fields
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) GetText() string {
+	if e == nil {
+		return ""
+	}
+	return e.Text
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) GetFuzzy() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.Fuzzy
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) GetAutocomplete() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.Autocomplete
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileSearchPayloadQuery) SetFields(fields []EvmDexWalletProfileSearchPayloadQueryTargetsEnum) {
+	e.Fields = fields
+	e.require(evmDexWalletProfileSearchPayloadQueryFieldFields)
+}
+
+// SetText sets the Text field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileSearchPayloadQuery) SetText(text string) {
+	e.Text = text
+	e.require(evmDexWalletProfileSearchPayloadQueryFieldText)
+}
+
+// SetFuzzy sets the Fuzzy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileSearchPayloadQuery) SetFuzzy(fuzzy *bool) {
+	e.Fuzzy = fuzzy
+	e.require(evmDexWalletProfileSearchPayloadQueryFieldFuzzy)
+}
+
+// SetAutocomplete sets the Autocomplete field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EvmDexWalletProfileSearchPayloadQuery) SetAutocomplete(autocomplete *bool) {
+	e.Autocomplete = autocomplete
+	e.require(evmDexWalletProfileSearchPayloadQueryFieldAutocomplete)
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) UnmarshalJSON(data []byte) error {
+	type unmarshaler EvmDexWalletProfileSearchPayloadQuery
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EvmDexWalletProfileSearchPayloadQuery(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) MarshalJSON() ([]byte, error) {
+	type embed EvmDexWalletProfileSearchPayloadQuery
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EvmDexWalletProfileSearchPayloadQuery) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EvmDexWalletProfileSearchPayloadQueryTargetsEnum string
+
+const (
+	EvmDexWalletProfileSearchPayloadQueryTargetsEnumWalletAddress EvmDexWalletProfileSearchPayloadQueryTargetsEnum = "wallet_address"
+)
+
+func NewEvmDexWalletProfileSearchPayloadQueryTargetsEnumFromString(s string) (EvmDexWalletProfileSearchPayloadQueryTargetsEnum, error) {
+	switch s {
+	case "wallet_address":
+		return EvmDexWalletProfileSearchPayloadQueryTargetsEnumWalletAddress, nil
+	}
+	var t EvmDexWalletProfileSearchPayloadQueryTargetsEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexWalletProfileSearchPayloadQueryTargetsEnum) Ptr() *EvmDexWalletProfileSearchPayloadQueryTargetsEnum {
+	return &e
+}
+
+type EvmDexWalletProfileTimeWindowEnum string
+
+const (
+	EvmDexWalletProfileTimeWindowEnumWindow30D EvmDexWalletProfileTimeWindowEnum = "30d"
+	EvmDexWalletProfileTimeWindowEnumWindow14D EvmDexWalletProfileTimeWindowEnum = "14d"
+	EvmDexWalletProfileTimeWindowEnumWindow7D  EvmDexWalletProfileTimeWindowEnum = "7d"
+	EvmDexWalletProfileTimeWindowEnumWindow3D  EvmDexWalletProfileTimeWindowEnum = "3d"
+	EvmDexWalletProfileTimeWindowEnumWindow1D  EvmDexWalletProfileTimeWindowEnum = "1d"
+)
+
+func NewEvmDexWalletProfileTimeWindowEnumFromString(s string) (EvmDexWalletProfileTimeWindowEnum, error) {
+	switch s {
+	case "30d":
+		return EvmDexWalletProfileTimeWindowEnumWindow30D, nil
+	case "14d":
+		return EvmDexWalletProfileTimeWindowEnumWindow14D, nil
+	case "7d":
+		return EvmDexWalletProfileTimeWindowEnumWindow7D, nil
+	case "3d":
+		return EvmDexWalletProfileTimeWindowEnumWindow3D, nil
+	case "1d":
+		return EvmDexWalletProfileTimeWindowEnumWindow1D, nil
+	}
+	var t EvmDexWalletProfileTimeWindowEnum
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EvmDexWalletProfileTimeWindowEnum) Ptr() *EvmDexWalletProfileTimeWindowEnum {
+	return &e
+}
+
+var (
 	forbiddenErrorBodyFieldError = big.NewInt(1 << 0)
 )
 

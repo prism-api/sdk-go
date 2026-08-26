@@ -1,6 +1,378 @@
 {
   "mappings": [
     {
+      "id": "ea817551-3d8a-4fcd-bf37-a567f49e9cec",
+      "name": "Get Profile - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/profiles/wallets/get-profile",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"updated_at\": \"2024-01-15T09:30:00Z\",\n  \"synced_at\": \"2024-01-15T09:30:00Z\",\n  \"chain_id\": 1,\n  \"wallet_address\": \"wallet_address\",\n  \"metadata\": {\n    \"last_trade_at\": \"2024-01-15T09:30:00Z\"\n  },\n  \"metrics\": {\n    \"key\": {\n      \"risk_score\": 1.1,\n      \"consistency_score\": 1.1,\n      \"largest_win\": 1.1,\n      \"largest_loss\": 1.1,\n      \"max_consecutive_wins\": 1,\n      \"max_consecutive_losses\": 1,\n      \"avg_buy_size\": 1.1,\n      \"avg_sell_size\": 1.1,\n      \"avg_buy_mcap\": 1.1,\n      \"avg_sell_mcap\": 1.1,\n      \"avg_daily_pnl\": 1.1,\n      \"avg_daily_roi\": 1.1,\n      \"avg_daily_trade_count\": 1,\n      \"avg_daily_traded_tokens\": 1,\n      \"avg_daily_volume\": 1.1,\n      \"avg_holding_duration\": 1,\n      \"avg_trade_delta\": 1,\n      \"avg_pnl\": 1.1,\n      \"avg_roi\": 1.1,\n      \"avg_token_pnl\": 1.1,\n      \"avg_token_roi\": 1.1,\n      \"token_roi_distribution\": {\n        \"key\": 1\n      },\n      \"trade_count\": 1,\n      \"buy_count\": 1,\n      \"sell_count\": 1,\n      \"position_count\": 1,\n      \"win_count\": 1,\n      \"loss_count\": 1,\n      \"pnl\": 1.1,\n      \"win_pnl\": 1.1,\n      \"loss_pnl\": 1.1,\n      \"volume\": 1.1,\n      \"buy_volume\": 1.1,\n      \"sell_volume\": 1.1,\n      \"winrate\": 1.1,\n      \"volume_weighted_winrate\": 1.1,\n      \"roi\": 1.1,\n      \"volume_weighted_roi\": 1.1,\n      \"time_weighted_roi\": 1.1,\n      \"pnl_volume_ratio\": 1.1,\n      \"token_hit_ratio\": 1.1,\n      \"win_loss_size_ratio\": 1.1,\n      \"profit_factor\": 1.1,\n      \"profit_expectancy\": 1.1,\n      \"recovery_factor\": 1.1,\n      \"winrate_stability\": 1.1,\n      \"winrate_volatility\": 1.1,\n      \"pnl_stability\": 1.1,\n      \"pnl_volatility\": 1.1,\n      \"roi_stability\": 1.1,\n      \"roi_volatility\": 1.1,\n      \"sharpe_ratio\": 1.1,\n      \"sortino_ratio\": 1.1,\n      \"max_drawdown\": 1.1,\n      \"risk_of_ruin\": 1.1,\n      \"turnover\": 1.1\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ea817551-3d8a-4fcd-bf37-a567f49e9cec",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "bb0d15b5-70c2-4fcd-9f79-102d887e4aa4",
+      "name": "Search Profiles - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/profiles/wallets/search-profiles",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"updated_at\": \"2024-01-15T09:30:00Z\",\n      \"synced_at\": \"2024-01-15T09:30:00Z\",\n      \"chain_id\": 1,\n      \"wallet_address\": \"wallet_address\",\n      \"metrics\": {\n        \"key\": {}\n      }\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "bb0d15b5-70c2-4fcd-9f79-102d887e4aa4",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "0d0deff7-e620-4a91-87b3-0680344cb228",
+      "name": "Get Profile - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/profiles/tokens/get-profile",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"updated_at\": \"2024-01-15T09:30:00Z\",\n  \"synced_at\": \"2024-01-15T09:30:00Z\",\n  \"chain_id\": 1,\n  \"token_address\": \"token_address\",\n  \"metadata\": {\n    \"last_trade_at\": \"2024-01-15T09:30:00Z\",\n    \"created_at\": \"2024-01-15T09:30:00Z\",\n    \"symbol\": \"symbol\",\n    \"name\": \"name\",\n    \"image\": \"image\",\n    \"verified\": true,\n    \"creator_address\": \"creator_address\",\n    \"twitter\": \"twitter\",\n    \"discord\": \"discord\",\n    \"website\": \"website\",\n    \"telegram\": \"telegram\"\n  },\n  \"metrics\": {\n    \"key\": {\n      \"largest_trade_win\": 1.1,\n      \"largest_trade_loss\": 1.1,\n      \"avg_buy_size\": 1.1,\n      \"avg_sell_size\": 1.1,\n      \"avg_price\": 1.1,\n      \"avg_buy_price\": 1.1,\n      \"avg_sell_price\": 1.1,\n      \"avg_buy_mcap\": 1.1,\n      \"avg_sell_mcap\": 1.1,\n      \"avg_holding_duration\": 1,\n      \"avg_trade_pnl\": 1.1,\n      \"avg_trade_roi\": 1.1,\n      \"avg_wallet_winrate\": 1.1,\n      \"avg_wallet_pnl\": 1.1,\n      \"avg_wallet_roi\": 1.1,\n      \"wallet_roi_distribution\": {\n        \"key\": 1\n      },\n      \"makers_count\": 1,\n      \"buyers_count\": 1,\n      \"sellers_count\": 1,\n      \"buy_count\": 1,\n      \"sell_count\": 1,\n      \"win_position_count\": 1,\n      \"loss_position_count\": 1,\n      \"win_pnl\": 1.1,\n      \"loss_pnl\": 1.1,\n      \"buy_volume\": 1.1,\n      \"sell_volume\": 1.1,\n      \"pnl\": 1.1,\n      \"trade_count\": 1,\n      \"volume\": 1.1,\n      \"position_count\": 1,\n      \"volume_weighted_winrate\": 1.1,\n      \"volume_weighted_roi\": 1.1,\n      \"wallet_hit_ratio\": 1.1,\n      \"profit_factor\": 1.1,\n      \"win_loss_size_ratio\": 1.1,\n      \"pnl_volume_ratio\": 1.1,\n      \"price_stability\": 1.1,\n      \"price_volatility\": 1.1,\n      \"roi_stability\": 1.1,\n      \"roi_volatility\": 1.1,\n      \"pnl_volatility\": 1.1,\n      \"pnl_stability\": 1.1,\n      \"sharpe_ratio\": 1.1,\n      \"sortino_ratio\": 1.1,\n      \"max_drawdown\": 1.1\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "0d0deff7-e620-4a91-87b3-0680344cb228",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "6fadc69f-5c48-4d4d-b1b9-350baa96417c",
+      "name": "Search Profiles - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/profiles/tokens/search-profiles",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"updated_at\": \"2024-01-15T09:30:00Z\",\n      \"synced_at\": \"2024-01-15T09:30:00Z\",\n      \"chain_id\": 1,\n      \"token_address\": \"token_address\",\n      \"metrics\": {\n        \"key\": {}\n      }\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "6fadc69f-5c48-4d4d-b1b9-350baa96417c",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "9a3c5adf-57d4-4322-8b6c-b998fd939bef",
+      "name": "Get Profile - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/profiles/positions/get-profile",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"updated_at\": \"2024-01-15T09:30:00Z\",\n  \"synced_at\": \"2024-01-15T09:30:00Z\",\n  \"chain_id\": 1,\n  \"position_address\": \"position_address\",\n  \"wallet_address\": \"wallet_address\",\n  \"token_address\": \"token_address\",\n  \"metadata\": {\n    \"last_trade_at\": \"2024-01-15T09:30:00Z\"\n  },\n  \"metrics\": {\n    \"key\": {\n      \"risk_score\": 1.1,\n      \"consistency_score\": 1.1,\n      \"largest_win\": 1.1,\n      \"largest_loss\": 1.1,\n      \"max_consecutive_wins\": 1,\n      \"max_consecutive_losses\": 1,\n      \"avg_buy_size\": 1.1,\n      \"avg_sell_size\": 1.1,\n      \"avg_buy_mcap\": 1.1,\n      \"avg_sell_mcap\": 1.1,\n      \"avg_daily_trade_count\": 1,\n      \"avg_daily_volume\": 1.1,\n      \"avg_daily_pnl\": 1.1,\n      \"avg_daily_roi\": 1.1,\n      \"avg_holding_duration\": 1,\n      \"avg_trade_delta\": 1,\n      \"avg_pnl\": 1.1,\n      \"avg_roi\": 1.1,\n      \"trade_count\": 1,\n      \"buy_count\": 1,\n      \"sell_count\": 1,\n      \"win_count\": 1,\n      \"loss_count\": 1,\n      \"pnl\": 1.1,\n      \"win_pnl\": 1.1,\n      \"loss_pnl\": 1.1,\n      \"volume\": 1.1,\n      \"buy_volume\": 1.1,\n      \"sell_volume\": 1.1,\n      \"winrate\": 1.1,\n      \"volume_weighted_winrate\": 1.1,\n      \"roi\": 1.1,\n      \"volume_weighted_roi\": 1.1,\n      \"pnl_volume_ratio\": 1.1,\n      \"win_loss_size_ratio\": 1.1,\n      \"profit_factor\": 1.1,\n      \"profit_expectancy\": 1.1,\n      \"recovery_factor\": 1.1,\n      \"winrate_stability\": 1.1,\n      \"winrate_volatility\": 1.1,\n      \"roi_stability\": 1.1,\n      \"roi_volatility\": 1.1,\n      \"pnl_stability\": 1.1,\n      \"pnl_volatility\": 1.1,\n      \"sharpe_ratio\": 1.1,\n      \"sortino_ratio\": 1.1,\n      \"max_drawdown\": 1.1,\n      \"risk_of_ruin\": 1.1,\n      \"turnover\": 1.1\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "9a3c5adf-57d4-4322-8b6c-b998fd939bef",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "06593ed1-8bfb-4166-bf16-9281f9f0c3fb",
+      "name": "Search Profiles - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/profiles/positions/search-profiles",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"updated_at\": \"2024-01-15T09:30:00Z\",\n      \"synced_at\": \"2024-01-15T09:30:00Z\",\n      \"chain_id\": 1,\n      \"position_address\": \"position_address\",\n      \"wallet_address\": \"wallet_address\",\n      \"token_address\": \"token_address\",\n      \"metrics\": {\n        \"key\": {}\n      }\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "06593ed1-8bfb-4166-bf16-9281f9f0c3fb",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "c50cc57d-bc8e-49b1-9c7a-a5bb2a6ee6f5",
+      "name": "Get Trades - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/trades/get-trades",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"chain_id\": 1,\n      \"protocol\": \"protocol\",\n      \"swap_type\": \"quote_token\",\n      \"wallet_address\": \"wallet_address\",\n      \"token_address\": \"token_address\",\n      \"quote_address\": \"quote_address\",\n      \"position_address\": \"position_address\",\n      \"direction\": \"buy\",\n      \"position_state\": \"open\",\n      \"token_amount\": 1.1,\n      \"quote_amount\": 1.1,\n      \"native_amount\": 1.1,\n      \"usd_amount\": 1.1,\n      \"pre_token_balance\": 1.1,\n      \"post_token_balance\": 1.1,\n      \"token_price\": 1.1,\n      \"quote_price\": 1.1,\n      \"token_mcap\": 1.1,\n      \"block_number\": 1,\n      \"block_time\": \"2024-01-15T09:30:00Z\",\n      \"tx_hash\": \"tx_hash\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "c50cc57d-bc8e-49b1-9c7a-a5bb2a6ee6f5",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "5249dae8-3083-481c-a0a3-5e618a83b7f0",
+      "name": "Get Swaps - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/swaps/get-swaps",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"count\": 1,\n  \"cursor\": \"cursor\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"chain_id\": 1,\n      \"swap_type\": \"quote_token\",\n      \"protocol\": \"protocol\",\n      \"wallet_address\": \"wallet_address\",\n      \"pool_address\": \"pool_address\",\n      \"token_address_in\": \"token_address_in\",\n      \"token_address_out\": \"token_address_out\",\n      \"token_amount_in\": 1.1,\n      \"token_amount_out\": 1.1,\n      \"token_price_in\": 1.1,\n      \"token_price_out\": 1.1,\n      \"pre_token_balance_in\": 1.1,\n      \"pre_token_balance_out\": 1.1,\n      \"post_token_balance_in\": 1.1,\n      \"post_token_balance_out\": 1.1,\n      \"usd_amount_in\": 1.1,\n      \"usd_amount_out\": 1.1,\n      \"block_number\": 1,\n      \"block_time\": \"2024-01-15T09:30:00Z\",\n      \"tx_hash\": \"tx_hash\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "5249dae8-3083-481c-a0a3-5e618a83b7f0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "17870fe9-b5b5-4b96-bc55-7fed63a03c13",
+      "name": "Get Price - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/prices/get-price",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {\n    \"chain_id\": 1,\n    \"token_address\": \"token_address\",\n    \"pool_address\": \"pool_address\",\n    \"usd_price\": 1.1,\n    \"block_number\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "17870fe9-b5b5-4b96-bc55-7fed63a03c13",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "19cb2096-e62b-408e-9f6e-4c28125e95b1",
+      "name": "Get Price Stats - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/prices/get-price-stats",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"pool_address\": \"pool_address\",\n    \"usd_price\": 1.1,\n    \"usd_price_change_5m\": 1.1,\n    \"usd_price_change_1h\": 1.1,\n    \"usd_price_change_6h\": 1.1,\n    \"usd_price_change_12h\": 1.1,\n    \"usd_price_change_1d\": 1.1,\n    \"usd_price_change_7d\": 1.1,\n    \"usd_price_change_30d\": 1.1,\n    \"usd_volume_5m\": 1.1,\n    \"usd_volume_1h\": 1.1,\n    \"usd_volume_6h\": 1.1,\n    \"usd_volume_12h\": 1.1,\n    \"usd_volume_1d\": 1.1,\n    \"usd_volume_7d\": 1.1,\n    \"usd_volume_30d\": 1.1,\n    \"usd_volume_change_5m\": 1.1,\n    \"usd_volume_change_1h\": 1.1,\n    \"usd_volume_change_6h\": 1.1,\n    \"usd_volume_change_12h\": 1.1,\n    \"usd_volume_change_1d\": 1.1,\n    \"usd_volume_change_7d\": 1.1,\n    \"usd_volume_change_30d\": 1.1,\n    \"block_number\": 1,\n    \"block_time\": \"2024-01-15T09:30:00Z\"\n  }\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "19cb2096-e62b-408e-9f6e-4c28125e95b1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3440a151-b9af-461c-9328-8836db9e3cc9",
+      "name": "Get Price Candles - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/prices/get-price-candles",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {\n    \"timestamp\": \"2024-01-15T09:30:00Z\",\n    \"open\": 1.1,\n    \"high\": 1.1,\n    \"low\": 1.1,\n    \"close\": 1.1,\n    \"volume\": 1.1,\n    \"count\": 1\n  }\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3440a151-b9af-461c-9328-8836db9e3cc9",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "53a12a85-bad2-40ea-8091-9731d57943ce",
+      "name": "Get Price History - default",
+      "request": {
+        "urlPathTemplate": "/v1/evm/dex/prices/get-price-history",
+        "method": "POST",
+        "headers": {
+          "x-api-key": {
+            "matches": ".+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {\n    \"token_address\": \"token_address\",\n    \"pool_address\": \"pool_address\",\n    \"prices\": [\n      {}\n    ]\n  }\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "53a12a85-bad2-40ea-8091-9731d57943ce",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "0008befb-0ec1-4c15-b004-f19137377919",
       "name": "Get Profile - default",
       "request": {
@@ -374,6 +746,6 @@
     }
   ],
   "meta": {
-    "total": 12
+    "total": 24
   }
 }

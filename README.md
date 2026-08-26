@@ -39,7 +39,7 @@ import (
 
     prism "github.com/prism-api/sdk-go"
     api "github.com/prism-api/sdk-go/api"
-    solana "github.com/prism-api/sdk-go/api/solana"
+    evm "github.com/prism-api/sdk-go/api/evm"
     client "github.com/prism-api/sdk-go/client"
     option "github.com/prism-api/sdk-go/option"
 )
@@ -50,21 +50,19 @@ func do() {
             "<value>",
         ),
     )
-    request := &solana.GetWalletProfileDexRequest{
-        Wallet: "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-        Options: &api.SolanaDexWalletProfilePayloadOptions{
+    request := &evm.GetWalletProfileDexRequest{
+        ChainID: 1,
+        Wallet: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+        Options: &api.EvmDexWalletProfilePayloadOptions{
             IncludeMetadata: prism.Bool(
                 true,
             ),
-            IncludeLabels: prism.Bool(
-                true,
-            ),
-            IncludeMetrics: []api.SolanaDexWalletProfileTimeWindowEnum{
-                api.SolanaDexWalletProfileTimeWindowEnumWindow7D,
+            IncludeMetrics: []api.EvmDexWalletProfileTimeWindowEnum{
+                api.EvmDexWalletProfileTimeWindowEnumWindow7D,
             },
         },
     }
-    client.API.Solana.Dex.GetWalletProfile(
+    client.API.Evm.Dex.GetWalletProfile(
         context.TODO(),
         request,
     )
@@ -88,7 +86,7 @@ Structured error types are returned from API calls that return non-success statu
 with the `errors.Is` and `errors.As` APIs, so you can access the error like so:
 
 ```go
-response, err := client.API.Solana.Dex.GetWalletProfile(...)
+response, err := client.API.Evm.Dex.GetWalletProfile(...)
 if err != nil {
     var apiError *core.APIError
     if errors.As(err, apiError) {
@@ -122,7 +120,7 @@ client := client.NewClient(
 )
 
 // Specify options for an individual request.
-response, err := client.API.Solana.Dex.GetWalletProfile(
+response, err := client.API.Evm.Dex.GetWalletProfile(
     ...,
     option.WithToken("<YOUR_API_KEY>"),
 )
@@ -137,7 +135,7 @@ when you need to examine the response headers received from the API call. (When 
 the raw HTTP response data will be included automatically in the Page response object.)
 
 ```go
-response, err := client.API.Solana.Dex.WithRawResponse.GetWalletProfile(...)
+response, err := client.API.Evm.Dex.WithRawResponse.GetWalletProfile(...)
 if err != nil {
     return err
 }
@@ -175,7 +173,7 @@ client := client.NewClient(
     option.WithMaxAttempts(1),
 )
 
-response, err := client.API.Solana.Dex.GetWalletProfile(
+response, err := client.API.Evm.Dex.GetWalletProfile(
     ...,
     option.WithMaxAttempts(1),
 )
@@ -189,7 +187,7 @@ Setting a timeout for each individual request is as simple as using the standard
 ctx, cancel := context.WithTimeout(ctx, time.Second)
 defer cancel()
 
-response, err := client.API.Solana.Dex.GetWalletProfile(ctx, ...)
+response, err := client.API.Evm.Dex.GetWalletProfile(ctx, ...)
 ```
 
 ### Explicit Null
@@ -211,7 +209,7 @@ type ExampleRequest struct {
 request := &ExampleRequest{}
 request.SetName(nil)
 
-response, err := client.API.Solana.Dex.GetWalletProfile(ctx, request, ...)
+response, err := client.API.Evm.Dex.GetWalletProfile(ctx, request, ...)
 ```
 
 ## Contributing
